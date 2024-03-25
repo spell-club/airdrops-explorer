@@ -1,3 +1,12 @@
+import React from 'react'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table'
 import {
   Box,
   Flex,
@@ -12,49 +21,89 @@ import {
   Tr,
   useColorModeValue,
 } from '@chakra-ui/react'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from '@tanstack/react-table'
-// Custom components
-import Card from 'components/card/Card'
-import Menu from 'components/menu/MainMenu'
-import * as React from 'react'
-// Assets
 import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md'
+import Card from '../card/Card'
+import Menu from '../menu/MainMenu'
 
 type RowObj = {
-  name: string
-  status: string
-  date: string
-  progress: number
+  pageName: string
+  visitors: number
+  uniqueVisitors: number
+  clients: number
+  bounceRate: number
 }
 
 const columnHelper = createColumnHelper<RowObj>()
 
+const TABLE_DATA: RowObj[] = [
+  {
+    pageName: 'Home',
+    visitors: 1000,
+    uniqueVisitors: 800,
+    clients: 100,
+    bounceRate: -50,
+  },
+  {
+    pageName: 'About',
+    visitors: 2000,
+    uniqueVisitors: 1500,
+    clients: 200,
+    bounceRate: 30,
+  },
+  {
+    pageName: 'Services',
+    visitors: 3000,
+    uniqueVisitors: 2500,
+    clients: 300,
+    bounceRate: -20,
+  },
+  {
+    pageName: 'Contact',
+    visitors: 4000,
+    uniqueVisitors: 3500,
+    clients: 400,
+    bounceRate: 10,
+  },
+  {
+    pageName: 'About',
+    visitors: 2000,
+    uniqueVisitors: 1500,
+    clients: 200,
+    bounceRate: -30,
+  },
+  {
+    pageName: 'Services',
+    visitors: 3000,
+    uniqueVisitors: 2500,
+    clients: 300,
+    bounceRate: 20,
+  },
+  {
+    pageName: 'Contact',
+    visitors: 4000,
+    uniqueVisitors: 3500,
+    clients: 400,
+    bounceRate: -10,
+  },
+]
 
-// const columns = columnsDataCheck;
-export default function ComplexTable(props: { tableData: any }) {
-  const { tableData } = props
+const StakingStatsTable = () => {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
-  let defaultData = tableData
+  let defaultData = TABLE_DATA
   const columns = [
-    columnHelper.accessor('name', {
-      id: 'name',
+    columnHelper.accessor('pageName', {
+      id: 'pageName',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
+          textTransform='uppercase'
         >
-          NAME
+          Page Name
         </Text>
       ),
       cell: (info: any) => (
@@ -65,59 +114,17 @@ export default function ComplexTable(props: { tableData: any }) {
         </Flex>
       ),
     }),
-    columnHelper.accessor('status', {
-      id: 'status',
+    columnHelper.accessor('visitors', {
+      id: 'visitors',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
+          textTransform={'uppercase'}
         >
-          STATUS
-        </Text>
-      ),
-      cell: (info) => (
-        <Flex align='center'>
-          <Icon
-            w='24px'
-            h='24px'
-            me='5px'
-            color={
-              info.getValue() === 'Approved'
-                ? 'green.500'
-                : info.getValue() === 'Disable'
-                  ? 'red.500'
-                  : info.getValue() === 'Error'
-                    ? 'orange.500'
-                    : null
-            }
-            as={
-              info.getValue() === 'Approved'
-                ? MdCheckCircle
-                : info.getValue() === 'Disable'
-                  ? MdCancel
-                  : info.getValue() === 'Error'
-                    ? MdOutlineError
-                    : null
-            }
-          />
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
-            {info.getValue()}
-          </Text>
-        </Flex>
-      ),
-    }),
-    columnHelper.accessor('date', {
-      id: 'date',
-      header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'
-        >
-          DATE
+          Visitors
         </Text>
       ),
       cell: (info) => (
@@ -126,29 +133,74 @@ export default function ComplexTable(props: { tableData: any }) {
         </Text>
       ),
     }),
-    columnHelper.accessor('progress', {
-      id: 'progress',
+    columnHelper.accessor('uniqueVisitors', {
+      id: 'uniqueVisitors',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
+          textTransform={'uppercase'}
         >
-          PROGRESS
+          Unique Visitors
+        </Text>
+      ),
+      cell: (info) => (
+        <Text color={textColor} fontSize='sm' fontWeight='700'>
+          {info.getValue()}
+        </Text>
+      ),
+    }),
+    columnHelper.accessor('clients', {
+      id: 'clients',
+      header: () => (
+        <Text
+          justifyContent='space-between'
+          align='center'
+          fontSize={{ sm: '10px', lg: '12px' }}
+          color='gray.400'
+          textTransform={'uppercase'}
+        >
+          Clients
         </Text>
       ),
       cell: (info) => (
         <Flex align='center'>
-          <Progress
-            variant='table'
-            colorScheme='brandScheme'
-            h='8px'
-            w='108px'
-            value={info.getValue()}
-          />
+          <Text color={textColor} fontSize='sm' fontWeight='700'>
+            {info.getValue()}
+          </Text>
         </Flex>
       ),
+    }),
+    columnHelper.accessor('bounceRate', {
+      id: 'bounceRate',
+      header: () => (
+        <Text
+          justifyContent='space-between'
+          align='center'
+          fontSize={{ sm: '10px', lg: '12px' }}
+          color='gray.400'
+          textTransform={'uppercase'}
+        >
+          Bounce Rate
+        </Text>
+      ),
+      cell: (info) => {
+        const isNegative = info.getValue() < 0
+        return (
+          <Flex align='center'>
+            <Text
+              fontSize='sm'
+              fontWeight='700'
+              color={isNegative ? 'red.500' : 'green.500'}
+            >
+              {isNegative ? '' : '+'}
+              {info.getValue()}%
+            </Text>
+          </Flex>
+        )
+      },
     }),
   ]
   const [data, setData] = React.useState(() => [...defaultData])
@@ -166,7 +218,6 @@ export default function ComplexTable(props: { tableData: any }) {
   return (
     <Card
       flexDirection='column'
-      w='100%'
       px='0px'
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
@@ -177,9 +228,8 @@ export default function ComplexTable(props: { tableData: any }) {
           fontWeight='700'
           lineHeight='100%'
         >
-          Complex Table
+          Atom staking stats
         </Text>
-        <Menu />
       </Flex>
       <Box>
         <Table variant='simple' color='gray.500' mb='24px' mt='12px'>
@@ -220,7 +270,7 @@ export default function ComplexTable(props: { tableData: any }) {
           <Tbody>
             {table
               .getRowModel()
-              .rows.slice(0, 5)
+              .rows.slice(0, 6)
               .map((row) => {
                 return (
                   <Tr key={row.id}>
@@ -248,3 +298,5 @@ export default function ComplexTable(props: { tableData: any }) {
     </Card>
   )
 }
+
+export default StakingStatsTable

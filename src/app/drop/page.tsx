@@ -15,23 +15,27 @@ import TopClaimersTable from '../../components/main/TopClaimersTable'
 import { tableColumnsTopClaimers } from '../../views/admin/marketplace/variables/tableDataTopCreators'
 import DailyTraffic from '../../views/admin/default/components/DailyTraffic'
 import PieCard from '../../views/admin/default/components/PieCard'
+import ConversionChartCard from '../../components/drop/ConversionChartCard'
+import DropDynamicChart from '../../components/drop/DropDynamicChart'
 
 const Page = () => {
   return (
-    <Box>
-      {/* Main Fields */}
-      <Grid gap={{ base: '20px', xl: '20px' }}>
-        <Banner
-          banner={banner.src}
-          avatar={NFT6}
-          name='Celestia'
-          job='Dec 2023'
-        />
-      </Grid>
-      <Flex gap='20px' align="start">
+    <Box mb={5}>
+      <Banner
+        banner={banner.src}
+        avatar={NFT6}
+        name='Celestia'
+        job='Dec 2023'
+      />
+
+      <Grid
+        gap='20px'
+        gridTemplateColumns={{ lg: '1fr 0.8fr', xl: '1fr 1fr' }}
+        display={{ base: 'block', lg: 'grid' }}
+      >
         <Flex flexDir='column' gap={5}>
-          <General pe='20px' w={700} />
-          <Card px='0px' mb='20px'>
+          <General pe='20px' w='100%' />
+          <Card px='0px'>
             <TopClaimersTable
               title='Top Claimers'
               tableData={tableColumnsTopClaimers}
@@ -39,8 +43,11 @@ const Page = () => {
           </Card>
         </Flex>
 
-        <PieCard />
-      </Flex>
+        <Flex flexDir='column' gap={5} align='start' w='100%'>
+          <ConversionChartCard />
+          <DropDynamicChart />
+        </Flex>
+      </Grid>
     </Box>
   )
 }

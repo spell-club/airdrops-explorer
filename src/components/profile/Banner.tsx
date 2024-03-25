@@ -20,7 +20,7 @@ export default function Banner(props: {
     '#111C44 !important',
   )
   return (
-    <Card mb={{ base: '0px', lg: '20px' }} alignItems='center' {...rest} pt={0}>
+    <Card mb='20px' alignItems='center' {...rest} pt={0}>
       <Box
         bg={`url(${banner})`}
         bgSize='cover'
@@ -37,12 +37,35 @@ export default function Banner(props: {
         border='4px solid'
         borderColor={borderColor}
       />
-      <Text color={textColorPrimary} fontWeight='bold' fontSize='32' mt='10px'>
-          cosmos140e7u946a2nqqkvcnjpjm83d0ynsqem8g840tx
+      <Text
+        color={textColorPrimary}
+        fontWeight='bold'
+        fontSize='32'
+        mt='10px'
+        display={{ base: 'none', lg: 'inline' }}
+      >
+        cosmos140e7u946a2nqqkvcnjpjm83d0ynsqem8g840tx
       </Text>
 
-      <Flex w='max-content' mx='auto' mt='46px'>
-        <Flex mx='auto' me='60px' alignItems='center' flexDirection='column'>
+      <Text
+        color={textColorPrimary}
+        fontWeight='bold'
+        fontSize='28'
+        mt='10px'
+        display={{ base: 'inline', lg: 'none' }}
+      >
+        cosmos140...em8g840tx
+      </Text>
+
+      <Flex
+        w='max-content'
+        mx='auto'
+        mt={{ base: '20px', lg: '40px' }}
+        flexDir={{ base: 'column', lg: 'row' }}
+        justify='center'
+        borderRadius={20}
+      >
+        <Flex mx='auto' alignItems='center' flexDirection='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
             28
           </Text>
@@ -52,7 +75,7 @@ export default function Banner(props: {
         </Flex>
         <VSeparator mx={{ base: '60px', xl: '60px', '2xl': '60px' }} />
 
-        <Flex mx='auto' me='60px' alignItems='center' flexDirection='column'>
+        <Flex mx='auto' alignItems='center' flexDirection='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
             46
           </Text>

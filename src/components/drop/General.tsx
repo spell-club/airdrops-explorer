@@ -25,7 +25,7 @@ export default function GeneralInformation(props: { [x: string]: any }) {
       >
         Description
       </Text>
-      <Text color={textColorSecondary} fontSize='16' me='26px' w={650}>
+      <Text color={textColorSecondary} fontSize='16' me='26px'>
         As we live, our hearts turn colder. Cause pain is what we go through as
         we become older. We get insulted by others, lose trust for those others.
         We get back stabbed by friends. It becomes harder for us to give others
