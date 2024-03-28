@@ -1,42 +1,68 @@
-'use client'
-// Chakra imports
+import React, { useMemo } from 'react'
+import Card from './card/Card'
 import {
-  AvatarGroup,
+  AspectRatio,
   Avatar,
+  AvatarGroup,
   Box,
   Button,
   Flex,
-  Icon,
   Image,
   Link,
   Text,
   useColorModeValue,
-  AspectRatio,
 } from '@chakra-ui/react'
-// Custom components
-import Card from 'components/card/Card'
 import { useRouter } from 'next/navigation'
-// Assets
-import { useState } from 'react'
+import numbro from 'numbro'
 
-export default function NFT(props: {
-  image: string | any
+interface Props {
+  id: number
+  image: string
   name: string
-  author: string
-  bidders: string[] | any[]
-  download: string
-  currentbid: string | number
-}) {
-  const { image, name, author, bidders, download, currentbid } = props
+  avgAmount: number
+  airdropAmount: number
+  tokenSymbol: string
+}
+
+const AirdropProject = ({
+  image,
+  name,
+  avgAmount,
+  airdropAmount,
+  tokenSymbol,
+  id,
+}: Props) => {
   const textColor = useColorModeValue('navy.700', 'white')
   const textColorBid = useColorModeValue('brand.500', 'white')
   const { push } = useRouter()
+
+  const averageAmount = useMemo(() => {
+    const roundFormat = {
+      trimMantissa: true,
+      thousandSeparated: true,
+        average: true,
+
+    }
+
+    return String(numbro(avgAmount).format(roundFormat)).replace(/,/g, ' ')
+  }, [avgAmount])
+
+  const totalAmount = useMemo(() => {
+    const roundFormat = {
+      trimMantissa: true,
+      thousandSeparated: true,
+      average: true,
+    }
+
+    return String(numbro(airdropAmount).format(roundFormat)).replace(/,/g, ' ')
+  }, [airdropAmount])
+
   return (
     <Card p='20px'>
       <Flex direction={{ base: 'column' }} justify='center'>
         <Box mb={{ base: '20px', '2xl': '20px' }} position='relative'>
           <AspectRatio ratio={7 / 5}>
-            <Image src={image.src} w={'100%'} borderRadius='20px' alt='' />
+            <Image src={image} w={'100%'} borderRadius='20px' alt='' />
           </AspectRatio>
         </Box>
         <Flex flexDirection='column' justify='space-between' h='100%'>
@@ -76,26 +102,27 @@ export default function NFT(props: {
                 fontWeight='400'
                 me='14px'
               >
-                {author}
+                Avg.amount {averageAmount} {tokenSymbol}
               </Text>
             </Flex>
-            <AvatarGroup
-              max={3}
-              color={textColorBid}
-              size='sm'
-              mt={{
-                base: '0px',
-                md: '10px',
-                lg: '0px',
-                xl: '10px',
-                '2xl': '0px',
-              }}
-              fontSize='12px'
-            >
-              {bidders.map((avt, key) => (
-                <Avatar key={key} h={'32px'} w={'32px'} src={avt.src} />
-              ))}
-            </AvatarGroup>
+            {/* chains list */}
+            {/*<AvatarGroup*/}
+            {/*  max={3}*/}
+            {/*  color={textColorBid}*/}
+            {/*  size='sm'*/}
+            {/*  mt={{*/}
+            {/*    base: '0px',*/}
+            {/*    md: '10px',*/}
+            {/*    lg: '0px',*/}
+            {/*    xl: '10px',*/}
+            {/*    '2xl': '0px',*/}
+            {/*  }}*/}
+            {/*  fontSize='12px'*/}
+            {/*>*/}
+            {/*  {bidders.map((avt, key) => (*/}
+            {/*    <Avatar key={key} h={'32px'} w={'32px'} src={avt.src} />*/}
+            {/*  ))}*/}
+            {/*</AvatarGroup>*/}
           </Flex>
           <Flex
             align={{
@@ -116,10 +143,9 @@ export default function NFT(props: {
             mt='25px'
           >
             <Text fontWeight='700' fontSize='sm' color={textColorBid}>
-              {currentbid}
+              {totalAmount} {tokenSymbol}
             </Text>
             <Link
-              href={download}
               mt={{
                 base: '0px',
                 md: '10px',
@@ -136,7 +162,7 @@ export default function NFT(props: {
                 borderRadius='70px'
                 px='24px'
                 py='5px'
-                onClick={() => push('/drop')}
+                onClick={() => push(`/drop/${id}`)}
               >
                 Read More
               </Button>
@@ -147,3 +173,5 @@ export default function NFT(props: {
     </Card>
   )
 }
+
+export default AirdropProject

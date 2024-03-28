@@ -1,12 +1,11 @@
 import React from 'react'
-import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
-import Card from '../card/Card'
-import { RiArrowUpSFill } from 'react-icons/ri'
-import LineChart from '../charts/LineChart'
-
 import useClientApi from '../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
 import { roundToPrecision } from '../../utils'
+import { Box, Button, Flex, Icon, useColorModeValue } from '@chakra-ui/react'
+import Card from '../card/Card'
+import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md'
+import LineChart from '../charts/LineChart'
 import { ApexOptions } from 'apexcharts'
 
 const lineChartOptionsTotalSpent: ApexOptions = {
@@ -23,7 +22,7 @@ const lineChartOptionsTotalSpent: ApexOptions = {
       color: '#4318FF',
     },
   },
-  colors: ['#4318FF', '#39B8FF'],
+  colors: [ '#39B8FF'],
   markers: {
     size: 0,
     colors: 'white',
@@ -82,27 +81,32 @@ const lineChartOptionsTotalSpent: ApexOptions = {
   // color: ["#7551FF", "#39B8FF"],
 }
 
-interface Props {
-  address: string
-}
-const ClaimedUnclaimedChart = ({ address }: Props) => {
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
+const ProjectsDynamicChart = () => {
   const { clientApi } = useClientApi()
   const { data: chartData, isLoading: isChartDataLoading } = useQuery({
-    queryKey: ['claimHistory'],
-    queryFn: () => clientApi.getClaimHistoricalValue(address),
+    queryKey: ['dropsHistory'],
+    queryFn: () => clientApi.getProjectsHistoricalValue(),
   })
 
-  const claimedArray = chartData?.map((data) =>
-    roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
-  )
-  const unclaimedArray = chartData?.map((data) =>
-    roundToPrecision({ value: data.unclaimed_amount_usd, precision: 2 }),
+  const dataArray = chartData?.map((data) =>
+    roundToPrecision({ value: data.value_usd, precision: 2 }),
   )
   const datesArray = chartData?.map((data) =>
     new Date(data.date).toLocaleDateString(),
   )
 
+  const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
+  const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+  const iconColor = useColorModeValue('brand.500', 'white')
+  const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+  const bgHover = useColorModeValue(
+    { bg: 'secondaryGray.400' },
+    { bg: 'whiteAlpha.50' },
+  )
+  const bgFocus = useColorModeValue(
+    { bg: 'secondaryGray.300' },
+    { bg: 'whiteAlpha.100' },
+  )
   return (
     <Card
       justifyContent='center'
@@ -111,13 +115,43 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
       w='100%'
       mb='0px'
     >
-      <Flex w='100%' flexDirection={{ base: 'column', lg: 'column' }}>
-        <Box minH='360px' minW='75%' mt='auto'>
+      <Flex justify='space-between' ps='0px' pe='20px' pt='5px' w='100%'>
+        <Flex align='center' w='100%'>
+          <Button
+            bg={boxBg}
+            fontSize='sm'
+            fontWeight='500'
+            color={textColorSecondary}
+            borderRadius='7px'
+          >
+            <Icon
+              as={MdOutlineCalendarToday}
+              color={textColorSecondary}
+              me='4px'
+            />
+            This month
+          </Button>
+          <Button
+            ms='auto'
+            alignItems='center'
+            justifyContent='center'
+            bg={bgButton}
+            _hover={bgHover}
+            _focus={bgFocus}
+            _active={bgFocus}
+            w='37px'
+            h='37px'
+            lineHeight='100%'
+            borderRadius='10px'
+          >
+            <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
+          </Button>
+        </Flex>
+      </Flex>
+      <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }}>
+        <Box minH='360px' minW='100%' mt='auto'>
           <LineChart
-            chartData={[
-              { name: 'Claimed', data: claimedArray },
-              { name: 'Unclaimed', data: unclaimedArray },
-            ]}
+            chartData={[{ name: 'Value USD', data: dataArray }]}
             chartOptions={{
               ...lineChartOptionsTotalSpent,
               xaxis: {
@@ -144,4 +178,4 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
   )
 }
 
-export default ClaimedUnclaimedChart
+export default ProjectsDynamicChart

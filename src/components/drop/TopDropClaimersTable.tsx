@@ -1,5 +1,4 @@
-'use client'
-import * as React from 'react'
+import React from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -23,13 +22,13 @@ import {
   Tr,
   useColorModeValue,
 } from '@chakra-ui/react'
-import NFT1 from 'img/nfts/Nft1.png'
-import NFT2 from 'img/nfts/Nft2.png'
 import { useRouter } from 'next/navigation'
 import useClientApi from '../../hooks/useClientApi'
+import NFT1 from '../../img/nfts/Nft1.png'
+import NFT2 from '../../img/nfts/Nft2.png'
 import { useQuery } from '@tanstack/react-query'
-import { roundToPrecision } from '../../utils'
 import numbro from 'numbro'
+import { roundToPrecision } from '../../utils'
 import { AIRDROPS_IMAGES } from '../../constants'
 
 type RowObj = {
@@ -37,18 +36,25 @@ type RowObj = {
   projects: Record<'project', string>[]
   total_amount_usd: number
 }
+
 const columnHelper = createColumnHelper<RowObj>()
 
 interface Props {
-  tableData: any
-  title: string
+  dropId: string
 }
 
-const TopClaimersTable = ({ tableData, title }: Props) => {
+const TopDropClaimersTable = ({ dropId }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   const { push } = useRouter()
+  const { clientApi } = useClientApi()
+  const [itemsCount, setItemsCount] = React.useState(10)
+
+  const { data: claimersData, isLoading } = useQuery({
+    queryKey: ['getTopDropClaimers'],
+    queryFn: () => clientApi.getAirdropClaimers(Number(dropId)),
+  })
 
   const columns = [
     columnHelper.accessor('address', {
@@ -64,7 +70,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         </Text>
       ),
       cell: (info: any) => {
-        const trucatedAddress = `${info.getValue().slice(0, 6)}...${info.getValue().slice(-6)}`
+        const trucatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
         return (
           <Flex
             align='center'
@@ -88,7 +94,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          PROJECTS
+          PROJECT
         </Text>
       ),
       cell: (info) => {
@@ -156,7 +162,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
     }),
   ]
   const table = useReactTable({
-    data: tableData ?? [],
+    data: claimersData ?? [],
     columns,
     state: {
       sorting,
@@ -182,8 +188,14 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'
       >
         <Text color={textColor} fontSize='xl' fontWeight='600'>
-          {title}
+          Top Claimers
         </Text>
+        <Button
+          variant='action'
+          onClick={() => setItemsCount(claimersData.length)}
+        >
+          See all
+        </Button>
       </Flex>
       <Box>
         <Table variant='simple' color='gray.500' mt='12px'>
@@ -224,7 +236,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           <Tbody>
             {table
               .getRowModel()
-              .rows.slice()
+              .rows.slice(0, itemsCount)
               .map((row) => {
                 return (
                   <Tr key={row.id}>
@@ -253,4 +265,4 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
   )
 }
 
-export default TopClaimersTable
+export default TopDropClaimersTable

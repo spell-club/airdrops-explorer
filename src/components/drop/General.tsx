@@ -2,11 +2,12 @@
 import { SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 import Card from '../card/Card'
-import Information from '../../views/admin/profile/components/Information'
 
-// Assets
-export default function GeneralInformation(props: { [x: string]: any }) {
-  const { ...rest } = props
+interface Props {
+  description: string
+}
+
+export default function GeneralInformation({ description }: Props) {
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
@@ -15,7 +16,7 @@ export default function GeneralInformation(props: { [x: string]: any }) {
     'unset',
   )
   return (
-    <Card {...rest}>
+    <Card pe='20px' w='100%'>
       <Text
         color={textColorPrimary}
         fontWeight='bold'
@@ -26,15 +27,7 @@ export default function GeneralInformation(props: { [x: string]: any }) {
         Description
       </Text>
       <Text color={textColorSecondary} fontSize='16' me='26px'>
-        As we live, our hearts turn colder. Cause pain is what we go through as
-        we become older. We get insulted by others, lose trust for those others.
-        We get back stabbed by friends. It becomes harder for us to give others
-        a hand. We get our heart broken by people we love, even that we give
-        them all... As we live, our hearts turn colder. Cause pain is what we go
-        through as we become older. We get insulted by others, lose trust for
-        those others. We get back stabbed by friends. It becomes harder for us
-        to give others a hand. We get our heart broken by people we love, even
-        that we give them all...
+        {description}
       </Text>
     </Card>
   )

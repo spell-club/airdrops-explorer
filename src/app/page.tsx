@@ -1,12 +1,8 @@
 'use client'
 import {
-  Box,
   Flex,
-  FormLabel,
   Grid,
   Icon,
-  Image,
-  Select,
   SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react'
@@ -18,18 +14,21 @@ import TopClaimersTable from '../components/main/TopClaimersTable'
 import DropsList from '../components/main/DropsList'
 import MiniStatistics from '../components/card/MiniStatistics'
 import IconBox from '../components/icons/IconBox'
-import {
-  MdAddTask,
-  MdAttachMoney,
-  MdBarChart,
-  MdFileCopy,
-} from 'react-icons/md'
-import Usa from '../img/dashboards/usa.png'
-import TotalSpent from '../views/admin/default/components/TotalSpent'
+import { MdAttachMoney, MdBarChart, MdFileCopy } from 'react-icons/md'
+import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
+import { useQuery } from '@tanstack/react-query'
+import useClientApi from '../hooks/useClientApi'
 
 export default function Home({}) {
   const brandColor = useColorModeValue('brand.500', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+  const { clientApi } = useClientApi()
+  const { data: topWinnersAndLosers, isLoading: isWinnersAndLosersLoading } =
+    useQuery({
+      queryKey: ['getTopClaimers'],
+      queryFn: () => clientApi.getTopWinnersAndLosers(),
+    })
+
   return (
     <Grid
       mb='20px'
@@ -37,17 +36,12 @@ export default function Home({}) {
       gap={{ base: '20px', xl: '20px' }}
       display={{ base: 'block', xl: 'grid' }}
     >
-      <Flex flexDirection='column'>
+      <Flex flexDirection='column' gap='30px'>
         <Banner />
 
         <DropsList />
 
-        <SimpleGrid
-          columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }}
-          gap='20px'
-          mb='20px'
-          mt='40px'
-        >
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }} gap='20px'>
           <MiniStatistics
             startContent={
               <IconBox
@@ -59,8 +53,8 @@ export default function Home({}) {
                 }
               />
             }
-            name='Earnings'
-            value='$350.4'
+            name='Total Droped'
+            value='$0'
           />
           <MiniStatistics
             startContent={
@@ -78,8 +72,8 @@ export default function Home({}) {
                 }
               />
             }
-            name='Spend this month'
-            value='$642.39'
+            name='Total Claimed'
+            value='$0'
           />
 
           <MiniStatistics
@@ -93,26 +87,25 @@ export default function Home({}) {
                 }
               />
             }
-            name='Total Projects'
-            value='2935'
+            name='Users'
+            value='999'
           />
         </SimpleGrid>
-
-        <TotalSpent />
+        <ProjectsDynamicChart />
       </Flex>
 
-      <Flex flexDirection='column' mt={{ base: '20px', xl: '0' }}>
+      <Flex flexDirection='column' mt={{ base: '30px', xl: '0' }}>
         <Card px='0px' mb='20px'>
           <TopClaimersTable
             title='Top Claimers'
-            tableData={tableColumnsTopClaimers}
+            tableData={topWinnersAndLosers?.winners}
           />
         </Card>
 
         <Card px='0px' mb='20px'>
           <TopClaimersTable
             title='Top Losers'
-            tableData={tableColumnsTopClaimers}
+            tableData={topWinnersAndLosers?.losers || []}
           />
         </Card>
       </Flex>

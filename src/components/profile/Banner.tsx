@@ -7,11 +7,22 @@ export default function Banner(props: {
   banner: string
   avatar: string | any
   name: string
-  job: string
+  claimedDrops: number
+  missedDrops: number
   [x: string]: any
 }) {
-  const { banner, avatar, name, job, posts, followers, following, ...rest } =
-    props
+  const {
+    banner,
+    avatar,
+    name,
+    job,
+    posts,
+    followers,
+    claimedDrops,
+    missedDrops,
+    following,
+    ...rest
+  } = props
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
@@ -44,7 +55,7 @@ export default function Banner(props: {
         mt='10px'
         display={{ base: 'none', lg: 'inline' }}
       >
-        cosmos140e7u946a2nqqkvcnjpjm83d0ynsqem8g840tx
+        {name}
       </Text>
 
       <Text
@@ -67,7 +78,7 @@ export default function Banner(props: {
       >
         <Flex mx='auto' alignItems='center' flexDirection='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            28
+            {claimedDrops}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
             Claimed Drops
@@ -77,31 +88,10 @@ export default function Banner(props: {
 
         <Flex mx='auto' alignItems='center' flexDirection='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            46
+            {missedDrops}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
             Missed Drops
-          </Text>
-        </Flex>
-        <VSeparator mx={{ base: '60px', xl: '60px', '2xl': '60px' }} />
-
-        <Flex mx='auto' alignItems='center' flexDirection='column'>
-          <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            0.56
-          </Text>
-          <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Cosmos Stake
-          </Text>
-        </Flex>
-
-        <VSeparator mx={{ base: '60px', xl: '60px', '2xl': '60px' }} />
-
-        <Flex mx='auto' alignItems='center' flexDirection='column'>
-          <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            Dec 2024
-          </Text>
-          <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Staked From
           </Text>
         </Flex>
       </Flex>

@@ -11,13 +11,9 @@ import {
 import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md'
 import LineChart from '../charts/LineChart'
 import { ApexOptions } from 'apexcharts'
-
-const lineChartDataTotalSpent = [
-  {
-    name: 'Revenue',
-    data: [50, 64, 48, 66, 49, 68],
-  },
-]
+import { useQuery } from '@tanstack/react-query'
+import useClientApi from '../../hooks/useClientApi'
+import { roundToPrecision } from '../../utils'
 
 const lineChartOptionsTotalSpent: ApexOptions = {
   chart: {
@@ -92,8 +88,27 @@ const lineChartOptionsTotalSpent: ApexOptions = {
   // color: ["#7551FF", "#39B8FF"],
 }
 
-const DropDynamicChart = () => {
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
+interface Props {
+  dropId: string
+}
+
+const DropDynamicChart = ({ dropId }: Props) => {
+  const { clientApi } = useClientApi()
+  const { data: chartData, isLoading: isChartDataLoading } = useQuery({
+    queryKey: ['dropHistory'],
+    queryFn: () => clientApi.getProjectHistoricalValue(Number(dropId)),
+  })
+
+  const dataArray = chartData?.map((data) =>
+    roundToPrecision({ value: data.value_usd, precision: 2 }),
+  )
+  const datesArray = chartData?.map((data) =>
+    new Date(data.date).toLocaleDateString(),
+  )
+
+  console.log({ chartData, isChartDataLoading })
+  console.log(dataArray)
+
   const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
   const iconColor = useColorModeValue('brand.500', 'white')
@@ -150,8 +165,26 @@ const DropDynamicChart = () => {
       <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }}>
         <Box minH='360px' minW='100%' mt='auto'>
           <LineChart
-            chartData={lineChartDataTotalSpent}
-            chartOptions={lineChartOptionsTotalSpent}
+            chartData={[{ name: 'Value USD', data: dataArray }]}
+            chartOptions={{
+              ...lineChartOptionsTotalSpent,
+              xaxis: {
+                categories: datesArray,
+                labels: {
+                  style: {
+                    colors: '#A3AED0',
+                    fontSize: '12px',
+                    fontWeight: '500',
+                  },
+                },
+                axisBorder: {
+                  show: false,
+                },
+                axisTicks: {
+                  show: false,
+                },
+              },
+            }}
           />
         </Box>
       </Flex>
