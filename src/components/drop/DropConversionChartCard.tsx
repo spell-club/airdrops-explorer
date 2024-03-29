@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../card/Card'
-import { Flex, Text } from '@chakra-ui/react'
+import {Flex, Text, useColorModeValue} from '@chakra-ui/react'
 import CircularChart from '../charts/DonutChart'
 import { VSeparator } from '../separator/Separator'
 import numbro from 'numbro'
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const DropConversionChartCard = ({ totalAllocated, totalClaimed }: Props) => {
+  const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
   const conversion = roundToPrecision({
     value: (totalClaimed / totalAllocated) * 100,
     precision: 2,
@@ -41,7 +42,7 @@ const DropConversionChartCard = ({ totalAllocated, totalClaimed }: Props) => {
       alignItems='center'
       flexDirection='column'
       w='100%'
-      bg='whiteAlpha.800'
+      bg={bg}
     >
       <Flex flexDir='column' align='center' gap={4}>
         <Text fontSize={20} fontWeight={600}>

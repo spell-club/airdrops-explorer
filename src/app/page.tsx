@@ -31,11 +31,11 @@ export default function Home({}) {
     })
   const { colorMode, toggleColorMode } = useColorMode()
 
-  // useEffect(() => {
-  //   if (colorMode === 'light') {
-  //     toggleColorMode()
-  //   }
-  // }, [colorMode])
+  useEffect(() => {
+    if (colorMode === 'light') {
+      toggleColorMode()
+    }
+  }, [colorMode])
 
   return (
     <Grid

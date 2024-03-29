@@ -39,7 +39,7 @@ export default function Banner(props: {
       <Text color={textColorPrimary} fontWeight='bold' fontSize='32' mt='10px'>
         {name}
       </Text>
-      <Text fontSize='sm' color='black'>
+      <Text fontSize='sm' color={textColorPrimary}>
         {job}
       </Text>
     </Card>

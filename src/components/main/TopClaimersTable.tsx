@@ -148,7 +148,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         )
 
         return (
-          <Flex align='center' color='black' fontWeight={600}>
+          <Flex align='center' color={textColor} fontWeight={600}>
             <Text>${formattedValue}</Text>
           </Flex>
         )
