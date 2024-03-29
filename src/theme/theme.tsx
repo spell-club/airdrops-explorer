@@ -13,7 +13,7 @@ import { globalStyles } from './styles'
 import sizes from './sizes'
 
 export default extendTheme(
-  { breakpoints, sizes }, // Breakpoints
+  { breakpoints, sizes,  initialColorMode: 'dark' }, // Breakpoints
   globalStyles,
   badgeStyles, // badge styles
   buttonStyles, // button styles

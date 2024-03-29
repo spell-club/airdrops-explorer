@@ -15,10 +15,16 @@ import TopClaimersTable from '../components/main/TopClaimersTable'
 import DropsList from '../components/main/DropsList'
 import MiniStatistics from '../components/card/MiniStatistics'
 import IconBox from '../components/icons/IconBox'
-import { MdAttachMoney, MdBarChart, MdFileCopy } from 'react-icons/md'
+import {
+  MdAttachMoney,
+  MdBarChart,
+  MdFileCopy, MdSupervisedUserCircle,
+  MdVerifiedUser,
+} from 'react-icons/md'
 import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 import { useQuery } from '@tanstack/react-query'
 import useClientApi from '../hooks/useClientApi'
+import { formatValue } from '../utils'
 
 export default function Home({}) {
   const brandColor = useColorModeValue('brand.500', 'white')
@@ -29,13 +35,19 @@ export default function Home({}) {
       queryKey: ['getTopClaimers'],
       queryFn: () => clientApi.getTopWinnersAndLosers(),
     })
+  const { data: stats, isLoading: isStatsLoading } = useQuery({
+    queryKey: ['stats'],
+    queryFn: () => clientApi.getStats(),
+  })
+
+
   const { colorMode, toggleColorMode } = useColorMode()
 
-  useEffect(() => {
-    if (colorMode === 'light') {
-      toggleColorMode()
-    }
-  }, [colorMode])
+  // useEffect(() => {
+  //   if (colorMode === 'light') {
+  //     toggleColorMode()
+  //   }
+  // }, [colorMode])
 
   return (
     <Grid
@@ -53,12 +65,21 @@ export default function Home({}) {
                 h='56px'
                 bg={boxBg}
                 icon={
-                  <Icon w='32px' h='32px' as={MdBarChart} color={brandColor} />
+                  <Icon
+                    w='32px'
+                    h='32px'
+                    as={MdAttachMoney}
+                    color={brandColor}
+                  />
                 }
               />
             }
-            name='Total Droped'
-            value='$0'
+            name='Total Allocated'
+            value={
+              stats?.total_allocated_usd
+                ? formatValue(stats?.total_allocated_usd, 0)
+                : '$0'
+            }
           />
           <MiniStatistics
             startContent={
@@ -77,7 +98,11 @@ export default function Home({}) {
               />
             }
             name='Total Claimed'
-            value='$0'
+            value={
+              stats?.total_claimed_usd
+                ? formatValue(stats?.total_claimed_usd, 0)
+                : '$0'
+            }
           />
 
           <MiniStatistics
@@ -87,12 +112,17 @@ export default function Home({}) {
                 h='56px'
                 bg={boxBg}
                 icon={
-                  <Icon w='32px' h='32px' as={MdFileCopy} color={brandColor} />
+                  <Icon
+                    w='32px'
+                    h='32px'
+                    as={MdSupervisedUserCircle}
+                    color={brandColor}
+                  />
                 }
               />
             }
             name='Users'
-            value='999'
+            value={stats?.users_num}
           />
         </SimpleGrid>
         <ProjectsDynamicChart />

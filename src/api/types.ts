@@ -56,6 +56,12 @@ interface AddressAsset {
   total_unclaimed_usd: number
 }
 
+interface Stats {
+  total_allocated_usd: number
+  total_claimed_usd: number
+  users_num: number
+}
+
 interface ClientApiInterface {
   readonly apiClient: AxiosInstance
 
@@ -68,6 +74,7 @@ interface ClientApiInterface {
   getAddressInfo(address: string): Promise<AddressInfo>
   getClaimHistoricalValue(address: string): Promise<ClaimHistoricalValue[]>
   getAddressAssets(address: string): Promise<AddressAsset[]>
+  getStats(): Promise<Stats>
 }
 
 export type {
@@ -79,4 +86,5 @@ export type {
   AddressInfo,
   ClaimHistoricalValue,
   AddressAsset,
+  Stats,
 }

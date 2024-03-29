@@ -27,5 +27,5 @@ export const formatValue = (value: number, precision?: number) => {
     thousandSeparated: true,
   }
 
-  return String(numbro(truncatedAmount).format(roundFormat)).replace(/,/g, ' ')
+  return String(numbro(truncatedAmount).format(roundFormat))
 }

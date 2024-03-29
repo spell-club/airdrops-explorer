@@ -15,6 +15,7 @@ import getProjectHistoricalValueRequest from './requests/getProjectHistoricalVal
 import getAddressInfoRequest from './requests/getAddressInfoRequest'
 import getClaimHistoricalValueRequest from './requests/getClaimHistoricalValueRequest'
 import getAddressAssetsRequest from './requests/getAddressAssetsRequest'
+import getStatsRequest from './requests/getStatsRequest'
 
 const API_BASE_URL = 'https://api.spell.club/'
 
@@ -62,6 +63,10 @@ class ClientApi implements ClientApiInterface {
 
   getAddressAssets(address: string) {
     return getAddressAssetsRequest(address, this.apiClient)
+  }
+
+  getStats() {
+    return getStatsRequest(this.apiClient)
   }
 }
 
