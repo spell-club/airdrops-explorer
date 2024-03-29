@@ -32,8 +32,10 @@ export default function Home({}) {
   const { colorMode, toggleColorMode } = useColorMode()
 
   // useEffect(() => {
-  //   toggleColorMode()
-  // }, [])
+  //   if (colorMode === 'light') {
+  //     toggleColorMode()
+  //   }
+  // }, [colorMode])
 
   return (
     <Grid
