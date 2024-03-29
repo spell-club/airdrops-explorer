@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <Head />
-      <body id={'root'}>
+      <body id={'root'} className='chakra-ui-dark'>
         <AppWrappers>
           <Flex flexDir='column' minH='100vh'>
             <AppHeader />

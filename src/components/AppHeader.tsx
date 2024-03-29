@@ -5,9 +5,8 @@ import { SearchBar } from './navbar/searchBar/SearchBar'
 
 const AppHeader = () => {
   const { push } = useRouter()
-  const bg = useColorModeValue('purple.100', 'navy.700')
   return (
-    <Box as='header' h='60px' bg={bg}>
+    <Box as='header' h='75px'>
       <Container maxW='container.xl' h='100%'>
         <Flex w='100%' h='100%' align='center' justify='space-between'>
           <Text
