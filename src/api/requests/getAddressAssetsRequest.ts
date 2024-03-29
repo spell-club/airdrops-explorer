@@ -1,13 +1,13 @@
+import { AddressAsset } from '../types'
 import { AxiosInstance } from 'axios'
-import { AirdropProject } from '../types'
 
-const getAirdropProjectRequest = async (
-  projectId: number | string,
+const getAddressAssetsRequest = async (
+  address: string,
   apiClient: AxiosInstance,
-): Promise<AirdropProject> => {
+): Promise<AddressAsset[]> => {
   return new Promise((resolve, reject) => {
     apiClient
-      .get(`/airdrop/project/${projectId}`)
+      .get(`/airdrop/address/${address}/assets`)
       .then((response) => {
         resolve(response.data)
       })
@@ -17,4 +17,4 @@ const getAirdropProjectRequest = async (
   })
 }
 
-export default getAirdropProjectRequest
+export default getAddressAssetsRequest

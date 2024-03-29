@@ -2,7 +2,14 @@ import React from 'react'
 import useClientApi from '../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
 import { roundToPrecision } from '../../utils'
-import { Box, Button, Flex, Icon, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  useColorModeValue,
+  Text,
+} from '@chakra-ui/react'
 import Card from '../card/Card'
 import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md'
 import LineChart from '../charts/LineChart'
@@ -22,7 +29,7 @@ const lineChartOptionsTotalSpent: ApexOptions = {
       color: '#4318FF',
     },
   },
-  colors: [ '#39B8FF'],
+  colors: ['#39B8FF'],
   markers: {
     size: 0,
     colors: 'white',
@@ -50,7 +57,6 @@ const lineChartOptionsTotalSpent: ApexOptions = {
   },
   xaxis: {
     // type: "numeric",
-    categories: ['01.03', '02.03', '03.03', '04.03', '05.03', '06.03'],
     labels: {
       style: {
         colors: '#A3AED0',
@@ -88,13 +94,20 @@ const ProjectsDynamicChart = () => {
     queryFn: () => clientApi.getProjectsHistoricalValue(),
   })
 
+  const roundFormat = {
+    trimMantissa: true,
+    thousandSeparated: true,
+  }
+
   const dataArray = chartData?.map((data) =>
     roundToPrecision({ value: data.value_usd, precision: 2 }),
   )
+
   const datesArray = chartData?.map((data) =>
     new Date(data.date).toLocaleDateString(),
   )
 
+  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
   const iconColor = useColorModeValue('brand.500', 'white')
@@ -107,6 +120,7 @@ const ProjectsDynamicChart = () => {
     { bg: 'secondaryGray.300' },
     { bg: 'whiteAlpha.100' },
   )
+
   return (
     <Card
       justifyContent='center'
@@ -115,6 +129,15 @@ const ProjectsDynamicChart = () => {
       w='100%'
       mb='0px'
     >
+      <Text
+        color={textColor}
+        fontSize='xl'
+        fontWeight='600'
+        alignSelf='start'
+        pb={2}
+      >
+        Total airdropped and claimed value
+      </Text>
       <Flex justify='space-between' ps='0px' pe='20px' pt='5px' w='100%'>
         <Flex align='center' w='100%'>
           <Button
@@ -148,6 +171,7 @@ const ProjectsDynamicChart = () => {
           </Button>
         </Flex>
       </Flex>
+
       <Flex w='100%' flexDirection={{ base: 'column', lg: 'row' }}>
         <Box minH='360px' minW='100%' mt='auto'>
           <LineChart

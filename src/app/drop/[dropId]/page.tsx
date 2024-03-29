@@ -19,7 +19,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
   const { data: airdropProject, isLoading: isAirdropProjectLoading } = useQuery(
     {
       queryKey: ['drop', dropId],
-      queryFn: () => clientApi.getAirdropProject(Number(dropId)),
+      queryFn: () => clientApi.getAirdropProject(dropId),
     },
   )
 

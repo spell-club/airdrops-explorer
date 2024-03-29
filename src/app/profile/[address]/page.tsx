@@ -1,17 +1,16 @@
 'use client'
 import React from 'react'
-import { Box, Center, Flex, Grid, SimpleGrid, Spinner } from '@chakra-ui/react'
+import { Box, Center, Grid, SimpleGrid, Spinner } from '@chakra-ui/react'
 import Banner from '../../../components/profile/Banner'
 import banner from '../../../img/profile/banner.png'
 import NFT6 from '../../../img/nfts/Nft6.png'
-import ComplexTable from '../../../views/admin/default/components/ComplexTable'
-import tableDataComplex from '../../../views/admin/default/variables/tableDataComplex'
 import ClaimedUnclaimedChart from '../../../components/profile/ClaimedUnclaimedChart'
 import ProfitEstimationChart from '../../../components/profile/ProfitEstimationChart'
 import YourAirdropsTable from '../../../components/profile/YourAirdropsTable'
 import StakingStatsTable from '../../../components/profile/StakingStatsTable'
 import useClientApi from '../../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
+import AssetsTable from '../../../components/profile/AssetsTable'
 
 const Page = ({ params }: { params: { address: string } }) => {
   const { address } = params
@@ -54,7 +53,7 @@ const Page = ({ params }: { params: { address: string } }) => {
         <StakingStatsTable />
       </Grid>
 
-      <ComplexTable tableData={tableDataComplex} />
+      <AssetsTable address={address} />
     </Box>
   )
 }

@@ -4,12 +4,13 @@ import {
   Grid,
   Icon,
   SimpleGrid,
+  useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Banner from '../components/main/Banner'
 import Card from '../components/card/Card'
 import { tableColumnsTopClaimers } from '../views/admin/marketplace/variables/tableDataTopCreators'
-import React from 'react'
+import React, { useEffect } from 'react'
 import TopClaimersTable from '../components/main/TopClaimersTable'
 import DropsList from '../components/main/DropsList'
 import MiniStatistics from '../components/card/MiniStatistics'
@@ -28,6 +29,11 @@ export default function Home({}) {
       queryKey: ['getTopClaimers'],
       queryFn: () => clientApi.getTopWinnersAndLosers(),
     })
+  const { colorMode, toggleColorMode } = useColorMode()
+
+  // useEffect(() => {
+  //   toggleColorMode()
+  // }, [])
 
   return (
     <Grid
@@ -37,10 +43,6 @@ export default function Home({}) {
       display={{ base: 'block', xl: 'grid' }}
     >
       <Flex flexDirection='column' gap='30px'>
-        <Banner />
-
-        <DropsList />
-
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }} gap='20px'>
           <MiniStatistics
             startContent={
@@ -92,6 +94,10 @@ export default function Home({}) {
           />
         </SimpleGrid>
         <ProjectsDynamicChart />
+
+        <DropsList />
+
+        <Banner />
       </Flex>
 
       <Flex flexDirection='column' mt={{ base: '30px', xl: '0' }}>

@@ -139,13 +139,13 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
 
         const truncatedAmount = roundToPrecision({
           value,
-          precision: 2,
+          precision: 0,
           method: 'floor',
         })
 
         const formattedValue = String(
           numbro(truncatedAmount).format(roundFormat),
-        ).replace(/,/g, ' ')
+        )
 
         return (
           <Flex align='center' color='black' fontWeight={600}>

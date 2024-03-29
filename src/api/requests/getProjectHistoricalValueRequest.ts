@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import { HistoricalValue } from '../types'
 
 const getProjectHistoricalValueRequest = async (
-  projectId: number,
+  projectId: number | string,
   apiClient: AxiosInstance,
 ): Promise<HistoricalValue[]> => {
   return new Promise((resolve, reject) => {

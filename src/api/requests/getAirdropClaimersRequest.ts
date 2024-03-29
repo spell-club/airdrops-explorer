@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import { TopParticipant } from '../types'
 
 const getAirdropClaimersRequest = async (
-  projectId: number,
+  projectId: number | string,
   apiClient: AxiosInstance,
 ): Promise<TopParticipant[]> => {
   return new Promise((resolve, reject) => {

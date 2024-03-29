@@ -2,8 +2,6 @@ import React, { useMemo } from 'react'
 import Card from './card/Card'
 import {
   AspectRatio,
-  Avatar,
-  AvatarGroup,
   Box,
   Button,
   Flex,
@@ -162,7 +160,7 @@ const AirdropProject = ({
                 borderRadius='70px'
                 px='24px'
                 py='5px'
-                onClick={() => push(`/drop/${id}`)}
+                onClick={() => push(`/drop/${name.toLowerCase()}`)}
               >
                 Read More
               </Button>

@@ -46,6 +46,16 @@ interface ClaimHistoricalValue {
   unclaimed_amount_usd: number
 }
 
+interface AddressAsset {
+  address: string
+  chain_name: string
+  token_name: string
+  total_claimed: number
+  total_claimed_usd: number
+  total_unclaimed: number
+  total_unclaimed_usd: number
+}
+
 interface ClientApiInterface {
   readonly apiClient: AxiosInstance
 
@@ -57,6 +67,7 @@ interface ClientApiInterface {
   getProjectHistoricalValue(id: number): Promise<HistoricalValue[]>
   getAddressInfo(address: string): Promise<AddressInfo>
   getClaimHistoricalValue(address: string): Promise<ClaimHistoricalValue[]>
+  getAddressAssets(address: string): Promise<AddressAsset[]>
 }
 
 export type {
@@ -67,4 +78,5 @@ export type {
   TopParticipant,
   AddressInfo,
   ClaimHistoricalValue,
+  AddressAsset,
 }

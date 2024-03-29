@@ -15,7 +15,7 @@ const AppHeader = () => {
             onClick={() => push('/')}
             cursor='pointer'
           >
-            Airdrops explorer
+            SpellDrop.xyz
           </Text>
         </Flex>
       </Container>

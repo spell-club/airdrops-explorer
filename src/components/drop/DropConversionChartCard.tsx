@@ -23,7 +23,7 @@ const DropConversionChartCard = ({ totalAllocated, totalClaimed }: Props) => {
   const formattValue = (value: number) => {
     const truncatedAmount = roundToPrecision({
       value,
-      precision: 2,
+      precision: 0,
       method: 'floor',
     })
 
@@ -32,10 +32,7 @@ const DropConversionChartCard = ({ totalAllocated, totalClaimed }: Props) => {
       thousandSeparated: true,
     }
 
-    return String(numbro(truncatedAmount).format(roundFormat)).replace(
-      /,/g,
-      ' ',
-    )
+    return String(numbro(truncatedAmount).format(roundFormat))
   }
 
   return (

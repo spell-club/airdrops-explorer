@@ -3,7 +3,7 @@ import Card from '../card/Card'
 import { Flex, Text } from '@chakra-ui/react'
 import CircularChart from '../charts/DonutChart'
 import { VSeparator } from '../separator/Separator'
-import { roundToPrecision } from '../../utils'
+import { formatValue, roundToPrecision } from '../../utils'
 import numbro from 'numbro'
 
 interface Props {
@@ -18,26 +18,8 @@ const ProfitEstimationChart = ({
   const conversion = roundToPrecision({
     value: (totalClaimedUsd / totalAllocatedUsd) * 100,
     precision: 2,
-    method: 'floor',
+    method: 'round',
   })
-
-  const formattValue = (value: number) => {
-    const truncatedAmount = roundToPrecision({
-      value,
-      precision: 2,
-      method: 'floor',
-    })
-
-    const roundFormat = {
-      trimMantissa: true,
-      thousandSeparated: true,
-    }
-
-    return String(numbro(truncatedAmount).format(roundFormat)).replace(
-      /,/g,
-      ' ',
-    )
-  }
 
   return (
     <Card
@@ -79,7 +61,7 @@ const ProfitEstimationChart = ({
               Total Allocated
             </Text>
             <Text fontSize={20} fontWeight={600}>
-              ${formattValue(totalAllocatedUsd)}
+              ${formatValue(totalAllocatedUsd, 0)}
             </Text>
           </Flex>
           <VSeparator />
@@ -88,7 +70,7 @@ const ProfitEstimationChart = ({
               Total Claimed
             </Text>
             <Text fontSize={20} fontWeight={600}>
-              ${formattValue(totalClaimedUsd)}
+              ${formatValue(totalClaimedUsd, 0)}
             </Text>
           </Flex>
         </Flex>

@@ -53,7 +53,7 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
 
   const { data: claimersData, isLoading } = useQuery({
     queryKey: ['getTopDropClaimers'],
-    queryFn: () => clientApi.getAirdropClaimers(Number(dropId)),
+    queryFn: () => clientApi.getAirdropClaimers(dropId),
   })
 
   const columns = [
@@ -145,13 +145,13 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
 
         const truncatedAmount = roundToPrecision({
           value,
-          precision: 2,
+          precision: 0,
           method: 'floor',
         })
 
         const formattedValue = String(
           numbro(truncatedAmount).format(roundFormat),
-        ).replace(/,/g, ' ')
+        )
 
         return (
           <Flex align='center' color='black' fontWeight={600}>

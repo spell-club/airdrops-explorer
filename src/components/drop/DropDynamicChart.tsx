@@ -96,7 +96,7 @@ const DropDynamicChart = ({ dropId }: Props) => {
   const { clientApi } = useClientApi()
   const { data: chartData, isLoading: isChartDataLoading } = useQuery({
     queryKey: ['dropHistory'],
-    queryFn: () => clientApi.getProjectHistoricalValue(Number(dropId)),
+    queryFn: () => clientApi.getProjectHistoricalValue(dropId),
   })
 
   const dataArray = chartData?.map((data) =>
@@ -105,9 +105,6 @@ const DropDynamicChart = ({ dropId }: Props) => {
   const datesArray = chartData?.map((data) =>
     new Date(data.date).toLocaleDateString(),
   )
-
-  console.log({ chartData, isChartDataLoading })
-  console.log(dataArray)
 
   const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
@@ -121,6 +118,8 @@ const DropDynamicChart = ({ dropId }: Props) => {
     { bg: 'secondaryGray.300' },
     { bg: 'whiteAlpha.100' },
   )
+  const textColor = useColorModeValue('secondaryGray.900', 'white')
+
   return (
     <Card
       justifyContent='center'
@@ -129,6 +128,15 @@ const DropDynamicChart = ({ dropId }: Props) => {
       w='100%'
       mb='0px'
     >
+      <Text
+        color={textColor}
+        fontSize='xl'
+        fontWeight='600'
+        alignSelf='start'
+        pb={2}
+      >
+        Total claimed value
+      </Text>
       <Flex justify='space-between' ps='0px' pe='20px' pt='5px' w='100%'>
         <Flex align='center' w='100%'>
           <Button
