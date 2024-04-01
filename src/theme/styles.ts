@@ -76,7 +76,7 @@ export const globalStyles = {
       400: '#3652ba',
       500: '#1b3bbb',
       600: '#24388a',
-      700: '#21213a',
+      700: '#24243f',
       800: '#1b1b28',
       900: '#151523',
     },
@@ -91,6 +91,7 @@ export const globalStyles = {
         bg: mode('navy.900', 'navy.900')(props),
         fontFamily: 'DM Sans',
         letterSpacing: '-0.5px',
+        color: 'grey.100'
       },
       input: {
         color: 'gray.700',
@@ -99,7 +100,6 @@ export const globalStyles = {
         fontFamily: 'DM Sans',
       },
       header: {
-        // bg: mode('purple.900', 'navy.800')(props),
         bg: 'navy.800',
         borderBottom: '1px solid',
         borderColor: 'navy.700',

@@ -46,8 +46,6 @@ interface Props {
 
 const TopClaimersTable = ({ tableData, title }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   const { push } = useRouter()
 
   const columns = [
@@ -60,7 +58,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          ADDRESS
+          Address
         </Text>
       ),
       cell: (info: any) => {
@@ -72,7 +70,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
             cursor='pointer'
           >
             <Avatar src={NFT1.src} w='30px' h='30px' me='8px' />
-            <Text color={textColor} fontSize='sm' fontWeight='600'>
+            <Text fontSize='sm' fontWeight='600'>
               {trucatedAddress}
             </Text>
           </Flex>
@@ -88,7 +86,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          PROJECTS
+          Networks
         </Text>
       ),
       cell: (info) => {
@@ -127,7 +125,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE
+          Airdrop
         </Text>
       ),
       cell: (info) => {
@@ -148,7 +146,7 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         )
 
         return (
-          <Flex align='center' color={textColor} fontWeight={600}>
+          <Flex align='center' fontWeight={600}>
             <Text>${formattedValue}</Text>
           </Flex>
         )
@@ -177,16 +175,14 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         justify='space-between'
         w='100%'
         px='22px'
-        pb='20px'
-        mb='10px'
-        boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'
+        pb='10px'
       >
-        <Text color={textColor} fontSize='xl' fontWeight='600'>
+        <Text fontSize='xl' fontWeight='600'>
           {title}
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' color='gray.500' mt='12px'>
+        <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -194,10 +190,12 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
                   return (
                     <Th
                       key={header.id}
+                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      pe='10px'
-                      borderColor={borderColor}
+                      // pe='10px'
+                      border='none'
                       cursor='pointer'
+                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex

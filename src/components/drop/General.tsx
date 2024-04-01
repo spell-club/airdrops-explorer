@@ -9,7 +9,6 @@ interface Props {
 
 export default function GeneralInformation({ description }: Props) {
   // Chakra Color Mode
-  const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const cardShadow = useColorModeValue(
     '0px 18px 40px rgba(112, 144, 176, 0.12)',
@@ -18,7 +17,6 @@ export default function GeneralInformation({ description }: Props) {
   return (
     <Card pe='20px' w='100%'>
       <Text
-        color={textColorPrimary}
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'

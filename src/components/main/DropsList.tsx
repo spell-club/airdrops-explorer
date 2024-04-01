@@ -6,7 +6,6 @@ import useClientApi from '../../hooks/useClientApi'
 import { AIRDROPS_IMAGES } from '../../constants'
 
 const DropsList = () => {
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const { clientApi } = useClientApi()
 
   const { data: airdrops, isLoading: isAirdropsLoading } = useQuery({
@@ -18,8 +17,7 @@ const DropsList = () => {
   return (
     <Flex direction='column'>
       <Text
-        color={textColor}
-        fontSize='2xl'
+        fontSize='xl'
         ms='24px'
         fontWeight='700'
         mb='20px'

@@ -59,7 +59,7 @@ export default function Banner() {
       </Flex>
 
       <Image
-        display={{ base: 'none', lg: 'block',  }}
+        display={{ base: 'none', lg: 'block', }}
         src={banner.src}
         width={415}
         height='100%'

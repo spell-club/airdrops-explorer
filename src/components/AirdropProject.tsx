@@ -30,8 +30,6 @@ const AirdropProject = ({
   tokenSymbol,
   id,
 }: Props) => {
-  const textColor = useColorModeValue('navy.700', 'white')
-  const textColorBid = useColorModeValue('brand.500', 'white')
   const { push } = useRouter()
 
   const averageAmount = useMemo(() => {
@@ -80,7 +78,6 @@ const AirdropProject = ({
           >
             <Flex direction='column'>
               <Text
-                color={textColor}
                 fontSize={{
                   base: 'xl',
                   md: 'lg',
@@ -143,7 +140,7 @@ const AirdropProject = ({
             }}
             mt='25px'
           >
-            <Text fontWeight='700' fontSize='sm' color={textColorBid}>
+            <Text fontWeight='700' fontSize='sm'>
               {totalAmount} {tokenSymbol}
             </Text>
             <Link
