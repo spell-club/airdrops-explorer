@@ -4,12 +4,15 @@ export const globalStyles = {
     purple: {
       100: '#6D49FB',
     },
+    grey: {
+      100: '#e6e6e9',
+    },
     brand: {
       100: '#E9E3FF',
       200: '#422AFB',
       300: '#422AFB',
       400: '#7551FF',
-      500: '#422AFB',
+      500: '#a378e1',
       600: '#3311DB',
       700: '#02044A',
       800: '#190793',
@@ -73,9 +76,9 @@ export const globalStyles = {
       400: '#3652ba',
       500: '#1b3bbb',
       600: '#24388a',
-      700: '#1B254B',
-      800: '#111c44',
-      900: '#0b1437',
+      700: '#21213a',
+      800: '#1b1b28',
+      900: '#151523',
     },
     gray: {
       100: '#FAFCFE',
@@ -94,6 +97,12 @@ export const globalStyles = {
       },
       html: {
         fontFamily: 'DM Sans',
+      },
+      header: {
+        // bg: mode('purple.900', 'navy.800')(props),
+        bg: 'navy.800',
+        borderBottom: '1px solid',
+        borderColor: 'navy.700',
       },
     }),
   },

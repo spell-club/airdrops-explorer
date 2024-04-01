@@ -38,8 +38,7 @@ const AirdropProject = ({
     const roundFormat = {
       trimMantissa: true,
       thousandSeparated: true,
-        average: true,
-
+      average: true,
     }
 
     return String(numbro(avgAmount).format(roundFormat)).replace(/,/g, ' ')
@@ -56,7 +55,11 @@ const AirdropProject = ({
   }, [airdropAmount])
 
   return (
-    <Card p='20px'>
+    <Card
+      p='20px'
+      onClick={() => push(`/drop/${name.toLowerCase()}`)}
+      cursor='pointer'
+    >
       <Flex direction={{ base: 'column' }} justify='center'>
         <Box mb={{ base: '20px', '2xl': '20px' }} position='relative'>
           <AspectRatio ratio={7 / 5}>

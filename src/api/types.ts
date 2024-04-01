@@ -30,7 +30,8 @@ interface AirdropProject {
 
 interface HistoricalValue {
   date: string
-  value_usd: number
+  allocated_amount_usd: number
+  claimed_amount_usd: number
 }
 
 interface AddressInfo {

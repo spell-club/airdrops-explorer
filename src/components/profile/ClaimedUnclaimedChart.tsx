@@ -1,91 +1,21 @@
-import React from 'react'
-import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
+import React, { useMemo, useState } from 'react'
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from '../card/Card'
-import { RiArrowUpSFill } from 'react-icons/ri'
 import LineChart from '../charts/LineChart'
-
 import useClientApi from '../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
 import { roundToPrecision } from '../../utils'
-import { ApexOptions } from 'apexcharts'
-
-const lineChartOptionsTotalSpent: ApexOptions = {
-  chart: {
-    toolbar: {
-      show: false,
-    },
-    dropShadow: {
-      enabled: true,
-      top: 13,
-      left: 0,
-      blur: 10,
-      opacity: 0.1,
-      color: '#4318FF',
-    },
-  },
-  colors: ['#4318FF', '#39B8FF'],
-  markers: {
-    size: 0,
-    colors: 'white',
-    strokeColors: '#7551FF',
-    strokeWidth: 3,
-    strokeOpacity: 0.9,
-    strokeDashArray: 0,
-    fillOpacity: 1,
-    discrete: [],
-    shape: 'circle',
-    radius: 2,
-    offsetX: 0,
-    offsetY: 0,
-    showNullDataPoints: true,
-  },
-  tooltip: {
-    theme: 'dark',
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: 'smooth',
-    // type: "line",
-  },
-  xaxis: {
-    // type: "numeric",
-    categories: ['01.03', '02.03', '03.03', '04.03', '05.03', '06.03'],
-    labels: {
-      style: {
-        colors: '#A3AED0',
-        fontSize: '12px',
-        fontWeight: '500',
-      },
-    },
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    show: false,
-  },
-  legend: {
-    show: false,
-  },
-  grid: {
-    show: false,
-    column: {
-      // color: ["#7551FF", "#39B8FF"],
-      opacity: 0.5,
-    },
-  },
-  // color: ["#7551FF", "#39B8FF"],
-}
+import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import SelectTimelineMenu from '../SelectTimelineMenu'
 
 interface Props {
   address: string
 }
+
+
 const ClaimedUnclaimedChart = ({ address }: Props) => {
+  const { chartConfig, ovewriteCategories, timeCategories } =
+    useDefaultChartConfig()
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const { clientApi } = useClientApi()
   const { data: chartData, isLoading: isChartDataLoading } = useQuery({
@@ -93,13 +23,31 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
     queryFn: () => clientApi.getClaimHistoricalValue(address),
   })
 
-  const claimedArray = chartData?.map((data) =>
-    roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
-  )
-  const unclaimedArray = chartData?.map((data) =>
-    roundToPrecision({ value: data.unclaimed_amount_usd, precision: 2 }),
-  )
-  const datesArray = chartData?.map((data) =>
+  const [selectedTime, setSelectedTime] = useState(timeCategories[0])
+
+  const dataByTime = useMemo(() => {
+    if (!chartData) return []
+
+    return chartData.slice(-selectedTime.value)
+  }, [chartData, selectedTime])
+
+  const { claimedArray, unclaimedArray } = useMemo(() => {
+    const claimedArray: number[] = []
+    const unclaimedArray: number[] = []
+
+    dataByTime.forEach((data) => {
+      claimedArray.push(
+        roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
+      )
+      unclaimedArray.push(
+        roundToPrecision({ value: data.unclaimed_amount_usd, precision: 2 }),
+      )
+    })
+
+    return { claimedArray, unclaimedArray }
+  }, [dataByTime])
+
+  const datesArray = dataByTime?.map((data) =>
     new Date(data.date).toLocaleDateString(),
   )
 
@@ -111,6 +59,22 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
       w='100%'
       mb='0px'
     >
+      <Flex w='100%' justify='space-between' align='center'>
+        <Text
+          color={textColor}
+          fontSize='xl'
+          fontWeight='600'
+          alignSelf='start'
+          pb={2}
+        >
+          Total airdropped and claimed value
+        </Text>
+        <SelectTimelineMenu
+          selected={selectedTime}
+          items={timeCategories}
+          onItemSelected={setSelectedTime}
+        />
+      </Flex>
       <Flex w='100%' flexDirection={{ base: 'column', lg: 'column' }}>
         <Box minH='360px' minW='75%' mt='auto'>
           <LineChart
@@ -119,22 +83,15 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
               { name: 'Unclaimed', data: unclaimedArray },
             ]}
             chartOptions={{
-              ...lineChartOptionsTotalSpent,
+              ...chartConfig,
+              colors: ['#4318FF', '#39B8FF'],
               xaxis: {
+                ...chartConfig.xaxis,
                 categories: datesArray,
-                labels: {
-                  style: {
-                    colors: '#A3AED0',
-                    fontSize: '12px',
-                    fontWeight: '500',
-                  },
-                },
-                axisBorder: {
-                  show: false,
-                },
-                axisTicks: {
-                  show: false,
-                },
+                overwriteCategories: ovewriteCategories(
+                  datesArray,
+                  selectedTime.label === '1W' ? 4 : 7,
+                ),
               },
             }}
           />

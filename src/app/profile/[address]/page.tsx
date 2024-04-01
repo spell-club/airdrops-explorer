@@ -53,7 +53,7 @@ const Page = ({ params }: { params: { address: string } }) => {
         <StakingStatsTable />
       </Grid>
 
-      <AssetsTable address={address} />
+      {/*<AssetsTable address={address} />*/}
     </Box>
   )
 }
