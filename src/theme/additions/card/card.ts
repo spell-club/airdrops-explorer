@@ -6,6 +6,8 @@ const Card = {
     flexDirection: "column",
     width: "100%",
     position: "relative",
+    border: "1px solid",
+    borderColor: "navy.700",
     borderRadius: "20px",
     minWidth: "0px",
     wordWrap: "break-word",

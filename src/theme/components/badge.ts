@@ -15,7 +15,6 @@ export const badgeStyles: { components: { Badge: StyleConfig } } = {
         }),
         brand: (props: StyleFunctionProps) => ({
           bg: mode("brand.500", "brand.400")(props),
-          color: "white",
           _focus: {
             bg: mode("brand.500", "brand.400")(props),
           },
