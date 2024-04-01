@@ -19,23 +19,15 @@ import { MdAttachMoney, MdBarChart, MdFileCopy } from 'react-icons/md'
 import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 import { useQuery } from '@tanstack/react-query'
 import useClientApi from '../hooks/useClientApi'
+import MiniStatisticsGrid from '../components/main/MiniStatisticsGrid'
 
-export default function Home({ }) {
-  const brandColor = useColorModeValue('brand.500', 'brand.500')
-  const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+export default function Home({}) {
   const { clientApi } = useClientApi()
   const { data: topWinnersAndLosers, isLoading: isWinnersAndLosersLoading } =
     useQuery({
       queryKey: ['getTopClaimers'],
       queryFn: () => clientApi.getTopWinnersAndLosers(),
     })
-  const { colorMode, toggleColorMode } = useColorMode()
-
-  useEffect(() => {
-    if (colorMode === 'light') {
-      toggleColorMode()
-    }
-  }, [colorMode])
 
   return (
     <Grid
@@ -45,61 +37,13 @@ export default function Home({ }) {
       display={{ base: 'block', xl: 'grid' }}
     >
       <Flex flexDirection='column' gap='30px'>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }} gap='20px'>
-          <MiniStatistics
-            startContent={
-              <IconBox
-                w='56px'
-                h='56px'
-                bg={boxBg}
-                icon={
-                  <Icon w='32px' h='32px' as={MdBarChart} color={brandColor} />
-                }
-              />
-            }
-            name='Total Droped'
-            value='$0'
-          />
-          <MiniStatistics
-            startContent={
-              <IconBox
-                w='56px'
-                h='56px'
-                bg={boxBg}
-                icon={
-                  <Icon
-                    w='32px'
-                    h='32px'
-                    as={MdAttachMoney}
-                    color={brandColor}
-                  />
-                }
-              />
-            }
-            name='Total Claimed'
-            value='$0'
-          />
+        <MiniStatisticsGrid />
 
-          <MiniStatistics
-            startContent={
-              <IconBox
-                w='56px'
-                h='56px'
-                bg={boxBg}
-                icon={
-                  <Icon w='32px' h='32px' as={MdFileCopy} color={brandColor} />
-                }
-              />
-            }
-            name='Users'
-            value='999'
-          />
-        </SimpleGrid>
         <ProjectsDynamicChart />
 
         <DropsList />
 
-        <Banner />
+        {/*<Banner />*/}
       </Flex>
 
       <Flex flexDirection='column' mt={{ base: '30px', xl: '0' }}>

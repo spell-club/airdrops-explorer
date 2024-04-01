@@ -13,7 +13,15 @@ import { globalStyles } from './styles'
 import sizes from './sizes'
 
 export default extendTheme(
-  { breakpoints, sizes,  initialColorMode: 'dark' }, // Breakpoints
+  {
+    breakpoints,
+    sizes,
+    initialColorMode: 'dark',
+    config: {
+      initialColorMode: 'dark',
+      useSystemColorMode: false,
+    },
+  }, // Breakpoints
   globalStyles,
   badgeStyles, // badge styles
   buttonStyles, // button styles
@@ -26,6 +34,4 @@ export default extendTheme(
   CardComponent, // card component
 )
 
-
 export interface CustomCardProps extends HTMLChakraProps<'div'>, ThemingProps {}
-
