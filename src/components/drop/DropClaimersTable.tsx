@@ -36,25 +36,41 @@ type RowObj = {
   address: string
   projects: Record<'project', string>[]
   total_amount_usd: number
+  total_amount: number
 }
 
 const columnHelper = createColumnHelper<RowObj>()
 
 interface Props {
-  dropId: string
+  tableData: RowObj[]
+  title: string
+  isLoading: boolean
+  tokenSymbol: string
 }
-
-const TopDropClaimersTable = ({ dropId }: Props) => {
+const DropClaimersTable = ({
+  tableData,
+  title,
+  isLoading,
+  tokenSymbol,
+}: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   const { push } = useRouter()
-  const { clientApi } = useClientApi()
-  const [itemsCount, setItemsCount] = React.useState(10)
 
-  const { data: claimersData, isLoading } = useQuery({
-    queryKey: ['getTopDropClaimers'],
-    queryFn: () => clientApi.getAirdropClaimers(dropId),
-  })
+  const formatValue = (value: number) => {
+    const roundFormat = {
+      trimMantissa: true,
+      thousandSeparated: true,
+    }
+
+    const truncatedAmount = roundToPrecision({
+      value,
+      precision: 0,
+      method: 'floor',
+    })
+
+    return String(numbro(truncatedAmount).format(roundFormat))
+  }
 
   const columns = [
     columnHelper.accessor('address', {
@@ -88,8 +104,8 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
         )
       },
     }),
-    columnHelper.accessor('projects', {
-      id: 'chains',
+    columnHelper.accessor('total_amount', {
+      id: 'total_amount',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -97,33 +113,17 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          PROJECT
+          VALUE TOKENS
         </Text>
       ),
       cell: (info) => {
         const value = info.getValue()
         return (
-          <AvatarGroup
-            max={3}
-            size='sm'
-            mt={{
-              base: '0px',
-              md: '10px',
-              lg: '0px',
-              xl: '10px',
-              '2xl': '0px',
-            }}
-            fontSize='12px'
-          >
-            {value.map((avt, key) => (
-              <Avatar
-                key={key}
-                h={'32px'}
-                w={'32px'}
-                src={AIRDROPS_IMAGES[avt.project.toLowerCase()]}
-              />
-            ))}
-          </AvatarGroup>
+          <Flex fontWeight={600}>
+            <Text>
+              {formatValue(value)} {tokenSymbol}
+            </Text>
+          </Flex>
         )
       },
     }),
@@ -136,36 +136,22 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE
+          VALUE $
         </Text>
       ),
       cell: (info) => {
         const value = info.getValue()
-        const roundFormat = {
-          trimMantissa: true,
-          thousandSeparated: true,
-        }
-
-        const truncatedAmount = roundToPrecision({
-          value,
-          precision: 0,
-          method: 'floor',
-        })
-
-        const formattedValue = String(
-          numbro(truncatedAmount).format(roundFormat),
-        )
 
         return (
           <Flex align='center' fontWeight={600}>
-            <Text>${formattedValue}</Text>
+            <Text>${formatValue(value)}</Text>
           </Flex>
         )
       },
     }),
   ]
   const table = useReactTable({
-    data: claimersData ?? [],
+    data: tableData ?? [],
     columns,
     state: {
       sorting,
@@ -190,14 +176,8 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
         mb='10px'
       >
         <Text fontSize='xl' fontWeight='600'>
-          Top Claimers
+          {title}
         </Text>
-        <Button
-          variant='action'
-          onClick={() => setItemsCount(claimersData.length)}
-        >
-          See all
-        </Button>
       </Flex>
       <Box>
         <Table variant='simple' mt='12px'>
@@ -238,7 +218,7 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
           <Tbody>
             {table
               .getRowModel()
-              .rows.slice(0, itemsCount)
+              .rows.slice()
               .map((row) => {
                 return (
                   <Tr key={row.id}>
@@ -267,4 +247,4 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
   )
 }
 
-export default TopDropClaimersTable
+export default DropClaimersTable

@@ -103,24 +103,6 @@ const AirdropProject = ({
                 Avg.amount {averageAmount} {tokenSymbol}
               </Text>
             </Flex>
-            {/* chains list */}
-            {/*<AvatarGroup*/}
-            {/*  max={3}*/}
-            {/*  color={textColorBid}*/}
-            {/*  size='sm'*/}
-            {/*  mt={{*/}
-            {/*    base: '0px',*/}
-            {/*    md: '10px',*/}
-            {/*    lg: '0px',*/}
-            {/*    xl: '10px',*/}
-            {/*    '2xl': '0px',*/}
-            {/*  }}*/}
-            {/*  fontSize='12px'*/}
-            {/*>*/}
-            {/*  {bidders.map((avt, key) => (*/}
-            {/*    <Avatar key={key} h={'32px'} w={'32px'} src={avt.src} />*/}
-            {/*  ))}*/}
-            {/*</AvatarGroup>*/}
           </Flex>
           <Flex
             align={{
@@ -162,7 +144,7 @@ const AirdropProject = ({
                 py='5px'
                 onClick={() => push(`/drop/${name.toLowerCase()}`)}
               >
-                Read More
+                Explore
               </Button>
             </Link>
           </Flex>

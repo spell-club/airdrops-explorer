@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios'
-import { GetTopWinnersAndLosersResponse } from '../types'
+import {GetTopWinnersAndLosersResponse, TopParticipant} from '../types'
 
 const getTopWinnersAndLosersRequest = async (
   apiClient: AxiosInstance,
-): Promise<GetTopWinnersAndLosersResponse> => {
+): Promise<GetTopWinnersAndLosersResponse<TopParticipant>> => {
   return new Promise((resolve, reject) => {
     apiClient
-      .get('/airdrop/top_winners_losers')
+      .get('/airdrop/projects/top_winners_losers')
       .then((response) => resolve(response.data))
       .catch((error) => reject(error))
   })

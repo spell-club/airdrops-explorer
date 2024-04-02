@@ -10,9 +10,13 @@ interface TopParticipant {
   total_amount_usd: number
 }
 
-interface GetTopWinnersAndLosersResponse {
-  losers: TopParticipant[]
-  winners: TopParticipant[]
+interface TopParticipantByProject extends TopParticipant {
+  total_amount: number
+}
+
+interface GetTopWinnersAndLosersResponse<T> {
+  losers: T[]
+  winners: T[]
 }
 
 interface AirdropProject {
@@ -66,12 +70,14 @@ interface Stats {
 interface ClientApiInterface {
   readonly apiClient: AxiosInstance
 
-  getTopWinnersAndLosers(): Promise<GetTopWinnersAndLosersResponse>
+  getTopWinnersAndLosers(): Promise<
+    GetTopWinnersAndLosersResponse<TopParticipant>
+  >
   getAirdropProjects(): Promise<AirdropProject[]>
   getProjectsHistoricalValue(): Promise<HistoricalValue[]>
-  getAirdropProject(id: number): Promise<AirdropProject>
-  getAirdropClaimers(id: number): Promise<TopParticipant[]>
-  getProjectHistoricalValue(id: number): Promise<HistoricalValue[]>
+  getAirdropProject(id: string): Promise<AirdropProject>
+  getAirdropTowWinnersAndLosers(id: string): Promise<GetTopWinnersAndLosersResponse<TopParticipantByProject>>
+  getProjectHistoricalValue(id: string): Promise<HistoricalValue[]>
   getAddressInfo(address: string): Promise<AddressInfo>
   getClaimHistoricalValue(address: string): Promise<ClaimHistoricalValue[]>
   getAddressAssets(address: string): Promise<AddressAsset[]>
@@ -84,6 +90,7 @@ export type {
   AirdropProject,
   HistoricalValue,
   TopParticipant,
+  TopParticipantByProject,
   AddressInfo,
   ClaimHistoricalValue,
   AddressAsset,
