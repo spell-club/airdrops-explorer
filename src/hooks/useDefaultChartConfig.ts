@@ -69,6 +69,7 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
   },
   stroke: {
     curve: 'smooth',
+    width: 3,
   },
   xaxis: {
     labels: {
