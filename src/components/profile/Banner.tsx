@@ -2,6 +2,8 @@
 import { Box, Flex, Avatar, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from '../card/Card'
 import { VSeparator } from '../separator/Separator'
+import { generateIcon } from '../../utils'
+import IconWithBg from 'components/IconWithBg'
 
 export default function Banner(props: {
   banner: string
@@ -30,24 +32,28 @@ export default function Banner(props: {
     'white !important',
     '#111C44 !important',
   )
+  const icon = generateIcon(name, 30)
   return (
     <Card mb='20px' alignItems='center' {...rest} pt={0}>
       <Box
-        bg={`url(${banner})`}
-        bgSize='cover'
+        bgColor='#151523'
+        opacity='1'
+        bgImage='radial-gradient(#a378e1 1.1px, #151523 1.1px)'
+        bgSize='22px 22px'
         borderRadius='16px'
         h='191px'
         w='102%'
       />
-      <Avatar
+      <IconWithBg
         mx='auto'
-        src={avatar.src}
+        icon={icon}
         h='157px'
         w='157px'
         mt='-63px'
-        border='4px solid'
+        border='2px solid'
         borderColor={borderColor}
       />
+
       <Text
         color={textColorPrimary}
         fontWeight='bold'

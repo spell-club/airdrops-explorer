@@ -12,7 +12,6 @@ import {
   Avatar,
   AvatarGroup,
   Box,
-  Button,
   Flex,
   Table,
   Tbody,
@@ -21,16 +20,12 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
 } from '@chakra-ui/react'
-import NFT1 from 'img/nfts/Nft1.png'
-import NFT2 from 'img/nfts/Nft2.png'
 import { useRouter } from 'next/navigation'
-import useClientApi from '../../hooks/useClientApi'
-import { useQuery } from '@tanstack/react-query'
-import { roundToPrecision } from '../../utils'
+import { generateIcon, roundToPrecision } from '../../utils'
 import numbro from 'numbro'
 import { AIRDROPS_IMAGES } from '../../constants'
+import IconWithBg from 'components/IconWithBg'
 
 type RowObj = {
   address: string
@@ -61,15 +56,16 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
           Address
         </Text>
       ),
-      cell: (info: any) => {
+      cell: (info) => {
         const trucatedAddress = `${info.getValue().slice(0, 6)}...${info.getValue().slice(-6)}`
+        const icon = generateIcon(info.row.original.address, 30)
         return (
           <Flex
             align='center'
             onClick={() => push(`/profile/${info.getValue()}`)}
             cursor='pointer'
           >
-            <Avatar src={NFT1.src} w='30px' h='30px' me='8px' />
+            <IconWithBg icon={icon} boxSize='32px' me='8px' />
             <Text fontSize='sm' fontWeight='600'>
               {trucatedAddress}
             </Text>

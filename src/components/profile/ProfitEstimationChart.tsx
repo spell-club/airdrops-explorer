@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../card/Card'
-import {Flex, Text, useColorModeValue} from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import CircularChart from '../charts/DonutChart'
 import { VSeparator } from '../separator/Separator'
 import { formatValue, roundToPrecision } from '../../utils'
@@ -22,15 +22,8 @@ const ProfitEstimationChart = ({
   })
   const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
 
-
   return (
-    <Card
-      p='20px'
-      alignItems='center'
-      flexDirection='column'
-      w='100%'
-      bg={bg}
-    >
+    <Card p='20px' alignItems='center' flexDirection='column' w='100%' bg={bg}>
       <Flex flexDir='column' align='center' gap={4}>
         <Text fontSize={20} fontWeight={600}>
           Dropped/Claimed
@@ -55,7 +48,7 @@ const ProfitEstimationChart = ({
           gap={5}
           px={10}
           py={4}
-          boxShadow='rgba(112, 144, 176, 0.08) 14px 17px 40px 4px'
+          boxShadow='rgba(112, 144, 176, 0.08) 4px 1px 10px 4px'
           borderRadius={20}
         >
           <Flex flexDir='column'>

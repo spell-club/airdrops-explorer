@@ -15,7 +15,6 @@ export default function Banner(props: {
   return (
     <Card mb='20px' alignItems='center' {...rest} pt={0}>
       <Box
-        // bg={`url(${banner})`}
         bgColor='#151523'
         opacity='1'
         bgImage='radial-gradient(#a378e1 1.1px, #151523 1.1px)'

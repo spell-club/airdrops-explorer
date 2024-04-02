@@ -28,8 +28,9 @@ import NFT1 from '../../img/nfts/Nft1.png'
 import NFT2 from '../../img/nfts/Nft2.png'
 import { useQuery } from '@tanstack/react-query'
 import numbro from 'numbro'
-import { roundToPrecision } from '../../utils'
+import { generateIcon, roundToPrecision } from '../../utils'
 import { AIRDROPS_IMAGES } from '../../constants'
+import IconWithBg from '../IconWithBg'
 
 type RowObj = {
   address: string
@@ -70,13 +71,16 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
       ),
       cell: (info: any) => {
         const trucatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
+        const icon = generateIcon(info.row.original.address, 30)
+
         return (
           <Flex
             align='center'
             onClick={() => push(`/profile/${info.getValue()}`)}
             cursor='pointer'
           >
-            <Avatar src={NFT1.src} w='30px' h='30px' me='8px' />
+            <IconWithBg icon={icon} boxSize='32px' me='8px' />
+
             <Text fontSize='sm' fontWeight='600'>
               {trucatedAddress}
             </Text>

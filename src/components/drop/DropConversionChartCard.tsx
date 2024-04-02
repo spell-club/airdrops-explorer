@@ -68,7 +68,7 @@ const DropConversionChartCard = ({ totalAllocated, totalClaimed }: Props) => {
           gap={5}
           px={10}
           py={4}
-          boxShadow='rgba(112, 144, 176, 0.08) 14px 17px 40px 4px'
+          boxShadow='rgba(112, 144, 176, 0.08) 4px 1px 10px 4px'
           borderRadius={20}
         >
           <Flex flexDir='column' align='center'>
