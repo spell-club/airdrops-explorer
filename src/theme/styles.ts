@@ -6,6 +6,7 @@ export const globalStyles = {
     },
     grey: {
       100: '#e6e6e9',
+      900: '#000614'
     },
     brand: {
       100: '#E9E3FF',

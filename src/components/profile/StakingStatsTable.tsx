@@ -89,7 +89,6 @@ const TABLE_DATA: RowObj[] = [
 
 const StakingStatsTable = () => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   let defaultData = TABLE_DATA
   const columns = [
@@ -108,7 +107,7 @@ const StakingStatsTable = () => {
       ),
       cell: (info: any) => (
         <Flex align='center'>
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
+          <Text fontSize='sm' fontWeight='700'>
             {info.getValue()}
           </Text>
         </Flex>
@@ -128,7 +127,7 @@ const StakingStatsTable = () => {
         </Text>
       ),
       cell: (info) => (
-        <Text color={textColor} fontSize='sm' fontWeight='700'>
+        <Text fontSize='sm' fontWeight='700'>
           {info.getValue()}
         </Text>
       ),
@@ -147,7 +146,7 @@ const StakingStatsTable = () => {
         </Text>
       ),
       cell: (info) => (
-        <Text color={textColor} fontSize='sm' fontWeight='700'>
+        <Text fontSize='sm' fontWeight='700'>
           {info.getValue()}
         </Text>
       ),
@@ -167,7 +166,7 @@ const StakingStatsTable = () => {
       ),
       cell: (info) => (
         <Flex align='center'>
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
+          <Text fontSize='sm' fontWeight='700'>
             {info.getValue()}
           </Text>
         </Flex>
@@ -223,7 +222,7 @@ const StakingStatsTable = () => {
     >
       <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
         <Text
-          color={textColor}
+
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'
@@ -232,7 +231,7 @@ const StakingStatsTable = () => {
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' color='gray.500' mb='24px' mt='12px'>
+        <Table variant='simple' mb='24px' mt='12px'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>

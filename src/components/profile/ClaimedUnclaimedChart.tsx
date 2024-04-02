@@ -16,7 +16,6 @@ interface Props {
 const ClaimedUnclaimedChart = ({ address }: Props) => {
   const { chartConfig, ovewriteCategories, timeCategories } =
     useDefaultChartConfig()
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const { clientApi } = useClientApi()
   const { data: chartData, isLoading: isChartDataLoading } = useQuery({
     queryKey: ['claimHistory'],
@@ -61,7 +60,6 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
     >
       <Flex w='100%' justify='space-between' align='center'>
         <Text
-          color={textColor}
           fontSize='xl'
           fontWeight='600'
           alignSelf='start'

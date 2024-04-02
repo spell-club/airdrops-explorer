@@ -15,9 +15,9 @@ export default function Banner(props: {
   return (
     <Card mb='20px' alignItems='center' {...rest} pt={0}>
       <Box
-        bgColor='#151523'
+        bgColor='grey.900'
         opacity='1'
-        bgImage='radial-gradient(#a378e1 1.1px, #151523 1.1px)'
+        bgImage='radial-gradient(#a378e1 1.1px, #000614 1.1px)'
         bgSize='22px 22px'
         borderRadius='16px'
         h='191px'
