@@ -1,5 +1,6 @@
 import numbro from 'numbro'
 import { toSvg } from 'jdenticon'
+import { prominent } from 'color.js'
 
 type RoundingMethod = 'round' | 'ceil' | 'floor' | 'trunc'
 
@@ -35,4 +36,14 @@ export const generateIcon = (address: string, size = 100) => {
   const icon = Buffer.from(toSvg(address, size)).toString('base64')
 
   return `data:image/svg+xml;base64,${icon}`
+}
+
+export const getProminentColor = (img: string) => {
+  return prominent(img, { format: 'hex', amount: 2 }).then(data => {
+    if (data[0] == "#000000") {
+      return data[1]
+    }
+
+    return data[0]
+  })
 }

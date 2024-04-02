@@ -13,6 +13,7 @@ const IconWithBg = chakra(({ className, icon }: Props) => (
     align='center'
     borderRadius='50%'
     bg='black'
+    zIndex='1'
   >
     <Image borderRadius='50%' w='100%' src={icon} />
   </Flex>

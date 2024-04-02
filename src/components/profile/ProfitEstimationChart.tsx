@@ -20,10 +20,9 @@ const ProfitEstimationChart = ({
     precision: 2,
     method: 'round',
   })
-  const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
 
   return (
-    <Card p='20px' alignItems='center' flexDirection='column' w='100%' bg={bg}>
+    <Card p='20px' alignItems='center' flexDirection='column' w='100%' bg='navy.800'>
       <Flex flexDir='column' align='center' gap={4}>
         <Text fontSize={20} fontWeight={600}>
           Dropped/Claimed
