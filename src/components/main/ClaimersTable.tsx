@@ -13,6 +13,7 @@ import {
   AvatarGroup,
   Box,
   Flex,
+  Skeleton,
   Table,
   Tbody,
   Td,
@@ -35,11 +36,20 @@ type RowObj = {
 const columnHelper = createColumnHelper<RowObj>()
 
 interface Props {
-  tableData: any
+  tableData: RowObj[]
   title: string
+  isLoading: boolean
 }
 
-const TopClaimersTable = ({ tableData, title }: Props) => {
+import { Roboto_Mono } from 'next/font/google'
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'block',
+  preload: true,
+})
+
+const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const { push } = useRouter()
 
@@ -142,7 +152,11 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
         )
 
         return (
-          <Flex align='center' fontWeight={600}>
+          <Flex
+            align='center'
+            fontWeight={600}
+            className={robotoMono.className}
+          >
             <Text>${formattedValue}</Text>
           </Flex>
         )
@@ -160,6 +174,8 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   })
+
+
   return (
     <Flex
       direction='column'
@@ -247,4 +263,4 @@ const TopClaimersTable = ({ tableData, title }: Props) => {
   )
 }
 
-export default TopClaimersTable
+export default ClaimersTable

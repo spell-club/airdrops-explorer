@@ -62,7 +62,7 @@ const ProjectsDynamicChart = () => {
           alignSelf='start'
           pb={2}
         >
-          Total airdropped and claimed value
+          Allocated vs Claimed
         </Text>
         <SelectTimelineMenu
           selected={selectedTime}

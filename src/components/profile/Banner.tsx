@@ -27,22 +27,22 @@ export default function Banner(props: {
     ...rest
   } = props
 
-  const [profileColor, setProfileColor] = useState("brand.500")
+  const [profileColor, setProfileColor] = useState('brand.500')
   const icon = generateIcon(name, 30)
-  getProminentColor(icon).then(c => {
+  getProminentColor(icon).then((c) => {
     setProfileColor(String(c))
   })
 
   return (
-    <Card mb='20px' alignItems='center' {...rest} pt={0}>
+    <Card mb='20px' alignItems='center' {...rest} pt={0} px={0}>
       <Box
-        bgColor='grey.900'
         opacity='0.8'
         bg={`radial-gradient(circle, transparent 20%, #000614 20%, #000614 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #000614 20%, #000614 80%, transparent 80%, transparent) 17.5px 17.5px, linear-gradient(${profileColor} 1.4000000000000001px, transparent 1.4000000000000001px) 0 -0.7000000000000001px, linear-gradient(90deg, ${profileColor} 1.4000000000000001px, #000614 1.4000000000000001px) -0.7000000000000001px 0;`}
         bgSize='35px 35px, 35px 35px, 17.5px 17.5px, 17.5px 17.5px'
-        borderRadius='16px'
+        borderRadius='20px'
         h='191px'
-        w='102%'
+        w='100%'
+        borderBottomRadius={0}
       />
       <IconWithBg
         mx='auto'

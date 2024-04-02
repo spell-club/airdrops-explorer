@@ -47,11 +47,14 @@ export function SearchBar(props: {
           _focus={{
             boxShadow: 'none',
           }}
+          _hover={{}}
           icon={<SearchIcon color={searchIconColor} w='15px' h='15px' />}
         />
       </InputLeftElement>
 
       <Input
+        border='1px solid'
+        borderColor='navy.700'
         ref={inputRef}
         variant='search'
         fontSize='sm'

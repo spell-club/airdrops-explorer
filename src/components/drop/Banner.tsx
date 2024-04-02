@@ -13,15 +13,15 @@ export default function Banner(props: {
     props
 
   return (
-    <Card mb='20px' alignItems='center' {...rest} pt={0}>
+    <Card mb='20px' alignItems='center' {...rest} pt={0} px={0}>
       <Box
-        bgColor='grey.900'
         opacity='1'
         bgImage='radial-gradient(#a378e1 1.1px, #000614 1.1px)'
         bgSize='22px 22px'
-        borderRadius='16px'
+        borderRadius='20px'
         h='191px'
-        w='102%'
+        w='100%'
+        borderBottomRadius={0}
       />
       <Avatar
         mx='auto'

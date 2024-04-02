@@ -10,7 +10,7 @@ import getTopWinnersAndLosersRequest from './requests/getTopWinnersAndLosersRequ
 import getAirdropProjectsRequest from './requests/getAirdropProjectsRequest'
 import getProjectsHistoricalValueRequest from './requests/getProjectsHistoricalValueRequets'
 import getAirdropProjectRequest from './requests/getAirdropProjectRequest'
-import getAirdropClaimersRequest from './requests/getAirdropClaimersRequest'
+import getAirdropTopClaimersAndLosersRequest from './requests/getAirdropTopClaimersAndLosersRequest'
 import getProjectHistoricalValueRequest from './requests/getProjectHistoricalValueRequest'
 import getAddressInfoRequest from './requests/getAddressInfoRequest'
 import getClaimHistoricalValueRequest from './requests/getClaimHistoricalValueRequest'
@@ -41,15 +41,15 @@ class ClientApi implements ClientApiInterface {
     return getProjectsHistoricalValueRequest(this.apiClient)
   }
 
-  getAirdropProject(id: number | string) {
+  getAirdropProject(id:  string) {
     return getAirdropProjectRequest(id, this.apiClient)
   }
 
-  getAirdropClaimers(id: number | string) {
-    return getAirdropClaimersRequest(id, this.apiClient)
+  getAirdropTowWinnersAndLosers(id: string) {
+    return getAirdropTopClaimersAndLosersRequest(id, this.apiClient)
   }
 
-  getProjectHistoricalValue(id: number | string) {
+  getProjectHistoricalValue(id: string) {
     return getProjectHistoricalValueRequest(id, this.apiClient)
   }
 
