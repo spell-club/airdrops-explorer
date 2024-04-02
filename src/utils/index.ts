@@ -1,4 +1,5 @@
 import numbro from 'numbro'
+import { toSvg } from 'jdenticon'
 
 type RoundingMethod = 'round' | 'ceil' | 'floor' | 'trunc'
 
@@ -28,4 +29,10 @@ export const formatValue = (value: number, precision?: number) => {
   }
 
   return String(numbro(truncatedAmount).format(roundFormat))
+}
+
+export const generateIcon = (address: string, size = 100) => {
+  const icon = Buffer.from(toSvg(address, size)).toString('base64')
+
+  return `data:image/svg+xml;base64,${icon}`
 }

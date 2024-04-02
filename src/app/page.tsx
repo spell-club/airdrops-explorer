@@ -29,6 +29,13 @@ export default function Home({}) {
       queryFn: () => clientApi.getTopWinnersAndLosers(),
     })
 
+  useEffect(() => {
+    const localStorageTheme = localStorage.getItem('chakra-ui-color-mode')
+    if (localStorageTheme === 'light') {
+      localStorage.setItem('chakra-ui-color-mode', 'dark')
+    }
+  }, [])
+
   return (
     <Grid
       mb='20px'
