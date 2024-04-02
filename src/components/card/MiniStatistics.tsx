@@ -11,7 +11,6 @@ export default function Default(props: {
 	value: string | number;
 }) {
 	const { startContent, endContent, name, growth, value } = props;
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const textColorSecondary = 'secondaryGray.600';
 
 	return (
@@ -33,7 +32,6 @@ export default function Default(props: {
 						{name}
 					</StatLabel>
 					<StatNumber
-						color={textColor}
 						fontSize={{
 							base: '2xl'
 						}}>

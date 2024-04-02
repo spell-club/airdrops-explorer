@@ -11,18 +11,15 @@ export default function Banner(props: {
 }) {
   const { banner, avatar, name, job, posts, followers, following, ...rest } =
     props
-  // Chakra Color Mode
-  const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
-  const textColorSecondary = 'gray.400'
-  const borderColor = useColorModeValue(
-    'white !important',
-    '#111C44 !important',
-  )
+
   return (
     <Card mb='20px' alignItems='center' {...rest} pt={0}>
       <Box
-        bg={`url(${banner})`}
-        bgSize='cover'
+        // bg={`url(${banner})`}
+        bgColor='#151523'
+        opacity='1'
+        bgImage='radial-gradient(#a378e1 1.1px, #151523 1.1px)'
+        bgSize='22px 22px'
         borderRadius='16px'
         h='191px'
         w='102%'
@@ -34,12 +31,12 @@ export default function Banner(props: {
         w='157px'
         mt='-63px'
         border='4px solid'
-        borderColor={borderColor}
+        borderColor='navy.700!important'
       />
-      <Text color={textColorPrimary} fontWeight='bold' fontSize='32' mt='10px'>
+      <Text fontWeight='bold' fontSize='32' mt='10px'>
         {name}
       </Text>
-      <Text fontSize='sm' color={textColorPrimary}>
+      <Text fontSize='sm' >
         {job}
       </Text>
     </Card>

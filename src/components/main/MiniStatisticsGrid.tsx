@@ -9,8 +9,6 @@ import MiniStatistics from 'components/card/MiniStatistics'
 
 const MiniStatisticsGrid = () => {
   const { clientApi } = useClientApi()
-
-  const brandColor = useColorModeValue('brand.500', 'white')
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
   const { data: stats, isLoading: isStatsLoading } = useQuery({
     queryKey: ['stats'],
@@ -44,7 +42,7 @@ const MiniStatisticsGrid = () => {
             h='56px'
             bg={boxBg}
             icon={
-              <Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor} />
+              <Icon w='32px' h='32px' as={MdAttachMoney} color='brand.500' />
             }
           />
         }
@@ -58,7 +56,7 @@ const MiniStatisticsGrid = () => {
             h='56px'
             bg={boxBg}
             icon={
-              <Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor} />
+              <Icon w='32px' h='32px' as={MdAttachMoney} color='brand.500' />
             }
           />
         }
@@ -77,7 +75,7 @@ const MiniStatisticsGrid = () => {
                 w='32px'
                 h='32px'
                 as={MdSupervisedUserCircle}
-                color={brandColor}
+                color='brand.500'
               />
             }
           />

@@ -45,7 +45,6 @@ interface Props {
 
 const TopDropClaimersTable = ({ dropId }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   const { push } = useRouter()
   const { clientApi } = useClientApi()
@@ -78,7 +77,7 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
             cursor='pointer'
           >
             <Avatar src={NFT1.src} w='30px' h='30px' me='8px' />
-            <Text color={textColor} fontSize='sm' fontWeight='600'>
+            <Text fontSize='sm' fontWeight='600'>
               {trucatedAddress}
             </Text>
           </Flex>
@@ -154,7 +153,7 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
         )
 
         return (
-          <Flex align='center' color={textColor} fontWeight={600}>
+          <Flex align='center' fontWeight={600}>
             <Text>${formattedValue}</Text>
           </Flex>
         )
@@ -185,9 +184,8 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
         px='22px'
         pb='20px'
         mb='10px'
-        boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'
       >
-        <Text color={textColor} fontSize='xl' fontWeight='600'>
+        <Text fontSize='xl' fontWeight='600'>
           Top Claimers
         </Text>
         <Button
@@ -198,7 +196,7 @@ const TopDropClaimersTable = ({ dropId }: Props) => {
         </Button>
       </Flex>
       <Box>
-        <Table variant='simple' color='gray.500' mt='12px'>
+        <Table variant='simple' mt='12px'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
