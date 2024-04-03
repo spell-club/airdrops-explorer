@@ -26,9 +26,12 @@ interface AirdropProject {
   id: number
   name: string
   snapshot_date: string
+  airdrop_timestamp: string
   token_symbol: string
   total_allocated_usd: number
   total_claimed_usd: number
+  total_allocated: number
+  total_claimed: number
   users_num: number
 }
 
@@ -48,7 +51,7 @@ interface AddressInfo {
 interface ClaimHistoricalValue {
   claimed_amount_usd: number
   date: string
-  unclaimed_amount_usd: number
+  allocated_amount_usd: number
 }
 
 interface AddressAsset {
@@ -59,6 +62,16 @@ interface AddressAsset {
   total_claimed_usd: number
   total_unclaimed: number
   total_unclaimed_usd: number
+}
+
+interface AddressAirdrop {
+  airdrop_timestamp: string
+  name: string
+  token_name: string
+  allocated_amount: number
+  allocated_amount_usd: number
+  claimed_amount: number
+  claimed_amount_usd: number
 }
 
 interface Stats {
@@ -76,12 +89,15 @@ interface ClientApiInterface {
   getAirdropProjects(): Promise<AirdropProject[]>
   getProjectsHistoricalValue(): Promise<HistoricalValue[]>
   getAirdropProject(id: string): Promise<AirdropProject>
-  getAirdropTowWinnersAndLosers(id: string): Promise<GetTopWinnersAndLosersResponse<TopParticipantByProject>>
+  getAirdropTowWinnersAndLosers(
+    id: string,
+  ): Promise<GetTopWinnersAndLosersResponse<TopParticipantByProject>>
   getProjectHistoricalValue(id: string): Promise<HistoricalValue[]>
   getAddressInfo(address: string): Promise<AddressInfo>
   getClaimHistoricalValue(address: string): Promise<ClaimHistoricalValue[]>
   getAddressAssets(address: string): Promise<AddressAsset[]>
   getStats(): Promise<Stats>
+  getAddressAirdrops(address: string): Promise<AddressAirdrop[]>
 }
 
 export type {
@@ -94,5 +110,6 @@ export type {
   AddressInfo,
   ClaimHistoricalValue,
   AddressAsset,
+  AddressAirdrop,
   Stats,
 }

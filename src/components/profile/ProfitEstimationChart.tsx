@@ -18,24 +18,26 @@ const ProfitEstimationChart = ({
   const conversion = roundToPrecision({
     value: (totalClaimedUsd / totalAllocatedUsd) * 100,
     precision: 2,
-    method: 'round',
+    method: 'trunc',
   })
 
   return (
-    <Card p='20px' alignItems='center' flexDirection='column' w='100%' bg='navy.800'>
-      <Flex flexDir='column' align='center' gap={4}>
+    <Card
+      p='20px'
+      alignItems='center'
+      flexDirection='column'
+      w='100%'
+      bg='navy.800'
+    >
+      <Flex flexDir='column' align='center' gap={8}>
         <Text fontSize={20} fontWeight={600}>
-          Dropped/Claimed
-        </Text>
-
-        <Text textAlign='center' fontSize={14} color='gray.400'>
-          Discover your stats, and learn more <br /> about your business users{' '}
+          Allocated/Claimed
         </Text>
 
         <CircularChart value={conversion}>
           <Flex flexDir='column' align='center'>
             <Text color='gray.400' fontSize={14}>
-              Conversion
+              Claim Rate
             </Text>
             <Text fontSize={20} fontWeight={600}>
               {conversion}%
@@ -52,19 +54,29 @@ const ProfitEstimationChart = ({
         >
           <Flex flexDir='column'>
             <Text fontSize={14} color='gray.400'>
-              Total Allocated
+              Total Allocated $
             </Text>
-            <Text fontSize={20} fontWeight={600}>
+            <Text textAlign='center' fontSize={20} fontWeight={600}>
               ${formatValue(totalAllocatedUsd, 0)}
             </Text>
           </Flex>
           <VSeparator />
           <Flex flexDir='column'>
             <Text fontSize={14} color='gray.400'>
-              Total Claimed
+              Total Claimed $
             </Text>
-            <Text fontSize={20} fontWeight={600}>
+            <Text textAlign='center' fontSize={20} fontWeight={600}>
               ${formatValue(totalClaimedUsd, 0)}
+            </Text>
+          </Flex>
+
+          <VSeparator />
+          <Flex flexDir='column'>
+            <Text fontSize={14} color='gray.400'>
+              Total Missed $
+            </Text>
+            <Text textAlign='center' fontSize={20} fontWeight={600}>
+              ${formatValue(totalAllocatedUsd - totalClaimedUsd, 0)}
             </Text>
           </Flex>
         </Flex>

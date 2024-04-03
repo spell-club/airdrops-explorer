@@ -26,22 +26,19 @@ import { useQuery } from '@tanstack/react-query'
 interface Props {
   address: string
 }
-const AssetsTable = ({ address }: Props) => {
+const AirdropsTable = ({ address }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   const { columns } = useAssetsTable()
   const { clientApi } = useClientApi()
-
-  const { data: assets, isLoading: isAssetsLoading } = useQuery({
-    queryKey: ['assets', address],
-    queryFn: () => clientApi.getAddressAssets(address),
+  const { data: airdrops, isLoading: isAssetsLoading } = useQuery({
+    queryKey: ['addressAirdrops', address],
+    queryFn: () => clientApi.getAddressAirdrops(address),
   })
 
-  console.log(assets)
-
   const table = useReactTable({
-    data: assets ?? [],
+    data: airdrops ?? [],
     columns,
     state: {
       sorting,
@@ -66,7 +63,7 @@ const AssetsTable = ({ address }: Props) => {
           fontWeight='700'
           lineHeight='100%'
         >
-          Assets Table
+          Airdrops Table
         </Text>
       </Flex>
       <Box>
@@ -136,4 +133,4 @@ const AssetsTable = ({ address }: Props) => {
   )
 }
 
-export default AssetsTable
+export default AirdropsTable

@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import {
+  AddressAirdrop,
   AddressAsset,
   AddressInfo,
   ClientApiInterface,
@@ -16,6 +17,7 @@ import getAddressInfoRequest from './requests/getAddressInfoRequest'
 import getClaimHistoricalValueRequest from './requests/getClaimHistoricalValueRequest'
 import getAddressAssetsRequest from './requests/getAddressAssetsRequest'
 import getStatsRequest from './requests/getStatsRequest'
+import getAddressAirdropsRequest from './requests/getAddressAirdropsRequest'
 
 const API_BASE_URL = 'https://api.spell.club/'
 
@@ -41,7 +43,7 @@ class ClientApi implements ClientApiInterface {
     return getProjectsHistoricalValueRequest(this.apiClient)
   }
 
-  getAirdropProject(id:  string) {
+  getAirdropProject(id: string) {
     return getAirdropProjectRequest(id, this.apiClient)
   }
 
@@ -67,6 +69,10 @@ class ClientApi implements ClientApiInterface {
 
   getStats() {
     return getStatsRequest(this.apiClient)
+  }
+
+  getAddressAirdrops(address: string) {
+    return getAddressAirdropsRequest(address, this.apiClient)
   }
 }
 

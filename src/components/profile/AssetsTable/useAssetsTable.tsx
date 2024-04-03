@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import { AddressAsset } from '../../../api/types'
+import { AddressAirdrop } from '../../../api/types'
 import {
   Avatar,
   AvatarGroup,
@@ -12,12 +12,12 @@ import { AIRDROPS_IMAGES } from '../../../constants'
 import { formatValue } from '../../../utils'
 
 const useAssetsTable = () => {
-  const columnHelper = createColumnHelper<AddressAsset>()
+  const columnHelper = createColumnHelper<AddressAirdrop>()
   const textColor = useColorModeValue('secondaryGray.900', 'white')
 
   const columns = [
-    columnHelper.accessor('address', {
-      id: 'address',
+    columnHelper.accessor('name', {
+      id: 'name',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -25,52 +25,35 @@ const useAssetsTable = () => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          Address
-        </Text>
-      ),
-      cell: (info: any) => (
-        <Flex align='center'>
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
-            {info.getValue()}
-          </Text>
-        </Flex>
-      ),
-    }),
-    columnHelper.accessor('chain_name', {
-      id: 'chain_name',
-      header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'
-        >
-          Chain
+          Airdrop Name
         </Text>
       ),
       cell: (info) => (
-        <AvatarGroup
-          max={3}
-          size='sm'
-          mt={{
-            base: '0px',
-            md: '10px',
-            lg: '0px',
-            xl: '10px',
-            '2xl': '0px',
-          }}
-          fontSize='12px'
+        <Text color={textColor} fontSize='sm' fontWeight='700'>
+          {info.getValue()}
+        </Text>
+      ),
+    }),
+    columnHelper.accessor('token_name', {
+      id: 'token_name',
+      header: () => (
+        <Text
+          justifyContent='space-between'
+          align='center'
+          fontSize={{ sm: '10px', lg: '12px' }}
+          color='gray.400'
         >
-          <Avatar
-            h={'32px'}
-            w={'32px'}
-            src={AIRDROPS_IMAGES[info.getValue().toLowerCase()]}
-          />
-        </AvatarGroup>
+          Token Name
+        </Text>
+      ),
+      cell: (info) => (
+        <Text color={textColor} fontSize='sm' fontWeight='700'>
+          {info.getValue()}
+        </Text>
       ),
     }),
 
-    columnHelper.accessor('total_claimed', {
+    columnHelper.accessor('allocated_amount', {
       id: 'total_claimed',
       header: () => (
         <Text
@@ -79,7 +62,7 @@ const useAssetsTable = () => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          Total Claimed
+          Allocated Amount
         </Text>
       ),
       cell: (info) => (
@@ -88,8 +71,8 @@ const useAssetsTable = () => {
         </Text>
       ),
     }),
-    columnHelper.accessor('total_unclaimed', {
-      id: 'total_unclaimed',
+    columnHelper.accessor('claimed_amount', {
+      id: 'claimed_amount',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -97,19 +80,24 @@ const useAssetsTable = () => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          Total Unclaimed
+          Claimed Amount
         </Text>
       ),
-      cell: (info) => (
-        <Flex w='100%' justify='start' px={10}>
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
+      cell: (info) => {
+        const isPositive = info.getValue() > 0
+        return (
+          <Text
+            color={!isPositive ? 'red.500' : 'green.500'}
+            fontSize='sm'
+            fontWeight='700'
+          >
             {formatValue(info.getValue())} {info.row.original.token_name}
           </Text>
-        </Flex>
-      ),
+        )
+      },
     }),
-    columnHelper.accessor('total_claimed_usd', {
-      id: 'total_claimed_usd',
+    columnHelper.accessor('allocated_amount_usd', {
+      id: 'allocated_amount_usd',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -117,19 +105,17 @@ const useAssetsTable = () => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          Total Claimed USD
+          Allocated Amount USD
         </Text>
       ),
       cell: (info) => (
-        <Flex w='100%' justify='start' px={10}>
-          <Text color={textColor} fontSize='sm' fontWeight='700'>
-            ${formatValue(info.getValue(), 0)}
-          </Text>
-        </Flex>
+        <Text color={textColor} fontSize='sm' fontWeight='700'>
+          ${formatValue(info.getValue(), 0)}
+        </Text>
       ),
     }),
-    columnHelper.accessor('total_unclaimed_usd', {
-      id: 'total_unclaimed_usd',
+    columnHelper.accessor('claimed_amount_usd', {
+      id: 'claimed_amount_usd',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -137,21 +123,21 @@ const useAssetsTable = () => {
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          Total Unclaimed USD
+          Claimed Amount USD
         </Text>
       ),
-      cell: (info) => (
-        <Flex w='100%' justify='start' px={10}>
+      cell: (info) => {
+        const isPositive = info.getValue() > 0
+        return (
           <Text
-            color={textColor}
+            color={!isPositive ? 'red.500' : 'green.500'}
             fontSize='sm'
-            textAlign='center'
             fontWeight='700'
           >
             ${formatValue(info.getValue(), 0)}
           </Text>
-        </Flex>
-      ),
+        )
+      },
     }),
   ]
 

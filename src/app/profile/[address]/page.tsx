@@ -10,7 +10,7 @@ import YourAirdropsTable from '../../../components/profile/YourAirdropsTable'
 import StakingStatsTable from '../../../components/profile/StakingStatsTable'
 import useClientApi from '../../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
-import AssetsTable from '../../../components/profile/AssetsTable'
+import AirdropsTable from '../../../components/profile/AssetsTable'
 
 const Page = ({ params }: { params: { address: string } }) => {
   const { address } = params
@@ -48,12 +48,12 @@ const Page = ({ params }: { params: { address: string } }) => {
         />
       </SimpleGrid>
 
-      <Grid gridTemplateColumns={{ xl: '0.4fr 1fr' }} gap='20px' mb='20px'>
-        <YourAirdropsTable />
-        <StakingStatsTable />
-      </Grid>
+      {/*<Grid gridTemplateColumns={{ xl: '0.4fr 1fr' }} gap='20px' mb='20px'>*/}
+      {/*  <YourAirdropsTable />*/}
+      {/*  <StakingStatsTable />*/}
+      {/*</Grid>*/}
 
-      {/*<AssetsTable address={address} />*/}
+      <AirdropsTable address={address} />
     </Box>
   )
 }
