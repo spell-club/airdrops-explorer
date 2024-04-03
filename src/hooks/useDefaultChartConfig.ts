@@ -74,9 +74,10 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
   xaxis: {
     labels: {
       rotate: 0,
+      hideOverlappingLabels: true,
       style: {
         colors: '#A3AED0',
-        fontSize: '12px',
+        fontSize: '0px',
         fontWeight: '500',
       },
     },
@@ -124,7 +125,11 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
     },
   },
   legend: {
-    show: false,
+    show: true,
+    position: 'top',
+    labels: {
+      colors: '#fff',
+    },
   },
   grid: {
     show: true,

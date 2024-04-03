@@ -33,6 +33,7 @@ import { AIRDROPS_IMAGES } from '../../constants'
 import IconWithBg from '../IconWithBg'
 
 import { Roboto_Mono } from 'next/font/google'
+import Link from 'next/link'
 
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
@@ -62,8 +63,6 @@ const DropClaimersTable = ({
   tokenSymbol,
 }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
-  const { push } = useRouter()
 
   const formatValue = (value: number) => {
     const roundFormat = {
@@ -94,21 +93,19 @@ const DropClaimersTable = ({
         </Text>
       ),
       cell: (info: any) => {
-        const trucatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
+        const truncatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
         const icon = generateIcon(info.row.original.address, 30)
 
         return (
-          <Flex
-            align='center'
-            onClick={() => push(`/profile/${info.getValue()}`)}
-            cursor='pointer'
-          >
-            <IconWithBg icon={icon} boxSize='32px' me='8px' />
+          <Link href={`/profile/${info.getValue()}`}>
+            <Flex align='center' cursor='pointer'>
+              <IconWithBg icon={icon} boxSize='32px' me='8px' />
 
-            <Text fontSize='sm' fontWeight='600'>
-              {trucatedAddress}
-            </Text>
-          </Flex>
+              <Text fontSize='sm' fontWeight='600'>
+                {truncatedAddress}
+              </Text>
+            </Flex>
+          </Link>
         )
       },
     }),
@@ -121,7 +118,7 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE TOKENS
+          AMOUNT
         </Text>
       ),
       cell: (info) => {
@@ -144,7 +141,7 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE $
+          VALUE
         </Text>
       ),
       cell: (info) => {
@@ -184,15 +181,14 @@ const DropClaimersTable = ({
         justify='space-between'
         w='100%'
         px='22px'
-        pb='20px'
-        mb='10px'
+        pb='10px'
       >
         <Text fontSize='xl' fontWeight='600'>
           {title}
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' mt='12px'>
+        <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -200,10 +196,12 @@ const DropClaimersTable = ({
                   return (
                     <Th
                       key={header.id}
+                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      pe='10px'
-                      borderColor={borderColor}
+                      // pe='10px'
+                      border='none'
                       cursor='pointer'
+                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex

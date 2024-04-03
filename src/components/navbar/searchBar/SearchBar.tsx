@@ -26,9 +26,18 @@ export function SearchBar(props: {
   const inputRef = useRef<HTMLInputElement>(null)
   const { push } = useRouter()
 
+  const handleSearch = () => {
+    if (inputRef.current?.value) {
+      push(`/profile/${inputRef.current.value}`)
+    }
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && inputRef.current?.value) {
-      push(`/profile/${inputRef.current.value}`)
+      handleSearch()
     }
   }
 
@@ -49,6 +58,7 @@ export function SearchBar(props: {
           }}
           _hover={{}}
           icon={<SearchIcon color={searchIconColor} w='15px' h='15px' />}
+          onClick={handleSearch}
         />
       </InputLeftElement>
 

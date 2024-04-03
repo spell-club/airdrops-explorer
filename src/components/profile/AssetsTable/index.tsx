@@ -16,11 +16,10 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
 } from '@chakra-ui/react'
 import Card from '../../card/Card'
-import useAssetsTable from './useAssetsTable'
-import useClientApi from '../../../hooks/useClientApi'
+import useAirdropsTable from './useAirdropsTable'
+import useClientApi from 'hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
 
 interface Props {
@@ -28,13 +27,12 @@ interface Props {
 }
 const AirdropsTable = ({ address }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
-  const { columns } = useAssetsTable()
+  const { columns } = useAirdropsTable()
   const { clientApi } = useClientApi()
   const { data: airdrops, isLoading: isAssetsLoading } = useQuery({
     queryKey: ['addressAirdrops', address],
     queryFn: () => clientApi.getAddressAirdrops(address),
+    retry: 1,
   })
 
   const table = useReactTable({
@@ -49,6 +47,8 @@ const AirdropsTable = ({ address }: Props) => {
     debugTable: true,
   })
 
+  if (!airdrops && !isAssetsLoading) return null
+
   return (
     <Card
       flexDirection='column'
@@ -56,18 +56,19 @@ const AirdropsTable = ({ address }: Props) => {
       px='0px'
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
-      <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
-        <Text
-          color={textColor}
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'
-        >
+      <Flex
+        align={{ sm: 'flex-start', lg: 'center' }}
+        justify='space-between'
+        w='100%'
+        px='22px'
+        pb='10px'
+      >
+        <Text fontSize='xl' fontWeight='600'>
           Airdrops Table
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' color='gray.500' mb='24px' mt='12px'>
+        <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -75,9 +76,11 @@ const AirdropsTable = ({ address }: Props) => {
                   return (
                     <Th
                       key={header.id}
+                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      borderColor={borderColor}
+                      border='none'
                       cursor='pointer'
+                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex

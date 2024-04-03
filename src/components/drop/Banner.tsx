@@ -22,26 +22,26 @@ export default function Banner(props: {
         bgImage='radial-gradient(#a378e1 1.1px, #000614 1.1px)'
         bgSize='22px 22px'
         borderRadius='20px'
-        h='191px'
+        h='150px'
         w='100%'
         borderBottomRadius={0}
       />
       <Avatar
         mx='auto'
         src={avatar}
-        h='157px'
-        w='157px'
+        h='115px'
+        w='115px'
         mt='-63px'
         border='4px solid'
         borderColor='navy.700!important'
       />
-      <Text fontWeight='bold' fontSize='32' mt='10px'>
+      <Text fontWeight='bold' fontSize={26} mt='10px'>
         {name}
       </Text>
       <Flex
         w='max-content'
         mx='auto'
-        mt={{ base: '20px', lg: '40px' }}
+        mt={{ base: '20px' }}
         flexDir={{ base: 'column', lg: 'row' }}
         justify='center'
         borderRadius={20}
@@ -72,7 +72,7 @@ export default function Banner(props: {
             {users}
           </Text>
           <Text color='gray.400' fontSize='sm' fontWeight='400'>
-            Users
+            Claimers
           </Text>
         </Flex>
       </Flex>

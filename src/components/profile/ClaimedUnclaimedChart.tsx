@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { roundToPrecision } from '../../utils'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
 import SelectTimelineMenu from '../SelectTimelineMenu'
+import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 interface Props {
   address: string
@@ -22,6 +23,7 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
   })
 
   const [selectedTime, setSelectedTime] = useState(timeCategories[0])
+  const { airdropsLabelsForChart } = useAirdropsDates()
 
   const dataByTime = useMemo(() => {
     if (!chartData) return []
@@ -76,17 +78,30 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
             ]}
             chartOptions={{
               ...chartConfig,
-              colors: ['#4318FF', '#39B8FF'],
+              colors: ['#a79dcb', '#0857ef'],
               xaxis: {
                 ...chartConfig.xaxis,
                 categories: datesArray,
-                overwriteCategories: ovewriteCategories(
-                  datesArray,
-                  selectedTime.label === '1W' ? 4 : 7,
-                ),
+                // overwriteCategories: ovewriteCategories(
+                //   datesArray,
+                //   selectedTime.label === '1W' ? 4 : 7,
+                // ),
+              },
+              annotations: {
+                xaxis: airdropsLabelsForChart,
               },
             }}
           />
+          <Flex justify='space-between' pl={5} pr={2}>
+            {ovewriteCategories(
+              datesArray,
+              selectedTime.label === '1W' ? 4 : 7,
+            ).map((date) => (
+              <Text key={date} fontSize={12} color='secondaryGray.600'>
+                {date}
+              </Text>
+            ))}
+          </Flex>
         </Box>
       </Flex>
     </Card>
