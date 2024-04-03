@@ -1,5 +1,5 @@
 // Chakra imports
-import { SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
+import { Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 import Card from '../card/Card'
 
@@ -24,7 +24,7 @@ export default function GeneralInformation({ description }: Props) {
       >
         Description
       </Text>
-      <Text color={textColorSecondary} fontSize='16' me='26px'>
+      <Text whiteSpace="pre-wrap" color={textColorSecondary} fontSize='16' me='26px'>
         {description}
       </Text>
     </Card>

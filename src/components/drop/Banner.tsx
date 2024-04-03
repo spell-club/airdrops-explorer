@@ -72,7 +72,7 @@ export default function Banner(props: {
             {users}
           </Text>
           <Text color='gray.400' fontSize='sm' fontWeight='400'>
-            Users
+            Allocated Users
           </Text>
         </Flex>
       </Flex>

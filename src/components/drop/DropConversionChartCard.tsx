@@ -13,6 +13,7 @@ interface Props {
   totalClaimed: number
   totalAllocatedUsd: number
   totalClaimedUsd: number
+  tokenSymbol: string
 }
 
 const DropConversionChartCard = ({
@@ -20,6 +21,7 @@ const DropConversionChartCard = ({
   totalClaimed,
   totalClaimedUsd,
   totalAllocatedUsd,
+  tokenSymbol,
 }: Props) => {
   const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
   const conversion = roundToPrecision({
@@ -71,7 +73,7 @@ const DropConversionChartCard = ({
           <Flex flexDir='column' gap={5}>
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Allocated $
+                Allocated $
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 ${formattValue(totalAllocatedUsd)}
@@ -80,7 +82,7 @@ const DropConversionChartCard = ({
 
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Allocated
+                Allocated {tokenSymbol}
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 {formattValue(totalAllocated)}
@@ -93,7 +95,7 @@ const DropConversionChartCard = ({
           <Flex flexDir='column' gap={5}>
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Claimed $
+                Claimed $
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 ${formattValue(totalClaimedUsd)}
@@ -102,7 +104,7 @@ const DropConversionChartCard = ({
 
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Claimed
+                Claimed {tokenSymbol}
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 {formattValue(totalClaimed)}
@@ -115,7 +117,7 @@ const DropConversionChartCard = ({
           <Flex flexDir='column' gap={5}>
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Missed $
+                Missed $
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 ${formattValue(totalAllocatedUsd - totalClaimedUsd)}
@@ -123,7 +125,7 @@ const DropConversionChartCard = ({
             </Flex>
             <Flex flexDir='column' align='center'>
               <Text fontSize={14} color='gray.400'>
-                Total Missed
+                Missed {tokenSymbol}
               </Text>
               <Text fontSize={20} fontWeight={600}>
                 {formattValue(totalAllocated - totalClaimed)}
