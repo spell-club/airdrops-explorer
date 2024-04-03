@@ -34,24 +34,6 @@ const useAssetsTable = () => {
         </Text>
       ),
     }),
-    columnHelper.accessor('token_name', {
-      id: 'token_name',
-      header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'
-        >
-          Token Name
-        </Text>
-      ),
-      cell: (info) => (
-        <Text color={textColor} fontSize='sm' fontWeight='700'>
-          {info.getValue()}
-        </Text>
-      ),
-    }),
 
     columnHelper.accessor('allocated_amount', {
       id: 'total_claimed',

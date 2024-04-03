@@ -121,7 +121,7 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE TOKENS
+          AMOUNT
         </Text>
       ),
       cell: (info) => {
@@ -144,7 +144,7 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE $
+          VALUE
         </Text>
       ),
       cell: (info) => {
@@ -184,15 +184,14 @@ const DropClaimersTable = ({
         justify='space-between'
         w='100%'
         px='22px'
-        pb='20px'
-        mb='10px'
+        pb='10px'
       >
         <Text fontSize='xl' fontWeight='600'>
           {title}
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' mt='12px'>
+        <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -200,10 +199,12 @@ const DropClaimersTable = ({
                   return (
                     <Th
                       key={header.id}
+                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      pe='10px'
-                      borderColor={borderColor}
+                      // pe='10px'
+                      border='none'
                       cursor='pointer'
+                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex

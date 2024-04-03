@@ -18,7 +18,7 @@ const ProfitEstimationChart = ({
   const conversion = roundToPrecision({
     value: (totalClaimedUsd / totalAllocatedUsd) * 100,
     precision: 2,
-    method: 'trunc',
+    method: 'round',
   })
 
   return (

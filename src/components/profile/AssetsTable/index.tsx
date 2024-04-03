@@ -56,18 +56,19 @@ const AirdropsTable = ({ address }: Props) => {
       px='0px'
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
-      <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
-        <Text
-          color={textColor}
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'
-        >
+      <Flex
+        align={{ sm: 'flex-start', lg: 'center' }}
+        justify='space-between'
+        w='100%'
+        px='22px'
+        pb='10px'
+      >
+        <Text fontSize='xl' fontWeight='600'>
           Airdrops Table
         </Text>
       </Flex>
       <Box>
-        <Table variant='simple' color='gray.500' mb='24px' mt='12px'>
+        <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -75,9 +76,12 @@ const AirdropsTable = ({ address }: Props) => {
                   return (
                     <Th
                       key={header.id}
+                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      borderColor={borderColor}
+                      // pe='10px'
+                      border='none'
                       cursor='pointer'
+                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex
