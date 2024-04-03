@@ -1,13 +1,13 @@
+import { AddressAirdrop } from '../types'
 import { AxiosInstance } from 'axios'
-import { ClaimHistoricalValue } from '../types'
 
-const getClaimHistoricalValueRequest = async (
+const getAddressAirdropsRequest = async (
   address: string,
   apiClient: AxiosInstance,
-): Promise<ClaimHistoricalValue[]> => {
+): Promise<AddressAirdrop[]> => {
   return new Promise((resolve, reject) => {
     apiClient
-      .get(`/airdrop/address/${address}/historical_value`)
+      .get(`/airdrop/address/${address}/drops`)
       .then((response) => {
         resolve(response.data)
       })
@@ -17,4 +17,4 @@ const getClaimHistoricalValueRequest = async (
   })
 }
 
-export default getClaimHistoricalValueRequest
+export default getAddressAirdropsRequest

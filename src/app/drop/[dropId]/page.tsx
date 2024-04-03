@@ -1,20 +1,20 @@
 'use client'
 import React from 'react'
-import { Box, Center, Flex, Grid, Spinner } from '@chakra-ui/react'
-import Banner from '../../../components/drop/Banner'
+import { Box, Center, Flex, Spinner } from '@chakra-ui/react'
+import Banner from 'components/drop/Banner'
 import banner from '../../../img/auth/banner.png'
-import General from '../../../components/drop/General'
+import General from 'components/drop/General'
 import DropConversionChartCard from '../../../components/drop/DropConversionChartCard'
-import DropDynamicChart from '../../../components/drop/DropDynamicChart'
+import DropDynamicChart from 'components/drop/DropDynamicChart'
 import { useQuery } from '@tanstack/react-query'
-import useClientApi from '../../../hooks/useClientApi'
-import { AIRDROPS_IMAGES } from '../../../constants'
+import useClientApi from 'hooks/useClientApi'
+import { AIRDROPS_IMAGES } from 'constants/index'
 import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
+import { formatValue } from '../../../utils'
 
 const Page = ({ params }: { params: { dropId: string } }) => {
   const { dropId } = params
   const { clientApi } = useClientApi()
-
   const { data: airdropProject, isLoading: isAirdropProjectLoading } = useQuery(
     {
       queryKey: ['drop', dropId],
@@ -36,14 +36,22 @@ const Page = ({ params }: { params: { dropId: string } }) => {
         banner={banner.src}
         avatar={AIRDROPS_IMAGES[airdropProject?.name.toLowerCase()]}
         name={airdropProject?.name}
-        job={new Date(airdropProject?.snapshot_date).toLocaleDateString()}
+        airdropDate={new Date(
+          airdropProject?.airdrop_timestamp,
+        ).toLocaleDateString()}
+        snapshotDate={new Date(
+          airdropProject?.snapshot_date,
+        ).toLocaleDateString()}
+        users={formatValue(airdropProject?.users_num, 0)}
       />
 
       <Flex gap='20px' mb='20px' flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
         <DropDynamicChart dropId={dropId} />
         <DropConversionChartCard
-          totalAllocated={airdropProject?.total_allocated_usd}
-          totalClaimed={airdropProject?.total_claimed_usd}
+          totalAllocatedUsd={airdropProject?.total_allocated_usd}
+          totalClaimedUsd={airdropProject?.total_claimed_usd}
+          totalClaimed={airdropProject?.total_claimed}
+          totalAllocated={airdropProject?.total_allocated}
         />
       </Flex>
 

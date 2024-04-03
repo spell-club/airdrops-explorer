@@ -75,8 +75,8 @@ const ProjectsDynamicChart = () => {
         <Box minH='360px' minW='100%' mt='auto'>
           <LineChart
             chartData={[
-              { name: 'Claimed', data: claimedArray },
               { name: 'Allocated', data: allocatedArray },
+              { name: 'Claimed', data: claimedArray },
             ]}
             chartOptions={{
               ...chartConfig,

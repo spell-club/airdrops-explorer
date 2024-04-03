@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import Card from '../card/Card'
 import LineChart from '../charts/LineChart'
 import useClientApi from '../../hooks/useClientApi'
@@ -11,7 +11,6 @@ import SelectTimelineMenu from '../SelectTimelineMenu'
 interface Props {
   address: string
 }
-
 
 const ClaimedUnclaimedChart = ({ address }: Props) => {
   const { chartConfig, ovewriteCategories, timeCategories } =
@@ -39,7 +38,7 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
         roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
       )
       unclaimedArray.push(
-        roundToPrecision({ value: data.unclaimed_amount_usd, precision: 2 }),
+        roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }),
       )
     })
 
@@ -59,13 +58,8 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
       mb='0px'
     >
       <Flex w='100%' justify='space-between' align='center'>
-        <Text
-          fontSize='xl'
-          fontWeight='600'
-          alignSelf='start'
-          pb={2}
-        >
-          Total airdropped and claimed value
+        <Text fontSize='xl' fontWeight='600' alignSelf='start' pb={2}>
+          Allocated vs Claimed
         </Text>
         <SelectTimelineMenu
           selected={selectedTime}
@@ -77,8 +71,8 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
         <Box minH='360px' minW='75%' mt='auto'>
           <LineChart
             chartData={[
+              { name: 'Allocated', data: unclaimedArray },
               { name: 'Claimed', data: claimedArray },
-              { name: 'Unclaimed', data: unclaimedArray },
             ]}
             chartOptions={{
               ...chartConfig,

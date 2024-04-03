@@ -16,24 +16,32 @@ const TopClaimersAndLosers = ({ dropId, tokenSymbol }: Props) => {
     queryKey: ['getTopDropClaimers'],
     queryFn: () => clientApi.getAirdropTowWinnersAndLosers(dropId),
   })
+
+  const isWinnersEmpty = !claimersData?.winners?.length && !isLoading
+  const isLosersEmpty = !claimersData?.losers?.length && !isLoading
+
   return (
     <Flex gap='20px' mb='20px' flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
-      <Card px='0px'>
-        <DropClaimersTable
-          tableData={claimersData?.winners}
-          title='Top Claimers'
-          isLoading={isLoading}
-          tokenSymbol={tokenSymbol}
-        />
-      </Card>
-      <Card px='0px'>
-        <DropClaimersTable
-          tableData={claimersData?.losers}
-          title='Top Losers'
-          isLoading={isLoading}
-          tokenSymbol={tokenSymbol}
-        />
-      </Card>
+      {isWinnersEmpty ? null : (
+        <Card px='0px'>
+          <DropClaimersTable
+            tableData={claimersData?.winners}
+            title='Top Claimers'
+            isLoading={isLoading}
+            tokenSymbol={tokenSymbol}
+          />
+        </Card>
+      )}
+      {isLosersEmpty ? null : (
+        <Card px='0px'>
+          <DropClaimersTable
+            tableData={claimersData?.losers}
+            title='Top Losers'
+            isLoading={isLoading}
+            tokenSymbol={tokenSymbol}
+          />
+        </Card>
+      )}
     </Flex>
   )
 }

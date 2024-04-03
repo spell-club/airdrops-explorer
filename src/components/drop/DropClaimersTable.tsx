@@ -32,6 +32,14 @@ import { generateIcon, roundToPrecision } from '../../utils'
 import { AIRDROPS_IMAGES } from '../../constants'
 import IconWithBg from '../IconWithBg'
 
+import { Roboto_Mono } from 'next/font/google'
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'block',
+  preload: true,
+})
+
 type RowObj = {
   address: string
   projects: Record<'project', string>[]
@@ -119,7 +127,7 @@ const DropClaimersTable = ({
       cell: (info) => {
         const value = info.getValue()
         return (
-          <Flex fontWeight={600}>
+          <Flex fontWeight={600} className={robotoMono.className}>
             <Text>
               {formatValue(value)} {tokenSymbol}
             </Text>
@@ -143,7 +151,11 @@ const DropClaimersTable = ({
         const value = info.getValue()
 
         return (
-          <Flex align='center' fontWeight={600}>
+          <Flex
+            align='center'
+            fontWeight={600}
+            className={robotoMono.className}
+          >
             <Text>${formatValue(value)}</Text>
           </Flex>
         )
