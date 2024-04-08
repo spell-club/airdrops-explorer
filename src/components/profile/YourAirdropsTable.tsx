@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../card/Card'
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
-import NFT1 from '../../img/nfts/Nft1.png'
+import NFT1 from '../../assets/img/nfts/Nft1.png'
 
 const AIRDROPS = [
   {

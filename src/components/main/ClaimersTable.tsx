@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation'
 import { generateIcon, roundToPrecision } from 'utils'
 import numbro from 'numbro'
 import { AIRDROPS_IMAGES } from 'constants/index'
-import IconWithBg from 'components/IconWithBg'
+import IconWithBg from 'components/UI/icon/iconWithBg'
 
 type RowObj = {
   address: string
@@ -72,7 +72,8 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
         return (
           <Link href={`/profile/${info.getValue()}`}>
             <Flex align='center' cursor='pointer'>
-              <IconWithBg icon={icon} boxSize='32px' me='8px' />
+              <IconWithBg icon={icon} boxSize='32px' me='8px' alt='Address' />
+
               <Text fontSize='sm' fontWeight='600'>
                 {trucatedAddress}
               </Text>

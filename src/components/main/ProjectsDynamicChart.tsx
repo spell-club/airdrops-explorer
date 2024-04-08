@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 import { roundToPrecision } from '../../utils'
 import { Box, Flex, useColorModeValue, Text } from '@chakra-ui/react'
 import Card from '../card/Card'
-import LineChart from '../charts/LineChart'
+import LineChart from '../UI/charts/LineChart'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
-import SelectTimelineMenu from 'components/SelectTimelineMenu'
+import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 const ProjectsDynamicChart = () => {

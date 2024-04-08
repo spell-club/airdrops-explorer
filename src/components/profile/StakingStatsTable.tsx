@@ -10,8 +10,6 @@ import {
 import {
   Box,
   Flex,
-  Icon,
-  Progress,
   Table,
   Tbody,
   Td,
@@ -21,9 +19,7 @@ import {
   Tr,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md'
 import Card from '../card/Card'
-import Menu from '../menu/MainMenu'
 
 type RowObj = {
   pageName: string
@@ -221,12 +217,7 @@ const StakingStatsTable = () => {
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
       <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
-        <Text
-
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'
-        >
+        <Text fontSize='22px' fontWeight='700' lineHeight='100%'>
           Atom staking stats
         </Text>
       </Flex>

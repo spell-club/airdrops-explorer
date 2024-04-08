@@ -5,19 +5,19 @@ import {
   Flex,
   Icon,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 // Custom components
-import BarChart from 'components/charts/BarChart'
+import { BarChart } from 'components/UI/charts'
 import React from 'react'
 import {
   barChartDataConsumption,
-  barChartOptionsConsumption
-} from 'variables/charts'
+  barChartOptionsConsumption,
+} from 'constants/charts'
 import { MdBarChart } from 'react-icons/md'
 
-export default function WeeklyRevenue (props: { [x: string]: any }) {
+export default function WeeklyRevenue(props: { [x: string]: any }) {
   const { ...rest } = props
 
   // Chakra Color Mode
@@ -26,11 +26,11 @@ export default function WeeklyRevenue (props: { [x: string]: any }) {
   const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
   const bgHover = useColorModeValue(
     { bg: 'secondaryGray.400' },
-    { bg: 'whiteAlpha.50' }
+    { bg: 'whiteAlpha.50' },
   )
   const bgFocus = useColorModeValue(
     { bg: 'secondaryGray.300' },
-    { bg: 'whiteAlpha.100' }
+    { bg: 'whiteAlpha.100' },
   )
   return (
     <Card w='100%' {...rest}>

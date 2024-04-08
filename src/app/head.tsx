@@ -1,4 +1,5 @@
 import React from 'react'
+
 export default function RootHead() {
   return (
     <>
@@ -11,6 +12,7 @@ export default function RootHead() {
       />
 
       <title>SpellDrop | Explore Cosmos Airdrops</title>
+
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta name='theme-color' content='#000000' />
     </>

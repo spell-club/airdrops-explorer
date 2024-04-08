@@ -16,8 +16,6 @@ import {
 // Custom components
 import Card from 'components/card/Card'
 import { useRouter } from 'next/navigation'
-// Assets
-import { useState } from 'react'
 
 export default function NFT(props: {
   image: string | any
@@ -28,9 +26,12 @@ export default function NFT(props: {
   currentbid: string | number
 }) {
   const { image, name, author, bidders, download, currentbid } = props
+
   const textColor = useColorModeValue('navy.700', 'white')
   const textColorBid = useColorModeValue('brand.500', 'white')
+
   const { push } = useRouter()
+
   return (
     <Card p='20px'>
       <Flex direction={{ base: 'column' }} justify='center'>

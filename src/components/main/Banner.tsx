@@ -1,7 +1,7 @@
 // Chakra imports
-import { Button, Flex, Text, Box, Image } from '@chakra-ui/react'
-import banner from '../../img/main/banner.png'
-import { SearchBar } from '../navbar/searchBar/SearchBar'
+import { Button, Flex, Text, Image } from '@chakra-ui/react'
+import banner from '../../assets/img/main/banner.png'
+import { SearchBar } from '../UI/layout/navbar/searchBar/SearchBar'
 import React from 'react'
 
 // Assets
@@ -14,7 +14,7 @@ export default function Banner() {
         flexDir='column'
         py={{ base: '30px', md: '56px' }}
         px={{ base: '30px', md: '64px' }}
-        pos="relative"
+        pos='relative'
         zIndex={2}
       >
         <Text
@@ -33,7 +33,8 @@ export default function Banner() {
           mb='40px'
           lineHeight='28px'
         >
-          Drop your cosmos address into form below to check your <br />{'    '}
+          Drop your cosmos address into form below to check your <br />
+          {'    '}
           eligibility for airdrops are available for you.
         </Text>
         <Flex
@@ -59,7 +60,7 @@ export default function Banner() {
       </Flex>
 
       <Image
-        display={{ base: 'none', lg: 'block', }}
+        display={{ base: 'none', lg: 'block' }}
         src={banner.src}
         width={415}
         height='100%'

@@ -1,6 +1,6 @@
-import NFT4 from 'img/nfts/Nft4.png'
-import NFT5 from 'img/nfts/Nft5.png'
-import NFT6 from 'img/nfts/Nft6.png'
+import NFT4 from 'assets/img/nfts/Nft4.png'
+import NFT5 from 'assets/img/nfts/Nft5.png'
+import NFT6 from 'assets/img/nfts/Nft6.png'
 
 type RowObj = {
   name: string[]

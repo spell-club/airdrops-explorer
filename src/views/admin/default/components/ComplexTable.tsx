@@ -22,7 +22,7 @@ import {
 } from '@tanstack/react-table'
 // Custom components
 import Card from 'components/card/Card'
-import Menu from 'components/menu/MainMenu'
+import Menu from 'components/UI/menu/MainMenu'
 import * as React from 'react'
 // Assets
 import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md'
@@ -35,7 +35,6 @@ type RowObj = {
 }
 
 const columnHelper = createColumnHelper<RowObj>()
-
 
 // const columns = columnsDataCheck;
 export default function ComplexTable(props: { tableData: any }) {

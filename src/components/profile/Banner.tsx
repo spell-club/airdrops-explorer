@@ -8,9 +8,9 @@ import {
   Link,
 } from '@chakra-ui/react'
 import Card from '../card/Card'
-import { VSeparator } from '../separator/Separator'
+import { VSeparator } from '../UI/separator'
 import { generateIcon, getProminentColor } from '../../utils'
-import IconWithBg from 'components/IconWithBg'
+import IconWithBg from 'components/UI/icon/iconWithBg'
 import { useState } from 'react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
@@ -62,9 +62,10 @@ export default function Banner(props: {
         mt='-63px'
         border='4px solid'
         borderColor='navy.700'
+        alt='Drops'
       />
 
-      <Flex align="center" gap={3}>
+      <Flex align='center' gap={3}>
         <Text fontWeight='bold' fontSize={26} mt='10px'>
           {name}{' '}
         </Text>

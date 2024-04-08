@@ -8,10 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import {
-  Avatar,
-  AvatarGroup,
   Box,
-  Button,
   Flex,
   Table,
   Tbody,
@@ -20,17 +17,10 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
-import useClientApi from '../../hooks/useClientApi'
-import NFT1 from '../../img/nfts/Nft1.png'
-import NFT2 from '../../img/nfts/Nft2.png'
-import { useQuery } from '@tanstack/react-query'
 import numbro from 'numbro'
 import { generateIcon, roundToPrecision } from '../../utils'
-import { AIRDROPS_IMAGES } from '../../constants'
-import IconWithBg from '../IconWithBg'
+import IconWithBg from '../UI/icon/iconWithBg'
 
 import { Roboto_Mono } from 'next/font/google'
 import Link from 'next/link'
@@ -99,7 +89,7 @@ const DropClaimersTable = ({
         return (
           <Link href={`/profile/${info.getValue()}`}>
             <Flex align='center' cursor='pointer'>
-              <IconWithBg icon={icon} boxSize='32px' me='8px' />
+              <IconWithBg icon={icon} boxSize='32px' me='8px' alt='Address' />
 
               <Text fontSize='sm' fontWeight='600'>
                 {truncatedAddress}

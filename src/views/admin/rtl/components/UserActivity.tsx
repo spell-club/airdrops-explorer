@@ -3,13 +3,13 @@ import { Box, Flex, Select, Text, useColorModeValue } from '@chakra-ui/react'
 import { ApexOptions } from 'apexcharts'
 import Card from 'components/card/Card'
 // Custom components
-import BarChart from 'components/charts/BarChart'
+import { BarChart } from 'components/UI/charts'
 import {
   barChartDataUserActivity,
-  barChartOptionsUserActivity
-} from 'variables/charts'
+  barChartOptionsUserActivity,
+} from 'constants/charts'
 
-export default function UserActivity (props: { [x: string]: any }) {
+export default function UserActivity(props: { [x: string]: any }) {
   const { ...rest } = props
 
   // Chakra Color Mode
@@ -43,7 +43,7 @@ export default function UserActivity (props: { [x: string]: any }) {
       <Box h='240px' mt='auto'>
         <BarChart
           chartData={barChartDataUserActivity}
-          chartOptions={(barChartOptionsUserActivity as unknown) as ApexOptions}
+          chartOptions={barChartOptionsUserActivity as unknown as ApexOptions}
         />
       </Box>
     </Card>

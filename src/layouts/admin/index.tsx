@@ -1,17 +1,16 @@
-// Chakra imports
 import { Portal, Box, useDisclosure } from '@chakra-ui/react'
-import Footer from 'components/footer/FooterAdmin'
-// Layout components
-import Navbar from 'components/navbar/NavbarAdmin'
-import Sidebar from 'components/sidebar/Sidebar'
-import { SidebarContext } from 'contexts/SidebarContext'
 import { PropsWithChildren, useEffect, useState } from 'react'
+
+import Footer from 'components/UI/layout/footer/FooterAdmin'
+import Navbar from 'components/UI/layout/navbar/NavbarAdmin'
+import Sidebar from 'components/UI/layout/sidebar/Sidebar'
+
+import { SidebarContextProvider } from 'contexts/SidebarContext'
 import routes from 'routes'
 import {
   getActiveNavbar,
   getActiveNavbarText,
   getActiveRoute,
-  isWindowAvailable
 } from 'utils/navigation'
 
 interface DashboardLayoutProps extends PropsWithChildren {
@@ -19,11 +18,11 @@ interface DashboardLayoutProps extends PropsWithChildren {
 }
 
 // Custom Chakra theme
-export default function AdminLayout (props: DashboardLayoutProps) {
+export default function AdminLayout(props: DashboardLayoutProps) {
   const { children, ...rest } = props
   // states and functions
   const [fixed] = useState(false)
-  const [toggleSidebar, setToggleSidebar] = useState(false)
+
   // functions for changing the states from components
   const { onOpen } = useDisclosure()
 
@@ -33,13 +32,9 @@ export default function AdminLayout (props: DashboardLayoutProps) {
 
   return (
     <Box>
-      <SidebarContext.Provider
-        value={{
-          toggleSidebar,
-          setToggleSidebar
-        }}
-      >
+      <SidebarContextProvider>
         <Sidebar routes={routes} display='none' {...rest} />
+
         <Box
           float='right'
           minHeight='100vh'
@@ -81,7 +76,7 @@ export default function AdminLayout (props: DashboardLayoutProps) {
             <Footer />
           </Box>
         </Box>
-      </SidebarContext.Provider>
+      </SidebarContextProvider>
     </Box>
   )
 }

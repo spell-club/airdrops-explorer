@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
+import { Flex, Text } from '@chakra-ui/react'
+
+import CircularChart from '../UI/charts/DonutChart'
+import { VSeparator } from '../UI/separator'
 import Card from '../card/Card'
-import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import CircularChart from '../charts/DonutChart'
-import { VSeparator } from '../separator/Separator'
 import { formatValue, roundToPrecision } from '../../utils'
-import numbro from 'numbro'
 
 interface Props {
   totalAllocatedUsd: number
