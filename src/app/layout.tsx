@@ -1,8 +1,9 @@
 'use client'
 import React, { ReactNode } from 'react'
+import { Box, Container, Flex } from '@chakra-ui/react'
+
 import AppWrappers from './AppWrappers'
 import Head from './head'
-import { Box, Container, Flex } from '@chakra-ui/react'
 import AppHeader from '../components/AppHeader'
 import AppFooter from '../components/AppFooter'
 
@@ -10,6 +11,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <Head />
+
       <body id={'root'} className='chakra-ui-dark'>
         <AppWrappers>
           <Flex flexDir='column' minH='100vh'>
