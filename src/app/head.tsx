@@ -19,6 +19,13 @@ export default function RootHead() {
       {/* GOOGLE ANALYTICS */}
       <Script
         async
+        id='google-tag-manager'
+        strategy='lazyOnload'
+        src='https://www.googletagmanager.com/gtag/js?id=G-94FJ9Y76DL'
+      />
+
+      <Script
+        async
         id='google-analytics'
         strategy='lazyOnload'
         dangerouslySetInnerHTML={{
