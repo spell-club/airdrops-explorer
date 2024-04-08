@@ -122,7 +122,8 @@ const AirdropProject = ({
               <Text fontWeight='700' fontSize='sm'>
                 {totalAmount} {tokenSymbol}
               </Text>
-              <ChakraLink
+
+              <Button
                 mt={{
                   base: '0px',
                   md: '10px',
@@ -130,20 +131,17 @@ const AirdropProject = ({
                   xl: '10px',
                   '2xl': '0px',
                 }}
+                boxShadow=''
+                variant='darkBrand'
+                color='white'
+                fontSize='sm'
+                fontWeight='500'
+                borderRadius='70px'
+                px='24px'
+                py='5px'
               >
-                <Button
-                  boxShadow=''
-                  variant='darkBrand'
-                  color='white'
-                  fontSize='sm'
-                  fontWeight='500'
-                  borderRadius='70px'
-                  px='24px'
-                  py='5px'
-                >
-                  Explore
-                </Button>
-              </ChakraLink>
+                Explore
+              </Button>
             </Flex>
           </Flex>
         </Flex>
