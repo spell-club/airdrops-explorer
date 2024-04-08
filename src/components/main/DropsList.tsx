@@ -16,7 +16,7 @@ const DropsList = () => {
       <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
         {airdrops?.map((airdrop) => (
           <AirdropProject
-            key={airdrop.id}
+            key={airdrop.id + airdrop.name}
             name={airdrop.name}
             airdropAmount={airdrop.airdrop_amount}
             tokenSymbol={airdrop.token_symbol}
