@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Card from '../card/Card'
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import CircularChart from '../charts/DonutChart'
@@ -15,11 +15,15 @@ const ProfitEstimationChart = ({
   totalAllocatedUsd,
   totalClaimedUsd,
 }: Props) => {
-  const conversion = roundToPrecision({
-    value: (totalClaimedUsd / totalAllocatedUsd) * 100,
-    precision: 2,
-    method: 'round',
-  })
+  const conversion = useMemo(() => {
+    if (totalAllocatedUsd === 0) return 0
+
+    return roundToPrecision({
+      value: (totalClaimedUsd / totalAllocatedUsd) * 100,
+      precision: 2,
+      method: 'round',
+    })
+  }, [totalAllocatedUsd, totalClaimedUsd])
 
   return (
     <Card

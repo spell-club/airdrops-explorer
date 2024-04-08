@@ -29,7 +29,7 @@ const MiniStatisticsGrid = () => {
 
       totalClaimed: formatValue(stats.total_claimed_usd, 0),
 
-      users: formatValue(stats.users_num, 0),
+      users: formatValue(stats.eligible_users_num, 0),
     }
   }, [stats, isStatsLoading])
 
@@ -80,7 +80,7 @@ const MiniStatisticsGrid = () => {
             }
           />
         }
-        name='Users'
+        name='Wallets'
         value={users}
       />
     </SimpleGrid>

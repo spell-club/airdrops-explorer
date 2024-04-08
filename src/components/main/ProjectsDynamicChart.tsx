@@ -7,6 +7,7 @@ import Card from '../card/Card'
 import LineChart from '../charts/LineChart'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
 import SelectTimelineMenu from 'components/SelectTimelineMenu'
+import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 const ProjectsDynamicChart = () => {
   const { clientApi } = useClientApi()
@@ -17,6 +18,7 @@ const ProjectsDynamicChart = () => {
     queryFn: () => clientApi.getProjectsHistoricalValue(),
   })
   const [selectedTime, setSelectedTime] = useState(timeCategories[0])
+  const { airdropsLabelsForChart } = useAirdropsDates()
 
   const dataByTime = useMemo(() => {
     if (!chartData) return []
@@ -43,7 +45,6 @@ const ProjectsDynamicChart = () => {
   const datesArray = dataByTime?.map((data) =>
     new Date(data.date).toLocaleDateString(),
   )
-
   const textColor = useColorModeValue('secondaryGray.900', 'white')
 
   return (
@@ -80,17 +81,31 @@ const ProjectsDynamicChart = () => {
             ]}
             chartOptions={{
               ...chartConfig,
-              colors: ['#4318FF', '#39B8FF'],
+              colors: ['#4690fd', '#f035fd'],
               xaxis: {
                 ...chartConfig.xaxis,
                 categories: datesArray,
-                overwriteCategories: ovewriteCategories(
-                  datesArray,
-                  selectedTime.label === '1W' ? 4 : 10,
-                ),
+
+                // overwriteCategories: ovewriteCategories(
+                //   datesArray,
+                //   selectedTime.label === '1W' ? 4 : 10,
+                // ),
+              },
+              annotations: {
+                xaxis: airdropsLabelsForChart,
               },
             }}
           />
+          <Flex justify='space-between' pl={5} pr={2}>
+            {ovewriteCategories(
+              datesArray,
+              selectedTime.label === '1W' ? 4 : 10,
+            ).map((date) => (
+              <Text key={date} fontSize={12} color='secondaryGray.600'>
+                {date}
+              </Text>
+            ))}
+          </Flex>
         </Box>
       </Flex>
     </Card>

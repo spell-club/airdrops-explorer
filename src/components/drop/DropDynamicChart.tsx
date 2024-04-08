@@ -7,12 +7,20 @@ import useClientApi from '../../hooks/useClientApi'
 import { roundToPrecision } from '../../utils'
 import SelectTimelineMenu from '../SelectTimelineMenu'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import useAirdropsDates from '../../hooks/useAirdropsDates'
+import numbro from 'numbro'
 
 interface Props {
   dropId: string
+  tokenSymbol: string
 }
 
-const DropDynamicChart = ({ dropId }: Props) => {
+const defaultTooltipFormat = {
+  trimMantissa: true,
+  thousandSeparated: true,
+}
+
+const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
   const { chartConfig, ovewriteCategories, timeCategories } =
     useDefaultChartConfig()
   const { clientApi } = useClientApi()
@@ -87,11 +95,50 @@ const DropDynamicChart = ({ dropId }: Props) => {
               colors: ['#4318FF', '#39B8FF'],
               xaxis: {
                 ...chartConfig.xaxis,
+                labels: {
+                  ...chartConfig.xaxis.labels,
+                  style: {
+                    ...chartConfig.xaxis.labels.style,
+                    fontSize: '12px',
+                  },
+                },
                 categories: datesArray,
                 overwriteCategories: ovewriteCategories(
                   datesArray,
                   selectedTime.label === '1W' ? 4 : 7,
                 ),
+              },
+              tooltip: {
+                ...chartConfig.tooltip,
+                y: {
+                  ...chartConfig.tooltip.y,
+                  formatter(
+                    val: number,
+                    { seriesIndex, dataPointIndex }: any,
+                  ): string {
+                    const truncatedValue = roundToPrecision({
+                      value: val,
+                      precision: 0,
+                      method: 'floor',
+                    })
+                    const tokenAmount = seriesIndex
+                      ? chartData[dataPointIndex].claimed_amount
+                      : chartData[dataPointIndex].allocated_amount
+
+                    console.log(
+                      tokenAmount,
+                      'tokenAmount',
+                      chartData[dataPointIndex],
+                    )
+
+                    const trancatedTokenAmount = roundToPrecision({
+                      value: tokenAmount,
+                      precision: 0,
+                      method: 'floor',
+                    })
+                    return `$${numbro(truncatedValue).format(defaultTooltipFormat)} | ${numbro(trancatedTokenAmount).format(defaultTooltipFormat)} ${tokenSymbol}`
+                  },
+                },
               },
             }}
           />

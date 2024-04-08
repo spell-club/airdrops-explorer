@@ -1,5 +1,4 @@
 import React from 'react'
-
 export default function RootHead() {
   return (
     <>
@@ -11,7 +10,7 @@ export default function RootHead() {
         href={process.env.NEXT_PUBLIC_BASE_PATH || '' + '/favicon.ico'}
       />
 
-      <title>Cosmos Airdrops Explorer</title>
+      <title>SpellDrop | Explore Cosmos Airdrops</title>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta name='theme-color' content='#000000' />
     </>

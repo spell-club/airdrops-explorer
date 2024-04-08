@@ -1,27 +1,15 @@
 import React from 'react'
-import { Flex, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
+import { Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import AirdropProject from '../AirdropProject'
-import { useQuery } from '@tanstack/react-query'
-import useClientApi from '../../hooks/useClientApi'
-import { AIRDROPS_IMAGES } from '../../constants'
+import { AIRDROPS_IMAGES } from 'constants/index'
+import useAirdrops from 'hooks/useAirdrops'
 
 const DropsList = () => {
-  const { clientApi } = useClientApi()
-
-  const { data: airdrops, isLoading: isAirdropsLoading } = useQuery({
-    queryKey: ['airdrops'],
-    queryFn: () => clientApi.getAirdropProjects(),
-  })
-
+  const { airdrops } = useAirdrops()
 
   return (
     <Flex direction='column'>
-      <Text
-        fontSize='xl'
-        ms='24px'
-        fontWeight='700'
-        mb='20px'
-      >
+      <Text fontSize='xl' ms='24px' fontWeight='700' mb='20px'>
         Recent Airdrops
       </Text>
 

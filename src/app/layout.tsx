@@ -2,8 +2,9 @@
 import React, { ReactNode } from 'react'
 import AppWrappers from './AppWrappers'
 import Head from './head'
-import { Container, Flex } from '@chakra-ui/react'
+import { Box, Container, Flex } from '@chakra-ui/react'
 import AppHeader from '../components/AppHeader'
+import AppFooter from '../components/AppFooter'
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -13,9 +14,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AppWrappers>
           <Flex flexDir='column' minH='100vh'>
             <AppHeader />
-            <Container maxW='container.xl' pt={30}>
-              {children}
-            </Container>
+            <Box as='main' flex='1 0 auto'>
+              <Container maxW='container.xl' pt={30}>
+                {children}
+              </Container>
+            </Box>
+            <AppFooter />
           </Flex>
         </AppWrappers>
       </body>

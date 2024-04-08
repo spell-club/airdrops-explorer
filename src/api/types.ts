@@ -32,13 +32,18 @@ interface AirdropProject {
   total_claimed_usd: number
   total_allocated: number
   total_claimed: number
-  users_num: number
+  eligible_users_num: number
+  total_reallocated?: number
+  total_reallocated_usd?: number
+  claimers_num: number
 }
 
 interface HistoricalValue {
   date: string
   allocated_amount_usd: number
   claimed_amount_usd: number
+  allocated_amount: number
+  claimed_amount: number
 }
 
 interface AddressInfo {
@@ -66,6 +71,7 @@ interface AddressAsset {
 
 interface AddressAirdrop {
   airdrop_timestamp: string
+  address: string
   name: string
   token_name: string
   allocated_amount: number
@@ -77,7 +83,7 @@ interface AddressAirdrop {
 interface Stats {
   total_allocated_usd: number
   total_claimed_usd: number
-  users_num: number
+  eligible_users_num: number
 }
 
 interface ClientApiInterface {

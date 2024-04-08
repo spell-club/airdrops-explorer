@@ -17,7 +17,11 @@ export function roundToPrecision({
   return Math[method](value * tenToThePowerPrecision) / tenToThePowerPrecision
 }
 
-export const formatValue = (value: number, precision?: number) => {
+export const formatValue = (
+  value: number,
+  precision?: number,
+  average = false,
+) => {
   const truncatedAmount = roundToPrecision({
     value,
     precision: precision ?? 2,
@@ -27,6 +31,7 @@ export const formatValue = (value: number, precision?: number) => {
   const roundFormat = {
     trimMantissa: true,
     thousandSeparated: true,
+    average,
   }
 
   return String(numbro(truncatedAmount).format(roundFormat))
@@ -39,8 +44,8 @@ export const generateIcon = (address: string, size = 100) => {
 }
 
 export const getProminentColor = (img: string) => {
-  return prominent(img, { format: 'hex', amount: 2 }).then(data => {
-    if (data[0] == "#000000") {
+  return prominent(img, { format: 'hex', amount: 2 }).then((data) => {
+    if (data[0] == '#000000') {
       return data[1]
     }
 

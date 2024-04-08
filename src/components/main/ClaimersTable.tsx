@@ -13,7 +13,6 @@ import {
   AvatarGroup,
   Box,
   Flex,
-  Skeleton,
   Table,
   Tbody,
   Td,
@@ -23,9 +22,9 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import { generateIcon, roundToPrecision } from '../../utils'
+import { generateIcon, roundToPrecision } from 'utils'
 import numbro from 'numbro'
-import { AIRDROPS_IMAGES } from '../../constants'
+import { AIRDROPS_IMAGES } from 'constants/index'
 import IconWithBg from 'components/IconWithBg'
 
 type RowObj = {
@@ -42,6 +41,7 @@ interface Props {
 }
 
 import { Roboto_Mono } from 'next/font/google'
+import Link from 'next/link'
 
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
@@ -70,16 +70,14 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
         const trucatedAddress = `${info.getValue().slice(0, 6)}...${info.getValue().slice(-6)}`
         const icon = generateIcon(info.row.original.address, 30)
         return (
-          <Flex
-            align='center'
-            onClick={() => push(`/profile/${info.getValue()}`)}
-            cursor='pointer'
-          >
-            <IconWithBg icon={icon} boxSize='32px' me='8px' />
-            <Text fontSize='sm' fontWeight='600'>
-              {trucatedAddress}
-            </Text>
-          </Flex>
+          <Link href={`/profile/${info.getValue()}`}>
+            <Flex align='center' cursor='pointer'>
+              <IconWithBg icon={icon} boxSize='32px' me='8px' />
+              <Text fontSize='sm' fontWeight='600'>
+                {trucatedAddress}
+              </Text>
+            </Flex>
+          </Link>
         )
       },
     }),
@@ -174,7 +172,6 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   })
-
 
   return (
     <Flex

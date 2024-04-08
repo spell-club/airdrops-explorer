@@ -4,26 +4,27 @@ import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import CircularChart from '../charts/DonutChart'
 import { VSeparator } from '../separator/Separator'
 import numbro from 'numbro'
-import { roundToPrecision } from '../../utils'
-
-const CONVERSION_VALUE = 66
+import { roundToPrecision } from 'utils'
+import { AirdropProject } from 'api/types'
 
 interface Props {
-  totalAllocated: number
-  totalClaimed: number
-  totalAllocatedUsd: number
-  totalClaimedUsd: number
-  tokenSymbol: string
+  project: AirdropProject
 }
 
-const DropConversionChartCard = ({
-  totalAllocated,
-  totalClaimed,
-  totalClaimedUsd,
-  totalAllocatedUsd,
-  tokenSymbol,
-}: Props) => {
+const DropConversionChartCard = ({ project }: Props) => {
   const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
+  const {
+    total_allocated: totalAllocated,
+    total_claimed: totalClaimed,
+    total_claimed_usd: totalClaimedUsd,
+    total_allocated_usd: totalAllocatedUsd,
+    token_symbol: tokenSymbol,
+    total_reallocated,
+    total_reallocated_usd,
+    eligible_users_num: eligibleUsersNum,
+    claimers_num: claimersNum,
+  } = project
+
   const conversion = roundToPrecision({
     value: (totalClaimedUsd / totalAllocatedUsd) * 100,
     precision: 2,
@@ -45,23 +46,47 @@ const DropConversionChartCard = ({
     return String(numbro(truncatedAmount).format(roundFormat))
   }
 
+  const isRelocatedStatExist = total_reallocated && total_reallocated_usd
+
+  const claimersRate = roundToPrecision({
+    value: (claimersNum / eligibleUsersNum) * 100,
+    precision: 2,
+    method: 'floor',
+  })
+
   return (
     <Card p='20px' alignItems='center' flexDirection='column' w='100%' bg={bg}>
       <Flex flexDir='column' align='center' gap={4}>
         <Text fontSize={20} fontWeight={600}>
-          Allocated/Claimed
+          Allocation Info
         </Text>
-
-        <CircularChart value={conversion}>
-          <Flex flexDir='column' align='center'>
-            <Text color='gray.400' fontSize={14}>
-              Claim Rate
-            </Text>
-            <Text fontSize={20} fontWeight={600}>
-              {conversion}%
-            </Text>
+        <Flex gap={5}>
+          <Flex flexDir='column' align='center' gap={4}>
+            <CircularChart value={conversion}>
+              <Flex flexDir='column' align='center'>
+                <Text color='gray.400' fontSize={14}>
+                  Claimed Amount
+                </Text>
+                <Text fontSize={20} fontWeight={600}>
+                  {conversion}%
+                </Text>
+              </Flex>
+            </CircularChart>
           </Flex>
-        </CircularChart>
+
+          {isRelocatedStatExist && (
+            <CircularChart value={claimersRate} color='#39B8FF'>
+              <Flex flexDir='column' align='center'>
+                <Text color='gray.400' fontSize={14}>
+                  Claimers
+                </Text>
+                <Text fontSize={20} fontWeight={600}>
+                  {claimersRate}%
+                </Text>
+              </Flex>
+            </CircularChart>
+          )}
+        </Flex>
 
         <Flex
           gap={5}
@@ -132,6 +157,31 @@ const DropConversionChartCard = ({
               </Text>
             </Flex>
           </Flex>
+
+          {isRelocatedStatExist ? (
+            <>
+              {' '}
+              <VSeparator />
+              <Flex flexDir='column' gap={5}>
+                <Flex flexDir='column' align='center'>
+                  <Text fontSize={14} color='gray.400'>
+                    Reallocated $
+                  </Text>
+                  <Text fontSize={20} fontWeight={600}>
+                    ${formattValue(total_reallocated_usd)}
+                  </Text>
+                </Flex>
+                <Flex flexDir='column' align='center'>
+                  <Text fontSize={14} color='gray.400'>
+                    Reallocated {tokenSymbol}
+                  </Text>
+                  <Text fontSize={20} fontWeight={600}>
+                    {formattValue(total_reallocated)}
+                  </Text>
+                </Flex>
+              </Flex>{' '}
+            </>
+          ) : null}
         </Flex>
       </Flex>
     </Card>

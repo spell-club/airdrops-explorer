@@ -42,18 +42,15 @@ const Page = ({ params }: { params: { dropId: string } }) => {
         snapshotDate={new Date(
           airdropProject?.snapshot_date,
         ).toLocaleDateString()}
-        users={formatValue(airdropProject?.users_num, 0)}
+        users={formatValue(airdropProject?.claimers_num, 0)}
       />
 
       <Flex gap='20px' mb='20px' flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
-        <DropDynamicChart dropId={dropId} />
-        <DropConversionChartCard
-          totalAllocatedUsd={airdropProject?.total_allocated_usd}
-          totalClaimedUsd={airdropProject?.total_claimed_usd}
-          totalClaimed={airdropProject?.total_claimed}
-          totalAllocated={airdropProject?.total_allocated}
+        <DropDynamicChart
+          dropId={dropId}
           tokenSymbol={airdropProject?.token_symbol}
         />
+        <DropConversionChartCard project={airdropProject} />
       </Flex>
 
       <TopClaimersAndLosers

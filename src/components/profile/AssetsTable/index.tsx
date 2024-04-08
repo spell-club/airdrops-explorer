@@ -16,11 +16,10 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
 } from '@chakra-ui/react'
 import Card from '../../card/Card'
-import useAssetsTable from './useAssetsTable'
-import useClientApi from '../../../hooks/useClientApi'
+import useAirdropsTable from './useAirdropsTable'
+import useClientApi from 'hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
 
 interface Props {
@@ -28,13 +27,12 @@ interface Props {
 }
 const AirdropsTable = ({ address }: Props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const textColor = useColorModeValue('secondaryGray.900', 'white')
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
-  const { columns } = useAssetsTable()
+  const { columns } = useAirdropsTable()
   const { clientApi } = useClientApi()
   const { data: airdrops, isLoading: isAssetsLoading } = useQuery({
     queryKey: ['addressAirdrops', address],
     queryFn: () => clientApi.getAddressAirdrops(address),
+    retry: 1,
   })
 
   const table = useReactTable({
@@ -48,6 +46,8 @@ const AirdropsTable = ({ address }: Props) => {
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   })
+
+  if (!airdrops && !isAssetsLoading) return null
 
   return (
     <Card
@@ -78,7 +78,6 @@ const AirdropsTable = ({ address }: Props) => {
                       key={header.id}
                       fontWeight='normal'
                       colSpan={header.colSpan}
-                      // pe='10px'
                       border='none'
                       cursor='pointer'
                       textTransform='none'

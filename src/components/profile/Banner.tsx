@@ -1,10 +1,18 @@
 // Chakra imports
-import { Box, Flex, Avatar, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Avatar,
+  Text,
+  useColorModeValue,
+  Link,
+} from '@chakra-ui/react'
 import Card from '../card/Card'
 import { VSeparator } from '../separator/Separator'
 import { generateIcon, getProminentColor } from '../../utils'
 import IconWithBg from 'components/IconWithBg'
 import { useState } from 'react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 export default function Banner(props: {
   banner: string
@@ -33,6 +41,8 @@ export default function Banner(props: {
     setProfileColor(String(c))
   })
 
+  const explorerLink = `https://www.mintscan.io/cosmos/address/${name}`
+
   return (
     <Card mb='20px' alignItems='center' {...rest} pt={0} px={0}>
       <Box
@@ -40,42 +50,38 @@ export default function Banner(props: {
         bg={`radial-gradient(circle, transparent 20%, #000614 20%, #000614 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #000614 20%, #000614 80%, transparent 80%, transparent) 17.5px 17.5px, linear-gradient(${profileColor} 1.4000000000000001px, transparent 1.4000000000000001px) 0 -0.7000000000000001px, linear-gradient(90deg, ${profileColor} 1.4000000000000001px, #000614 1.4000000000000001px) -0.7000000000000001px 0;`}
         bgSize='35px 35px, 35px 35px, 17.5px 17.5px, 17.5px 17.5px'
         borderRadius='20px'
-        h='191px'
+        h='150px'
         w='100%'
         borderBottomRadius={0}
       />
       <IconWithBg
         mx='auto'
         icon={icon}
-        h='157px'
-        w='157px'
+        h='115px'
+        w='115px'
         mt='-63px'
         border='4px solid'
         borderColor='navy.700'
       />
 
-      <Text
-        fontWeight='bold'
-        fontSize='32'
-        mt='10px'
-        display={{ base: 'none', lg: 'inline' }}
-      >
-        {name}
-      </Text>
-
-      <Text
-        fontWeight='bold'
-        fontSize='28'
-        mt='10px'
-        display={{ base: 'inline', lg: 'none' }}
-      >
-        cosmos140...em8g840tx
-      </Text>
+      <Flex align="center" gap={3}>
+        <Text fontWeight='bold' fontSize={26} mt='10px'>
+          {name}{' '}
+        </Text>
+        <Link
+          isExternal
+          href={explorerLink}
+          target='_blank'
+          rel='noreferer noopener'
+        >
+          <ExternalLinkIcon boxSize={7} mt={1.5} />
+        </Link>
+      </Flex>
 
       <Flex
         w='max-content'
         mx='auto'
-        mt={{ base: '20px', lg: '40px' }}
+        mt={{ base: '20px' }}
         flexDir={{ base: 'column', lg: 'row' }}
         justify='center'
         borderRadius={20}
