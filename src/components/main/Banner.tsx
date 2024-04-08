@@ -1,10 +1,8 @@
 // Chakra imports
 import { Button, Flex, Text, Image } from '@chakra-ui/react'
 import banner from '../../assets/img/main/banner.png'
-import { SearchBar } from '../UI/layout/navbar/searchBar/SearchBar'
+import { SearchBar } from '../UI/searchBar'
 import React from 'react'
-
-// Assets
 
 export default function Banner() {
   // Chakra Color Mode

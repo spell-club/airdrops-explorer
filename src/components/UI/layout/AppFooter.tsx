@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Container, Flex } from '@chakra-ui/react'
 
-import Logo from '../../../assets/icons/Logo'
+import Logo from 'assets/icons/Logo'
 
 const AppFooter = () => {
   // let linkColor = 'white'
