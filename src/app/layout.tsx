@@ -16,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AppWrappers>
           <Flex flexDir='column' minH='100vh'>
             <AppHeader />
+
             <Box as='main' flex='1 0 auto'>
               <Container maxW='container.xl' pt={30}>
                 {children}
