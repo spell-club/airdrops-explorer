@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import React from 'react'
 
 export default function RootHead() {
@@ -15,6 +16,16 @@ export default function RootHead() {
 
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta name='theme-color' content='#000000' />
+
+      {/* GOOGLE ANALYTICS */}
+      <Script
+        async
+        id='google-analytics'
+        strategy='lazyOnload'
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-94FJ9Y76DL');`,
+        }}
+      />
     </>
   )
 }

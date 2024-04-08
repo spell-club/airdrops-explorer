@@ -4,8 +4,8 @@ import { Box, Container, Flex } from '@chakra-ui/react'
 
 import AppWrappers from './AppWrappers'
 import Head from './head'
-import AppHeader from '../components/UI/layout/AppHeader'
-import AppFooter from '../components/UI/layout/AppFooter'
+import AppHeader from 'components/UI/layout/AppHeader'
+import AppFooter from 'components/UI/layout/AppFooter'
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
