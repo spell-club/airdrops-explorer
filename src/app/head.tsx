@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import React from 'react'
 
-export default function RootHead() {
+export default function Head() {
   return (
     <>
       <link rel='apple-touch-icon' href='/logo192.png' />
@@ -19,16 +19,10 @@ export default function RootHead() {
       {/* GOOGLE ANALYTICS */}
       <Script
         async
-        strategy='afterInteractive'
-        src='https://www.googletagmanager.com/gtag/js?id=GTM-P5TJLMZL'
-      />
-
-      <Script
-        async
         id='google-analytics'
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'GTM-P5TJLMZL');`,
+          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-94FJ9Y76DL');`,
         }}
       />
     </>
