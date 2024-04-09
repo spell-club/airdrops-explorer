@@ -1,12 +1,4 @@
-// Chakra imports
-import {
-  Box,
-  Flex,
-  Avatar,
-  Text,
-  useColorModeValue,
-  Link,
-} from '@chakra-ui/react'
+import { Box, Flex, Text, Link } from '@chakra-ui/react'
 import Card from '../card/Card'
 import { VSeparator } from '../separator/Separator'
 import { generateIcon, getProminentColor } from '../../utils'
@@ -54,6 +46,7 @@ export default function Banner(props: {
         w='100%'
         borderBottomRadius={0}
       />
+
       <IconWithBg
         mx='auto'
         icon={icon}
@@ -64,17 +57,29 @@ export default function Banner(props: {
         borderColor='navy.700'
       />
 
-      <Flex align="center" gap={3}>
-        <Text fontWeight='bold' fontSize={26} mt='10px'>
+      <Flex
+        align='center'
+        direction={{ base: 'column', md: 'row' }}
+        gap={3}
+        px={4}
+      >
+        <Text
+          fontWeight='bold'
+          fontSize={{ base: 14, md: 26 }}
+          mt='10px'
+          wordBreak='break-word'
+          alignItems='center'
+        >
           {name}{' '}
         </Text>
+
         <Link
           isExternal
           href={explorerLink}
           target='_blank'
           rel='noreferer noopener'
         >
-          <ExternalLinkIcon boxSize={7} mt={1.5} />
+          <ExternalLinkIcon boxSize={{ base: 4, md: 7 }} mt={1.5} />
         </Link>
       </Flex>
 

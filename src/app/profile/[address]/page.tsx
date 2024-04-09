@@ -89,6 +89,7 @@ const Page = ({ params }: { params: { address: string } }) => {
       />
       <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} gap='20px' mb='20px'>
         <ClaimedUnclaimedChart address={address} />
+
         <ProfitEstimationChart
           totalAllocatedUsd={
             info?.total_claimed_usd + info?.total_unclaimed_usd

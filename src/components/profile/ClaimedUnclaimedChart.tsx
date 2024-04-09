@@ -17,13 +17,14 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
   const { chartConfig, ovewriteCategories, timeCategories } =
     useDefaultChartConfig()
   const { clientApi } = useClientApi()
+  const { airdropsLabelsForChart } = useAirdropsDates()
+
   const { data: chartData, isLoading: isChartDataLoading } = useQuery({
     queryKey: ['claimHistory'],
     queryFn: () => clientApi.getClaimHistoricalValue(address),
   })
 
   const [selectedTime, setSelectedTime] = useState(timeCategories[0])
-  const { airdropsLabelsForChart } = useAirdropsDates()
 
   const dataByTime = useMemo(() => {
     if (!chartData) return []
@@ -63,12 +64,14 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
         <Text fontSize='xl' fontWeight='600' alignSelf='start' pb={2}>
           Allocated vs Claimed
         </Text>
+
         <SelectTimelineMenu
           selected={selectedTime}
           items={timeCategories}
           onItemSelected={setSelectedTime}
         />
       </Flex>
+
       <Flex w='100%' flexDirection={{ base: 'column', lg: 'column' }}>
         <Box minH='360px' minW='75%' mt='auto'>
           <LineChart
@@ -97,7 +100,13 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
               datesArray,
               selectedTime.label === '1W' ? 4 : 7,
             ).map((date) => (
-              <Text key={date} fontSize={12} color='secondaryGray.600'>
+              <Text
+                key={date}
+                fontSize={12}
+                color='secondaryGray.600'
+                overflow='hidden'
+                whiteSpace='nowrap'
+              >
                 {date}
               </Text>
             ))}

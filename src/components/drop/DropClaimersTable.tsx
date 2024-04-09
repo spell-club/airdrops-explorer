@@ -14,6 +14,7 @@ import {
   Button,
   Flex,
   Table,
+  TableContainer,
   Tbody,
   Td,
   Text,
@@ -187,7 +188,7 @@ const DropClaimersTable = ({
           {title}
         </Text>
       </Flex>
-      <Box>
+      <TableContainer>
         <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -252,7 +253,7 @@ const DropClaimersTable = ({
               })}
           </Tbody>
         </Table>
-      </Box>
+      </TableContainer>
     </Flex>
   )
 }

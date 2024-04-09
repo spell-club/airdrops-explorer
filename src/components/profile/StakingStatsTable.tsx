@@ -8,11 +8,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import {
-  Box,
   Flex,
-  Icon,
-  Progress,
   Table,
+  TableContainer,
   Tbody,
   Td,
   Text,
@@ -221,16 +219,11 @@ const StakingStatsTable = () => {
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
       <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
-        <Text
-
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'
-        >
+        <Text fontSize='22px' fontWeight='700' lineHeight='100%'>
           Atom staking stats
         </Text>
       </Flex>
-      <Box>
+      <TableContainer>
         <Table variant='simple' mb='24px' mt='12px'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -293,7 +286,7 @@ const StakingStatsTable = () => {
               })}
           </Tbody>
         </Table>
-      </Box>
+      </TableContainer>
     </Card>
   )
 }

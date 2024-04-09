@@ -27,7 +27,7 @@ const ProfitEstimationChart = ({
 
   return (
     <Card
-      p='20px'
+      p='10px'
       alignItems='center'
       flexDirection='column'
       w='100%'
@@ -50,36 +50,54 @@ const ProfitEstimationChart = ({
         </CircularChart>
 
         <Flex
-          gap={5}
-          px={10}
+          gap={{ base: 2, md: 5 }}
+          px={{ base: 4, md: 6 }}
           py={4}
           boxShadow='rgba(112, 144, 176, 0.08) 4px 1px 10px 4px'
           borderRadius={20}
+          justifyContent='space-between'
         >
           <Flex flexDir='column'>
-            <Text fontSize={14} color='gray.400'>
+            <Text fontSize={{ base: 10, md: 14 }} color='gray.400'>
               Total Allocated $
             </Text>
-            <Text textAlign='center' fontSize={20} fontWeight={600}>
+
+            <Text
+              textAlign='center'
+              fontSize={{ base: 14, md: 20 }}
+              fontWeight={600}
+            >
               ${formatValue(totalAllocatedUsd, 0)}
             </Text>
           </Flex>
+
           <VSeparator />
+
           <Flex flexDir='column'>
-            <Text fontSize={14} color='gray.400'>
+            <Text fontSize={{ base: 10, md: 14 }} color='gray.400'>
               Total Claimed $
             </Text>
-            <Text textAlign='center' fontSize={20} fontWeight={600}>
+            <Text
+              textAlign='center'
+              fontSize={{ base: 14, md: 20 }}
+              fontWeight={600}
+            >
               ${formatValue(totalClaimedUsd, 0)}
             </Text>
           </Flex>
 
           <VSeparator />
+
           <Flex flexDir='column'>
-            <Text fontSize={14} color='gray.400'>
+            <Text fontSize={{ base: 10, md: 14 }} color='gray.400'>
               Total Missed $
             </Text>
-            <Text textAlign='center' fontSize={20} fontWeight={600}>
+
+            <Text
+              textAlign='center'
+              fontSize={{ base: 14, md: 20 }}
+              fontWeight={600}
+            >
               ${formatValue(totalAllocatedUsd - totalClaimedUsd, 0)}
             </Text>
           </Flex>

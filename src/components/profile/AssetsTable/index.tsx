@@ -7,9 +7,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import {
-  Box,
   Flex,
   Table,
+  TableContainer,
   Tbody,
   Td,
   Text,
@@ -69,7 +69,7 @@ const AirdropsTable = ({ address }: Props) => {
           Airdrops Table
         </Text>
       </Flex>
-      <Box>
+      <TableContainer>
         <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -134,7 +134,7 @@ const AirdropsTable = ({ address }: Props) => {
               })}
           </Tbody>
         </Table>
-      </Box>
+      </TableContainer>
     </Card>
   )
 }
