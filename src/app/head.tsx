@@ -20,7 +20,7 @@ export default function Head() {
 
       <meta name='theme-color' content='#000000' />
 
-      {/* -GOOGLE ANALYTICS- */}
+      {/* GOOGLE ANALYTICS */}
       <Script
         async
         id='google-analytics'
@@ -29,6 +29,7 @@ export default function Head() {
           __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-94FJ9Y76DL');`,
         }}
       />
+      {/* -GOOGLE ANALYTICS- */}
     </>
   )
 }
