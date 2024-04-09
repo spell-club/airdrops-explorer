@@ -160,7 +160,7 @@ const useAirdropsTable = () => {
 
         const missed_amount = allocated_amount - claimed_amount
         const missed_amount_usd = allocated_amount_usd - claimed_amount_usd
-        const isPositive = missed_amount > 0
+        const isPositive = Number(missed_amount.toFixed()) > 0
 
         return (
           <Flex
