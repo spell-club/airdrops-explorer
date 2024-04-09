@@ -5,7 +5,9 @@ export default function Head() {
   return (
     <>
       <link rel='apple-touch-icon' href='/logo192.png' />
+
       <link rel='manifest' href='/manifest.json' />
+
       <link
         rel='shortcut icon'
         type='image/x-icon'
@@ -13,7 +15,9 @@ export default function Head() {
       />
 
       <title>SpellDrop | Explore Cosmos Airdrops</title>
+
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+
       <meta name='theme-color' content='#000000' />
 
       {/* GOOGLE ANALYTICS */}
