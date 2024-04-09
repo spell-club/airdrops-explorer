@@ -1,20 +1,20 @@
-import { AddressInfo } from '../types'
-import { AxiosInstance } from 'axios'
+import { AddressInfo } from '../types';
+import { AxiosInstance } from 'axios';
 
 const getAddressInfoRequest = async (
-  address: string,
-  apiClient: AxiosInstance,
+	address: string,
+	apiClient: AxiosInstance,
 ): Promise<AddressInfo> => {
-  return new Promise((resolve, reject) => {
-    apiClient
-      .get(`/airdrop/address/${address}`)
-      .then((response) => {
-        resolve(response.data)
-      })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-}
+	return new Promise((resolve, reject) => {
+		apiClient
+			.get(`/airdrop/address/${address}`)
+			.then((response) => {
+				resolve(response.data);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
+};
 
-export default getAddressInfoRequest
+export default getAddressInfoRequest;

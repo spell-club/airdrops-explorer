@@ -14,47 +14,49 @@ export default function Default(props: {
 	const { id, label, isChecked, onChange, desc, textWidth, reversed, fontSize, ...rest } = props;
 	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
 	return (
-		<Box w='100%' fontWeight='500' {...rest}>
+		<Box w="100%" fontWeight="500" {...rest}>
 			{reversed ? (
-				<Flex align='center' borderRadius='16px'>
+				<Flex align="center" borderRadius="16px">
 					{isChecked && onChange ? (
 						<Switch
 							isChecked={isChecked}
 							id={id}
-							variant='main'
-							colorScheme='brandScheme'
-							size='md'
+							variant="main"
+							colorScheme="brandScheme"
+							size="md"
 							onChange={onChange}
 						/>
 					) : (
-						<Switch id={id} variant='main' colorScheme='brandScheme' size='md' />
+						<Switch id={id} variant="main" colorScheme="brandScheme" size="md" />
 					)}
 					<FormLabel
-						ms='15px'
+						ms="15px"
 						htmlFor={id}
 						_hover={{ cursor: 'pointer' }}
-						flexDirection='column'
-						mb='0px'
-						maxW={textWidth ? textWidth : '75%'}>
-						<Text color={textColorPrimary} fontSize='md' fontWeight='500'>
+						flexDirection="column"
+						mb="0px"
+						maxW={textWidth ? textWidth : '75%'}
+					>
+						<Text color={textColorPrimary} fontSize="md" fontWeight="500">
 							{label}
 						</Text>
-						<Text color='secondaryGray.600' fontSize={fontSize ? fontSize : 'md'}>
+						<Text color="secondaryGray.600" fontSize={fontSize ? fontSize : 'md'}>
 							{desc}
 						</Text>
 					</FormLabel>
 				</Flex>
 			) : (
-				<Flex justify='space-between' align='center' borderRadius='16px'>
+				<Flex justify="space-between" align="center" borderRadius="16px">
 					<FormLabel
 						htmlFor={id}
 						_hover={{ cursor: 'pointer' }}
-						flexDirection='column'
-						maxW={textWidth ? textWidth : '75%'}>
-						<Text color={textColorPrimary} fontSize='md' fontWeight='500'>
+						flexDirection="column"
+						maxW={textWidth ? textWidth : '75%'}
+					>
+						<Text color={textColorPrimary} fontSize="md" fontWeight="500">
 							{label}
 						</Text>
-						<Text color='secondaryGray.600' fontSize={fontSize ? fontSize : 'md'}>
+						<Text color="secondaryGray.600" fontSize={fontSize ? fontSize : 'md'}>
 							{desc}
 						</Text>
 					</FormLabel>
@@ -62,13 +64,13 @@ export default function Default(props: {
 						<Switch
 							isChecked={isChecked}
 							id={id}
-							variant='main'
-							colorScheme='brandScheme'
-							size='md'
+							variant="main"
+							colorScheme="brandScheme"
+							size="md"
 							onChange={onChange}
 						/>
 					) : (
-						<Switch id={id} variant='main' colorScheme='brandScheme' size='md' />
+						<Switch id={id} variant="main" colorScheme="brandScheme" size="md" />
 					)}
 				</Flex>
 			)}

@@ -10,7 +10,7 @@ import {
 	MenuItem,
 	MenuList,
 	useDisclosure,
-	useColorModeValue
+	useColorModeValue,
 } from '@chakra-ui/react';
 // Assets
 import {
@@ -18,7 +18,7 @@ import {
 	MdOutlinePerson,
 	MdOutlineCardTravel,
 	MdOutlineLightbulb,
-	MdOutlineSettings
+	MdOutlineSettings,
 } from 'react-icons/md';
 
 export default function Banner(props: { [x: string]: any }) {
@@ -27,7 +27,7 @@ export default function Banner(props: { [x: string]: any }) {
 	const textColor = useColorModeValue('secondaryGray.500', 'white');
 	const textHover = useColorModeValue(
 		{ color: 'secondaryGray.900', bg: 'unset' },
-		{ color: 'secondaryGray.500', bg: 'unset' }
+		{ color: 'secondaryGray.500', bg: 'unset' },
 	);
 	const iconColor = useColorModeValue('brand.500', 'white');
 	const bgList = useColorModeValue('white', 'whiteAlpha.100');
@@ -42,105 +42,111 @@ export default function Banner(props: { [x: string]: any }) {
 	return (
 		<Menu isOpen={isOpen1} onClose={onClose1}>
 			<MenuButton
-				alignItems='center'
-				justifyContent='center'
+				alignItems="center"
+				justifyContent="center"
 				bg={bgButton}
 				_hover={bgHover}
 				_focus={bgFocus}
 				_active={bgFocus}
-				w='37px'
-				h='37px'
-				lineHeight='100%'
+				w="37px"
+				h="37px"
+				lineHeight="100%"
 				onClick={onOpen1}
-				borderRadius='10px'
-				{...rest}>
-				<Icon as={MdOutlineMoreHoriz} color={iconColor} w='24px' h='24px' />
+				borderRadius="10px"
+				{...rest}
+			>
+				<Icon as={MdOutlineMoreHoriz} color={iconColor} w="24px" h="24px" />
 			</MenuButton>
 			<MenuList
-				w='150px'
-				minW='unset'
-				maxW='150px !important'
-				border='transparent'
-				backdropFilter='blur(63px)'
+				w="150px"
+				minW="unset"
+				maxW="150px !important"
+				border="transparent"
+				backdropFilter="blur(63px)"
 				bg={bgList}
 				boxShadow={bgShadow}
-				borderRadius='20px'
-				p='15px'>
+				borderRadius="20px"
+				p="15px"
+			>
 				<MenuItem
-					transition='0.2s linear'
+					transition="0.2s linear"
 					color={textColor}
 					_hover={textHover}
-					p='0px'
-					borderRadius='8px'
+					p="0px"
+					borderRadius="8px"
 					_active={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
 					_focus={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
-					mb='10px'>
-					<Flex align='center'>
-						<Icon as={MdOutlinePerson} h='16px' w='16px' me='8px' />
-						<Text fontSize='sm' fontWeight='400'>
+					mb="10px"
+				>
+					<Flex align="center">
+						<Icon as={MdOutlinePerson} h="16px" w="16px" me="8px" />
+						<Text fontSize="sm" fontWeight="400">
 							Panel 1
 						</Text>
 					</Flex>
 				</MenuItem>
 				<MenuItem
-					transition='0.2s linear'
-					p='0px'
-					borderRadius='8px'
+					transition="0.2s linear"
+					p="0px"
+					borderRadius="8px"
 					color={textColor}
 					_hover={textHover}
 					_active={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
 					_focus={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
-					mb='10px'>
-					<Flex align='center'>
-						<Icon as={MdOutlineCardTravel} h='16px' w='16px' me='8px' />
-						<Text fontSize='sm' fontWeight='400'>
+					mb="10px"
+				>
+					<Flex align="center">
+						<Icon as={MdOutlineCardTravel} h="16px" w="16px" me="8px" />
+						<Text fontSize="sm" fontWeight="400">
 							Panel 2
 						</Text>
 					</Flex>
 				</MenuItem>
 				<MenuItem
-					transition='0.2s linear'
-					p='0px'
-					borderRadius='8px'
+					transition="0.2s linear"
+					p="0px"
+					borderRadius="8px"
 					color={textColor}
 					_hover={textHover}
 					_active={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
 					_focus={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
-					mb='10px'>
-					<Flex align='center'>
-						<Icon as={MdOutlineLightbulb} h='16px' w='16px' me='8px' />
-						<Text fontSize='sm' fontWeight='400'>
+					mb="10px"
+				>
+					<Flex align="center">
+						<Icon as={MdOutlineLightbulb} h="16px" w="16px" me="8px" />
+						<Text fontSize="sm" fontWeight="400">
 							Panel 3
 						</Text>
 					</Flex>
 				</MenuItem>
 				<MenuItem
-					transition='0.2s linear'
+					transition="0.2s linear"
 					color={textColor}
 					_hover={textHover}
-					p='0px'
-					borderRadius='8px'
+					p="0px"
+					borderRadius="8px"
 					_active={{
-						bg: 'transparent'
+						bg: 'transparent',
 					}}
 					_focus={{
-						bg: 'transparent'
-					}}>
-					<Flex align='center'>
-						<Icon as={MdOutlineSettings} h='16px' w='16px' me='8px' />
-						<Text fontSize='sm' fontWeight='400'>
+						bg: 'transparent',
+					}}
+				>
+					<Flex align="center">
+						<Icon as={MdOutlineSettings} h="16px" w="16px" me="8px" />
+						<Text fontSize="sm" fontWeight="400">
 							Panel 4
 						</Text>
 					</Flex>

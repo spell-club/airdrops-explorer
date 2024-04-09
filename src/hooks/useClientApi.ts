@@ -1,11 +1,11 @@
-import ClientApi from '../api'
+import ClientApi from '../api';
 
 const useClientApi = () => {
-  const clientApi = new ClientApi()
+	const clientApi = new ClientApi();
 
-  return {
-    clientApi,
-  }
-}
+	return {
+		clientApi,
+	};
+};
 
-export default useClientApi
+export default useClientApi;
