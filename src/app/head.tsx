@@ -19,10 +19,16 @@ export default function RootHead() {
       {/* GOOGLE ANALYTICS */}
       <Script
         async
+        strategy='afterInteractive'
+        src='https://www.googletagmanager.com/gtag/js?id=GTM-P5TJLMZL'
+      />
+
+      <Script
+        async
         id='google-analytics'
-        strategy='lazyOnload'
+        strategy='afterInteractive'
         dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-94FJ9Y76DL');`,
+          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'GTM-P5TJLMZL');`,
         }}
       />
     </>
