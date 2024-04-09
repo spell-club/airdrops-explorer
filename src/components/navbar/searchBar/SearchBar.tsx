@@ -6,8 +6,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
-import { useRef } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+
 export function SearchBar(props: {
   variant?: string
   background?: string
@@ -28,30 +29,31 @@ export function SearchBar(props: {
     ...rest
   } = props
 
+  const { push } = useRouter()
+
   // Chakra Color Mode
   const searchIconColor = useColorModeValue('gray.700', 'white')
   const inputBg = useColorModeValue('secondaryGray.300', 'navy.900')
   const inputText = useColorModeValue('gray.700', 'gray.100')
-  const { push } = useRouter()
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [value, setValue] = useState('')
 
   const handleSearch = () => {
-    if (inputRef.current?.value) {
-      push(`/profile/${inputRef.current.value}`)
+    if (value) {
+      push(`/profile/${value}`)
     }
 
-    if (inputRef.current) {
-      inputRef.current.value = ''
+    if (value) {
+      setValue('')
     }
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && inputRef.current?.value) {
+    if (event.key === 'Enter' && value) {
       handleSearch()
 
-      if (inputRef.current?.value) {
-        onSearch(inputRef.current.value)
+      if (value) {
+        onSearch(value)
       }
     }
   }
@@ -80,7 +82,8 @@ export function SearchBar(props: {
       <Input
         border='1px solid'
         borderColor='navy.700'
-        ref={inputRef}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         variant='search'
         fontSize='sm'
         bg={background ? background : inputBg}
