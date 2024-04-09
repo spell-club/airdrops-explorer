@@ -20,16 +20,21 @@ export default function Head() {
 
       <meta name='theme-color' content='#000000' />
 
-      {/* GOOGLE ANALYTICS */}
       <Script
         async
-        id='google-analytics'
-        strategy='afterInteractive'
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-94FJ9Y76DL');`,
-        }}
+        strategy='lazyOnload'
+        src='https://www.googletagmanager.com/gtag/js?id=G-94FJ9Y76DL'
       />
-      {/* -GOOGLE ANALYTICS- */}
+
+      <Script id='google-analytics' strategy='lazyOnload'>
+        {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-94FJ9Y76DL');
+          `}
+      </Script>
     </>
   )
 }
