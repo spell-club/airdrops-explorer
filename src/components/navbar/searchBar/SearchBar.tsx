@@ -14,22 +14,33 @@ export function SearchBar(props: {
   children?: JSX.Element
   placeholder?: string
   borderRadius?: string | number
+  onSearch?: (value: string) => void
   [x: string]: any
 }) {
   // Pass the computed styles into the `__css` prop
-  const { variant, background, children, placeholder, borderRadius, ...rest } =
-    props
+  const {
+    variant,
+    background,
+    children,
+    placeholder,
+    borderRadius,
+    onSearch,
+    ...rest
+  } = props
+
   // Chakra Color Mode
   const searchIconColor = useColorModeValue('gray.700', 'white')
   const inputBg = useColorModeValue('secondaryGray.300', 'navy.900')
   const inputText = useColorModeValue('gray.700', 'gray.100')
-  const inputRef = useRef<HTMLInputElement>(null)
   const { push } = useRouter()
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSearch = () => {
     if (inputRef.current?.value) {
       push(`/profile/${inputRef.current.value}`)
     }
+
     if (inputRef.current) {
       inputRef.current.value = ''
     }
@@ -38,6 +49,10 @@ export function SearchBar(props: {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && inputRef.current?.value) {
       handleSearch()
+
+      if (inputRef.current?.value) {
+        onSearch(inputRef.current.value)
+      }
     }
   }
 
