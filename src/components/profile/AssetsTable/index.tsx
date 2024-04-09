@@ -26,14 +26,16 @@ interface Props {
   address: string
 }
 const AirdropsTable = ({ address }: Props) => {
-  const [sorting, setSorting] = React.useState<SortingState>([])
   const { columns } = useAirdropsTable()
   const { clientApi } = useClientApi()
+
   const { data: airdrops, isLoading: isAssetsLoading } = useQuery({
     queryKey: ['addressAirdrops', address],
     queryFn: () => clientApi.getAddressAirdrops(address),
     retry: 1,
   })
+
+  const [sorting, setSorting] = React.useState<SortingState>([])
 
   const table = useReactTable({
     data: airdrops ?? [],
@@ -104,6 +106,7 @@ const AirdropsTable = ({ address }: Props) => {
               </Tr>
             ))}
           </Thead>
+
           <Tbody>
             {table
               .getRowModel()
