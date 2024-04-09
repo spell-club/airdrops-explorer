@@ -20,7 +20,7 @@ export default function Head() {
 
       <meta name='theme-color' content='#000000' />
 
-      {/* GOOGLE ANALYTICS */}
+      {/* -GOOGLE ANALYTICS- */}
       <Script
         async
         id='google-analytics'
