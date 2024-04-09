@@ -26,7 +26,7 @@ const useAirdropsDates = () => {
 		},
 	}))
 
-	return { airdropsLabelsForChart }
+	return { airdropsLabelsForChart, airdropsDates }
 }
 
 export default useAirdropsDates
