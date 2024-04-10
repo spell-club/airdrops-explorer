@@ -1,5 +1,7 @@
 {
-	"*.{js, jsx,ts,tsx}": ["eslint --quiet --fix"],
+	"*.{js, jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+
+	"**/*.(ts|tsx)": ["yarn tsc --noEmit"],
 
 	"*.{json,js,ts,jsx,tsx,html}": ["prettier --write --ignore-unknown"]
 }
