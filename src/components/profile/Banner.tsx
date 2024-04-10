@@ -47,6 +47,7 @@ export default function Banner(props: {
 				w="100%"
 				borderBottomRadius={0}
 			/>
+
 			<IconWithBg
 				mx="auto"
 				icon={icon}
@@ -55,29 +56,24 @@ export default function Banner(props: {
 				mt="-63px"
 				border="4px solid"
 				borderColor="navy.700"
+				alt="Profile"
 			/>
 
-<<<<<<< HEAD
-      <IconWithBg
-        mx='auto'
-        icon={icon}
-        h='115px'
-        w='115px'
-        mt='-63px'
-        border='4px solid'
-        borderColor='navy.700'
-        alt='Drops'
-      />
-=======
-			<Flex align="center" gap={3}>
-				<Text fontWeight="bold" fontSize={26} mt="10px">
+			<Flex align="center" direction={{ base: 'column', md: 'row' }} gap={3} px={4}>
+				<Text
+					fontWeight="bold"
+					fontSize={{ base: 14, md: 26 }}
+					mt="10px"
+					wordBreak="break-word"
+					alignItems="center"
+				>
 					{name}{' '}
 				</Text>
+
 				<Link isExternal href={explorerLink} target="_blank" rel="noreferer noopener">
-					<ExternalLinkIcon boxSize={7} mt={1.5} />
+					<ExternalLinkIcon boxSize={{ base: 4, md: 7 }} mt={1.5} />
 				</Link>
 			</Flex>
->>>>>>> development
 
 			<Flex
 				w="max-content"

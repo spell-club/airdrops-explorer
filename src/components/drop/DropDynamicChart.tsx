@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import Card from '../card/Card'
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import LineChart from '../UI/charts/LineChart'
+import { LineChart } from '../UI/charts'
 import { useQuery } from '@tanstack/react-query'
 import useClientApi from '../../hooks/useClientApi'
 import { roundToPrecision } from '../../utils'

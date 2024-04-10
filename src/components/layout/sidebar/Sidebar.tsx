@@ -1,6 +1,3 @@
-import React from 'react'
-
-// chakra imports
 import {
 	Box,
 	Flex,
@@ -13,17 +10,13 @@ import {
 	DrawerContent,
 	DrawerCloseButton,
 } from '@chakra-ui/react'
-<<<<<<< HEAD:src/components/UI/layout/sidebar/Sidebar.tsx
-import Content from 'components/layout/sidebar/components/Content'
-import { renderThumb, renderTrack, renderView } from 'components/UI/scrollbar'
-=======
-import Content from 'components/sidebar/components/Content'
-import { renderThumb, renderTrack, renderView } from 'components/scrollbar/Scrollbar'
->>>>>>> development:src/components/sidebar/Sidebar.tsx
+import { useRef } from 'react'
+import { IoMenuOutline } from 'react-icons/io5'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
-// Assets
-import { IoMenuOutline } from 'react-icons/io5'
+import Content from 'components/layout/sidebar/components/Content'
+import { renderThumb, renderTrack, renderView } from 'components/UI/scrollbar'
+
 import { IRoute } from 'types/navigation'
 import { isWindowAvailable } from 'utils/navigation'
 
@@ -40,11 +33,10 @@ function Sidebar(props: SidebarProps) {
 
 	let variantChange = '0.2s linear'
 	let shadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset')
-	// Chakra Color Mode
+
 	let sidebarBg = useColorModeValue('white', 'navy.800')
 	let sidebarMargins = '0px'
 
-	// SIDEBAR
 	return (
 		<Box display={{ sm: 'none', xl: 'block' }} position="fixed" minH="100%">
 			<Box
@@ -70,18 +62,14 @@ function Sidebar(props: SidebarProps) {
 	)
 }
 
-// FUNCTIONS
-
 export function SidebarResponsive(props: SidebarResponsiveProps) {
 	let sidebarBackgroundColor = useColorModeValue('white', 'navy.800')
 	let menuColor = useColorModeValue('gray.400', 'white')
-	// // SIDEBAR
+
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const btnRef = React.useRef()
+	const btnRef = useRef()
 
 	const { routes } = props
-	// let isWindows = navigator.platform.startsWith("Win");
-	//  BRAND
 
 	return (
 		<Flex display={{ sm: 'flex', xl: 'none' }} alignItems="center">
