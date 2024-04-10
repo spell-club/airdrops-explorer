@@ -5,20 +5,20 @@ export const linkStyles = {
 				textDecoration: 'none',
 				boxShadow: 'none',
 				_focus: {
-					boxShadow: 'none'
+					boxShadow: 'none',
 				},
 				_active: {
-					boxShadow: 'none'
+					boxShadow: 'none',
 				},
 				_hover: {
 					textDecoration: 'none',
-					border: 'none'
-				}
+					border: 'none',
+				},
 			},
 			_hover: {
 				textDecoration: 'none',
-				border: 'none'
-			}
-		}
-	}
-};
+				border: 'none',
+			},
+		},
+	},
+}
