@@ -14,6 +14,7 @@ import {
   Box,
   Flex,
   Table,
+  TableContainer,
   Tbody,
   Td,
   Text,
@@ -191,7 +192,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
           {title}
         </Text>
       </Flex>
-      <Box>
+      <TableContainer>
         <Table variant='simple'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -256,7 +257,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
               })}
           </Tbody>
         </Table>
-      </Box>
+      </TableContainer>
     </Flex>
   )
 }

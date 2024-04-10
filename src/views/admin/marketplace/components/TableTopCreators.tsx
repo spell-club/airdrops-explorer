@@ -1,15 +1,9 @@
-import React from 'react'
 import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from '@tanstack/react-table'
-import {
+  Avatar,
   Box,
+  Button,
   Flex,
+  Progress,
   Table,
   TableContainer,
   Tbody,
@@ -18,61 +12,39 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import numbro from 'numbro'
-import { generateIcon, roundToPrecision } from '../../utils'
-import IconWithBg from '../UI/icon/iconWithBg'
-
-import { Roboto_Mono } from 'next/font/google'
-import Link from 'next/link'
-
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'block',
-  preload: true,
-})
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table'
+// Custom components
+import * as React from 'react'
+// Assets
 
 type RowObj = {
-  address: string
-  projects: Record<'project', string>[]
-  total_amount_usd: number
-  total_amount: number
+  name: string[]
+  artworks: number
+  rating: number
 }
 
 const columnHelper = createColumnHelper<RowObj>()
 
-interface Props {
-  tableData: RowObj[]
-  title: string
-  isLoading: boolean
-  tokenSymbol: string
-}
-const DropClaimersTable = ({
-  tableData,
-  title,
-  isLoading,
-  tokenSymbol,
-}: Props) => {
+// const columns = columnsDataCheck;
+export default function TopCreatorTable(props: { tableData: any }) {
+  const { tableData } = props
   const [sorting, setSorting] = React.useState<SortingState>([])
-
-  const formatValue = (value: number) => {
-    const roundFormat = {
-      trimMantissa: true,
-      thousandSeparated: true,
-    }
-
-    const truncatedAmount = roundToPrecision({
-      value,
-      precision: 0,
-      method: 'floor',
-    })
-
-    return String(numbro(truncatedAmount).format(roundFormat))
-  }
-
+  const textColor = useColorModeValue('secondaryGray.900', 'white')
+  const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
+  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
+  let defaultData = tableData
   const columns = [
-    columnHelper.accessor('address', {
-      id: 'address',
+    columnHelper.accessor('name', {
+      id: 'name',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -80,28 +52,20 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          ADDRESS
+          NAME
         </Text>
       ),
-      cell: (info: any) => {
-        const truncatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
-        const icon = generateIcon(info.row.original.address, 30)
-
-        return (
-          <Link href={`/profile/${info.getValue()}`}>
-            <Flex align='center' cursor='pointer'>
-              <IconWithBg icon={icon} boxSize='32px' me='8px' alt='Address' />
-
-              <Text fontSize='sm' fontWeight='600'>
-                {truncatedAddress}
-              </Text>
-            </Flex>
-          </Link>
-        )
-      },
+      cell: (info: any) => (
+        <Flex align='center'>
+          <Avatar src={info.getValue()[1]} w='30px' h='30px' me='8px' />
+          <Text color={textColor} fontSize='sm' fontWeight='600'>
+            {info.getValue()[0]}
+          </Text>
+        </Flex>
+      ),
     }),
-    columnHelper.accessor('total_amount', {
-      id: 'total_amount',
+    columnHelper.accessor('artworks', {
+      id: 'artworks',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -109,22 +73,17 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          AMOUNT
+          ARTWORKS
         </Text>
       ),
-      cell: (info) => {
-        const value = info.getValue()
-        return (
-          <Flex fontWeight={600} className={robotoMono.className}>
-            <Text>
-              {formatValue(value)} {tokenSymbol}
-            </Text>
-          </Flex>
-        )
-      },
+      cell: (info) => (
+        <Text color={textColorSecondary} fontSize='sm' fontWeight='500'>
+          {info.getValue()}
+        </Text>
+      ),
     }),
-    columnHelper.accessor('total_amount_usd', {
-      id: 'total_amount_usd',
+    columnHelper.accessor('rating', {
+      id: 'rating',
       header: () => (
         <Text
           justifyContent='space-between'
@@ -132,26 +91,25 @@ const DropClaimersTable = ({
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
         >
-          VALUE
+          RATING
         </Text>
       ),
-      cell: (info) => {
-        const value = info.getValue()
-
-        return (
-          <Flex
-            align='center'
-            fontWeight={600}
-            className={robotoMono.className}
-          >
-            <Text>${formatValue(value)}</Text>
-          </Flex>
-        )
-      },
+      cell: (info) => (
+        <Flex align='center'>
+          <Progress
+            variant='table'
+            colorScheme='brandScheme'
+            h='8px'
+            w='108px'
+            value={info.getValue()}
+          />
+        </Flex>
+      ),
     }),
   ]
+  const [data, setData] = React.useState(() => [...defaultData])
   const table = useReactTable({
-    data: tableData ?? [],
+    data,
     columns,
     state: {
       sorting,
@@ -161,6 +119,7 @@ const DropClaimersTable = ({
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   })
+
   return (
     <Flex
       direction='column'
@@ -172,14 +131,17 @@ const DropClaimersTable = ({
         justify='space-between'
         w='100%'
         px='22px'
-        pb='10px'
+        pb='20px'
+        mb='10px'
+        boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'
       >
-        <Text fontSize='xl' fontWeight='600'>
-          {title}
+        <Text color={textColor} fontSize='xl' fontWeight='600'>
+          Top Creators
         </Text>
+        <Button variant='action'>See all</Button>
       </Flex>
       <TableContainer>
-        <Table variant='simple'>
+        <Table variant='simple' color='gray.500' mt='12px'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -187,12 +149,10 @@ const DropClaimersTable = ({
                   return (
                     <Th
                       key={header.id}
-                      fontWeight='normal'
                       colSpan={header.colSpan}
-                      // pe='10px'
-                      border='none'
+                      pe='10px'
+                      borderColor={borderColor}
                       cursor='pointer'
-                      textTransform='none'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <Flex
@@ -219,7 +179,7 @@ const DropClaimersTable = ({
           <Tbody>
             {table
               .getRowModel()
-              .rows.slice()
+              .rows.slice(0, 11)
               .map((row) => {
                 return (
                   <Tr key={row.id}>
@@ -247,5 +207,3 @@ const DropClaimersTable = ({
     </Flex>
   )
 }
-
-export default DropClaimersTable

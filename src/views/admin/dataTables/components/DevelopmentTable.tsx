@@ -1,14 +1,7 @@
-import React from 'react'
 import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from '@tanstack/react-table'
-import {
+  Box,
   Flex,
+  Progress,
   Table,
   TableContainer,
   Tbody,
@@ -19,183 +12,147 @@ import {
   Tr,
   useColorModeValue,
 } from '@chakra-ui/react'
-import Card from '../card/Card'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table'
+// Custom components
+import Card from 'components/card/Card'
+import Menu from 'components/menu/MainMenu'
+import { AndroidLogo, AppleLogo, WindowsLogo } from 'components/icons/Icons'
+import * as React from 'react'
+// Assets
 
 type RowObj = {
-  pageName: string
-  visitors: number
-  uniqueVisitors: number
-  clients: number
-  bounceRate: number
+  name: string
+  tech: any
+  date: string
+  progress: number
 }
 
 const columnHelper = createColumnHelper<RowObj>()
 
-const TABLE_DATA: RowObj[] = [
-  {
-    pageName: 'Home',
-    visitors: 1000,
-    uniqueVisitors: 800,
-    clients: 100,
-    bounceRate: -50,
-  },
-  {
-    pageName: 'About',
-    visitors: 2000,
-    uniqueVisitors: 1500,
-    clients: 200,
-    bounceRate: 30,
-  },
-  {
-    pageName: 'Services',
-    visitors: 3000,
-    uniqueVisitors: 2500,
-    clients: 300,
-    bounceRate: -20,
-  },
-  {
-    pageName: 'Contact',
-    visitors: 4000,
-    uniqueVisitors: 3500,
-    clients: 400,
-    bounceRate: 10,
-  },
-  {
-    pageName: 'About',
-    visitors: 2000,
-    uniqueVisitors: 1500,
-    clients: 200,
-    bounceRate: -30,
-  },
-  {
-    pageName: 'Services',
-    visitors: 3000,
-    uniqueVisitors: 2500,
-    clients: 300,
-    bounceRate: 20,
-  },
-  {
-    pageName: 'Contact',
-    visitors: 4000,
-    uniqueVisitors: 3500,
-    clients: 400,
-    bounceRate: -10,
-  },
-]
-
-const StakingStatsTable = () => {
+// const columns = columnsDataCheck;
+export default function ComplexTable(props: { tableData: any }) {
+  const { tableData } = props
   const [sorting, setSorting] = React.useState<SortingState>([])
+  const textColor = useColorModeValue('secondaryGray.900', 'white')
+  const iconColor = useColorModeValue('secondaryGray.500', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
-  let defaultData = TABLE_DATA
+  let defaultData = tableData
   const columns = [
-    columnHelper.accessor('pageName', {
-      id: 'pageName',
+    columnHelper.accessor('name', {
+      id: 'name',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
-          textTransform='uppercase'
         >
-          Page Name
+          NAME
         </Text>
       ),
       cell: (info: any) => (
         <Flex align='center'>
-          <Text fontSize='sm' fontWeight='700'>
+          <Text color={textColor} fontSize='sm' fontWeight='700'>
             {info.getValue()}
           </Text>
         </Flex>
       ),
     }),
-    columnHelper.accessor('visitors', {
-      id: 'visitors',
+    columnHelper.accessor('tech', {
+      id: 'tech',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
-          textTransform={'uppercase'}
         >
-          Visitors
-        </Text>
-      ),
-      cell: (info) => (
-        <Text fontSize='sm' fontWeight='700'>
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor('uniqueVisitors', {
-      id: 'uniqueVisitors',
-      header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'
-          textTransform={'uppercase'}
-        >
-          Unique Visitors
-        </Text>
-      ),
-      cell: (info) => (
-        <Text fontSize='sm' fontWeight='700'>
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor('clients', {
-      id: 'clients',
-      header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'
-          textTransform={'uppercase'}
-        >
-          Clients
+          STATUS
         </Text>
       ),
       cell: (info) => (
         <Flex align='center'>
-          <Text fontSize='sm' fontWeight='700'>
-            {info.getValue()}
-          </Text>
+          {info.getValue().map((item: string, key: number) => {
+            if (item === 'apple') {
+              return (
+                <AppleLogo
+                  key={key}
+                  color={iconColor}
+                  me='16px'
+                  h='18px'
+                  w='15px'
+                />
+              )
+            } else if (item === 'android') {
+              return (
+                <AndroidLogo
+                  key={key}
+                  color={iconColor}
+                  me='16px'
+                  h='18px'
+                  w='16px'
+                />
+              )
+            } else if (item === 'windows') {
+              return (
+                <WindowsLogo key={key} color={iconColor} h='18px' w='19px' />
+              )
+            }
+          })}
         </Flex>
       ),
     }),
-    columnHelper.accessor('bounceRate', {
-      id: 'bounceRate',
+    columnHelper.accessor('date', {
+      id: 'date',
       header: () => (
         <Text
           justifyContent='space-between'
           align='center'
           fontSize={{ sm: '10px', lg: '12px' }}
           color='gray.400'
-          textTransform={'uppercase'}
         >
-          Bounce Rate
+          DATE
         </Text>
       ),
-      cell: (info) => {
-        const isNegative = info.getValue() < 0
-        return (
-          <Flex align='center'>
-            <Text
-              fontSize='sm'
-              fontWeight='700'
-              color={isNegative ? 'red.500' : 'green.500'}
-            >
-              {isNegative ? '' : '+'}
-              {info.getValue()}%
-            </Text>
-          </Flex>
-        )
-      },
+      cell: (info) => (
+        <Text color={textColor} fontSize='sm' fontWeight='700'>
+          {info.getValue()}
+        </Text>
+      ),
+    }),
+    columnHelper.accessor('progress', {
+      id: 'progress',
+      header: () => (
+        <Text
+          justifyContent='space-between'
+          align='center'
+          fontSize={{ sm: '10px', lg: '12px' }}
+          color='gray.400'
+        >
+          PROGRESS
+        </Text>
+      ),
+      cell: (info) => (
+        <Flex align='center'>
+          <Text me='10px' color={textColor} fontSize='sm' fontWeight='700'>
+            {info.getValue()}%
+          </Text>
+          <Progress
+            variant='table'
+            colorScheme='brandScheme'
+            h='8px'
+            w='63px'
+            value={info.getValue()}
+          />
+        </Flex>
+      ),
     }),
   ]
   const [data, setData] = React.useState(() => [...defaultData])
@@ -213,16 +170,23 @@ const StakingStatsTable = () => {
   return (
     <Card
       flexDirection='column'
+      w='100%'
       px='0px'
       overflowX={{ sm: 'scroll', lg: 'hidden' }}
     >
       <Flex px='25px' mb='8px' justifyContent='space-between' align='center'>
-        <Text fontSize='22px' fontWeight='700' lineHeight='100%'>
-          Atom staking stats
+        <Text
+          color={textColor}
+          fontSize='22px'
+          fontWeight='700'
+          lineHeight='100%'
+        >
+          Complex Table
         </Text>
+        <Menu />
       </Flex>
       <TableContainer>
-        <Table variant='simple' mb='24px' mt='12px'>
+        <Table variant='simple' color='gray.500' mb='24px' mt='12px'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -260,7 +224,7 @@ const StakingStatsTable = () => {
           <Tbody>
             {table
               .getRowModel()
-              .rows.slice(0, 6)
+              .rows.slice(0, 11)
               .map((row) => {
                 return (
                   <Tr key={row.id}>
@@ -288,5 +252,3 @@ const StakingStatsTable = () => {
     </Card>
   )
 }
-
-export default StakingStatsTable

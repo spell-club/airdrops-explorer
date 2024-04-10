@@ -1,11 +1,13 @@
 import Script from 'next/script'
 import React from 'react'
 
-export default function RootHead() {
+export default function Head() {
   return (
     <>
       <link rel='apple-touch-icon' href='/logo192.png' />
+
       <link rel='manifest' href='/manifest.json' />
+
       <link
         rel='shortcut icon'
         type='image/x-icon'
@@ -15,23 +17,24 @@ export default function RootHead() {
       <title>SpellDrop | Explore Cosmos Airdrops</title>
 
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+
       <meta name='theme-color' content='#000000' />
 
-      {/* GOOGLE ANALYTICS */}
       <Script
         async
-        strategy='afterInteractive'
-        src='https://www.googletagmanager.com/gtag/js?id=GTM-P5TJLMZL'
+        strategy='lazyOnload'
+        src='https://www.googletagmanager.com/gtag/js?id=G-94FJ9Y76DL'
       />
 
-      <Script
-        async
-        id='google-analytics'
-        strategy='afterInteractive'
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'GTM-P5TJLMZL');`,
-        }}
-      />
+      <Script id='google-analytics' strategy='lazyOnload'>
+        {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-94FJ9Y76DL');
+          `}
+      </Script>
     </>
   )
 }
