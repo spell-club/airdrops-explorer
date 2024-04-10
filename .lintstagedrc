@@ -1,4 +1,7 @@
 {
-	"*.{js, jsx,ts,tsx}": ["eslint --quiet --fix"],
+	"*.{js, jsx,ts,tsx}": ["lint"],
+
+	"**/*.(ts|tsx)": ["tsc --noEmit"],
+
 	"*.{json,js,ts,jsx,tsx,html}": ["prettier --write --ignore-unknown"]
 }
