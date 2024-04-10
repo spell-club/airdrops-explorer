@@ -13,11 +13,11 @@ import 'styles/MiniCalendar.css'
 const queryClient = new QueryClient()
 
 export default function AppWrappers({ children }: { children: ReactNode }) {
-  return (
-    <CacheProvider>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </QueryClientProvider>
-    </CacheProvider>
-  )
+	return (
+		<CacheProvider>
+			<QueryClientProvider client={queryClient}>
+				<ChakraProvider theme={theme}>{children}</ChakraProvider>
+			</QueryClientProvider>
+		</CacheProvider>
+	)
 }
