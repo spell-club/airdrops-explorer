@@ -5,18 +5,20 @@ interface Props {
 	icon: string
 }
 
-const IconWithBg = chakra(({ className, icon }: Props) => (
-	<Flex
-		p={0.5}
-		className={className}
-		justify="center"
-		align="center"
-		borderRadius="50%"
-		bg="black"
-		zIndex="1"
-	>
-		<Image borderRadius="50%" w="100%" src={icon} />
-	</Flex>
-))
+const IconWithBg = chakra(({ className, icon }: Props) => {
+	return (
+		<Flex
+			p={0.5}
+			className={className}
+			justify="center"
+			align="center"
+			borderRadius="50%"
+			bg="black"
+			zIndex="1"
+		>
+			<Image borderRadius="50%" w="100%" src={icon} alt="icon" />
+		</Flex>
+	)
+})
 
 export default IconWithBg
