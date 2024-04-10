@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const progressStyles = {
 	components: {
 		Progress: {
@@ -40,4 +40,4 @@ export const progressStyles = {
 			},
 		},
 	},
-};
+}

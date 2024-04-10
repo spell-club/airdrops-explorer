@@ -1,48 +1,48 @@
-import React, { useMemo, useState } from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
-import Card from '../card/Card';
-import LineChart from '../charts/LineChart';
-import useClientApi from '../../hooks/useClientApi';
-import { useQuery } from '@tanstack/react-query';
-import { roundToPrecision } from '../../utils';
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig';
-import SelectTimelineMenu from '../SelectTimelineMenu';
-import useAirdropsDates from '../../hooks/useAirdropsDates';
+import React, { useMemo, useState } from 'react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import Card from '../card/Card'
+import LineChart from '../charts/LineChart'
+import useClientApi from '../../hooks/useClientApi'
+import { useQuery } from '@tanstack/react-query'
+import { roundToPrecision } from '../../utils'
+import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import SelectTimelineMenu from '../SelectTimelineMenu'
+import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 interface Props {
-	address: string;
+	address: string
 }
 
 const ClaimedUnclaimedChart = ({ address }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig();
-	const { clientApi } = useClientApi();
+	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { clientApi } = useClientApi()
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['claimHistory'],
 		queryFn: () => clientApi.getClaimHistoricalValue(address),
-	});
+	})
 
-	const [selectedTime, setSelectedTime] = useState(timeCategories[0]);
-	const { airdropsLabelsForChart } = useAirdropsDates();
+	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
+	const { airdropsLabelsForChart } = useAirdropsDates()
 
 	const dataByTime = useMemo(() => {
-		if (!chartData) return [];
+		if (!chartData) return []
 
-		return chartData.slice(-selectedTime.value);
-	}, [chartData, selectedTime]);
+		return chartData.slice(-selectedTime.value)
+	}, [chartData, selectedTime])
 
 	const { claimedArray, unclaimedArray } = useMemo(() => {
-		const claimedArray: number[] = [];
-		const unclaimedArray: number[] = [];
+		const claimedArray: number[] = []
+		const unclaimedArray: number[] = []
 
 		dataByTime.forEach((data) => {
-			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }));
-			unclaimedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }));
-		});
+			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }))
+			unclaimedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }))
+		})
 
-		return { claimedArray, unclaimedArray };
-	}, [dataByTime]);
+		return { claimedArray, unclaimedArray }
+	}, [dataByTime])
 
-	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString());
+	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString())
 
 	return (
 		<Card justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
@@ -89,7 +89,7 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 				</Box>
 			</Flex>
 		</Card>
-	);
-};
+	)
+}
 
-export default ClaimedUnclaimedChart;
+export default ClaimedUnclaimedChart

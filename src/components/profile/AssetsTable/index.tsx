@@ -1,31 +1,31 @@
-import React from 'react';
+import React from 'react'
 import {
 	flexRender,
 	getCoreRowModel,
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
-import { Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
-import Card from '../../card/Card';
-import useAirdropsTable from './useAirdropsTable';
-import useClientApi from 'hooks/useClientApi';
-import { useQuery } from '@tanstack/react-query';
+} from '@tanstack/react-table'
+import { Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import Card from '../../card/Card'
+import useAirdropsTable from './useAirdropsTable'
+import useClientApi from 'hooks/useClientApi'
+import { useQuery } from '@tanstack/react-query'
 
 interface Props {
-	address: string;
+	address: string
 }
 const AirdropsTable = ({ address }: Props) => {
-	const { columns } = useAirdropsTable();
-	const { clientApi } = useClientApi();
+	const { columns } = useAirdropsTable()
+	const { clientApi } = useClientApi()
 
 	const { data: airdrops, isLoading: isAssetsLoading } = useQuery({
 		queryKey: ['addressAirdrops', address],
 		queryFn: () => clientApi.getAddressAirdrops(address),
 		retry: 1,
-	});
+	})
 
-	const [sorting, setSorting] = React.useState<SortingState>([]);
+	const [sorting, setSorting] = React.useState<SortingState>([])
 
 	const table = useReactTable({
 		data: airdrops ?? [],
@@ -37,9 +37,9 @@ const AirdropsTable = ({ address }: Props) => {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 
-	if (!airdrops && !isAssetsLoading) return null;
+	if (!airdrops && !isAssetsLoading) return null
 
 	return (
 		<Card flexDirection="column" w="100%" px="0px" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -84,7 +84,7 @@ const AirdropsTable = ({ address }: Props) => {
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -107,16 +107,16 @@ const AirdropsTable = ({ address }: Props) => {
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Card>
-	);
-};
+	)
+}
 
-export default AirdropsTable;
+export default AirdropsTable

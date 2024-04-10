@@ -1,18 +1,18 @@
 // Chakra imports
-import { Flex, FormLabel, Input, SpaceProps, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, FormLabel, Input, SpaceProps, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 
 export default function Default(props: {
-	id: string;
-	label: string;
-	extra: JSX.Element;
-	placeholder: string;
-	type: string;
-	mb: SpaceProps['mb'];
+	id: string
+	label: string
+	extra: JSX.Element
+	placeholder: string
+	type: string
+	mb: SpaceProps['mb']
 }) {
-	const { id, label, extra, placeholder, type, mb, ...rest } = props;
+	const { id, label, extra, placeholder, type, mb, ...rest } = props
 	// Chakra Color Mode
-	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
+	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
 
 	return (
 		<Flex direction="column" mb={mb ? mb : '30px'}>
@@ -42,5 +42,5 @@ export default function Default(props: {
 				maxH="44px"
 			/>
 		</Flex>
-	);
+	)
 }

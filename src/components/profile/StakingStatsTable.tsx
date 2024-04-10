@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
 	createColumnHelper,
 	flexRender,
@@ -6,7 +6,7 @@ import {
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
+} from '@tanstack/react-table'
 import {
 	Flex,
 	Table,
@@ -18,18 +18,18 @@ import {
 	Thead,
 	Tr,
 	useColorModeValue,
-} from '@chakra-ui/react';
-import Card from '../card/Card';
+} from '@chakra-ui/react'
+import Card from '../card/Card'
 
 type RowObj = {
-	pageName: string;
-	visitors: number;
-	uniqueVisitors: number;
-	clients: number;
-	bounceRate: number;
-};
+	pageName: string
+	visitors: number
+	uniqueVisitors: number
+	clients: number
+	bounceRate: number
+}
 
-const columnHelper = createColumnHelper<RowObj>();
+const columnHelper = createColumnHelper<RowObj>()
 
 const TABLE_DATA: RowObj[] = [
 	{
@@ -81,12 +81,12 @@ const TABLE_DATA: RowObj[] = [
 		clients: 400,
 		bounceRate: -10,
 	},
-];
+]
 
 const StakingStatsTable = () => {
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-	let defaultData = TABLE_DATA;
+	const [sorting, setSorting] = React.useState<SortingState>([])
+	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
+	let defaultData = TABLE_DATA
 	const columns = [
 		columnHelper.accessor('pageName', {
 			id: 'pageName',
@@ -182,7 +182,7 @@ const StakingStatsTable = () => {
 				</Text>
 			),
 			cell: (info) => {
-				const isNegative = info.getValue() < 0;
+				const isNegative = info.getValue() < 0
 				return (
 					<Flex align="center">
 						<Text fontSize="sm" fontWeight="700" color={isNegative ? 'red.500' : 'green.500'}>
@@ -190,11 +190,11 @@ const StakingStatsTable = () => {
 							{info.getValue()}%
 						</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
-	];
-	const [data, setData] = React.useState(() => [...defaultData]);
+	]
+	const [data, setData] = React.useState(() => [...defaultData])
 	const table = useReactTable({
 		data,
 		columns,
@@ -205,7 +205,7 @@ const StakingStatsTable = () => {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 	return (
 		<Card flexDirection="column" px="0px" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px="25px" mb="8px" justifyContent="space-between" align="center">
@@ -242,7 +242,7 @@ const StakingStatsTable = () => {
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -264,16 +264,16 @@ const StakingStatsTable = () => {
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Card>
-	);
-};
+	)
+}
 
-export default StakingStatsTable;
+export default StakingStatsTable

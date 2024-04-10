@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const buttonStyles = {
 	components: {
 		Button: {
@@ -101,4 +101,4 @@ export const buttonStyles = {
 			},
 		},
 	},
-};
+}

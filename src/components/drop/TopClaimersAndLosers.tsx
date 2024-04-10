@@ -1,24 +1,24 @@
-import React from 'react';
-import { Flex } from '@chakra-ui/react';
-import Card from '../card/Card';
-import DropClaimersTable from './DropClaimersTable';
-import useClientApi from '../../hooks/useClientApi';
-import { useQuery } from '@tanstack/react-query';
+import React from 'react'
+import { Flex } from '@chakra-ui/react'
+import Card from '../card/Card'
+import DropClaimersTable from './DropClaimersTable'
+import useClientApi from '../../hooks/useClientApi'
+import { useQuery } from '@tanstack/react-query'
 
 interface Props {
-	dropId: string;
-	tokenSymbol: string;
+	dropId: string
+	tokenSymbol: string
 }
 
 const TopClaimersAndLosers = ({ dropId, tokenSymbol }: Props) => {
-	const { clientApi } = useClientApi();
+	const { clientApi } = useClientApi()
 	const { data: claimersData, isLoading } = useQuery({
 		queryKey: ['getTopDropClaimers'],
 		queryFn: () => clientApi.getAirdropTowWinnersAndLosers(dropId),
-	});
+	})
 
-	const isWinnersEmpty = !claimersData?.winners?.length && !isLoading;
-	const isLosersEmpty = !claimersData?.losers?.length && !isLoading;
+	const isWinnersEmpty = !claimersData?.winners?.length && !isLoading
+	const isLosersEmpty = !claimersData?.losers?.length && !isLoading
 
 	return (
 		<Flex gap="20px" mb="20px" flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
@@ -43,7 +43,7 @@ const TopClaimersAndLosers = ({ dropId, tokenSymbol }: Props) => {
 				</Card>
 			)}
 		</Flex>
-	);
-};
+	)
+}
 
-export default TopClaimersAndLosers;
+export default TopClaimersAndLosers

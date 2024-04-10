@@ -1,4 +1,4 @@
-import { mode, StyleConfig, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleConfig, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const badgeStyles: { components: { Badge: StyleConfig } } = {
 	components: {
 		Badge: {
@@ -28,4 +28,4 @@ export const badgeStyles: { components: { Badge: StyleConfig } } = {
 			},
 		},
 	},
-};
+}

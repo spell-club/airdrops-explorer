@@ -1,9 +1,9 @@
 type RowObj = {
-	name: string;
-	progress: string;
-	quantity: number;
-	date: string;
-};
+	name: string
+	progress: string
+	quantity: number
+	date: string
+}
 
 const tableDataColumns: RowObj[] = [
 	{
@@ -30,6 +30,6 @@ const tableDataColumns: RowObj[] = [
 		progress: '31.5%',
 		date: '24 Jan 2021',
 	},
-];
+]
 
-export default tableDataColumns;
+export default tableDataColumns

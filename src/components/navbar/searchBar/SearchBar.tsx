@@ -4,51 +4,51 @@ import {
 	InputGroup,
 	InputLeftElement,
 	useColorModeValue,
-} from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+} from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export function SearchBar(props: {
-	variant?: string;
-	background?: string;
-	children?: JSX.Element;
-	placeholder?: string;
-	borderRadius?: string | number;
-	onSearch?: (value: string) => void;
-	[x: string]: any;
+	variant?: string
+	background?: string
+	children?: JSX.Element
+	placeholder?: string
+	borderRadius?: string | number
+	onSearch?: (value: string) => void
+	[x: string]: any
 }) {
 	// Pass the computed styles into the `__css` prop
-	const { variant, background, children, placeholder, borderRadius, onSearch, ...rest } = props;
+	const { variant, background, children, placeholder, borderRadius, onSearch, ...rest } = props
 
-	const { push } = useRouter();
+	const { push } = useRouter()
 
 	// Chakra Color Mode
-	const searchIconColor = useColorModeValue('gray.700', 'white');
-	const inputBg = useColorModeValue('secondaryGray.300', 'navy.900');
-	const inputText = useColorModeValue('gray.700', 'gray.100');
+	const searchIconColor = useColorModeValue('gray.700', 'white')
+	const inputBg = useColorModeValue('secondaryGray.300', 'navy.900')
+	const inputText = useColorModeValue('gray.700', 'gray.100')
 
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState('')
 
 	const handleSearch = () => {
 		if (value) {
-			push(`/profile/${value}`);
+			push(`/profile/${value}`)
 		}
 
 		if (value) {
-			setValue('');
+			setValue('')
 		}
-	};
+	}
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter' && value) {
-			handleSearch();
+			handleSearch()
 
 			if (value) {
-				onSearch(value);
+				onSearch(value)
 			}
 		}
-	};
+	}
 
 	return (
 		<InputGroup w={{ base: '100%', md: '420px' }} {...rest}>
@@ -87,5 +87,5 @@ export function SearchBar(props: {
 				onKeyDown={handleKeyDown}
 			/>
 		</InputGroup>
-	);
+	)
 }

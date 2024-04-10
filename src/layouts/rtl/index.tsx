@@ -1,34 +1,34 @@
 // Chakra imports
-import { Portal, Box, useDisclosure } from '@chakra-ui/react';
-import Footer from 'components/footer/FooterAdmin';
+import { Portal, Box, useDisclosure } from '@chakra-ui/react'
+import Footer from 'components/footer/FooterAdmin'
 // Layout components
-import Navbar from 'components/navbar/NavbarRTL';
-import Sidebar from 'components/sidebar/Sidebar';
-import { RtlProvider } from 'components/rtlProvider/RtlProvider';
-import { SidebarContext } from 'contexts/SidebarContext';
-import { PropsWithChildren, useEffect, useState } from 'react';
-import routes from 'routes';
+import Navbar from 'components/navbar/NavbarRTL'
+import Sidebar from 'components/sidebar/Sidebar'
+import { RtlProvider } from 'components/rtlProvider/RtlProvider'
+import { SidebarContext } from 'contexts/SidebarContext'
+import { PropsWithChildren, useEffect, useState } from 'react'
+import routes from 'routes'
 import {
 	getActiveNavbar,
 	getActiveNavbarText,
 	getActiveRoute,
 	isWindowAvailable,
-} from 'utils/navigation';
+} from 'utils/navigation'
 
 interface RTLLayoutProps extends PropsWithChildren {}
 
 // Custom Chakra theme
 export default function RTLLayout(props: RTLLayoutProps) {
-	const { children, ...rest } = props;
-	const [fixed] = useState(false);
-	const [toggleSidebar, setToggleSidebar] = useState(false);
+	const { children, ...rest } = props
+	const [fixed] = useState(false)
+	const [toggleSidebar, setToggleSidebar] = useState(false)
 
 	useEffect(() => {
-		if (!isWindowAvailable()) return;
-		window.document.documentElement.dir = 'rtl';
-	});
+		if (!isWindowAvailable()) return
+		window.document.documentElement.dir = 'rtl'
+	})
 
-	const { onOpen } = useDisclosure();
+	const { onOpen } = useDisclosure()
 	return (
 		<RtlProvider>
 			<Box>
@@ -77,5 +77,5 @@ export default function RTLLayout(props: RTLLayoutProps) {
 				</SidebarContext.Provider>
 			</Box>
 		</RtlProvider>
-	);
+	)
 }

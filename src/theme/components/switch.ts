@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const switchStyles = {
 	components: {
 		Switch: {
@@ -33,4 +33,4 @@ export const switchStyles = {
 			},
 		},
 	},
-};
+}

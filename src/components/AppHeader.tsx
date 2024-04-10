@@ -1,16 +1,16 @@
-import React from 'react';
-import { Box, Container, Flex } from '@chakra-ui/react';
-import { SearchBar } from './navbar/searchBar/SearchBar';
-import Logo from './icons/Logo';
-import { captureGtag } from 'utils/analytics';
+import React from 'react'
+import { Box, Container, Flex } from '@chakra-ui/react'
+import { SearchBar } from './navbar/searchBar/SearchBar'
+import Logo from './icons/Logo'
+import { captureGtag } from 'utils/analytics'
 
 const AppHeader = () => {
 	const onSearch = (value: string) => {
 		captureGtag('wallet_search', {
 			event_category: 'Search',
 			event_label: value,
-		});
-	};
+		})
+	}
 
 	return (
 		<Box as="header" h="75px">
@@ -22,7 +22,7 @@ const AppHeader = () => {
 				</Flex>
 			</Container>
 		</Box>
-	);
-};
+	)
+}
 
-export default AppHeader;
+export default AppHeader

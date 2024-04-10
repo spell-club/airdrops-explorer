@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { PropsWithChildren } from 'react';
-import { Box, CircularProgress, Flex } from '@chakra-ui/react';
+import { PropsWithChildren } from 'react'
+import { Box, CircularProgress, Flex } from '@chakra-ui/react'
 
 interface Props extends PropsWithChildren {
-	value: number;
-	color?: string;
+	value: number
+	color?: string
 }
 
 const CircularChart = ({ children, value, color = 'purple.100' }: Props) => {
@@ -23,8 +23,8 @@ const CircularChart = ({ children, value, color = 'purple.100' }: Props) => {
 				{children}
 			</Flex>
 		</Box>
-	);
-};
+	)
+}
 
 // @ts-ignore
-export default CircularChart;
+export default CircularChart

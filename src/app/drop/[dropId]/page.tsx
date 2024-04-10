@@ -1,31 +1,31 @@
-'use client';
-import React from 'react';
-import { Box, Center, Flex, Spinner } from '@chakra-ui/react';
-import Banner from 'components/drop/Banner';
-import banner from 'img/auth/banner.png';
-import General from 'components/drop/General';
-import DropConversionChartCard from 'components/drop/DropConversionChartCard';
-import DropDynamicChart from 'components/drop/DropDynamicChart';
-import { useQuery } from '@tanstack/react-query';
-import useClientApi from 'hooks/useClientApi';
-import { AIRDROPS_IMAGES } from 'constants/index';
-import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers';
-import { formatValue } from 'utils';
+'use client'
+import React from 'react'
+import { Box, Center, Flex, Spinner } from '@chakra-ui/react'
+import Banner from 'components/drop/Banner'
+import banner from 'img/auth/banner.png'
+import General from 'components/drop/General'
+import DropConversionChartCard from 'components/drop/DropConversionChartCard'
+import DropDynamicChart from 'components/drop/DropDynamicChart'
+import { useQuery } from '@tanstack/react-query'
+import useClientApi from 'hooks/useClientApi'
+import { AIRDROPS_IMAGES } from 'constants/index'
+import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
+import { formatValue } from 'utils'
 
 const Page = ({ params }: { params: { dropId: string } }) => {
-	const { dropId } = params;
-	const { clientApi } = useClientApi();
+	const { dropId } = params
+	const { clientApi } = useClientApi()
 	const { data: airdropProject, isLoading: isAirdropProjectLoading } = useQuery({
 		queryKey: ['drop', dropId],
 		queryFn: () => clientApi.getAirdropProject(dropId),
-	});
+	})
 
 	if (isAirdropProjectLoading) {
 		return (
 			<Center my={50}>
 				<Spinner />
 			</Center>
-		);
+		)
 	}
 
 	return (
@@ -48,7 +48,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 
 			<General description={airdropProject?.description} />
 		</Box>
-	);
-};
+	)
+}
 
-export default Page;
+export default Page

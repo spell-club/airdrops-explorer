@@ -1,25 +1,25 @@
-import React, { useMemo } from 'react';
-import Card from '../card/Card';
-import { Flex, Text } from '@chakra-ui/react';
-import CircularChart from '../charts/DonutChart';
-import { VSeparator } from '../separator/Separator';
-import { formatValue, roundToPrecision } from '../../utils';
+import React, { useMemo } from 'react'
+import Card from '../card/Card'
+import { Flex, Text } from '@chakra-ui/react'
+import CircularChart from '../charts/DonutChart'
+import { VSeparator } from '../separator/Separator'
+import { formatValue, roundToPrecision } from '../../utils'
 
 interface Props {
-	totalAllocatedUsd: number;
-	totalClaimedUsd: number;
+	totalAllocatedUsd: number
+	totalClaimedUsd: number
 }
 
 const ProfitEstimationChart = ({ totalAllocatedUsd, totalClaimedUsd }: Props) => {
 	const conversion = useMemo(() => {
-		if (totalAllocatedUsd === 0) return 0;
+		if (totalAllocatedUsd === 0) return 0
 
 		return roundToPrecision({
 			value: (totalClaimedUsd / totalAllocatedUsd) * 100,
 			precision: 2,
 			method: 'round',
-		});
-	}, [totalAllocatedUsd, totalClaimedUsd]);
+		})
+	}, [totalAllocatedUsd, totalClaimedUsd])
 
 	return (
 		<Card p="10px" alignItems="center" flexDirection="column" w="100%" bg="navy.800">
@@ -82,7 +82,7 @@ const ProfitEstimationChart = ({ totalAllocatedUsd, totalClaimedUsd }: Props) =>
 				</Flex>
 			</Flex>
 		</Card>
-	);
-};
+	)
+}
 
-export default ProfitEstimationChart;
+export default ProfitEstimationChart

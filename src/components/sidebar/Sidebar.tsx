@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // chakra imports
 import {
@@ -12,32 +12,32 @@ import {
 	useDisclosure,
 	DrawerContent,
 	DrawerCloseButton,
-} from '@chakra-ui/react';
-import Content from 'components/sidebar/components/Content';
-import { renderThumb, renderTrack, renderView } from 'components/scrollbar/Scrollbar';
-import { Scrollbars } from 'react-custom-scrollbars-2';
+} from '@chakra-ui/react'
+import Content from 'components/sidebar/components/Content'
+import { renderThumb, renderTrack, renderView } from 'components/scrollbar/Scrollbar'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 
 // Assets
-import { IoMenuOutline } from 'react-icons/io5';
-import { IRoute } from 'types/navigation';
-import { isWindowAvailable } from 'utils/navigation';
+import { IoMenuOutline } from 'react-icons/io5'
+import { IRoute } from 'types/navigation'
+import { isWindowAvailable } from 'utils/navigation'
 
 interface SidebarResponsiveProps {
-	routes: IRoute[];
+	routes: IRoute[]
 }
 
 interface SidebarProps extends SidebarResponsiveProps {
-	[x: string]: any;
+	[x: string]: any
 }
 
 function Sidebar(props: SidebarProps) {
-	const { routes } = props;
+	const { routes } = props
 
-	let variantChange = '0.2s linear';
-	let shadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
+	let variantChange = '0.2s linear'
+	let shadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset')
 	// Chakra Color Mode
-	let sidebarBg = useColorModeValue('white', 'navy.800');
-	let sidebarMargins = '0px';
+	let sidebarBg = useColorModeValue('white', 'navy.800')
+	let sidebarMargins = '0px'
 
 	// SIDEBAR
 	return (
@@ -62,19 +62,19 @@ function Sidebar(props: SidebarProps) {
 				</Scrollbars>
 			</Box>
 		</Box>
-	);
+	)
 }
 
 // FUNCTIONS
 
 export function SidebarResponsive(props: SidebarResponsiveProps) {
-	let sidebarBackgroundColor = useColorModeValue('white', 'navy.800');
-	let menuColor = useColorModeValue('gray.400', 'white');
+	let sidebarBackgroundColor = useColorModeValue('white', 'navy.800')
+	let menuColor = useColorModeValue('gray.400', 'white')
 	// // SIDEBAR
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const btnRef = React.useRef();
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const btnRef = React.useRef()
 
-	const { routes } = props;
+	const { routes } = props
 	// let isWindows = navigator.platform.startsWith("Win");
 	//  BRAND
 
@@ -120,8 +120,8 @@ export function SidebarResponsive(props: SidebarResponsiveProps) {
 				</DrawerContent>
 			</Drawer>
 		</Flex>
-	);
+	)
 }
 // PROPS
 
-export default Sidebar;
+export default Sidebar

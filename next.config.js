@@ -9,7 +9,7 @@ const nextConfig = {
 		// Make ENV
 		unoptimized: true,
 	},
-};
+}
 
 // module.exports = withTM(nextConfig);
-module.exports = nextConfig;
+module.exports = nextConfig

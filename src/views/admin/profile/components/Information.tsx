@@ -1,18 +1,18 @@
 // Chakra imports
-import { Box, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
+import Card from 'components/card/Card'
 
 export default function Information(props: {
-	title: string;
-	value: number | string;
-	[x: string]: any;
+	title: string
+	value: number | string
+	[x: string]: any
 }) {
-	const { title, value, ...rest } = props;
+	const { title, value, ...rest } = props
 	// Chakra Color Mode
-	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
-	const textColorSecondary = 'gray.400';
-	const bg = useColorModeValue('white', 'navy.700');
+	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
+	const textColorSecondary = 'gray.400'
+	const bg = useColorModeValue('white', 'navy.700')
 	return (
 		<Card bg={bg} {...rest}>
 			<Box>
@@ -24,5 +24,5 @@ export default function Information(props: {
 				</Text>
 			</Box>
 		</Card>
-	);
+	)
 }

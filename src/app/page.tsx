@@ -1,19 +1,19 @@
-'use client';
-import { Flex, Grid } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import DropsList from '../components/main/DropsList';
-import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart';
-import MiniStatisticsGrid from '../components/main/MiniStatisticsGrid';
-import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers';
+'use client'
+import { Flex, Grid } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import DropsList from '../components/main/DropsList'
+import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
+import MiniStatisticsGrid from '../components/main/MiniStatisticsGrid'
+import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 
 export default function Home({}) {
 	useEffect(() => {
-		const localStorageTheme = localStorage.getItem('chakra-ui-color-mode');
-		console.log(localStorageTheme);
+		const localStorageTheme = localStorage.getItem('chakra-ui-color-mode')
+		console.log(localStorageTheme)
 		if (localStorageTheme === 'light') {
-			localStorage.setItem('chakra-ui-color-mode', 'dark');
+			localStorage.setItem('chakra-ui-color-mode', 'dark')
 		}
-	}, []);
+	}, [])
 
 	return (
 		<Grid
@@ -34,5 +34,5 @@ export default function Home({}) {
 
 			<TopClaimersAndLosers />
 		</Grid>
-	);
+	)
 }

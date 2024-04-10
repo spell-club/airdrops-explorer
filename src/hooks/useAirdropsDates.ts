@@ -1,12 +1,12 @@
-import useAirdrops from './useAirdrops';
+import useAirdrops from './useAirdrops'
 
 const useAirdropsDates = () => {
-	const { airdrops, isAirdropsLoading } = useAirdrops();
+	const { airdrops, isAirdropsLoading } = useAirdrops()
 
 	const airdropsDates = airdrops?.map((airdrop) => ({
 		date: new Date(airdrop.airdrop_timestamp).toLocaleDateString(),
 		name: airdrop.name,
-	}));
+	}))
 
 	const airdropsLabelsForChart = airdropsDates?.map(({ date, name }) => ({
 		x: date,
@@ -24,9 +24,9 @@ const useAirdropsDates = () => {
 			},
 			text: name,
 		},
-	}));
+	}))
 
-	return { airdropsLabelsForChart };
-};
+	return { airdropsLabelsForChart }
+}
 
-export default useAirdropsDates;
+export default useAirdropsDates

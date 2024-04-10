@@ -3,6 +3,6 @@ const sizes = {
 		xl: '1600px',
 		md: '1044px',
 	},
-};
+}
 
-export default sizes;
+export default sizes

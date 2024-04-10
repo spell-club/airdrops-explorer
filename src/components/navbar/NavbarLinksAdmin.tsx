@@ -1,4 +1,4 @@
-'use client';
+'use client'
 // Chakra Imports
 import {
 	Box,
@@ -15,47 +15,47 @@ import {
 	Text,
 	useColorMode,
 	useColorModeValue,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 // Custom Components
-import { ItemContent } from 'components/menu/ItemContent';
-import { SearchBar } from 'components/navbar/searchBar/SearchBar';
-import { SidebarResponsive } from 'components/sidebar/Sidebar';
+import { ItemContent } from 'components/menu/ItemContent'
+import { SearchBar } from 'components/navbar/searchBar/SearchBar'
+import { SidebarResponsive } from 'components/sidebar/Sidebar'
 // Assets
-import navImage from '/public/img/layout/Navbar.png';
-import { FaEthereum } from 'react-icons/fa';
-import { IoMdMoon, IoMdSunny } from 'react-icons/io';
-import { MdInfoOutline, MdNotificationsNone } from 'react-icons/md';
-import routes from 'routes';
-import { captureGtag } from 'utils/analytics';
+import navImage from '/public/img/layout/Navbar.png'
+import { FaEthereum } from 'react-icons/fa'
+import { IoMdMoon, IoMdSunny } from 'react-icons/io'
+import { MdInfoOutline, MdNotificationsNone } from 'react-icons/md'
+import routes from 'routes'
+import { captureGtag } from 'utils/analytics'
 
 export default function NavbarLinksAdmin(props: {
-	secondary: boolean;
-	onOpen: boolean | any;
-	fixed: boolean | any;
+	secondary: boolean
+	onOpen: boolean | any
+	fixed: boolean | any
 }) {
-	const { secondary } = props;
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { secondary } = props
+	const { colorMode, toggleColorMode } = useColorMode()
 	// Chakra Color Mode
-	const navbarIcon = useColorModeValue('gray.400', 'white');
-	let menuBg = useColorModeValue('white', 'navy.800');
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
-	const textColorBrand = useColorModeValue('brand.700', 'brand.400');
-	const ethColor = useColorModeValue('gray.700', 'white');
-	const borderColor = useColorModeValue('#E6ECFA', 'rgba(135, 140, 189, 0.3)');
-	const ethBg = useColorModeValue('secondaryGray.300', 'navy.900');
-	const ethBox = useColorModeValue('white', 'navy.800');
+	const navbarIcon = useColorModeValue('gray.400', 'white')
+	let menuBg = useColorModeValue('white', 'navy.800')
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
+	const textColorBrand = useColorModeValue('brand.700', 'brand.400')
+	const ethColor = useColorModeValue('gray.700', 'white')
+	const borderColor = useColorModeValue('#E6ECFA', 'rgba(135, 140, 189, 0.3)')
+	const ethBg = useColorModeValue('secondaryGray.300', 'navy.900')
+	const ethBox = useColorModeValue('white', 'navy.800')
 	const shadow = useColorModeValue(
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)',
-	);
-	const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200');
+	)
+	const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200')
 
 	const onSearch = (value: string) => {
 		captureGtag('wallet_search', {
 			event_category: 'Search',
 			event_label: value,
-		});
-	};
+		})
+	}
 
 	return (
 		<Flex
@@ -71,9 +71,9 @@ export default function NavbarLinksAdmin(props: {
 			<SearchBar
 				mb={() => {
 					if (secondary) {
-						return { base: '10px', md: 'unset' };
+						return { base: '10px', md: 'unset' }
 					}
-					return 'unset';
+					return 'unset'
 				}}
 				me="10px"
 				borderRadius="30px"
@@ -274,5 +274,5 @@ export default function NavbarLinksAdmin(props: {
 				</MenuList>
 			</Menu>
 		</Flex>
-	);
+	)
 }

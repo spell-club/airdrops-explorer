@@ -1,5 +1,5 @@
-import { AxiosInstance } from 'axios';
-import { GetTopWinnersAndLosersResponse, TopParticipant } from '../types';
+import { AxiosInstance } from 'axios'
+import { GetTopWinnersAndLosersResponse, TopParticipant } from '../types'
 
 const getTopWinnersAndLosersRequest = async (
 	apiClient: AxiosInstance,
@@ -8,8 +8,8 @@ const getTopWinnersAndLosersRequest = async (
 		apiClient
 			.get('/airdrop/projects/top_winners_losers')
 			.then((response) => resolve(response.data))
-			.catch((error) => reject(error));
-	});
-};
+			.catch((error) => reject(error))
+	})
+}
 
-export default getTopWinnersAndLosersRequest;
+export default getTopWinnersAndLosersRequest

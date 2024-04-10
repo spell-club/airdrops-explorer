@@ -1,5 +1,5 @@
-import { Icon } from '@chakra-ui/react';
-import { MdBarChart, MdPerson, MdHome, MdLock, MdOutlineShoppingCart } from 'react-icons/md';
+import { Icon } from '@chakra-ui/react'
+import { MdBarChart, MdPerson, MdHome, MdLock, MdOutlineShoppingCart } from 'react-icons/md'
 
 // Admin Imports
 // import MainDashboard from './pages/admin/default';
@@ -10,7 +10,7 @@ import { MdBarChart, MdPerson, MdHome, MdLock, MdOutlineShoppingCart } from 'rea
 
 // Auth Imports
 // import SignInCentered from './pages/auth/sign-in';
-import { IRoute } from 'types/navigation';
+import { IRoute } from 'types/navigation'
 
 const routes: IRoute[] = [
 	{
@@ -50,6 +50,6 @@ const routes: IRoute[] = [
 		path: '/rtl-default',
 		icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
 	},
-];
+]
 
-export default routes;
+export default routes

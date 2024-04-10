@@ -1,5 +1,5 @@
-import { AxiosInstance } from 'axios';
-import { ClaimHistoricalValue } from '../types';
+import { AxiosInstance } from 'axios'
+import { ClaimHistoricalValue } from '../types'
 
 const getClaimHistoricalValueRequest = async (
 	address: string,
@@ -9,12 +9,12 @@ const getClaimHistoricalValueRequest = async (
 		apiClient
 			.get(`/airdrop/address/${address}/historical_value`)
 			.then((response) => {
-				resolve(response.data);
+				resolve(response.data)
 			})
 			.catch((error) => {
-				reject(error);
-			});
-	});
-};
+				reject(error)
+			})
+	})
+}
 
-export default getClaimHistoricalValueRequest;
+export default getClaimHistoricalValueRequest

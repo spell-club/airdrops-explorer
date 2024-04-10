@@ -1,12 +1,12 @@
-import { createColumnHelper } from '@tanstack/react-table';
-import { AddressAirdrop } from 'api/types';
-import { Flex, Link, Text, useColorModeValue } from '@chakra-ui/react';
-import React from 'react';
-import { formatValue } from 'utils';
+import { createColumnHelper } from '@tanstack/react-table'
+import { AddressAirdrop } from 'api/types'
+import { Flex, Link, Text, useColorModeValue } from '@chakra-ui/react'
+import React from 'react'
+import { formatValue } from 'utils'
 
 const useAirdropsTable = () => {
-	const columnHelper = createColumnHelper<AddressAirdrop>();
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
+	const columnHelper = createColumnHelper<AddressAirdrop>()
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
 
 	const columns = [
 		columnHelper.accessor('name', {
@@ -41,8 +41,8 @@ const useAirdropsTable = () => {
 				</Text>
 			),
 			cell: (info) => {
-				const value = info.getValue();
-				const explorerLink = `https://www.mintscan.io/cosmos/address/${value}`;
+				const value = info.getValue()
+				const explorerLink = `https://www.mintscan.io/cosmos/address/${value}`
 
 				return (
 					<Link isExternal href={explorerLink} target="_blank" rel="noreferer noopener">
@@ -55,7 +55,7 @@ const useAirdropsTable = () => {
 							{value}
 						</Text>
 					</Link>
-				);
+				)
 			},
 		}),
 
@@ -91,7 +91,7 @@ const useAirdropsTable = () => {
 				</Text>
 			),
 			cell: (info) => {
-				const { allocated_amount_usd, allocated_amount, token_name } = info.row.original;
+				const { allocated_amount_usd, allocated_amount, token_name } = info.row.original
 				return (
 					<Flex align="center" gap={2}>
 						<Text color={textColor} fontSize="sm" fontWeight="700">
@@ -100,7 +100,7 @@ const useAirdropsTable = () => {
 
 						<Text>(${formatValue(allocated_amount_usd, 0, true)})</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
 		columnHelper.accessor('claimed_amount', {
@@ -116,7 +116,7 @@ const useAirdropsTable = () => {
 				</Text>
 			),
 			cell: (info) => {
-				const { claimed_amount_usd, claimed_amount, token_name } = info.row.original;
+				const { claimed_amount_usd, claimed_amount, token_name } = info.row.original
 
 				return (
 					<Flex align="center" gap={2}>
@@ -126,7 +126,7 @@ const useAirdropsTable = () => {
 
 						<Text>(${formatValue(claimed_amount_usd, 0, true)})</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
 
@@ -149,11 +149,11 @@ const useAirdropsTable = () => {
 					allocated_amount,
 					allocated_amount_usd,
 					token_name,
-				} = info.row.original;
+				} = info.row.original
 
-				const missed_amount = allocated_amount - claimed_amount;
-				const missed_amount_usd = allocated_amount_usd - claimed_amount_usd;
-				const isPositive = Number(missed_amount.toFixed()) > 0;
+				const missed_amount = allocated_amount - claimed_amount
+				const missed_amount_usd = allocated_amount_usd - claimed_amount_usd
+				const isPositive = Number(missed_amount.toFixed()) > 0
 
 				return (
 					<Flex align="center" gap={2} color={isPositive ? 'red.500' : 'inherit'}>
@@ -163,12 +163,12 @@ const useAirdropsTable = () => {
 
 						<Text>(${formatValue(missed_amount_usd, 0, true)})</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
-	];
+	]
 
-	return { columns };
-};
+	return { columns }
+}
 
-export default useAirdropsTable;
+export default useAirdropsTable

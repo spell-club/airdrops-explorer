@@ -10,7 +10,7 @@ import {
 	Thead,
 	Tr,
 	useColorModeValue,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 import {
 	createColumnHelper,
 	flexRender,
@@ -18,31 +18,31 @@ import {
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
+} from '@tanstack/react-table'
 // Custom components
-import Card from 'components/card/Card';
-import Menu from 'components/menu/MainMenu';
-import { AndroidLogo, AppleLogo, WindowsLogo } from 'components/icons/Icons';
-import * as React from 'react';
+import Card from 'components/card/Card'
+import Menu from 'components/menu/MainMenu'
+import { AndroidLogo, AppleLogo, WindowsLogo } from 'components/icons/Icons'
+import * as React from 'react'
 // Assets
 
 type RowObj = {
-	name: string;
-	tech: any;
-	date: string;
-	progress: number;
-};
+	name: string
+	tech: any
+	date: string
+	progress: number
+}
 
-const columnHelper = createColumnHelper<RowObj>();
+const columnHelper = createColumnHelper<RowObj>()
 
 // const columns = columnsDataCheck;
 export default function ComplexTable(props: { tableData: any }) {
-	const { tableData } = props;
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
-	const iconColor = useColorModeValue('secondaryGray.500', 'white');
-	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-	let defaultData = tableData;
+	const { tableData } = props
+	const [sorting, setSorting] = React.useState<SortingState>([])
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
+	const iconColor = useColorModeValue('secondaryGray.500', 'white')
+	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
+	let defaultData = tableData
 	const columns = [
 		columnHelper.accessor('name', {
 			id: 'name',
@@ -80,11 +80,11 @@ export default function ComplexTable(props: { tableData: any }) {
 				<Flex align="center">
 					{info.getValue().map((item: string, key: number) => {
 						if (item === 'apple') {
-							return <AppleLogo key={key} color={iconColor} me="16px" h="18px" w="15px" />;
+							return <AppleLogo key={key} color={iconColor} me="16px" h="18px" w="15px" />
 						} else if (item === 'android') {
-							return <AndroidLogo key={key} color={iconColor} me="16px" h="18px" w="16px" />;
+							return <AndroidLogo key={key} color={iconColor} me="16px" h="18px" w="16px" />
 						} else if (item === 'windows') {
-							return <WindowsLogo key={key} color={iconColor} h="18px" w="19px" />;
+							return <WindowsLogo key={key} color={iconColor} h="18px" w="19px" />
 						}
 					})}
 				</Flex>
@@ -135,8 +135,8 @@ export default function ComplexTable(props: { tableData: any }) {
 				</Flex>
 			),
 		}),
-	];
-	const [data, setData] = React.useState(() => [...defaultData]);
+	]
+	const [data, setData] = React.useState(() => [...defaultData])
 	const table = useReactTable({
 		data,
 		columns,
@@ -147,7 +147,7 @@ export default function ComplexTable(props: { tableData: any }) {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 	return (
 		<Card flexDirection="column" w="100%" px="0px" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px="25px" mb="8px" justifyContent="space-between" align="center">
@@ -185,7 +185,7 @@ export default function ComplexTable(props: { tableData: any }) {
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -207,14 +207,14 @@ export default function ComplexTable(props: { tableData: any }) {
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Card>
-	);
+	)
 }

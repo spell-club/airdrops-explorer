@@ -1,15 +1,15 @@
 // Chakra imports
-import { Box, Flex, Icon, useColorModeValue, Text } from '@chakra-ui/react';
-import Footer from 'components/footer/FooterAuth';
-import FixedPlugin from 'components/fixedPlugin/FixedPlugin';
+import { Box, Flex, Icon, useColorModeValue, Text } from '@chakra-ui/react'
+import Footer from 'components/footer/FooterAuth'
+import FixedPlugin from 'components/fixedPlugin/FixedPlugin'
 // Assets
-import { FaChevronLeft } from 'react-icons/fa';
-import Link from 'next/link';
-import { ReactNode } from 'react';
+import { FaChevronLeft } from 'react-icons/fa'
+import Link from 'next/link'
+import { ReactNode } from 'react'
 
 function AuthIllustration(props: { children: ReactNode; illustrationBackground: string }) {
-	const authBg = useColorModeValue('white', 'navy.900');
-	const { children, illustrationBackground } = props;
+	const authBg = useColorModeValue('white', 'navy.900')
+	const { children, illustrationBackground } = props
 	// Chakra color mode
 	return (
 		<Flex minW="100vh" w="100%" bg={authBg} position="relative" h="max-content">
@@ -73,7 +73,7 @@ function AuthIllustration(props: { children: ReactNode; illustrationBackground: 
 			</Flex>
 			<FixedPlugin />
 		</Flex>
-	);
+	)
 }
 
-export default AuthIllustration;
+export default AuthIllustration

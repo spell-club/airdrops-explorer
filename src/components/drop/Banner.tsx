@@ -1,18 +1,18 @@
 // Chakra imports
-import { Box, Flex, Avatar, Text, useColorModeValue } from '@chakra-ui/react';
-import Card from '../card/Card';
-import { VSeparator } from '../separator/Separator';
+import { Box, Flex, Avatar, Text, useColorModeValue } from '@chakra-ui/react'
+import Card from '../card/Card'
+import { VSeparator } from '../separator/Separator'
 
 export default function Banner(props: {
-	banner: string;
-	avatar: string | any;
-	name: string;
-	airdropDate: string;
-	snapshotDate: string;
-	users: string;
-	[x: string]: any;
+	banner: string
+	avatar: string | any
+	name: string
+	airdropDate: string
+	snapshotDate: string
+	users: string
+	[x: string]: any
 }) {
-	const { banner, avatar, name, airdropDate, snapshotDate, users, ...rest } = props;
+	const { banner, avatar, name, airdropDate, snapshotDate, users, ...rest } = props
 
 	return (
 		<Card mb="20px" alignItems="center" {...rest} pt={0} px={0}>
@@ -76,5 +76,5 @@ export default function Banner(props: {
 				</Flex>
 			</Flex>
 		</Card>
-	);
+	)
 }

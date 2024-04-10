@@ -1,13 +1,13 @@
-import { ApexOptions } from 'apexcharts';
+import { ApexOptions } from 'apexcharts'
 
-type ApexGeneric = ApexOptions & any;
+type ApexGeneric = ApexOptions & any
 
 export const barChartDataDailyTraffic = [
 	{
 		name: 'Daily Traffic',
 		data: [20, 30, 40, 20, 45, 50, 30],
 	},
-];
+]
 
 export const barChartOptionsDailyTraffic: ApexGeneric = {
 	chart: {
@@ -103,7 +103,7 @@ export const barChartOptionsDailyTraffic: ApexGeneric = {
 			columnWidth: '40px',
 		},
 	},
-};
+}
 
 export const barChartDataUserActivity = [
 	{
@@ -114,7 +114,7 @@ export const barChartDataUserActivity = [
 		name: 'PRODUCT B',
 		data: [90, 70, 60, 50, 80, 90],
 	},
-];
+]
 
 // User Activity
 
@@ -202,7 +202,7 @@ export const barChartOptionsUserActivity = {
 			columnWidth: '30px',
 		},
 	},
-};
+}
 // Consumption Users Reports
 
 export const barChartDataConsumption = [
@@ -218,7 +218,7 @@ export const barChartDataConsumption = [
 		name: 'PRODUCT C',
 		data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
 	},
-];
+]
 
 export const barChartOptionsConsumption: ApexGeneric = {
 	chart: {
@@ -306,7 +306,7 @@ export const barChartOptionsConsumption: ApexGeneric = {
 			columnWidth: '20px',
 		},
 	},
-};
+}
 
 export const pieChartOptions: ApexGeneric = {
 	labels: ['Your files', 'System', 'Empty'],
@@ -345,9 +345,9 @@ export const pieChartOptions: ApexGeneric = {
 		enabled: true,
 		theme: 'dark',
 	},
-};
+}
 
-export const pieChartData = [63, 25, 12];
+export const pieChartData = [63, 25, 12]
 
 // Total Spent Default
 
@@ -360,7 +360,7 @@ export const lineChartDataTotalSpent = [
 		name: 'Profit',
 		data: [30, 40, 24, 46, 20, 46],
 	},
-];
+]
 
 export const lineChartOptionsTotalSpent: ApexOptions = {
 	chart: {
@@ -433,4 +433,4 @@ export const lineChartOptionsTotalSpent: ApexOptions = {
 		},
 	},
 	// color: ["#7551FF", "#39B8FF"],
-};
+}

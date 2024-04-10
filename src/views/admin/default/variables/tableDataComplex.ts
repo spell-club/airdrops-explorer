@@ -1,9 +1,9 @@
 type RowObj = {
-	name: string;
-	status: string;
-	date: string;
-	progress: number;
-};
+	name: string
+	status: string
+	date: string
+	progress: number
+}
 
 const tableDataComplex: RowObj[] = [
 	{
@@ -30,5 +30,5 @@ const tableDataComplex: RowObj[] = [
 		status: 'Approved',
 		date: '24 Oct 2022',
 	},
-];
-export default tableDataComplex;
+]
+export default tableDataComplex

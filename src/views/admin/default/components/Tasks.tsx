@@ -1,20 +1,20 @@
 // Chakra imports
-import { Box, Flex, Text, Icon, useColorModeValue, Checkbox } from '@chakra-ui/react';
+import { Box, Flex, Text, Icon, useColorModeValue, Checkbox } from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
-import Menu from 'components/menu/MainMenu';
-import IconBox from 'components/icons/IconBox';
+import Card from 'components/card/Card'
+import Menu from 'components/menu/MainMenu'
+import IconBox from 'components/icons/IconBox'
 
 // Assets
-import { MdCheckBox, MdDragIndicator } from 'react-icons/md';
+import { MdCheckBox, MdDragIndicator } from 'react-icons/md'
 
 export default function Conversion(props: { [x: string]: any }) {
-	const { ...rest } = props;
+	const { ...rest } = props
 
 	// Chakra Color Mode
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
-	const boxBg = useColorModeValue('secondaryGray.300', 'navy.700');
-	const brandColor = useColorModeValue('brand.500', 'brand.400');
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
+	const boxBg = useColorModeValue('secondaryGray.300', 'navy.700')
+	const brandColor = useColorModeValue('brand.500', 'brand.400')
 	return (
 		<Card p="20px" alignItems="center" flexDirection="column" w="100%" {...rest}>
 			<Flex alignItems="center" w="100%" mb="30px">
@@ -69,5 +69,5 @@ export default function Conversion(props: { [x: string]: any }) {
 				</Flex>
 			</Box>
 		</Card>
-	);
+	)
 }

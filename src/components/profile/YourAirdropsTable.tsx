@@ -1,7 +1,7 @@
-import React from 'react';
-import Card from '../card/Card';
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
-import NFT1 from '../../img/nfts/Nft1.png';
+import React from 'react'
+import Card from '../card/Card'
+import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
+import NFT1 from '../../img/nfts/Nft1.png'
 
 const AIRDROPS = [
 	{
@@ -40,7 +40,7 @@ const AIRDROPS = [
 		amount: 'TIA 10 000',
 		id: 6,
 	},
-];
+]
 
 const YourAirdropsTable = () => {
 	return (
@@ -51,7 +51,7 @@ const YourAirdropsTable = () => {
 
 			<Flex flexDir="column" gap={5}>
 				{AIRDROPS.map((airdrop, index) => {
-					const isMissed = airdrop.status === 'Missed';
+					const isMissed = airdrop.status === 'Missed'
 					return (
 						<Flex w={320} justify="space-between" align="center" key={airdrop.id}>
 							<Flex align="center" gap={5}>
@@ -76,11 +76,11 @@ const YourAirdropsTable = () => {
 								{airdrop.amount}
 							</Box>
 						</Flex>
-					);
+					)
 				})}
 			</Flex>
 		</Card>
-	);
-};
+	)
+}
 
-export default YourAirdropsTable;
+export default YourAirdropsTable

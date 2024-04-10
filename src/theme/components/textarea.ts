@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const textareaStyles = {
 	components: {
 		Textarea: {
@@ -52,4 +52,4 @@ export const textareaStyles = {
 			},
 		},
 	},
-};
+}

@@ -1,35 +1,35 @@
 // Chakra imports
-import { Portal, Box, useDisclosure } from '@chakra-ui/react';
-import Footer from 'components/footer/FooterAdmin';
+import { Portal, Box, useDisclosure } from '@chakra-ui/react'
+import Footer from 'components/footer/FooterAdmin'
 // Layout components
-import Navbar from 'components/navbar/NavbarAdmin';
-import Sidebar from 'components/sidebar/Sidebar';
-import { SidebarContext } from 'contexts/SidebarContext';
-import { PropsWithChildren, useEffect, useState } from 'react';
-import routes from 'routes';
+import Navbar from 'components/navbar/NavbarAdmin'
+import Sidebar from 'components/sidebar/Sidebar'
+import { SidebarContext } from 'contexts/SidebarContext'
+import { PropsWithChildren, useEffect, useState } from 'react'
+import routes from 'routes'
 import {
 	getActiveNavbar,
 	getActiveNavbarText,
 	getActiveRoute,
 	isWindowAvailable,
-} from 'utils/navigation';
+} from 'utils/navigation'
 
 interface DashboardLayoutProps extends PropsWithChildren {
-	[x: string]: any;
+	[x: string]: any
 }
 
 // Custom Chakra theme
 export default function AdminLayout(props: DashboardLayoutProps) {
-	const { children, ...rest } = props;
+	const { children, ...rest } = props
 	// states and functions
-	const [fixed] = useState(false);
-	const [toggleSidebar, setToggleSidebar] = useState(false);
+	const [fixed] = useState(false)
+	const [toggleSidebar, setToggleSidebar] = useState(false)
 	// functions for changing the states from components
-	const { onOpen } = useDisclosure();
+	const { onOpen } = useDisclosure()
 
 	useEffect(() => {
-		window.document.documentElement.dir = 'ltr';
-	});
+		window.document.documentElement.dir = 'ltr'
+	})
 
 	return (
 		<Box>
@@ -77,5 +77,5 @@ export default function AdminLayout(props: DashboardLayoutProps) {
 				</Box>
 			</SidebarContext.Provider>
 		</Box>
-	);
+	)
 }

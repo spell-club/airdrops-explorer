@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // Chakra imports
 import {
@@ -11,29 +11,29 @@ import {
 	Flex,
 	Icon,
 	Text,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 // Assets
 import {
 	MdOutlinePerson,
 	MdOutlineCardTravel,
 	MdOutlineLightbulb,
 	MdOutlineSettings,
-} from 'react-icons/md';
+} from 'react-icons/md'
 export default function Banner(props: { icon: JSX.Element | string; [x: string]: any }) {
-	const { icon, ...rest } = props;
+	const { icon, ...rest } = props
 
 	// Ellipsis modals
-	const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
+	const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure()
 
 	// Chakra color mode
 
-	const textColor = useColorModeValue('secondaryGray.500', 'white');
+	const textColor = useColorModeValue('secondaryGray.500', 'white')
 	const textHover = useColorModeValue(
 		{ color: 'secondaryGray.900', bg: 'unset' },
 		{ color: 'secondaryGray.500', bg: 'unset' },
-	);
-	const bgList = useColorModeValue('white', 'whiteAlpha.100');
-	const bgShadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
+	)
+	const bgList = useColorModeValue('white', 'whiteAlpha.100')
+	const bgShadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset')
 
 	return (
 		<Menu isOpen={isOpen1} onClose={onClose1}>
@@ -136,5 +136,5 @@ export default function Banner(props: { icon: JSX.Element | string; [x: string]:
 				</MenuItem>
 			</MenuList>
 		</Menu>
-	);
+	)
 }

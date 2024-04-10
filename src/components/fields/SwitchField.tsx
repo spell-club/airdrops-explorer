@@ -1,18 +1,18 @@
 // Chakra imports
-import { Box, Flex, FormLabel, Switch, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, FormLabel, Switch, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
 export default function Default(props: {
-	id: string;
-	label?: string;
-	isChecked?: boolean;
-	onChange?: () => void;
-	desc?: string;
-	textWidth?: string | number;
-	reversed?: boolean;
-	[x: string]: any;
+	id: string
+	label?: string
+	isChecked?: boolean
+	onChange?: () => void
+	desc?: string
+	textWidth?: string | number
+	reversed?: boolean
+	[x: string]: any
 }) {
-	const { id, label, isChecked, onChange, desc, textWidth, reversed, fontSize, ...rest } = props;
-	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
+	const { id, label, isChecked, onChange, desc, textWidth, reversed, fontSize, ...rest } = props
+	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
 	return (
 		<Box w="100%" fontWeight="500" {...rest}>
 			{reversed ? (
@@ -75,5 +75,5 @@ export default function Default(props: {
 				</Flex>
 			)}
 		</Box>
-	);
+	)
 }

@@ -1,19 +1,19 @@
-import React, { useMemo } from 'react';
-import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
-import IconBox from '../icons/IconBox';
-import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md';
-import { formatValue } from '../../utils';
-import { useQuery } from '@tanstack/react-query';
-import useClientApi from '../../hooks/useClientApi';
-import MiniStatistics from 'components/card/MiniStatistics';
+import React, { useMemo } from 'react'
+import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
+import IconBox from '../icons/IconBox'
+import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md'
+import { formatValue } from '../../utils'
+import { useQuery } from '@tanstack/react-query'
+import useClientApi from '../../hooks/useClientApi'
+import MiniStatistics from 'components/card/MiniStatistics'
 
 const MiniStatisticsGrid = () => {
-	const { clientApi } = useClientApi();
-	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
+	const { clientApi } = useClientApi()
+	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
 	const { data: stats, isLoading: isStatsLoading } = useQuery({
 		queryKey: ['stats'],
 		queryFn: () => clientApi.getStats(),
-	});
+	})
 
 	const { totalClaimed, totalAllocated, users } = useMemo(() => {
 		if (isStatsLoading || !stats) {
@@ -21,7 +21,7 @@ const MiniStatisticsGrid = () => {
 				totalAllocated: '$0',
 				totalClaimed: '$0',
 				users: 0,
-			};
+			}
 		}
 
 		return {
@@ -30,8 +30,8 @@ const MiniStatisticsGrid = () => {
 			totalClaimed: formatValue(stats.total_claimed_usd, 0),
 
 			users: formatValue(stats.eligible_users_num, 0),
-		};
-	}, [stats, isStatsLoading]);
+		}
+	}, [stats, isStatsLoading])
 
 	return (
 		<SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }} gap="20px">
@@ -73,7 +73,7 @@ const MiniStatisticsGrid = () => {
 				value={users}
 			/>
 		</SimpleGrid>
-	);
-};
+	)
+}
 
-export default MiniStatisticsGrid;
+export default MiniStatisticsGrid

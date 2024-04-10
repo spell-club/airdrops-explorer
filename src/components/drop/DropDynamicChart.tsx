@@ -1,54 +1,54 @@
-import React, { useMemo, useState } from 'react';
-import Card from '../card/Card';
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
-import LineChart from '../charts/LineChart';
-import { useQuery } from '@tanstack/react-query';
-import useClientApi from '../../hooks/useClientApi';
-import { roundToPrecision } from '../../utils';
-import SelectTimelineMenu from '../SelectTimelineMenu';
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig';
-import numbro from 'numbro';
+import React, { useMemo, useState } from 'react'
+import Card from '../card/Card'
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import LineChart from '../charts/LineChart'
+import { useQuery } from '@tanstack/react-query'
+import useClientApi from '../../hooks/useClientApi'
+import { roundToPrecision } from '../../utils'
+import SelectTimelineMenu from '../SelectTimelineMenu'
+import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import numbro from 'numbro'
 
 interface Props {
-	dropId: string;
-	tokenSymbol: string;
+	dropId: string
+	tokenSymbol: string
 }
 
 const defaultTooltipFormat = {
 	trimMantissa: true,
 	thousandSeparated: true,
-};
+}
 
 const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig();
-	const { clientApi } = useClientApi();
+	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { clientApi } = useClientApi()
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['dropHistory'],
 		queryFn: () => clientApi.getProjectHistoricalValue(dropId),
-	});
-	const [selectedTime, setSelectedTime] = useState(timeCategories[0]);
+	})
+	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const dataByTime = useMemo(() => {
-		if (!chartData) return [];
+		if (!chartData) return []
 
-		return chartData.slice(-selectedTime.value);
-	}, [chartData, selectedTime]);
+		return chartData.slice(-selectedTime.value)
+	}, [chartData, selectedTime])
 
 	const { claimedArray, allocatedArray } = useMemo(() => {
-		const claimedArray: number[] = [];
-		const allocatedArray: number[] = [];
+		const claimedArray: number[] = []
+		const allocatedArray: number[] = []
 
 		dataByTime.forEach((data) => {
-			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }));
-			allocatedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }));
-		});
+			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }))
+			allocatedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }))
+		})
 
-		return { claimedArray, allocatedArray };
-	}, [dataByTime]);
+		return { claimedArray, allocatedArray }
+	}, [dataByTime])
 
-	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString());
+	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString())
 
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
 
 	return (
 		<Card justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
@@ -97,19 +97,19 @@ const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
 											value: val,
 											precision: 0,
 											method: 'floor',
-										});
+										})
 										const tokenAmount = seriesIndex
 											? chartData[dataPointIndex].claimed_amount
-											: chartData[dataPointIndex].allocated_amount;
+											: chartData[dataPointIndex].allocated_amount
 
-										console.log(tokenAmount, 'tokenAmount', chartData[dataPointIndex]);
+										console.log(tokenAmount, 'tokenAmount', chartData[dataPointIndex])
 
 										const trancatedTokenAmount = roundToPrecision({
 											value: tokenAmount,
 											precision: 0,
 											method: 'floor',
-										});
-										return `$${numbro(truncatedValue).format(defaultTooltipFormat)} | ${numbro(trancatedTokenAmount).format(defaultTooltipFormat)} ${tokenSymbol}`;
+										})
+										return `$${numbro(truncatedValue).format(defaultTooltipFormat)} | ${numbro(trancatedTokenAmount).format(defaultTooltipFormat)} ${tokenSymbol}`
 									},
 								},
 							},
@@ -118,7 +118,7 @@ const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
 				</Box>
 			</Flex>
 		</Card>
-	);
-};
+	)
+}
 
-export default DropDynamicChart;
+export default DropDynamicChart

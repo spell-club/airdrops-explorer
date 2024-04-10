@@ -1,18 +1,18 @@
-import React from 'react';
-import Card from '../card/Card';
-import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
-import CircularChart from '../charts/DonutChart';
-import { VSeparator } from '../separator/Separator';
-import numbro from 'numbro';
-import { roundToPrecision } from 'utils';
-import { AirdropProject } from 'api/types';
+import React from 'react'
+import Card from '../card/Card'
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import CircularChart from '../charts/DonutChart'
+import { VSeparator } from '../separator/Separator'
+import numbro from 'numbro'
+import { roundToPrecision } from 'utils'
+import { AirdropProject } from 'api/types'
 
 interface Props {
-	project: AirdropProject;
+	project: AirdropProject
 }
 
 const DropConversionChartCard = ({ project }: Props) => {
-	const bg = useColorModeValue('whiteAlpha.800', 'navy.800');
+	const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
 	const {
 		total_allocated: totalAllocated,
 		total_claimed: totalClaimed,
@@ -23,36 +23,36 @@ const DropConversionChartCard = ({ project }: Props) => {
 		total_reallocated_usd,
 		eligible_users_num: eligibleUsersNum,
 		claimers_num: claimersNum,
-	} = project;
+	} = project
 
 	const conversion = roundToPrecision({
 		value: (totalClaimedUsd / totalAllocatedUsd) * 100,
 		precision: 2,
 		method: 'floor',
-	});
+	})
 
 	const formattValue = (value: number) => {
 		const truncatedAmount = roundToPrecision({
 			value,
 			precision: 0,
 			method: 'floor',
-		});
+		})
 
 		const roundFormat = {
 			trimMantissa: true,
 			thousandSeparated: true,
-		};
+		}
 
-		return String(numbro(truncatedAmount).format(roundFormat));
-	};
+		return String(numbro(truncatedAmount).format(roundFormat))
+	}
 
-	const isRelocatedStatExist = total_reallocated && total_reallocated_usd;
+	const isRelocatedStatExist = total_reallocated && total_reallocated_usd
 
 	const claimersRate = roundToPrecision({
 		value: (claimersNum / eligibleUsersNum) * 100,
 		precision: 2,
 		method: 'floor',
-	});
+	})
 
 	return (
 		<Card p="20px" alignItems="center" flexDirection="column" w="100%" bg={bg}>
@@ -185,7 +185,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 				</Flex>
 			</Flex>
 		</Card>
-	);
-};
+	)
+}
 
-export default DropConversionChartCard;
+export default DropConversionChartCard

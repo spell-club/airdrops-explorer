@@ -1,8 +1,8 @@
-import { chakra, Flex, Image } from '@chakra-ui/react';
+import { chakra, Flex, Image } from '@chakra-ui/react'
 
 interface Props {
-	className?: string;
-	icon: string;
+	className?: string
+	icon: string
 }
 
 const IconWithBg = chakra(({ className, icon }: Props) => (
@@ -17,6 +17,6 @@ const IconWithBg = chakra(({ className, icon }: Props) => (
 	>
 		<Image borderRadius="50%" w="100%" src={icon} />
 	</Flex>
-));
+))
 
-export default IconWithBg;
+export default IconWithBg

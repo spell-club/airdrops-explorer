@@ -1,23 +1,23 @@
 // Chakra imports
-import { Box, Flex, Icon, Link, Image, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Icon, Link, Image, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
+import Card from 'components/card/Card'
 // Assets
-import { MdEdit } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md'
 
 export default function Project(props: {
-	title: string;
-	ranking: number | string;
-	link: string;
-	image: string | any;
-	[x: string]: any;
+	title: string
+	ranking: number | string
+	link: string
+	image: string | any
+	[x: string]: any
 }) {
-	const { title, ranking, link, image, ...rest } = props;
+	const { title, ranking, link, image, ...rest } = props
 	// Chakra Color Mode
-	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
-	const textColorSecondary = 'gray.400';
-	const brandColor = useColorModeValue('brand.500', 'white');
-	const bg = useColorModeValue('white', 'navy.700');
+	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
+	const textColorSecondary = 'gray.400'
+	const brandColor = useColorModeValue('brand.500', 'white')
+	const bg = useColorModeValue('white', 'navy.700')
 	return (
 		<Card bg={bg} {...rest} p="14px">
 			<Flex align="center" direction={{ base: 'column', md: 'row' }}>
@@ -40,5 +40,5 @@ export default function Project(props: {
 				</Link>
 			</Flex>
 		</Card>
-	);
+	)
 }

@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const inputStyles = {
 	components: {
 		Input: {
@@ -202,4 +202,4 @@ export const inputStyles = {
 			},
 		},
 	},
-};
+}

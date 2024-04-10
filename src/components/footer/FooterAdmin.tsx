@@ -1,9 +1,9 @@
 /*eslint-disable*/
 
-import { Flex, Link, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Link, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react'
 
 export default function Footer() {
-	const textColor = useColorModeValue('gray.400', 'white');
+	const textColor = useColorModeValue('gray.400', 'white')
 	return (
 		<Flex
 			zIndex="3"
@@ -80,5 +80,5 @@ export default function Footer() {
 				</ListItem>
 			</List>
 		</Flex>
-	);
+	)
 }

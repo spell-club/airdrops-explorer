@@ -1,39 +1,39 @@
 // Chakra imports
-import { Box, Button, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
-import LineChart from 'components/charts/LineChart';
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { IoCheckmarkCircle } from 'react-icons/io5';
-import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md';
+import Card from 'components/card/Card'
+import LineChart from 'components/charts/LineChart'
+import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
+import { IoCheckmarkCircle } from 'react-icons/io5'
+import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md'
 // Assets
-import { RiArrowUpSFill } from 'react-icons/ri';
-import { lineChartDataTotalSpent, lineChartOptionsTotalSpent } from 'variables/charts';
+import { RiArrowUpSFill } from 'react-icons/ri'
+import { lineChartDataTotalSpent, lineChartOptionsTotalSpent } from 'variables/charts'
 
 export default function TotalSpent(props: { [x: string]: any }) {
-	const { ...rest } = props;
+	const { ...rest } = props
 
 	// Chakra Color Mode
 
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
-	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white');
-	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
-	const iconColor = useColorModeValue('brand.500', 'white');
-	const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
-	const bgHover = useColorModeValue({ bg: 'secondaryGray.400' }, { bg: 'whiteAlpha.50' });
-	const bgFocus = useColorModeValue({ bg: 'secondaryGray.300' }, { bg: 'whiteAlpha.100' });
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
+	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
+	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+	const iconColor = useColorModeValue('brand.500', 'white')
+	const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+	const bgHover = useColorModeValue({ bg: 'secondaryGray.400' }, { bg: 'whiteAlpha.50' })
+	const bgFocus = useColorModeValue({ bg: 'secondaryGray.300' }, { bg: 'whiteAlpha.100' })
 
-	const [mounted, setMounted] = useState(false);
+	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			setMounted(true);
-		}, 3000);
+			setMounted(true)
+		}, 3000)
 		return () => {
-			clearTimeout(timeout);
-		};
-	}, []);
+			clearTimeout(timeout)
+		}
+	}, [])
 
 	return (
 		<Card
@@ -112,5 +112,5 @@ export default function TotalSpent(props: { [x: string]: any }) {
 				</Box>
 			</Flex>
 		</Card>
-	);
+	)
 }

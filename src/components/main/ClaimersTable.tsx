@@ -1,5 +1,5 @@
-'use client';
-import * as React from 'react';
+'use client'
+import * as React from 'react'
 import {
 	createColumnHelper,
 	flexRender,
@@ -7,7 +7,7 @@ import {
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
+} from '@tanstack/react-table'
 import {
 	Avatar,
 	AvatarGroup,
@@ -20,38 +20,38 @@ import {
 	Th,
 	Thead,
 	Tr,
-} from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-import { generateIcon, roundToPrecision } from 'utils';
-import numbro from 'numbro';
-import { AIRDROPS_IMAGES } from 'constants/index';
-import IconWithBg from 'components/IconWithBg';
+} from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { generateIcon, roundToPrecision } from 'utils'
+import numbro from 'numbro'
+import { AIRDROPS_IMAGES } from 'constants/index'
+import IconWithBg from 'components/IconWithBg'
 
 type RowObj = {
-	address: string;
-	projects: Record<'project', string>[];
-	total_amount_usd: number;
-};
-const columnHelper = createColumnHelper<RowObj>();
+	address: string
+	projects: Record<'project', string>[]
+	total_amount_usd: number
+}
+const columnHelper = createColumnHelper<RowObj>()
 
 interface Props {
-	tableData: RowObj[];
-	title: string;
-	isLoading: boolean;
+	tableData: RowObj[]
+	title: string
+	isLoading: boolean
 }
 
-import { Roboto_Mono } from 'next/font/google';
-import Link from 'next/link';
+import { Roboto_Mono } from 'next/font/google'
+import Link from 'next/link'
 
 const robotoMono = Roboto_Mono({
 	subsets: ['latin'],
 	display: 'block',
 	preload: true,
-});
+})
 
 const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const { push } = useRouter();
+	const [sorting, setSorting] = React.useState<SortingState>([])
+	const { push } = useRouter()
 
 	const columns = [
 		columnHelper.accessor('address', {
@@ -67,8 +67,8 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 				</Text>
 			),
 			cell: (info) => {
-				const trucatedAddress = `${info.getValue().slice(0, 6)}...${info.getValue().slice(-6)}`;
-				const icon = generateIcon(info.row.original.address, 30);
+				const trucatedAddress = `${info.getValue().slice(0, 6)}...${info.getValue().slice(-6)}`
+				const icon = generateIcon(info.row.original.address, 30)
 				return (
 					<Link href={`/profile/${info.getValue()}`}>
 						<Flex align="center" cursor="pointer">
@@ -78,7 +78,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 							</Text>
 						</Flex>
 					</Link>
-				);
+				)
 			},
 		}),
 		columnHelper.accessor('projects', {
@@ -94,7 +94,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 				</Text>
 			),
 			cell: (info) => {
-				const value = info.getValue();
+				const value = info.getValue()
 				return (
 					<AvatarGroup
 						max={3}
@@ -117,7 +117,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 							/>
 						))}
 					</AvatarGroup>
-				);
+				)
 			},
 		}),
 		columnHelper.accessor('total_amount_usd', {
@@ -133,28 +133,28 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 				</Text>
 			),
 			cell: (info) => {
-				const value = info.getValue();
+				const value = info.getValue()
 				const roundFormat = {
 					trimMantissa: true,
 					thousandSeparated: true,
-				};
+				}
 
 				const truncatedAmount = roundToPrecision({
 					value,
 					precision: 0,
 					method: 'floor',
-				});
+				})
 
-				const formattedValue = String(numbro(truncatedAmount).format(roundFormat));
+				const formattedValue = String(numbro(truncatedAmount).format(roundFormat))
 
 				return (
 					<Flex align="center" fontWeight={600} className={robotoMono.className}>
 						<Text>${formattedValue}</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
-	];
+	]
 	const table = useReactTable({
 		data: tableData ?? [],
 		columns,
@@ -165,7 +165,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 
 	return (
 		<Flex direction="column" w="100%" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -210,7 +210,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -232,16 +232,16 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Flex>
-	);
-};
+	)
+}
 
-export default ClaimersTable;
+export default ClaimersTable

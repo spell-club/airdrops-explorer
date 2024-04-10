@@ -1,14 +1,14 @@
 // Chakra imports
-import { Flex, Box, Icon, Text, Spacer } from '@chakra-ui/react';
+import { Flex, Box, Icon, Text, Spacer } from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
+import Card from 'components/card/Card'
 
 // Assets
-import bgMastercard from 'img/dashboards/Debit.png';
-import { RiMastercardFill } from 'react-icons/ri';
+import bgMastercard from 'img/dashboards/Debit.png'
+import { RiMastercardFill } from 'react-icons/ri'
 
 export default function Banner(props: { exp: string; cvv: string; number: string }) {
-	const { exp, cvv, number, ...rest } = props;
+	const { exp, cvv, number, ...rest } = props
 
 	// Chakra Color Mode
 	return (
@@ -54,5 +54,5 @@ export default function Banner(props: { exp: string; cvv: string; number: string
 				</Flex>
 			</Flex>
 		</Card>
-	);
+	)
 }

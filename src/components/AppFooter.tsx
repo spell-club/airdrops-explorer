@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, Container, Flex, Link, List, ListItem, useColorModeValue } from '@chakra-ui/react';
-import Logo from './icons/Logo';
+import React from 'react'
+import { Box, Container, Flex, Link, List, ListItem, useColorModeValue } from '@chakra-ui/react'
+import Logo from './icons/Logo'
 
 const AppFooter = () => {
-	let linkColor = 'white';
+	let linkColor = 'white'
 	return (
 		<Box as="footer" h="75px" bg="navy.800" borderTop="1px solid" borderColor="navy.700">
 			<Container maxW="container.xl" h="100%">
@@ -81,7 +81,7 @@ const AppFooter = () => {
 				</Flex>
 			</Container>
 		</Box>
-	);
-};
+	)
+}
 
-export default AppFooter;
+export default AppFooter

@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 
-import { createIcon } from '@chakra-ui/icons';
+import { createIcon } from '@chakra-ui/icons'
 
 export const AdobexdLogo = createIcon({
 	displayName: 'AdobexdLogo',
@@ -18,7 +18,7 @@ export const AdobexdLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 export const AppleLogo = createIcon({
 	displayName: 'AppleLogo',
 	viewBox: '0 0 15 18',
@@ -37,7 +37,7 @@ export const AppleLogo = createIcon({
 			</defs>
 		</g>
 	),
-});
+})
 export const AndroidLogo = createIcon({
 	displayName: 'AndroidLogo',
 	viewBox: '0 0 16 18',
@@ -61,7 +61,7 @@ export const AndroidLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 export const WindowsLogo = createIcon({
 	displayName: 'WindowsLogo',
 	viewBox: '0 0 19 18',
@@ -73,7 +73,7 @@ export const WindowsLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const AtlassianLogo = createIcon({
 	displayName: 'AtlassianLogo',
@@ -90,7 +90,7 @@ export const AtlassianLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const CartIcon = createIcon({
 	displayName: 'CartIcon',
@@ -101,7 +101,7 @@ export const CartIcon = createIcon({
 			d="M7.984 19.937a1.406 1.406 0 100-2.812 1.406 1.406 0 000 2.812zM17.828 19.937a1.406 1.406 0 100-2.812 1.406 1.406 0 000 2.812zM20.324 5.558a1.051 1.051 0 00-.815-.386H6.134l-.27-1.528a.703.703 0 00-.692-.581H2.359a.703.703 0 000 1.406h2.223L6.59 15.841a.703.703 0 00.692.581h11.25a.703.703 0 100-1.406H7.871l-.248-1.406h10.62a1.057 1.057 0 001.035-.848l1.266-6.328a1.055 1.055 0 00-.22-.876z"
 		/>
 	),
-});
+})
 
 export const ClockIcon = createIcon({
 	displayName: 'ClockIcon',
@@ -123,7 +123,7 @@ export const ClockIcon = createIcon({
 			</g>
 		</g>
 	),
-});
+})
 
 export const CreditIcon = createIcon({
 	displayName: 'CreditIcon',
@@ -134,7 +134,7 @@ export const CreditIcon = createIcon({
 			d="M1.406 17.023a2.461 2.461 0 002.461 2.46h14.766a2.461 2.461 0 002.46-2.46v-6.768H1.407v6.768zm2.9-3.34a1.318 1.318 0 011.319-1.318h2.11a1.318 1.318 0 011.318 1.318v.879a1.318 1.318 0 01-1.319 1.318H5.625a1.318 1.318 0 01-1.318-1.318v-.879zM18.633 4.014H3.867a2.46 2.46 0 00-2.46 2.461v1.143h19.687V6.475a2.46 2.46 0 00-2.461-2.46z"
 		/>
 	),
-});
+})
 
 export const DashboardLogo = createIcon({
 	displayName: 'DashboardLogo',
@@ -190,7 +190,7 @@ export const DashboardLogo = createIcon({
 			</defs>
 		</g>
 	),
-});
+})
 
 export const DashboardLogoWhite = createIcon({
 	displayName: 'DashboardLogo',
@@ -207,7 +207,7 @@ export const DashboardLogoWhite = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const DocumentIcon = createIcon({
 	displayName: 'DocumentIcon',
@@ -224,7 +224,7 @@ export const DocumentIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const GlobeIcon = createIcon({
 	displayName: 'GlobeIcon',
@@ -267,7 +267,7 @@ export const GlobeIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const HelpIcon = createIcon({
 	displayName: 'HelpIcon',
@@ -278,7 +278,7 @@ export const HelpIcon = createIcon({
 			d="M11.25 0C5.04 0 0 5.04 0 11.25S5.04 22.5 11.25 22.5 22.5 17.46 22.5 11.25 17.46 0 11.25 0zm-.352 17.813a1.172 1.172 0 110-2.344 1.172 1.172 0 010 2.344zm1.96-5.977c-.95.637-1.08 1.222-1.08 1.758a.82.82 0 11-1.641 0c0-1.284.59-2.305 1.806-3.121 1.13-.758 1.768-1.239 1.768-2.295 0-.718-.41-1.264-1.26-1.668-.199-.095-.644-.187-1.191-.18-.687.008-1.22.172-1.63.503-.775.623-.84 1.302-.84 1.312a.821.821 0 11-1.642-.08c.007-.142.106-1.425 1.452-2.507.698-.562 1.585-.854 2.636-.866.745-.01 1.444.117 1.918.34 1.418.672 2.198 1.79 2.198 3.146 0 1.982-1.325 2.872-2.494 3.658z"
 		/>
 	),
-});
+})
 
 export const HomeIcon = createIcon({
 	displayName: 'HomeIcon',
@@ -295,7 +295,7 @@ export const HomeIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const InvisionLogo = createIcon({
 	displayName: 'InvisionLogo',
@@ -312,7 +312,7 @@ export const InvisionLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const JiraLogo = createIcon({
 	displayName: 'JiraLogo',
@@ -333,7 +333,7 @@ export const JiraLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const MastercardIcon = createIcon({
 	displayName: 'MastercardIcon',
@@ -344,7 +344,7 @@ export const MastercardIcon = createIcon({
 			<circle cx="14.3686" cy="7.49999" r="6.63158" fill="#F79E1B" />
 		</svg>
 	),
-});
+})
 
 export const PayPalIcon = createIcon({
 	displayName: 'PayPalIcon',
@@ -361,7 +361,7 @@ export const PayPalIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const PersonIcon = createIcon({
 	displayName: 'PersonIcon',
@@ -372,7 +372,7 @@ export const PersonIcon = createIcon({
 			d="M14.618 3.338c-.855-.924-2.05-1.432-3.368-1.432-1.325 0-2.524.505-3.375 1.423-.86.928-1.28 2.188-1.181 3.55.195 2.686 2.239 4.87 4.556 4.87s4.358-2.184 4.556-4.87c.1-1.349-.322-2.607-1.188-3.541zM18.984 21.592H3.515a1.363 1.363 0 01-1.063-.489 1.552 1.552 0 01-.316-1.279c.371-2.058 1.529-3.786 3.348-5 1.616-1.076 3.664-1.67 5.766-1.67s4.15.594 5.765 1.67c1.82 1.214 2.977 2.942 3.348 5 .085.471-.03.937-.315 1.279a1.362 1.362 0 01-1.064.49z"
 		/>
 	),
-});
+})
 
 export const ProfileIcon = createIcon({
 	displayName: 'ProfileIcon',
@@ -386,7 +386,7 @@ export const ProfileIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const RocketIcon = createIcon({
 	displayName: 'RocketIcon',
@@ -403,7 +403,7 @@ export const RocketIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const SettingsIcon = createIcon({
 	displayName: 'SettingsIcon',
@@ -418,7 +418,7 @@ export const SettingsIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const SlackLogo = createIcon({
 	displayName: 'SlackLogo',
@@ -443,7 +443,7 @@ export const SlackLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const SpotifyLogo = createIcon({
 	displayName: 'SpotifyLogo',
@@ -456,7 +456,7 @@ export const SpotifyLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const HorizonLogo = createIcon({
 	displayName: 'horizonLogo',
@@ -469,7 +469,7 @@ export const HorizonLogo = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const SupportIcon = createIcon({
 	// Doesn't display the full icon without w and h being specified
@@ -481,7 +481,7 @@ export const SupportIcon = createIcon({
 			d="M20.885 5.547a.703.703 0 00-1.122-.176l-2.7 2.702a.708.708 0 01-.995 0l-1.167-1.169a.702.702 0 010-.994l2.689-2.69a.704.704 0 00-.21-1.138c-2.031-.908-4.566-.435-6.164 1.152-1.358 1.348-1.763 3.455-1.11 5.78a.698.698 0 01-.197.703L2.593 16.4a2.82 2.82 0 103.981 3.983l6.754-7.332a.699.699 0 01.693-.2 7.885 7.885 0 002.03.279c1.469 0 2.757-.475 3.686-1.39 1.72-1.695 1.983-4.57 1.148-6.192zM4.623 19.901a1.407 1.407 0 11-.305-2.797 1.407 1.407 0 01.305 2.797z"
 		/>
 	),
-});
+})
 
 export const StatsIcon = createIcon({
 	displayName: 'StatsIcon',
@@ -492,7 +492,7 @@ export const StatsIcon = createIcon({
 			d="M4.57 22.297H3.164a1.055 1.055 0 01-1.055-1.054v-6.328a1.055 1.055 0 011.055-1.055H4.57a1.055 1.055 0 011.055 1.055v6.328a1.055 1.055 0 01-1.055 1.054zM14.414 22.296h-1.406a1.055 1.055 0 01-1.055-1.055V10.695a1.055 1.055 0 011.055-1.055h1.406a1.055 1.055 0 011.055 1.055V21.24a1.055 1.055 0 01-1.055 1.055zM19.336 22.297H17.93a1.055 1.055 0 01-1.055-1.055V5.773A1.055 1.055 0 0117.93 4.72h1.406a1.055 1.055 0 011.055 1.054v15.47a1.055 1.055 0 01-1.055 1.054zM9.492 22.297H8.086a1.055 1.055 0 01-1.055-1.055V2.257a1.055 1.055 0 011.055-1.054h1.406a1.055 1.055 0 011.055 1.054v18.985a1.055 1.055 0 01-1.055 1.055z"
 		/>
 	),
-});
+})
 
 export const WalletIcon = createIcon({
 	displayName: 'WalletIcon',
@@ -509,7 +509,7 @@ export const WalletIcon = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const VisaIcon = createIcon({
 	displayName: 'VisaIcon',
@@ -524,7 +524,7 @@ export const VisaIcon = createIcon({
 			/>
 		</svg>
 	),
-});
+})
 
 export const BitcoinLogo = createIcon({
 	displayName: 'BitcoinLogo',
@@ -541,7 +541,7 @@ export const BitcoinLogo = createIcon({
 			/>
 		</svg>
 	),
-});
+})
 
 export const EthereumLogoOutline = createIcon({
 	displayName: 'EthereumLogoOutline',
@@ -556,7 +556,7 @@ export const EthereumLogoOutline = createIcon({
 			/>
 		</svg>
 	),
-});
+})
 
 export const DashCurveUp = createIcon({
 	displayName: 'DashCurveUp',
@@ -573,7 +573,7 @@ export const DashCurveUp = createIcon({
 			/>
 		</g>
 	),
-});
+})
 export const DashCurveDown = createIcon({
 	displayName: 'DashCurveDown',
 	viewBox: '0 0 134 22',
@@ -589,7 +589,7 @@ export const DashCurveDown = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const ButtonLeft = createIcon({
 	displayName: 'ButtonLeft',
@@ -603,7 +603,7 @@ export const ButtonLeft = createIcon({
 			/>
 		</g>
 	),
-});
+})
 
 export const ButtonRight = createIcon({
 	displayName: 'ButtonRight',
@@ -617,7 +617,7 @@ export const ButtonRight = createIcon({
 			/>
 		</svg>
 	),
-});
+})
 
 export const Fingerprint = createIcon({
 	displayName: 'ButtonRight',
@@ -630,4 +630,4 @@ export const Fingerprint = createIcon({
 			/>
 		</g>
 	),
-});
+})

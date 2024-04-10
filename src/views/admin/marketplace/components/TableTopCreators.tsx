@@ -12,7 +12,7 @@ import {
 	Thead,
 	Tr,
 	useColorModeValue,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 import {
 	createColumnHelper,
 	flexRender,
@@ -20,27 +20,27 @@ import {
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
+} from '@tanstack/react-table'
 // Custom components
-import * as React from 'react';
+import * as React from 'react'
 // Assets
 
 type RowObj = {
-	name: string[];
-	artworks: number;
-	rating: number;
-};
+	name: string[]
+	artworks: number
+	rating: number
+}
 
-const columnHelper = createColumnHelper<RowObj>();
+const columnHelper = createColumnHelper<RowObj>()
 
 // const columns = columnsDataCheck;
 export default function TopCreatorTable(props: { tableData: any }) {
-	const { tableData } = props;
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
-	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white');
-	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-	let defaultData = tableData;
+	const { tableData } = props
+	const [sorting, setSorting] = React.useState<SortingState>([])
+	const textColor = useColorModeValue('secondaryGray.900', 'white')
+	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
+	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
+	let defaultData = tableData
 	const columns = [
 		columnHelper.accessor('name', {
 			id: 'name',
@@ -105,8 +105,8 @@ export default function TopCreatorTable(props: { tableData: any }) {
 				</Flex>
 			),
 		}),
-	];
-	const [data, setData] = React.useState(() => [...defaultData]);
+	]
+	const [data, setData] = React.useState(() => [...defaultData])
 	const table = useReactTable({
 		data,
 		columns,
@@ -117,7 +117,7 @@ export default function TopCreatorTable(props: { tableData: any }) {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 
 	return (
 		<Flex direction="column" w="100%" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -164,7 +164,7 @@ export default function TopCreatorTable(props: { tableData: any }) {
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -186,14 +186,14 @@ export default function TopCreatorTable(props: { tableData: any }) {
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Flex>
-	);
+	)
 }

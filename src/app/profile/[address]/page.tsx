@@ -1,28 +1,28 @@
-'use client';
-import React, { useMemo } from 'react';
-import { Box, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
-import Banner from 'components/profile/Banner';
-import banner from 'img/profile/banner.png';
-import NFT6 from 'img/nfts/Nft6.png';
-import ClaimedUnclaimedChart from 'components/profile/ClaimedUnclaimedChart';
-import ProfitEstimationChart from 'components/profile/ProfitEstimationChart';
-import useClientApi from 'hooks/useClientApi';
-import { useQuery } from '@tanstack/react-query';
-import AirdropsTable from 'components/profile/AssetsTable';
-import { AddressInfo } from 'api/types';
-import Card from 'components/card/Card';
-import Link from 'next/link';
+'use client'
+import React, { useMemo } from 'react'
+import { Box, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
+import Banner from 'components/profile/Banner'
+import banner from 'img/profile/banner.png'
+import NFT6 from 'img/nfts/Nft6.png'
+import ClaimedUnclaimedChart from 'components/profile/ClaimedUnclaimedChart'
+import ProfitEstimationChart from 'components/profile/ProfitEstimationChart'
+import useClientApi from 'hooks/useClientApi'
+import { useQuery } from '@tanstack/react-query'
+import AirdropsTable from 'components/profile/AssetsTable'
+import { AddressInfo } from 'api/types'
+import Card from 'components/card/Card'
+import Link from 'next/link'
 
 const emptyState: AddressInfo = {
 	claimed_airdrops: 0,
 	total_claimed_usd: 0,
 	total_unclaimed_usd: 0,
 	unclaimed_airdrops: 0,
-};
+}
 
 const Page = ({ params }: { params: { address: string } }) => {
-	const { address } = params;
-	const { clientApi } = useClientApi();
+	const { address } = params
+	const { clientApi } = useClientApi()
 
 	const {
 		data: addressInfo,
@@ -32,29 +32,29 @@ const Page = ({ params }: { params: { address: string } }) => {
 		queryKey: ['profile', address],
 		queryFn: () => clientApi.getAddressInfo(address),
 		retry: 1,
-	});
+	})
 
 	const isNotValid = useMemo(
 		// @ts-ignore
 		() => error?.response?.data?.message === 'address',
 		[error],
-	);
+	)
 
 	const isNotFound = useMemo(
 		// @ts-ignore
 		() => error?.response?.data?.message === 'NOT_FOUND',
 		[error],
-	);
+	)
 
 	if (isAddressInfoLoading) {
 		return (
 			<Center my={50}>
 				<Spinner />
 			</Center>
-		);
+		)
 	}
 
-	const info = isNotFound ? emptyState : addressInfo;
+	const info = isNotFound ? emptyState : addressInfo
 
 	if (isNotValid) {
 		return (
@@ -75,7 +75,7 @@ const Page = ({ params }: { params: { address: string } }) => {
 					</Card>
 				</Center>
 			</Box>
-		);
+		)
 	}
 
 	return (
@@ -97,7 +97,7 @@ const Page = ({ params }: { params: { address: string } }) => {
 
 			<AirdropsTable address={address} />
 		</Box>
-	);
-};
+	)
+}
 
-export default Page;
+export default Page

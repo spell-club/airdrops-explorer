@@ -1,41 +1,41 @@
-import React, { useMemo } from 'react';
-import Card from './card/Card';
-import { AspectRatio, Box, Button, Flex, Image, Text, Link as ChakraLink } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-import numbro from 'numbro';
-import Link from 'next/link';
+import React, { useMemo } from 'react'
+import Card from './card/Card'
+import { AspectRatio, Box, Button, Flex, Image, Text, Link as ChakraLink } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import numbro from 'numbro'
+import Link from 'next/link'
 
 interface Props {
-	id: number;
-	image: string;
-	name: string;
-	avgAmount: number;
-	airdropAmount: number;
-	tokenSymbol: string;
+	id: number
+	image: string
+	name: string
+	avgAmount: number
+	airdropAmount: number
+	tokenSymbol: string
 }
 
 const AirdropProject = ({ image, name, avgAmount, airdropAmount, tokenSymbol, id }: Props) => {
-	const { push } = useRouter();
+	const { push } = useRouter()
 
 	const averageAmount = useMemo(() => {
 		const roundFormat = {
 			trimMantissa: true,
 			thousandSeparated: true,
 			average: true,
-		};
+		}
 
-		return String(numbro(avgAmount).format(roundFormat)).replace(/,/g, ' ');
-	}, [avgAmount]);
+		return String(numbro(avgAmount).format(roundFormat)).replace(/,/g, ' ')
+	}, [avgAmount])
 
 	const totalAmount = useMemo(() => {
 		const roundFormat = {
 			trimMantissa: true,
 			thousandSeparated: true,
 			average: true,
-		};
+		}
 
-		return String(numbro(airdropAmount).format(roundFormat)).replace(/,/g, ' ');
-	}, [airdropAmount]);
+		return String(numbro(airdropAmount).format(roundFormat)).replace(/,/g, ' ')
+	}, [airdropAmount])
 
 	return (
 		<Link href={`/drop/${name.toLowerCase()}`}>
@@ -132,7 +132,7 @@ const AirdropProject = ({ image, name, avgAmount, airdropAmount, tokenSymbol, id
 				</Flex>
 			</Card>
 		</Link>
-	);
-};
+	)
+}
 
-export default AirdropProject;
+export default AirdropProject

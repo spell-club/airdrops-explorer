@@ -1,11 +1,11 @@
-import React from 'react';
-import { Flex, SimpleGrid, Text } from '@chakra-ui/react';
-import AirdropProject from '../AirdropProject';
-import { AIRDROPS_IMAGES } from 'constants/index';
-import useAirdrops from 'hooks/useAirdrops';
+import React from 'react'
+import { Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import AirdropProject from '../AirdropProject'
+import { AIRDROPS_IMAGES } from 'constants/index'
+import useAirdrops from 'hooks/useAirdrops'
 
 const DropsList = () => {
-	const { airdrops } = useAirdrops();
+	const { airdrops } = useAirdrops()
 
 	return (
 		<Flex direction="column">
@@ -27,7 +27,7 @@ const DropsList = () => {
 				))}
 			</SimpleGrid>
 		</Flex>
-	);
-};
+	)
+}
 
-export default DropsList;
+export default DropsList

@@ -1,5 +1,5 @@
-import { AxiosInstance } from 'axios';
-import { AirdropProject } from '../types';
+import { AxiosInstance } from 'axios'
+import { AirdropProject } from '../types'
 
 const getAirdropProjectRequest = async (
 	projectId: number | string,
@@ -9,12 +9,12 @@ const getAirdropProjectRequest = async (
 		apiClient
 			.get(`/airdrop/project/${projectId}`)
 			.then((response) => {
-				resolve(response.data);
+				resolve(response.data)
 			})
 			.catch((error) => {
-				reject(error);
-			});
-	});
-};
+				reject(error)
+			})
+	})
+}
 
-export default getAirdropProjectRequest;
+export default getAirdropProjectRequest

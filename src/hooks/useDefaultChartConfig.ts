@@ -1,17 +1,17 @@
-import { roundToPrecision } from '../utils';
-import numbro from 'numbro';
-import { ApexOptions } from 'apexcharts';
+import { roundToPrecision } from '../utils'
+import numbro from 'numbro'
+import { ApexOptions } from 'apexcharts'
 
 const defaultTooltipFormat = {
 	trimMantissa: true,
 	thousandSeparated: true,
-};
+}
 
 const defaultYAxisLabelFormat = {
 	trimMantissa: true,
 	mantissa: 2,
 	average: true,
-};
+}
 
 const DEFAULT_CHART_CONFIG: ApexOptions = {
 	chart: {
@@ -59,8 +59,8 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
 					value: val,
 					precision: 0,
 					method: 'floor',
-				});
-				return `$${numbro(truncatedValue).format(defaultTooltipFormat)}`;
+				})
+				return `$${numbro(truncatedValue).format(defaultTooltipFormat)}`
 			},
 		},
 	},
@@ -107,7 +107,7 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
 			offsetY: 0,
 			rotate: 0,
 			formatter: (value) => {
-				return numbro(value).format(defaultYAxisLabelFormat).toUpperCase();
+				return numbro(value).format(defaultYAxisLabelFormat).toUpperCase()
 			},
 		},
 		axisBorder: {
@@ -135,7 +135,7 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
 		show: true,
 		borderColor: 'rgba(255, 255, 255, 0.3)',
 	},
-};
+}
 
 const timeCategories = [
 	{
@@ -159,24 +159,24 @@ const timeCategories = [
 		label: '1W',
 		value: 7,
 	},
-];
+]
 
 const useDefaultChartConfig = () => {
 	const ovewriteCategories = (categories: string[], count = 10) => {
 		return categories?.filter((value, index, array) => {
-			const length = array.length;
-			const desiredCount = count;
-			const step = Math.floor(length / desiredCount);
+			const length = array.length
+			const desiredCount = count
+			const step = Math.floor(length / desiredCount)
 
-			return index === 0 || index % step === 0 || index === length - 1;
-		});
-	};
+			return index === 0 || index % step === 0 || index === length - 1
+		})
+	}
 
 	return {
 		chartConfig: DEFAULT_CHART_CONFIG,
 		ovewriteCategories,
 		timeCategories,
-	};
-};
+	}
+}
 
-export default useDefaultChartConfig;
+export default useDefaultChartConfig

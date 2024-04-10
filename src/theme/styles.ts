@@ -1,4 +1,4 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools'
 export const globalStyles = {
 	colors: {
 		purple: {
@@ -107,4 +107,4 @@ export const globalStyles = {
 			},
 		}),
 	},
-};
+}

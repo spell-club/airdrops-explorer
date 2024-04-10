@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
 	createColumnHelper,
 	flexRender,
@@ -6,54 +6,54 @@ import {
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table';
-import { Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
-import numbro from 'numbro';
-import { generateIcon, roundToPrecision } from '../../utils';
-import { AIRDROPS_IMAGES } from '../../constants';
-import IconWithBg from '../IconWithBg';
+} from '@tanstack/react-table'
+import { Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import numbro from 'numbro'
+import { generateIcon, roundToPrecision } from '../../utils'
+import { AIRDROPS_IMAGES } from '../../constants'
+import IconWithBg from '../IconWithBg'
 
-import { Roboto_Mono } from 'next/font/google';
-import Link from 'next/link';
+import { Roboto_Mono } from 'next/font/google'
+import Link from 'next/link'
 
 const robotoMono = Roboto_Mono({
 	subsets: ['latin'],
 	display: 'block',
 	preload: true,
-});
+})
 
 type RowObj = {
-	address: string;
-	projects: Record<'project', string>[];
-	total_amount_usd: number;
-	total_amount: number;
-};
+	address: string
+	projects: Record<'project', string>[]
+	total_amount_usd: number
+	total_amount: number
+}
 
-const columnHelper = createColumnHelper<RowObj>();
+const columnHelper = createColumnHelper<RowObj>()
 
 interface Props {
-	tableData: RowObj[];
-	title: string;
-	isLoading: boolean;
-	tokenSymbol: string;
+	tableData: RowObj[]
+	title: string
+	isLoading: boolean
+	tokenSymbol: string
 }
 const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) => {
-	const [sorting, setSorting] = React.useState<SortingState>([]);
+	const [sorting, setSorting] = React.useState<SortingState>([])
 
 	const formatValue = (value: number) => {
 		const roundFormat = {
 			trimMantissa: true,
 			thousandSeparated: true,
-		};
+		}
 
 		const truncatedAmount = roundToPrecision({
 			value,
 			precision: 0,
 			method: 'floor',
-		});
+		})
 
-		return String(numbro(truncatedAmount).format(roundFormat));
-	};
+		return String(numbro(truncatedAmount).format(roundFormat))
+	}
 
 	const columns = [
 		columnHelper.accessor('address', {
@@ -69,8 +69,8 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 				</Text>
 			),
 			cell: (info: any) => {
-				const truncatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`;
-				const icon = generateIcon(info.row.original.address, 30);
+				const truncatedAddress = `${info.getValue().slice(0, 8)}...${info.getValue().slice(-8)}`
+				const icon = generateIcon(info.row.original.address, 30)
 
 				return (
 					<Link href={`/profile/${info.getValue()}`}>
@@ -82,7 +82,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 							</Text>
 						</Flex>
 					</Link>
-				);
+				)
 			},
 		}),
 		columnHelper.accessor('total_amount', {
@@ -98,14 +98,14 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 				</Text>
 			),
 			cell: (info) => {
-				const value = info.getValue();
+				const value = info.getValue()
 				return (
 					<Flex fontWeight={600} className={robotoMono.className}>
 						<Text>
 							{formatValue(value)} {tokenSymbol}
 						</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
 		columnHelper.accessor('total_amount_usd', {
@@ -121,16 +121,16 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 				</Text>
 			),
 			cell: (info) => {
-				const value = info.getValue();
+				const value = info.getValue()
 
 				return (
 					<Flex align="center" fontWeight={600} className={robotoMono.className}>
 						<Text>${formatValue(value)}</Text>
 					</Flex>
-				);
+				)
 			},
 		}),
-	];
+	]
 	const table = useReactTable({
 		data: tableData ?? [],
 		columns,
@@ -141,7 +141,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	});
+	})
 	return (
 		<Flex direction="column" w="100%" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex
@@ -185,7 +185,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 												}[header.column.getIsSorted() as string] ?? null}
 											</Flex>
 										</Th>
-									);
+									)
 								})}
 							</Tr>
 						))}
@@ -207,16 +207,16 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 												>
 													{flexRender(cell.column.columnDef.cell, cell.getContext())}
 												</Td>
-											);
+											)
 										})}
 									</Tr>
-								);
+								)
 							})}
 					</Tbody>
 				</Table>
 			</TableContainer>
 		</Flex>
-	);
-};
+	)
+}
 
-export default DropClaimersTable;
+export default DropClaimersTable

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
 	Button,
 	Flex,
@@ -8,31 +8,31 @@ import {
 	MenuItem,
 	MenuList,
 	useColorModeValue,
-} from '@chakra-ui/react';
-import { MdOutlineCalendarToday } from 'react-icons/md';
+} from '@chakra-ui/react'
+import { MdOutlineCalendarToday } from 'react-icons/md'
 
 interface MenuItem {
-	label: string;
-	value: number;
+	label: string
+	value: number
 }
 
 interface Props {
-	items: MenuItem[];
-	onItemSelected: (value: MenuItem) => void;
-	selected: MenuItem;
+	items: MenuItem[]
+	onItemSelected: (value: MenuItem) => void
+	selected: MenuItem
 }
 
 const SelectTimelineMenu = ({ items, onItemSelected, selected }: Props) => {
-	const [selectedItem, setSelectedItem] = useState(selected);
-	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
-	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white');
-	const bgList = useColorModeValue('white', 'whiteAlpha.100');
-	const bgShadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
-	const textColor = useColorModeValue('secondaryGray.500', 'white');
+	const [selectedItem, setSelectedItem] = useState(selected)
+	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white')
+	const bgList = useColorModeValue('white', 'whiteAlpha.100')
+	const bgShadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset')
+	const textColor = useColorModeValue('secondaryGray.500', 'white')
 	const textHover = useColorModeValue(
 		{ color: 'secondaryGray.900', bg: 'unset' },
 		{ color: 'secondaryGray.500', bg: 'unset' },
-	);
+	)
 
 	return (
 		<Menu matchWidth>
@@ -77,18 +77,18 @@ const SelectTimelineMenu = ({ items, onItemSelected, selected }: Props) => {
 								display="flex"
 								justifyContent="center"
 								onClick={() => {
-									setSelectedItem(item);
-									onItemSelected(item);
+									setSelectedItem(item)
+									onItemSelected(item)
 								}}
 							>
 								{item.label}
 							</MenuItem>
-						);
+						)
 					}
 				})}
 			</MenuList>
 		</Menu>
-	);
-};
+	)
+}
 
-export default SelectTimelineMenu;
+export default SelectTimelineMenu

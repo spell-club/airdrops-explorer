@@ -1,10 +1,10 @@
 type RowObj = {
-	name: [string, boolean];
-	progress: string;
-	quantity: number;
-	date: string;
-	info: boolean;
-};
+	name: [string, boolean]
+	progress: string
+	quantity: number
+	date: string
+	info: boolean
+}
 
 const tableDataCheck: RowObj[] = [
 	{
@@ -42,6 +42,6 @@ const tableDataCheck: RowObj[] = [
 		date: '24 Oct 2022',
 		info: true,
 	},
-];
+]
 
-export default tableDataCheck;
+export default tableDataCheck

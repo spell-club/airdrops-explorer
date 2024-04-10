@@ -1,4 +1,4 @@
-'use client';
+'use client'
 // Chakra imports
 import {
 	AvatarGroup,
@@ -12,25 +12,25 @@ import {
 	Text,
 	useColorModeValue,
 	AspectRatio,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 // Custom components
-import Card from 'components/card/Card';
-import { useRouter } from 'next/navigation';
+import Card from 'components/card/Card'
+import { useRouter } from 'next/navigation'
 // Assets
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function NFT(props: {
-	image: string | any;
-	name: string;
-	author: string;
-	bidders: string[] | any[];
-	download: string;
-	currentbid: string | number;
+	image: string | any
+	name: string
+	author: string
+	bidders: string[] | any[]
+	download: string
+	currentbid: string | number
 }) {
-	const { image, name, author, bidders, download, currentbid } = props;
-	const textColor = useColorModeValue('navy.700', 'white');
-	const textColorBid = useColorModeValue('brand.500', 'white');
-	const { push } = useRouter();
+	const { image, name, author, bidders, download, currentbid } = props
+	const textColor = useColorModeValue('navy.700', 'white')
+	const textColorBid = useColorModeValue('brand.500', 'white')
+	const { push } = useRouter()
 	return (
 		<Card p="20px">
 			<Flex direction={{ base: 'column' }} justify="center">
@@ -145,5 +145,5 @@ export default function NFT(props: {
 				</Flex>
 			</Flex>
 		</Card>
-	);
+	)
 }

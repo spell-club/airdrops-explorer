@@ -1,5 +1,5 @@
-import { AxiosInstance } from 'axios';
-import { HistoricalValue } from '../types';
+import { AxiosInstance } from 'axios'
+import { HistoricalValue } from '../types'
 
 const getProjectHistoricalValueRequest = async (
 	projectId: number | string,
@@ -9,12 +9,12 @@ const getProjectHistoricalValueRequest = async (
 		apiClient
 			.get(`/airdrop/project/${projectId}/historical_value`)
 			.then((response) => {
-				resolve(response.data);
+				resolve(response.data)
 			})
 			.catch((error) => {
-				reject(error);
-			});
-	});
-};
+				reject(error)
+			})
+	})
+}
 
-export default getProjectHistoricalValueRequest;
+export default getProjectHistoricalValueRequest

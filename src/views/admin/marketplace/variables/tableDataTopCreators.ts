@@ -1,12 +1,12 @@
-import NFT4 from 'img/nfts/Nft4.png';
-import NFT5 from 'img/nfts/Nft5.png';
-import NFT6 from 'img/nfts/Nft6.png';
+import NFT4 from 'img/nfts/Nft4.png'
+import NFT5 from 'img/nfts/Nft5.png'
+import NFT6 from 'img/nfts/Nft6.png'
 
 type RowObj = {
-	name: string[];
-	artworks: number;
-	rating: number;
-};
+	name: string[]
+	artworks: number
+	rating: number
+}
 
 export const tableColumnsTopClaimers = [
 	{
@@ -56,7 +56,7 @@ export const tableColumnsTopClaimers = [
 
 		value: 10000,
 	},
-];
+]
 
 const tableColumnsTopCreators: RowObj[] = [
 	{
@@ -109,6 +109,6 @@ const tableColumnsTopCreators: RowObj[] = [
 		artworks: 2907,
 		rating: 38,
 	},
-];
+]
 
-export default tableColumnsTopCreators;
+export default tableColumnsTopCreators

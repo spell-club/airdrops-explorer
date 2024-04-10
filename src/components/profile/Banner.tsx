@@ -1,19 +1,19 @@
 // Chakra imports
-import { Box, Flex, Avatar, Text, useColorModeValue, Link } from '@chakra-ui/react';
-import Card from '../card/Card';
-import { VSeparator } from '../separator/Separator';
-import { generateIcon, getProminentColor } from '../../utils';
-import IconWithBg from 'components/IconWithBg';
-import { useState } from 'react';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { Box, Flex, Avatar, Text, useColorModeValue, Link } from '@chakra-ui/react'
+import Card from '../card/Card'
+import { VSeparator } from '../separator/Separator'
+import { generateIcon, getProminentColor } from '../../utils'
+import IconWithBg from 'components/IconWithBg'
+import { useState } from 'react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 export default function Banner(props: {
-	banner: string;
-	avatar: string | any;
-	name: string;
-	claimedDrops: number;
-	missedDrops: number;
-	[x: string]: any;
+	banner: string
+	avatar: string | any
+	name: string
+	claimedDrops: number
+	missedDrops: number
+	[x: string]: any
 }) {
 	const {
 		banner,
@@ -26,15 +26,15 @@ export default function Banner(props: {
 		missedDrops,
 		following,
 		...rest
-	} = props;
+	} = props
 
-	const [profileColor, setProfileColor] = useState('brand.500');
-	const icon = generateIcon(name, 30);
+	const [profileColor, setProfileColor] = useState('brand.500')
+	const icon = generateIcon(name, 30)
 	getProminentColor(icon).then((c) => {
-		setProfileColor(String(c));
-	});
+		setProfileColor(String(c))
+	})
 
-	const explorerLink = `https://www.mintscan.io/cosmos/address/${name}`;
+	const explorerLink = `https://www.mintscan.io/cosmos/address/${name}`
 
 	return (
 		<Card mb="20px" alignItems="center" {...rest} pt={0} px={0}>
@@ -94,5 +94,5 @@ export default function Banner(props: {
 				</Flex>
 			</Flex>
 		</Card>
-	);
+	)
 }

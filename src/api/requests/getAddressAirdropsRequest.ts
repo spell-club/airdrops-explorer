@@ -1,5 +1,5 @@
-import { AddressAirdrop } from '../types';
-import { AxiosInstance } from 'axios';
+import { AddressAirdrop } from '../types'
+import { AxiosInstance } from 'axios'
 
 const getAddressAirdropsRequest = async (
 	address: string,
@@ -9,12 +9,12 @@ const getAddressAirdropsRequest = async (
 		apiClient
 			.get(`/airdrop/address/${address}/drops`)
 			.then((response) => {
-				resolve(response.data);
+				resolve(response.data)
 			})
 			.catch((error) => {
-				reject(error);
-			});
-	});
-};
+				reject(error)
+			})
+	})
+}
 
-export default getAddressAirdropsRequest;
+export default getAddressAirdropsRequest
