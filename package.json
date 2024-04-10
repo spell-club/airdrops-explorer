@@ -9,7 +9,8 @@
 		"lint": "next lint",
 		"predeploy": "yarn run build",
 		"deploy": "gh-pages -d build",
-		"prettier": "prettier --write ."
+		"prettier": "prettier --write .",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@chakra-ui/icons": "^2.0.19",
@@ -35,7 +36,6 @@
 		"jdenticon": "^3.2.0",
 		"next": "14.0.2",
 		"numbro": "^2.4.0",
-		"prettier": "^3.2.5",
 		"react": "18.2.0",
 		"react-apexcharts": "^1.4.0",
 		"react-calendar": "^3.7.0",
@@ -57,7 +57,11 @@
 		"@types/react-table": "^7.7.12",
 		"eslint": "^8.23.0",
 		"eslint-config-next": "^12.2.5",
-		"gh-pages": "^3.2.3"
+		"eslint-config-prettier": "^9.1.0",
+		"gh-pages": "^3.2.3",
+		"husky": "^8.0.0",
+		"lint-staged": "^15.2.2",
+		"prettier": "^3.2.5"
 	},
 	"browserslist": {
 		"production": [
