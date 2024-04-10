@@ -7,6 +7,7 @@ interface Props {
 
 const IconWithBg = chakra(({ className, icon }: Props) => {
 	var a = 3
+	var b = 3
 
 	return (
 		<Flex
