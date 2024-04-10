@@ -3,6 +3,7 @@
 	"rules": {
 		"react/jsx-key": "warn",
 		"no-console": "warn",
-		"no-debugger": "error"
+		"no-debugger": "error",
+		"no-unused-vars": "warn"
 	}
 }
