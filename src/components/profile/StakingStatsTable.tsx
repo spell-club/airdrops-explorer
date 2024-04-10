@@ -8,11 +8,9 @@ import {
 	useReactTable,
 } from '@tanstack/react-table';
 import {
-	Box,
 	Flex,
-	Icon,
-	Progress,
 	Table,
+	TableContainer,
 	Tbody,
 	Td,
 	Text,
@@ -21,9 +19,7 @@ import {
 	Tr,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import { MdCancel, MdCheckCircle, MdOutlineError } from 'react-icons/md';
 import Card from '../card/Card';
-import Menu from '../menu/MainMenu';
 
 type RowObj = {
 	pageName: string;
@@ -217,7 +213,8 @@ const StakingStatsTable = () => {
 					Atom staking stats
 				</Text>
 			</Flex>
-			<Box>
+
+			<TableContainer>
 				<Table variant="simple" mb="24px" mt="12px">
 					<Thead>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -274,7 +271,7 @@ const StakingStatsTable = () => {
 							})}
 					</Tbody>
 				</Table>
-			</Box>
+			</TableContainer>
 		</Card>
 	);
 };

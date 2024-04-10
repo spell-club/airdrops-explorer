@@ -4,6 +4,7 @@ import {
 	Icon,
 	Progress,
 	Table,
+	TableContainer,
 	Tbody,
 	Td,
 	Text,
@@ -170,7 +171,8 @@ export default function ComplexTable(props: { tableData: any }) {
 				</Text>
 				<Menu />
 			</Flex>
-			<Box>
+
+			<TableContainer>
 				<Table variant="simple" color="gray.500" mb="24px" mt="12px">
 					<Thead>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -227,7 +229,7 @@ export default function ComplexTable(props: { tableData: any }) {
 							})}
 					</Tbody>
 				</Table>
-			</Box>
+			</TableContainer>
 		</Card>
 	);
 }

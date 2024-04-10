@@ -7,26 +7,7 @@ import {
 	SortingState,
 	useReactTable,
 } from '@tanstack/react-table';
-import {
-	Avatar,
-	AvatarGroup,
-	Box,
-	Button,
-	Flex,
-	Table,
-	Tbody,
-	Td,
-	Text,
-	Th,
-	Thead,
-	Tr,
-	useColorModeValue,
-} from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-import useClientApi from '../../hooks/useClientApi';
-import NFT1 from '../../img/nfts/Nft1.png';
-import NFT2 from '../../img/nfts/Nft2.png';
-import { useQuery } from '@tanstack/react-query';
+import { Flex, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import numbro from 'numbro';
 import { generateIcon, roundToPrecision } from '../../utils';
 import { AIRDROPS_IMAGES } from '../../constants';
@@ -174,7 +155,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 					{title}
 				</Text>
 			</Flex>
-			<Box>
+			<TableContainer>
 				<Table variant="simple">
 					<Thead>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -233,7 +214,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 							})}
 					</Tbody>
 				</Table>
-			</Box>
+			</TableContainer>
 		</Flex>
 	);
 };

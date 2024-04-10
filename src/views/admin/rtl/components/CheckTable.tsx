@@ -1,6 +1,5 @@
 import {
 	Flex,
-	Box,
 	Table,
 	Checkbox,
 	Tbody,
@@ -10,6 +9,7 @@ import {
 	Thead,
 	Tr,
 	useColorModeValue,
+	TableContainer,
 } from '@chakra-ui/react';
 import * as React from 'react';
 
@@ -140,7 +140,8 @@ export default function CheckTable(props: { tableData: any }) {
 				</Text>
 				<Menu />
 			</Flex>
-			<Box>
+
+			<TableContainer>
 				<Table variant="simple" color="gray.500" mb="24px" mt="12px">
 					<Thead>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -197,7 +198,7 @@ export default function CheckTable(props: { tableData: any }) {
 							})}
 					</Tbody>
 				</Table>
-			</Box>
+			</TableContainer>
 		</Card>
 	);
 }

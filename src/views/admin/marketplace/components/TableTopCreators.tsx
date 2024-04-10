@@ -1,10 +1,10 @@
 import {
 	Avatar,
-	Box,
 	Button,
 	Flex,
 	Progress,
 	Table,
+	TableContainer,
 	Tbody,
 	Td,
 	Text,
@@ -135,7 +135,8 @@ export default function TopCreatorTable(props: { tableData: any }) {
 				</Text>
 				<Button variant="action">See all</Button>
 			</Flex>
-			<Box>
+
+			<TableContainer>
 				<Table variant="simple" color="gray.500" mt="12px">
 					<Thead>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -192,7 +193,7 @@ export default function TopCreatorTable(props: { tableData: any }) {
 							})}
 					</Tbody>
 				</Table>
-			</Box>
+			</TableContainer>
 		</Flex>
 	);
 }
