@@ -5,7 +5,7 @@ import Card from 'components/card/Card'
 import { useCalculatorContext } from 'contexts/CalculatorContext'
 import AprChart from 'components/calculator/AprChart'
 import RewardsChart from 'components/calculator/RewardsChart'
-import CalculatorTable from 'components/calculator/CalculatorTable'
+import CalculatorSummary from '../../components/calculator/CalculatorSummary'
 
 const Page = () => {
 	const { isLoading, isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
@@ -42,7 +42,7 @@ const Page = () => {
 			{isDataLoaded && aprs.length && rewardsUSD.length ? (
 				<Flex flexDir="column" gap={5} align="center">
 					<Box w="50%">
-						<CalculatorTable />
+						<CalculatorSummary />
 					</Box>
 					<Flex gap={5} w="100%">
 						<AprChart dates={dates} values={aprs} />

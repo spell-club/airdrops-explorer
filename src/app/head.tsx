@@ -20,6 +20,9 @@ export default function Head() {
 
 			<meta name="theme-color" content="#000000" />
 
+			<meta property="og:title" content="SpellDrop" />
+			<meta property="og:description" content="Explore Cosmos Airdrops" />
+
 			<Script
 				async
 				strategy="lazyOnload"

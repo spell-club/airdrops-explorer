@@ -9,13 +9,14 @@ import { useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 export default function CalculatorBanner() {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const { push } = useRouter()
-	const { setAmount } = useCalculatorDispatchContext()
+	const { setAmount, calculate } = useCalculatorDispatchContext()
 	const [isLoading, setIsLoading] = React.useState(false)
 
 	const onCalculate = () => {
 		if (!inputRef.current?.value) return
 		setIsLoading(true)
 		setAmount(Number(inputRef.current?.value))
+		calculate()
 		push('/calculator')
 		setTimeout(() => setIsLoading(false), 1000)
 	}
@@ -54,7 +55,7 @@ export default function CalculatorBanner() {
 						fontWeight="500"
 						_placeholder={{ color: 'gray.400', fontSize: '14px' }}
 						borderRadius={'30px'}
-						placeholder={'Enter amount...'}
+						placeholder={'Atom'}
 					/>
 					<Button
 						boxShadow=""

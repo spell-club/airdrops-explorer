@@ -1,15 +1,24 @@
-import { useRef, RefObject, useEffect } from 'react'
-import { Text, Button, Flex, Input, FormLabel, FormControl } from '@chakra-ui/react'
+import { RefObject, ChangeEvent } from 'react'
+import {
+	Text,
+	Button,
+	Flex,
+	Input,
+	FormLabel,
+	FormControl,
+	InputGroup,
+	InputRightAddon,
+} from '@chakra-ui/react'
 import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
-import { useQueryClient } from '@tanstack/react-query'
 import { CalendarIcon } from '@chakra-ui/icons'
 import { formatValue } from '../../utils'
 
 interface CalculatorFormInputProps {
-	inputRef: RefObject<HTMLInputElement>
+	inputRef?: RefObject<HTMLInputElement>
 	placeholder: string
 	id: string
 	label: string
+	adon?: string
 	[x: string]: unknown
 }
 
@@ -18,12 +27,14 @@ const CalculatorFormInput = ({
 	placeholder,
 	id,
 	label,
+	adon,
 	...rest
 }: CalculatorFormInputProps) => (
 	<FormControl>
 		<FormLabel ml={2} htmlFor={id} fontSize="sm" fontWeight="bold" _hover={{ cursor: 'pointer' }}>
 			{label}
 		</FormLabel>
+
 		<Input
 			id={id}
 			type="number"
@@ -46,36 +57,15 @@ const CalculatorFormInput = ({
 )
 
 const CalculatorForm = () => {
-	const amountInputRef = useRef<HTMLInputElement>(null)
-	const feeInputRef = useRef<HTMLInputElement>(null)
-	const { setAmount, setValidatorFee } = useCalculatorDispatchContext()
-	const { isLoading, currentAmount, initialAmountUsd } = useCalculatorContext()
-	const client = useQueryClient()
-
-	useEffect(() => {
-		if (currentAmount) {
-			amountInputRef.current!.value = currentAmount.toString()
-		}
-	}, [])
-
-	const handleCalculate = () => {
-		if (
-			!amountInputRef.current?.value ||
-			Number(amountInputRef.current?.value) <= 0 ||
-			Number(feeInputRef.current?.value) < 0
-		) {
-			client.invalidateQueries({ queryKey: ['calculator'] })
-			return
-		}
-
-		setAmount(Number(amountInputRef.current?.value))
-		setValidatorFee(Number(feeInputRef.current?.value))
-	}
+	const { setAmount, setValidatorFee, calculate, clearData } = useCalculatorDispatchContext()
+	const { isLoading, currentAmount, initialAmountUsd, validatorFee, startDate } =
+		useCalculatorContext()
 
 	return (
 		<Flex align="center" flexDir="column" gap={4} w="400px">
 			<CalculatorFormInput
-				inputRef={amountInputRef}
+				value={currentAmount || ''}
+				onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}
 				id="amount"
 				placeholder="Atom"
 				min={0}
@@ -89,11 +79,13 @@ const CalculatorForm = () => {
 			) : null}
 
 			<CalculatorFormInput
-				inputRef={feeInputRef}
+				value={validatorFee}
+				onChange={(e: ChangeEvent<HTMLInputElement>) => setValidatorFee(Number(e.target.value))}
 				id="fee"
 				placeholder="%"
 				min={0}
 				label="Validator fee"
+				adon="%"
 			/>
 
 			<Flex flexDir="column" gap={1} w="100%">
@@ -115,7 +107,7 @@ const CalculatorForm = () => {
 					px={4}
 				>
 					<Text fontSize={14} color="gray.400">
-						01.01.2021
+						{startDate}
 					</Text>
 					<CalendarIcon pos="absolute" color="gray.400" right={5} />
 				</Flex>
@@ -130,7 +122,7 @@ const CalculatorForm = () => {
 				borderRadius="70px"
 				px="24px"
 				py="5px"
-				onClick={handleCalculate}
+				onClick={() => calculate()}
 				isLoading={isLoading}
 			>
 				Calculate

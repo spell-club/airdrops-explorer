@@ -2,9 +2,9 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import LineChart from 'components/UI/charts/LineChart'
 import React, { useMemo, useState } from 'react'
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import Card from '../card/Card'
-import useAirdropsDates from '../../hooks/useAirdropsDates'
+import useAirdropsDates from 'hooks/useAirdropsDates'
 
 interface Props {
 	values: number[]
@@ -30,7 +30,7 @@ const RewardsChart = ({ values, dates }: Props) => {
 	}, [dates, selectedTime])
 
 	return (
-		<Card w="100%" alignItems="center" key="rewards">
+		<Card w="100%" alignItems="center">
 			<Box justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
 				<Flex w="100%" justify="space-between" align="center">
 					<Text fontSize="xl" fontWeight="600" alignSelf="start" pb={2}>

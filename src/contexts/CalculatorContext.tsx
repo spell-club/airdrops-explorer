@@ -1,7 +1,7 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react'
+import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
 import useClientApi from '../hooks/useClientApi'
-import { useQuery } from '@tanstack/react-query'
-import { AirdropDetails } from 'api/types'
+import { AirdropDetails, CalculatorResponse } from 'api/types'
+import { useDebouncedValue } from '../hooks/useDebounce'
 
 interface CalculatorContextState {
 	isDataLoaded: boolean
@@ -13,21 +13,23 @@ interface CalculatorContextState {
 	totalRewardsUSD: number
 	airdropsDetails: AirdropDetails[]
 	currentAmount: number
+	validatorFee: number
 	totalUsd: number
 	roi: number
 	initialAmountUsd?: number
+	startDate: string
 }
 
 interface CalculatorDispatchContextState {
 	setAmount: (amount: number) => void
 	setValidatorFee: (fee: number) => void
+	calculate: () => void
+	clearData: () => void
 }
 
-const CalculatorContext = createContext<CalculatorContextState>({} as CalculatorContextState)
+const CalculatorContext = createContext<Partial<CalculatorContextState>>({})
 
-const CalculatorDispatchContext = createContext<CalculatorDispatchContextState>(
-	{} as CalculatorDispatchContextState,
-)
+const CalculatorDispatchContext = createContext<Partial<CalculatorDispatchContextState>>({})
 
 const useCalculatorContext = () => {
 	const context = useContext(CalculatorContext)
@@ -50,42 +52,29 @@ const useCalculatorDispatchContext = () => {
 const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const { clientApi } = useClientApi()
 	const [amount, setAmount] = useState<number>(0)
-	const [validatorFee, setValidatorFee] = useState<number>(0)
+	const [validatorFee, setValidatorFee] = useState<number>(5)
+	const [calculatedData, setCalculatedData] = useState<CalculatorResponse | null>(null)
+	const [isLoading, setIsLoading] = useState(false)
+	// const debouncedValidatorFee = useDebouncedValue(validatorFee, 100)
 
-	const {
-		data: calculateData,
-		isLoading,
-		isFetching,
-	} = useQuery({
-		queryKey: ['calculator', amount],
-		queryFn: () => clientApi.calculateAirdrop(amount),
-		enabled: Boolean(amount),
-		refetchOnWindowFocus: false,
-	})
+	const calculate = useCallback(async () => {
+		try {
+			setIsLoading(true)
+			const response = await clientApi.calculateAirdrop(amount)
+			setCalculatedData(response)
+		} finally {
+			setIsLoading(false)
+		}
+	}, [amount, clientApi])
 
-	const {
-		dates,
-		aprs,
-		rewardsUSD,
-		totalRewardsUSD,
-		totalAirdropUSD,
-		airdropsDetails,
-		totalUsd,
-		totalRewardsWithFee,
-	} = useMemo(() => {
+	// data for charts
+	const { dates, aprs, rewardsUSD } = useMemo(() => {
 		const dates: string[] = []
 		const aprs: number[] = []
 		const rewardsUSD: number[] = []
 		const airdrops: number[] = []
-		const lastElement = calculateData?.details[calculateData?.details?.length - 1]
-		const totalAirdropUSD = lastElement?.total_airdrops_usd
-		const totalRewardsUSD = lastElement?.total_rewards_usd
-		const airdropsDetails = lastElement?.airdrops_details
-		const totalRewardsWithFee =
-			lastElement?.total_rewards_usd - (lastElement?.total_rewards_usd * validatorFee) / 100
-		const totalUsd = lastElement?.total_airdrops_usd + totalRewardsWithFee
 
-		calculateData?.details?.forEach((data) => {
+		calculatedData?.details?.forEach((data) => {
 			dates.push(new Date(data.date).toLocaleDateString())
 			aprs.push(data.apr)
 			rewardsUSD.push(data.total_usd)
@@ -97,34 +86,88 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			aprs,
 			rewardsUSD,
 			airdrops,
-			totalAirdropUSD,
-			totalRewardsUSD,
-			airdropsDetails,
-			totalUsd,
-			totalRewardsWithFee,
 		}
-	}, [calculateData?.details, validatorFee])
+	}, [calculatedData?.details])
 
-	const isDataLoaded = calculateData?.details?.length > 0 && !isLoading
+	// data for summary
+	const { totalAirdropUSD, startDate, airdropsDetails, totalUsd, totalRewardsWithFee } =
+		useMemo(() => {
+			const lastElement = calculatedData?.details[calculatedData?.details?.length - 1]
+			const totalAirdropUSD = lastElement?.total_airdrops_usd
+			const totalRewardsUSD = lastElement?.total_rewards_usd
+			const airdropsDetails = lastElement?.airdrops_details
+			const totalRewardsWithFee =
+				lastElement?.total_rewards_usd - (lastElement?.total_rewards_usd * validatorFee) / 100
+			const totalUsd = lastElement?.total_airdrops_usd + totalRewardsWithFee
 
-	return (
-		<CalculatorContext.Provider
-			value={{
-				currentAmount: amount,
-				isDataLoaded,
-				dates,
-				aprs,
-				isLoading: isLoading || isFetching,
-				rewardsUSD,
+			const startDate = calculatedData?.details[0]?.date
+				? new Date(calculatedData?.details[0]?.date).toLocaleDateString()
+				: '01.01.2021'
+
+			return {
 				totalAirdropUSD,
-				totalRewardsUSD: totalRewardsWithFee,
+				totalRewardsUSD,
 				airdropsDetails,
 				totalUsd,
-				roi: Number(calculateData?.roi?.toFixed(2)) || 0,
-				initialAmountUsd: calculateData?.initial_investment_usd,
-			}}
-		>
-			<CalculatorDispatchContext.Provider value={{ setAmount, setValidatorFee }}>
+				totalRewardsWithFee,
+				startDate,
+			}
+		}, [calculatedData?.details, validatorFee])
+
+	const isDataLoaded = calculatedData?.details?.length > 0 && !isLoading
+
+	const clearData = useCallback(() => {
+		setCalculatedData(null)
+	}, [])
+
+	const value = useMemo(
+		() => ({
+			currentAmount: amount,
+			isDataLoaded,
+			dates,
+			aprs,
+			isLoading,
+			rewardsUSD,
+			totalAirdropUSD,
+			totalRewardsUSD: totalRewardsWithFee,
+			airdropsDetails,
+			totalUsd,
+			roi: Number(calculatedData?.roi?.toFixed(2)) || 0,
+			initialAmountUsd: calculatedData?.initial_investment_usd,
+			validatorFee: validatorFee,
+			startDate,
+		}),
+		[
+			airdropsDetails,
+			amount,
+			aprs,
+			calculatedData?.initial_investment_usd,
+			calculatedData?.roi,
+			dates,
+			isDataLoaded,
+			isLoading,
+			rewardsUSD,
+			totalAirdropUSD,
+			totalRewardsWithFee,
+			totalUsd,
+			validatorFee,
+			startDate,
+		],
+	)
+
+	const dispatchValue = useMemo(
+		() => ({
+			setAmount,
+			setValidatorFee,
+			calculate,
+			clearData,
+		}),
+		[setAmount, setValidatorFee, calculate, clearData],
+	)
+
+	return (
+		<CalculatorContext.Provider value={value}>
+			<CalculatorDispatchContext.Provider value={dispatchValue}>
 				{children}
 			</CalculatorDispatchContext.Provider>
 		</CalculatorContext.Provider>
