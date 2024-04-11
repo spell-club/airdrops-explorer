@@ -1,12 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import {
-	AddressAirdrop,
-	AddressAsset,
-	AddressInfo,
-	ClientApiInterface,
-	HistoricalValue,
-	TopParticipant,
-} from './types'
+import { ClientApiInterface } from './types'
 import getTopWinnersAndLosersRequest from './requests/getTopWinnersAndLosersRequest'
 import getAirdropProjectsRequest from './requests/getAirdropProjectsRequest'
 import getProjectsHistoricalValueRequest from './requests/getProjectsHistoricalValueRequets'
