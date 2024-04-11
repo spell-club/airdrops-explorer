@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import Card from '../card/Card'
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import LineChart from '../charts/LineChart'
+import { LineChart } from '../UI/charts'
 import { useQuery } from '@tanstack/react-query'
 import useClientApi from '../../hooks/useClientApi'
 import { roundToPrecision } from '../../utils'
-import SelectTimelineMenu from '../SelectTimelineMenu'
+import SelectTimelineMenu from '../UI/menu/SelectTimelineMenu'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
 import numbro from 'numbro'
 

@@ -1,9 +1,8 @@
-// Chakra imports
-import { Flex, Stat, StatLabel, StatNumber, useColorModeValue, Text } from '@chakra-ui/react'
-// Custom components
+import { Flex, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react'
+
 import Card from 'components/card/Card'
 
-export default function Default(props: {
+export default function MiniStatistics(props: {
 	startContent?: JSX.Element
 	endContent?: JSX.Element
 	name: string

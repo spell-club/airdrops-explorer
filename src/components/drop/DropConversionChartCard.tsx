@@ -1,9 +1,9 @@
-import React from 'react'
-import Card from '../card/Card'
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import CircularChart from '../charts/DonutChart'
-import { VSeparator } from '../separator/Separator'
 import numbro from 'numbro'
+
+import Card from '../card/Card'
+import { DonutChart } from '../UI/charts'
+import { VSeparator } from '../UI/separator'
 import { roundToPrecision } from 'utils'
 import { AirdropProject } from 'api/types'
 
@@ -62,7 +62,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 				</Text>
 				<Flex gap={5}>
 					<Flex flexDir="column" align="center" gap={4}>
-						<CircularChart value={conversion}>
+						<DonutChart value={conversion}>
 							<Flex flexDir="column" align="center">
 								<Text color="gray.400" fontSize={14}>
 									Claimed Amount
@@ -71,11 +71,11 @@ const DropConversionChartCard = ({ project }: Props) => {
 									{conversion}%
 								</Text>
 							</Flex>
-						</CircularChart>
+						</DonutChart>
 					</Flex>
 
 					{isRelocatedStatExist && (
-						<CircularChart value={claimersRate} color="#39B8FF">
+						<DonutChart value={claimersRate} color="#39B8FF">
 							<Flex flexDir="column" align="center">
 								<Text color="gray.400" fontSize={14}>
 									Claimers
@@ -84,7 +84,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 									{claimersRate}%
 								</Text>
 							</Flex>
-						</CircularChart>
+						</DonutChart>
 					)}
 				</Flex>
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
-import IconBox from '../icons/IconBox'
+import IconBox from '../UI/icon/iconBox'
 import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md'
 import { formatValue } from '../../utils'
 import { useQuery } from '@tanstack/react-query'

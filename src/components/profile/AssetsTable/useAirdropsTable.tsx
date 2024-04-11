@@ -1,12 +1,22 @@
-import { createColumnHelper } from '@tanstack/react-table'
-import { AddressAirdrop } from 'api/types'
+import { useState } from 'react'
+import {
+	SortingState,
+	createColumnHelper,
+	getCoreRowModel,
+	getSortedRowModel,
+	useReactTable,
+} from '@tanstack/react-table'
 import { Flex, Link, Text, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
+
+import { AddressAirdrop } from 'api/types'
 import { formatValue } from 'utils'
 
-const useAirdropsTable = () => {
+export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 	const columnHelper = createColumnHelper<AddressAirdrop>()
+
 	const textColor = useColorModeValue('secondaryGray.900', 'white')
+
+	const [sorting, setSorting] = useState<SortingState>([])
 
 	const columns = [
 		columnHelper.accessor('name', {
@@ -168,7 +178,20 @@ const useAirdropsTable = () => {
 		}),
 	]
 
-	return { columns }
-}
+	const table = useReactTable({
+		data: airdrops ?? [],
+		columns,
+		state: {
+			sorting,
+		},
+		onSortingChange: setSorting,
+		getCoreRowModel: getCoreRowModel(),
+		getSortedRowModel: getSortedRowModel(),
+		debugTable: true,
+	})
 
-export default useAirdropsTable
+	const headers = table.getHeaderGroups()
+	const rows = table.getRowModel()
+
+	return { ...table, headers, rows }
+}

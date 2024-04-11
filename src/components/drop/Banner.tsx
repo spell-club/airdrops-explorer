@@ -1,7 +1,7 @@
 // Chakra imports
 import { Box, Flex, Avatar, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from '../card/Card'
-import { VSeparator } from '../separator/Separator'
+import { VSeparator } from '../UI/separator'
 
 export default function Banner(props: {
 	banner: string

@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react'
-import Card from './card/Card'
-import { AspectRatio, Box, Button, Flex, Image, Text, Link as ChakraLink } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import numbro from 'numbro'
 import Link from 'next/link'
+
+import Card from './card/Card'
 
 interface Props {
 	id: number

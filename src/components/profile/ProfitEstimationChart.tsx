@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
-import Card from '../card/Card'
 import { Flex, Text } from '@chakra-ui/react'
-import CircularChart from '../charts/DonutChart'
-import { VSeparator } from '../separator/Separator'
+
+import { DonutChart } from '../UI/charts'
+import { VSeparator } from '../UI/separator'
+import Card from '../card/Card'
 import { formatValue, roundToPrecision } from '../../utils'
 
 interface Props {
@@ -28,7 +29,7 @@ const ProfitEstimationChart = ({ totalAllocatedUsd, totalClaimedUsd }: Props) =>
 					Allocated/Claimed
 				</Text>
 
-				<CircularChart value={conversion}>
+				<DonutChart value={conversion}>
 					<Flex flexDir="column" align="center">
 						<Text color="gray.400" fontSize={14}>
 							Claim Rate
@@ -37,7 +38,7 @@ const ProfitEstimationChart = ({ totalAllocatedUsd, totalClaimedUsd }: Props) =>
 							{conversion}%
 						</Text>
 					</Flex>
-				</CircularChart>
+				</DonutChart>
 
 				<Flex
 					gap={{ base: 2, md: 5 }}

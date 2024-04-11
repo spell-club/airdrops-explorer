@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
-import Card from '../card/Card'
-import LineChart from '../charts/LineChart'
-import useClientApi from '../../hooks/useClientApi'
 import { useQuery } from '@tanstack/react-query'
+
+import Card from '../card/Card'
+import LineChart from '../UI/charts/LineChart'
+import useClientApi from '../../hooks/useClientApi'
 import { roundToPrecision } from '../../utils'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
-import SelectTimelineMenu from '../SelectTimelineMenu'
+import SelectTimelineMenu from '../UI/menu/SelectTimelineMenu'
 import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 interface Props {
