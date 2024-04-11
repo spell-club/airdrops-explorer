@@ -24,18 +24,22 @@ export default function Banner(props: {
 				w="100%"
 				borderBottomRadius={0}
 			/>
-			<Avatar
-				mx="auto"
-				src={avatar}
-				h="115px"
-				w="115px"
-				mt="-63px"
-				border="4px solid"
-				borderColor="navy.700!important"
-			/>
+			{avatar && (
+				<Avatar
+					mx="auto"
+					src={avatar}
+					h="115px"
+					w="115px"
+					mt="-63px"
+					border="4px solid"
+					borderColor="navy.700!important"
+				/>
+			)}
+
 			<Text fontWeight="bold" fontSize={26} mt="10px">
-				{name}
+				{name || 'No data'}
 			</Text>
+
 			<Flex
 				w="max-content"
 				mx="auto"
@@ -46,7 +50,7 @@ export default function Banner(props: {
 			>
 				<Flex mx="auto" alignItems="center" flexDirection="column">
 					<Text fontSize="2xl" fontWeight="700">
-						{airdropDate}
+						{airdropDate || 'No data'}
 					</Text>
 					<Text color="gray.400" fontSize="sm" fontWeight="400">
 						Airdrop Date
@@ -56,7 +60,7 @@ export default function Banner(props: {
 
 				<Flex mx="auto" alignItems="center" flexDirection="column">
 					<Text fontSize="2xl" fontWeight="700">
-						{snapshotDate}
+						{snapshotDate || 'No data'}
 					</Text>
 					<Text color="gray.400" fontSize="sm" fontWeight="400">
 						Snapshot Date
@@ -67,7 +71,7 @@ export default function Banner(props: {
 
 				<Flex mx="auto" alignItems="center" flexDirection="column">
 					<Text fontSize="2xl" fontWeight="700">
-						{users}
+						{users || 'No data'}
 					</Text>
 					<Text color="gray.400" fontSize="sm" fontWeight="400">
 						Claimers

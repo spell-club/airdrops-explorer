@@ -7,7 +7,7 @@ const getAirdropProjectRequest = async (
 ): Promise<AirdropProject> => {
 	return new Promise((resolve, reject) => {
 		apiClient
-			.get(`/airdrop/projec/${projectId}`)
+			.get(`/airdrop/project/${projectId}`)
 			.then((response) => {
 				resolve(response.data)
 			})

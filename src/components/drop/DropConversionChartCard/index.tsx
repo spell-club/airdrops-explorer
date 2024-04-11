@@ -1,11 +1,12 @@
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import numbro from 'numbro'
 
-import Card from '../card/Card'
-import { DonutChart } from '../UI/charts'
-import { VSeparator } from '../UI/separator'
+import Card from '../../card/Card'
+import { DonutChart } from '../../UI/charts'
+import { VSeparator } from '../../UI/separator'
 import { roundToPrecision } from 'utils'
 import { AirdropProject } from 'api/types'
+import DropConversionChartCardError from './DropConversionChartCardError'
 
 interface Props {
 	project: AirdropProject
@@ -13,6 +14,11 @@ interface Props {
 
 const DropConversionChartCard = ({ project }: Props) => {
 	const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
+
+	if (!project) {
+		return <DropConversionChartCardError />
+	}
+
 	const {
 		total_allocated: totalAllocated,
 		total_claimed: totalClaimed,
@@ -31,7 +37,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 		method: 'floor',
 	})
 
-	const formattValue = (value: number) => {
+	const formatValue = (value: number) => {
 		const truncatedAmount = roundToPrecision({
 			value,
 			precision: 0,
@@ -101,7 +107,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Allocated $
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								${formattValue(totalAllocatedUsd)}
+								${formatValue(totalAllocatedUsd)}
 							</Text>
 						</Flex>
 
@@ -110,7 +116,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Allocated {tokenSymbol}
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								{formattValue(totalAllocated)}
+								{formatValue(totalAllocated)}
 							</Text>
 						</Flex>
 					</Flex>
@@ -123,7 +129,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Claimed $
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								${formattValue(totalClaimedUsd)}
+								${formatValue(totalClaimedUsd)}
 							</Text>
 						</Flex>
 
@@ -132,7 +138,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Claimed {tokenSymbol}
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								{formattValue(totalClaimed)}
+								{formatValue(totalClaimed)}
 							</Text>
 						</Flex>
 					</Flex>
@@ -145,7 +151,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Missed $
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								${formattValue(totalAllocatedUsd - totalClaimedUsd)}
+								${formatValue(totalAllocatedUsd - totalClaimedUsd)}
 							</Text>
 						</Flex>
 						<Flex flexDir="column" align="center">
@@ -153,7 +159,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								Missed {tokenSymbol}
 							</Text>
 							<Text fontSize={20} fontWeight={600}>
-								{formattValue(totalAllocated - totalClaimed)}
+								{formatValue(totalAllocated - totalClaimed)}
 							</Text>
 						</Flex>
 					</Flex>
@@ -168,7 +174,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 										Reallocated $
 									</Text>
 									<Text fontSize={20} fontWeight={600}>
-										${formattValue(total_reallocated_usd)}
+										${formatValue(total_reallocated_usd)}
 									</Text>
 								</Flex>
 								<Flex flexDir="column" align="center">
@@ -176,7 +182,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 										Reallocated {tokenSymbol}
 									</Text>
 									<Text fontSize={20} fontWeight={600}>
-										{formattValue(total_reallocated)}
+										{formatValue(total_reallocated)}
 									</Text>
 								</Flex>
 							</Flex>{' '}

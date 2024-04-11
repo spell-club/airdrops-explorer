@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
-	const { rows, headers } = useDropClaimersTable(tableData)
+	const { getHeaderGroups, getRowModel } = useDropClaimersTable(tableData)
 
 	return (
 		<Flex direction="column" w="100%" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -33,7 +33,7 @@ const ClaimersTable = ({ tableData, title, isLoading }: Props) => {
 				</Text>
 			</Flex>
 
-			<Table rows={rows} headers={headers} />
+			<Table getHeaderGroups={getHeaderGroups} getRowModel={getRowModel} />
 		</Flex>
 	)
 }

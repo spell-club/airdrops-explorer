@@ -13,12 +13,14 @@ import useAirdropsDates from '../../hooks/useAirdropsDates'
 const ProjectsDynamicChart = () => {
 	const { clientApi } = useClientApi()
 	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['dropsHistory'],
 		queryFn: () => clientApi.getProjectsHistoricalValue(),
 	})
-	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 	const { airdropsLabelsForChart } = useAirdropsDates()
+
+	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const dataByTime = useMemo(() => {
 		if (!chartData) return []

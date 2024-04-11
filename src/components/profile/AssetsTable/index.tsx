@@ -18,7 +18,7 @@ const AirdropsTable = ({ address }: Props) => {
 		retry: 1,
 	})
 
-	const { rows, headers } = useAirdropsTable(airdrops)
+	const { getHeaderGroups, getRowModel } = useAirdropsTable(airdrops)
 
 	if (!airdrops && !isAssetsLoading) return null
 
@@ -36,7 +36,7 @@ const AirdropsTable = ({ address }: Props) => {
 				</Text>
 			</Flex>
 
-			<Table rows={rows} headers={headers} />
+			<Table getHeaderGroups={getHeaderGroups} getRowModel={getRowModel} />
 		</Card>
 	)
 }

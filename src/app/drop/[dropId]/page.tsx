@@ -42,6 +42,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 
 			<Flex gap="20px" mb="20px" flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
 				<DropDynamicChart dropId={dropId} tokenSymbol={airdropProject?.token_symbol} />
+
 				<DropConversionChartCard project={airdropProject} />
 			</Flex>
 

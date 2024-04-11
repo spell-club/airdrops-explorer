@@ -70,7 +70,7 @@ const StakingStatsTable = () => {
 
 	const [data, setData] = React.useState(() => [...defaultData])
 
-	const { rows, headers } = useStakingStatsTable(data)
+	const { getHeaderGroups, getRowModel } = useStakingStatsTable(data)
 
 	return (
 		<Card flexDirection="column" px="0px" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -80,7 +80,7 @@ const StakingStatsTable = () => {
 				</Text>
 			</Flex>
 
-			<Table rows={rows} headers={headers} />
+			<Table getHeaderGroups={getHeaderGroups} getRowModel={getRowModel} />
 		</Card>
 	)
 }
