@@ -1,4 +1,5 @@
 'use client'
+import { RepeatIcon } from '@chakra-ui/icons'
 import { Button, Heading, Center, Flex, Icon } from '@chakra-ui/react'
 import { FaExclamationTriangle } from 'react-icons/fa'
 
@@ -12,16 +13,7 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
 					Oops! Something went wrong.
 				</Heading>
 
-				<Button
-					boxShadow=""
-					variant="darkBrand"
-					color="white"
-					fontSize="sm"
-					fontWeight="500"
-					borderRadius="70px"
-					mt={8}
-					onClick={reset}
-				>
+				<Button variant="darkBrand" mt={8} onClick={reset} rightIcon={<RepeatIcon />}>
 					Try Again
 				</Button>
 			</Flex>
