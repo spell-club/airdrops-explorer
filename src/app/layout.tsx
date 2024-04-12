@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html lang="en">
 			<Head />
 
-			<body id="root" className="chakra-ui-dark">
+			<body id="root" className="chakra-ui-dark" suppressHydrationWarning={true}>
 				<AppWrappers>
 					<Flex flexDir="column" minH="100vh">
 						<AppHeader />

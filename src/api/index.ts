@@ -3,6 +3,7 @@ import {
 	AddressAirdrop,
 	AddressAsset,
 	AddressInfo,
+	CalculatorResponse,
 	ClientApiInterface,
 	HistoricalValue,
 	TopParticipant,
@@ -18,6 +19,7 @@ import getClaimHistoricalValueRequest from './requests/getClaimHistoricalValueRe
 import getAddressAssetsRequest from './requests/getAddressAssetsRequest'
 import getStatsRequest from './requests/getStatsRequest'
 import getAddressAirdropsRequest from './requests/getAddressAirdropsRequest'
+import calculateAirdropRequest from './requests/calculateAirdropRequest'
 
 const API_BASE_URL = 'https://api.spell.club/'
 
@@ -73,6 +75,10 @@ class ClientApi implements ClientApiInterface {
 
 	getAddressAirdrops(address: string) {
 		return getAddressAirdropsRequest(address, this.apiClient)
+	}
+
+	calculateAirdrop(amount: number) {
+		return calculateAirdropRequest(amount, this.apiClient)
 	}
 }
 

@@ -86,6 +86,28 @@ interface Stats {
 	eligible_users_num: number
 }
 
+interface AirdropDetails {
+	amount: number
+	amount_usd: number
+	name: string
+}
+
+interface CalculateAirdropInfo {
+	airdrops_details: AirdropDetails[]
+	apr: number
+	date: string
+	total_airdrops_usd: number
+	total_rewards: number
+	total_rewards_usd: number
+	total_usd: number
+}
+
+interface CalculatorResponse {
+	details: CalculateAirdropInfo[]
+	initial_investment_usd: number
+	roi: number
+}
+
 interface ClientApiInterface {
 	readonly apiClient: AxiosInstance
 
@@ -102,6 +124,7 @@ interface ClientApiInterface {
 	getAddressAssets(address: string): Promise<AddressAsset[]>
 	getStats(): Promise<Stats>
 	getAddressAirdrops(address: string): Promise<AddressAirdrop[]>
+	calculateAirdrop(amount: number): Promise<CalculatorResponse>
 }
 
 export type {
@@ -116,4 +139,6 @@ export type {
 	AddressAsset,
 	AddressAirdrop,
 	Stats,
+	CalculatorResponse,
+	AirdropDetails,
 }
