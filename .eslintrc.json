@@ -1,8 +1,9 @@
 {
-  "extends": "next/core-web-vitals",
-  "rules": {
-    "react/jsx-key": "warn",
-    "no-console": "warn",
-    "no-debugger": "error"
-  }
+	"extends": ["next", "next/core-web-vitals"],
+	"rules": {
+		"react/jsx-key": "warn",
+		"no-console": "warn",
+		"no-debugger": "error",
+		"no-unused-vars": "warn"
+	}
 }
