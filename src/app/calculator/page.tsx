@@ -10,6 +10,7 @@ import CalculatorSummary from '../../components/calculator/CalculatorSummary'
 const Page = () => {
 	const { isLoading, isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
 
+	console.log('calculator page render')
 	return (
 		<Box as="section" mb="20px">
 			<Box
@@ -39,7 +40,7 @@ const Page = () => {
 				</Card>
 			</Flex>
 
-			{isDataLoaded && aprs.length && rewardsUSD.length ? (
+			{isDataLoaded ? (
 				<Flex flexDir="column" gap={5} align="center">
 					<Box w="50%">
 						<CalculatorSummary />

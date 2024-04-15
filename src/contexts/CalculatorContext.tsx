@@ -23,7 +23,7 @@ interface CalculatorContextState {
 interface CalculatorDispatchContextState {
 	setAmount: (amount: number) => void
 	setValidatorFee: (fee: number) => void
-	calculate: () => void
+	calculate: (amount: number) => void
 	clearData: () => void
 }
 
@@ -55,17 +55,21 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const [validatorFee, setValidatorFee] = useState<number>(5)
 	const [calculatedData, setCalculatedData] = useState<CalculatorResponse | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-	// const debouncedValidatorFee = useDebouncedValue(validatorFee, 100)
+	const debouncedValidatorFee = useDebouncedValue(validatorFee, 300)
 
-	const calculate = useCallback(async () => {
-		try {
-			setIsLoading(true)
-			const response = await clientApi.calculateAirdrop(amount)
-			setCalculatedData(response)
-		} finally {
-			setIsLoading(false)
-		}
-	}, [amount, clientApi])
+	console.log('calculator context render')
+	const calculate = useCallback(
+		async (calculateAmount: number) => {
+			try {
+				setIsLoading(true)
+				const response = await clientApi.calculateAirdrop(calculateAmount)
+				setCalculatedData(response)
+			} finally {
+				setIsLoading(false)
+			}
+		},
+		[clientApi],
+	)
 
 	// data for charts
 	const { dates, aprs, rewardsUSD } = useMemo(() => {
@@ -75,6 +79,8 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 		const airdrops: number[] = []
 
 		calculatedData?.details?.forEach((data) => {
+			console.log('chartData ')
+
 			dates.push(new Date(data.date).toLocaleDateString())
 			aprs.push(data.apr)
 			rewardsUSD.push(data.total_usd)
@@ -97,7 +103,8 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			const totalRewardsUSD = lastElement?.total_rewards_usd
 			const airdropsDetails = lastElement?.airdrops_details
 			const totalRewardsWithFee =
-				lastElement?.total_rewards_usd - (lastElement?.total_rewards_usd * validatorFee) / 100
+				lastElement?.total_rewards_usd -
+				(lastElement?.total_rewards_usd * debouncedValidatorFee) / 100
 			const totalUsd = lastElement?.total_airdrops_usd + totalRewardsWithFee
 
 			const startDate = calculatedData?.details[0]?.date
@@ -112,7 +119,7 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 				totalRewardsWithFee,
 				startDate,
 			}
-		}, [calculatedData?.details, validatorFee])
+		}, [calculatedData?.details, debouncedValidatorFee])
 
 	const isDataLoaded = calculatedData?.details?.length > 0 && !isLoading
 
@@ -134,7 +141,6 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			totalUsd,
 			roi: Number(calculatedData?.roi?.toFixed(2)) || 0,
 			initialAmountUsd: calculatedData?.initial_investment_usd,
-			validatorFee: validatorFee,
 			startDate,
 		}),
 		[
@@ -150,7 +156,6 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			totalAirdropUSD,
 			totalRewardsWithFee,
 			totalUsd,
-			validatorFee,
 			startDate,
 		],
 	)
@@ -166,7 +171,7 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	)
 
 	return (
-		<CalculatorContext.Provider value={value}>
+		<CalculatorContext.Provider value={{ ...value, validatorFee }}>
 			<CalculatorDispatchContext.Provider value={dispatchValue}>
 				{children}
 			</CalculatorDispatchContext.Provider>

@@ -1,4 +1,4 @@
-import { RefObject, ChangeEvent } from 'react'
+import { RefObject, ChangeEvent, useState } from 'react'
 import {
 	Text,
 	Button,
@@ -57,14 +57,17 @@ const CalculatorFormInput = ({
 )
 
 const CalculatorForm = () => {
-	const { setAmount, setValidatorFee, calculate, clearData } = useCalculatorDispatchContext()
+	const { setValidatorFee, calculate } = useCalculatorDispatchContext()
 	const { isLoading, currentAmount, initialAmountUsd, validatorFee, startDate } =
 		useCalculatorContext()
+	const [inputAmount, setAmount] = useState<number>(currentAmount)
+
+	console.log('calculator form render')
 
 	return (
 		<Flex align="center" flexDir="column" gap={4} w="400px">
 			<CalculatorFormInput
-				value={currentAmount || ''}
+				value={inputAmount || ''}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}
 				id="amount"
 				placeholder="Atom"
@@ -122,7 +125,7 @@ const CalculatorForm = () => {
 				borderRadius="70px"
 				px="24px"
 				py="5px"
-				onClick={() => calculate()}
+				onClick={() => calculate(inputAmount)}
 				isLoading={isLoading}
 			>
 				Calculate

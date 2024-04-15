@@ -7,6 +7,8 @@ import useAirdropsDates from '../../hooks/useAirdropsDates'
 const CalculatorSummary = () => {
 	const { roi, totalRewardsUSD, airdropsDetails, totalUsd, startDate } = useCalculatorContext()
 	const { airdropsDates } = useAirdropsDates()
+
+	console.log('calculator summary render')
 	return (
 		<Card w="100%" alignItems="center">
 			<Box w="500px">
