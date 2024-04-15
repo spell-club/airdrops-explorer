@@ -1,6 +1,7 @@
 import numbro from 'numbro'
 import { toSvg } from 'jdenticon'
 import { prominent } from 'color.js'
+import { API_BASE_URL } from '../api'
 
 type RoundingMethod = 'round' | 'ceil' | 'floor' | 'trunc'
 
@@ -59,4 +60,8 @@ export const daysAgoFromDate = (airdropDate: string): string => {
 	const daysDifference = Math.floor((Date.now() - dateObj.getTime()) / (1000 * 60 * 60 * 24))
 
 	return `${daysDifference} days ago`
+}
+
+export const getStaticImageLink = (image: string) => {
+	return `${API_BASE_URL}/static/${image}.webp`
 }
