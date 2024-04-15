@@ -5,8 +5,7 @@ type WindowWithDataLayer = Window & {
 declare const window: WindowWithDataLayer
 
 export const captureDataLayer = (name: string, options = {}) => {
-	window.dataLayer.push({
-		...options,
-		event: name,
-	})
+	if (window.dataLayer) {
+		window.dataLayer.push({ ...options, event: name })
+	}
 }
