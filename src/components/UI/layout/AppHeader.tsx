@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box, Container, Flex } from '@chakra-ui/react'
 
 import { SearchBar } from 'components/UI/searchBar'
