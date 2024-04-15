@@ -3,13 +3,12 @@ import { Box, Container, Flex } from '@chakra-ui/react'
 
 import { SearchBar } from 'components/UI/searchBar'
 import Logo from 'assets/icons/Logo'
-import { captureGtag } from 'utils/analytics'
+import { captureDataLayer } from 'utils/analytics'
 
 const AppHeader = () => {
 	const onSearch = (value: string) => {
-		captureGtag('wallet_search', {
-			event_category: 'Search',
-			event_label: value,
+		captureDataLayer('wallet_search', {
+			value,
 		})
 	}
 

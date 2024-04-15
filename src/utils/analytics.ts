@@ -1,9 +1,12 @@
 type WindowWithDataLayer = Window & {
-	gtag: Function
+	dataLayer: Array<Record<string, any>>
 }
 
 declare const window: WindowWithDataLayer
 
-export const captureGtag = (name: string, options = {}) => {
-	return window.gtag('event', name, options)
+export const captureDataLayer = (name: string, options = {}) => {
+	window.dataLayer.push({
+		...options,
+		event: name,
+	})
 }
