@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 import { CalendarIcon } from '@chakra-ui/icons'
-import { formatValue } from '../../utils'
+import { formatValue } from 'utils'
 
 interface CalculatorFormInputProps {
 	inputRef?: RefObject<HTMLInputElement>
@@ -35,44 +35,63 @@ const CalculatorFormInput = ({
 			{label}
 		</FormLabel>
 
-		<Input
-			id={id}
-			type="number"
-			w="100%"
-			h="50px"
-			border="1px solid"
-			borderColor="navy.700"
-			ref={inputRef}
-			variant="search"
-			fontSize="lg"
-			bg={'navy.900'}
-			color={'gray.100'}
-			fontWeight="500"
-			_placeholder={{ color: 'gray.400', fontSize: '14px' }}
-			borderRadius={'30px'}
-			placeholder={placeholder}
-			{...rest}
-		/>
+		<InputGroup>
+			<Input
+				id={id}
+				type="number"
+				w="100%"
+				h="50px"
+				border="1px solid"
+				borderColor="navy.700"
+				ref={inputRef}
+				variant="search"
+				fontSize="lg"
+				bg={'navy.900'}
+				color={'gray.100'}
+				fontWeight="500"
+				_placeholder={{ color: 'gray.400', fontSize: '14px' }}
+				borderRadius={'30px'}
+				placeholder={placeholder}
+				borderRight={adon ? 'none' : '1px solid'}
+				{...rest}
+			/>
+
+			<InputRightAddon
+				border="1px solid"
+				borderColor="navy.700"
+				h="50px"
+				bg="navy.900"
+				borderRightRadius="20px"
+				color={'gray.400'}
+			>
+				{adon}
+			</InputRightAddon>
+		</InputGroup>
 	</FormControl>
 )
 
-const CalculatorForm = () => {
-	const { setValidatorFee, calculate } = useCalculatorDispatchContext()
-	const { isLoading, currentAmount, initialAmountUsd, validatorFee, startDate } =
-		useCalculatorContext()
+interface Props {
+	validatorFee: number
+	setValidatorFee: (fee: number) => void
+}
+
+const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
+	const { calculate } = useCalculatorDispatchContext()
+	const { isLoading, currentAmount, initialAmountUsd, startDate } = useCalculatorContext()
 	const [inputAmount, setAmount] = useState<number>(currentAmount)
 
-	console.log('calculator form render')
+	const isButtonDisabled = !inputAmount
 
 	return (
-		<Flex align="center" flexDir="column" gap={4} w="400px">
+		<Flex align="center" flexDir="column" gap={4} w={{ base: '300px', md: '400px' }}>
 			<CalculatorFormInput
-				value={inputAmount || ''}
+				value={inputAmount}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}
 				id="amount"
 				placeholder="Atom"
 				min={0}
 				label="Initial staking amount"
+				adon="ATOM"
 			/>
 
 			{initialAmountUsd ? (
@@ -127,6 +146,7 @@ const CalculatorForm = () => {
 				py="5px"
 				onClick={() => calculate(inputAmount)}
 				isLoading={isLoading}
+				isDisabled={isButtonDisabled}
 			>
 				Calculate
 			</Button>

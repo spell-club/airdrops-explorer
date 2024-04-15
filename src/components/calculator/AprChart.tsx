@@ -32,8 +32,6 @@ const AprChart = ({ dates, values }: Props) => {
 		return values.reduce((acc, value) => acc + value, 0) / values.length
 	}, [values])
 
-	console.log('apr chart render')
-
 	return (
 		<Card w="100%" alignItems="center" key="apr">
 			<Box justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">

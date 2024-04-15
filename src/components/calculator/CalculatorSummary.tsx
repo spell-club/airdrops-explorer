@@ -2,13 +2,17 @@ import Card from '../card/Card'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { useCalculatorContext } from 'contexts/CalculatorContext'
 import { daysAgoFromDate, formatValue } from 'utils'
-import useAirdropsDates from '../../hooks/useAirdropsDates'
+import useAirdropsDates from 'hooks/useAirdropsDates'
 
-const CalculatorSummary = () => {
-	const { roi, totalRewardsUSD, airdropsDetails, totalUsd, startDate } = useCalculatorContext()
+interface Props {
+	totalUsd: number
+	totalStakingRewardsUSD: number
+}
+
+const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd }: Props) => {
+	const { roi, airdropsDetails } = useCalculatorContext()
 	const { airdropsDates } = useAirdropsDates()
 
-	console.log('calculator summary render')
 	return (
 		<Card w="100%" alignItems="center">
 			<Box w="500px">
@@ -50,7 +54,7 @@ const CalculatorSummary = () => {
 
 									<Box minW="80px">
 										<Text fontSize={20} fontWeight={600}>
-											+${formatValue(totalRewardsUSD, 0)}
+											+${formatValue(totalStakingRewardsUSD, 0)}
 										</Text>
 									</Box>
 								</Flex>

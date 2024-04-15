@@ -1,7 +1,6 @@
 import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
 import useClientApi from '../hooks/useClientApi'
-import { AirdropDetails, CalculatorResponse } from 'api/types'
-import { useDebouncedValue } from '../hooks/useDebounce'
+import { AirdropDetails, CalculatorResponse } from '../api/types'
 
 interface CalculatorContextState {
 	isDataLoaded: boolean
@@ -10,11 +9,9 @@ interface CalculatorContextState {
 	aprs: number[]
 	rewardsUSD: number[]
 	totalAirdropUSD: number
-	totalRewardsUSD: number
+	totalStakingRewardsUSD: number
 	airdropsDetails: AirdropDetails[]
 	currentAmount: number
-	validatorFee: number
-	totalUsd: number
 	roi: number
 	initialAmountUsd?: number
 	startDate: string
@@ -22,7 +19,6 @@ interface CalculatorContextState {
 
 interface CalculatorDispatchContextState {
 	setAmount: (amount: number) => void
-	setValidatorFee: (fee: number) => void
 	calculate: (amount: number) => void
 	clearData: () => void
 }
@@ -52,18 +48,17 @@ const useCalculatorDispatchContext = () => {
 const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const { clientApi } = useClientApi()
 	const [amount, setAmount] = useState<number>(0)
-	const [validatorFee, setValidatorFee] = useState<number>(5)
 	const [calculatedData, setCalculatedData] = useState<CalculatorResponse | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-	const debouncedValidatorFee = useDebouncedValue(validatorFee, 300)
 
-	console.log('calculator context render')
 	const calculate = useCallback(
 		async (calculateAmount: number) => {
 			try {
 				setIsLoading(true)
 				const response = await clientApi.calculateAirdrop(calculateAmount)
 				setCalculatedData(response)
+			} catch (e) {
+				console.error(e)
 			} finally {
 				setIsLoading(false)
 			}
@@ -73,19 +68,11 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 
 	// data for charts
 	const { dates, aprs, rewardsUSD } = useMemo(() => {
-		const dates: string[] = []
-		const aprs: number[] = []
-		const rewardsUSD: number[] = []
-		const airdrops: number[] = []
-
-		calculatedData?.details?.forEach((data) => {
-			console.log('chartData ')
-
-			dates.push(new Date(data.date).toLocaleDateString())
-			aprs.push(data.apr)
-			rewardsUSD.push(data.total_usd)
-			airdrops.push(data.total_airdrops_usd)
-		})
+		const dates: string[] =
+			calculatedData?.details.map((data) => new Date(data.date).toLocaleDateString()) || []
+		const aprs: number[] = calculatedData?.details.map((data) => data.apr) || []
+		const rewardsUSD: number[] = calculatedData?.details.map((data) => data.total_usd) || []
+		const airdrops: number[] = calculatedData?.details.map((data) => data.total_airdrops_usd) || []
 
 		return {
 			dates,
@@ -96,30 +83,24 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	}, [calculatedData?.details])
 
 	// data for summary
-	const { totalAirdropUSD, startDate, airdropsDetails, totalUsd, totalRewardsWithFee } =
-		useMemo(() => {
-			const lastElement = calculatedData?.details[calculatedData?.details?.length - 1]
-			const totalAirdropUSD = lastElement?.total_airdrops_usd
-			const totalRewardsUSD = lastElement?.total_rewards_usd
-			const airdropsDetails = lastElement?.airdrops_details
-			const totalRewardsWithFee =
-				lastElement?.total_rewards_usd -
-				(lastElement?.total_rewards_usd * debouncedValidatorFee) / 100
-			const totalUsd = lastElement?.total_airdrops_usd + totalRewardsWithFee
+	const { totalAirdropUSD, startDate, airdropsDetails, totalRewardsUSD } = useMemo(() => {
+		const lastElement = calculatedData?.details[calculatedData?.details?.length - 1]
+		const totalAirdropUSD = lastElement?.total_airdrops_usd
+		const totalRewardsUSD = lastElement?.total_rewards_usd
+		const airdropsDetails = lastElement?.airdrops_details
 
-			const startDate = calculatedData?.details[0]?.date
-				? new Date(calculatedData?.details[0]?.date).toLocaleDateString()
-				: '01.01.2021'
+		const startDate = calculatedData?.details[0]?.date
+			? new Date(calculatedData?.details[0]?.date).toLocaleDateString()
+			: '01.01.2021'
 
-			return {
-				totalAirdropUSD,
-				totalRewardsUSD,
-				airdropsDetails,
-				totalUsd,
-				totalRewardsWithFee,
-				startDate,
-			}
-		}, [calculatedData?.details, debouncedValidatorFee])
+		return {
+			totalAirdropUSD,
+			totalRewardsUSD,
+			airdropsDetails,
+			totalStakingRewardsUSD: totalRewardsUSD,
+			startDate,
+		}
+	}, [calculatedData?.details])
 
 	const isDataLoaded = calculatedData?.details?.length > 0 && !isLoading
 
@@ -136,26 +117,24 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			isLoading,
 			rewardsUSD,
 			totalAirdropUSD,
-			totalRewardsUSD: totalRewardsWithFee,
+			totalStakingRewardsUSD: totalRewardsUSD,
 			airdropsDetails,
-			totalUsd,
 			roi: Number(calculatedData?.roi?.toFixed(2)) || 0,
 			initialAmountUsd: calculatedData?.initial_investment_usd,
 			startDate,
 		}),
 		[
-			airdropsDetails,
 			amount,
-			aprs,
-			calculatedData?.initial_investment_usd,
-			calculatedData?.roi,
-			dates,
 			isDataLoaded,
+			dates,
+			aprs,
 			isLoading,
 			rewardsUSD,
 			totalAirdropUSD,
-			totalRewardsWithFee,
-			totalUsd,
+			totalRewardsUSD,
+			airdropsDetails,
+			calculatedData?.roi,
+			calculatedData?.initial_investment_usd,
 			startDate,
 		],
 	)
@@ -163,15 +142,14 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 	const dispatchValue = useMemo(
 		() => ({
 			setAmount,
-			setValidatorFee,
 			calculate,
 			clearData,
 		}),
-		[setAmount, setValidatorFee, calculate, clearData],
+		[setAmount, calculate, clearData],
 	)
 
 	return (
-		<CalculatorContext.Provider value={{ ...value, validatorFee }}>
+		<CalculatorContext.Provider value={{ ...value }}>
 			<CalculatorDispatchContext.Provider value={dispatchValue}>
 				{children}
 			</CalculatorDispatchContext.Provider>

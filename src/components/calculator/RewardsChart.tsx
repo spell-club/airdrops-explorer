@@ -15,8 +15,6 @@ const RewardsChart = ({ values, dates }: Props) => {
 	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
 	const { airdropsLabelsForChart } = useAirdropsDates()
 
-	console.log('rewards chart render')
-
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const rewardsByTime = useMemo(() => {
