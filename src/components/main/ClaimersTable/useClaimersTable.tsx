@@ -142,5 +142,5 @@ export const useDropClaimersTable = (data: RowObj[]) => {
 		debugTable: true,
 	})
 
-	return { ...table }
+	return table
 }

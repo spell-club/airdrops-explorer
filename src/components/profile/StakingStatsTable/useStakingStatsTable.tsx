@@ -135,8 +135,5 @@ export const useStakingStatsTable = (data?: RowObj[]) => {
 		debugTable: true,
 	})
 
-	const headers = table.getHeaderGroups()
-	const rows = table.getRowModel()
-
-	return { ...table, headers, rows }
+	return table
 }

@@ -190,8 +190,5 @@ export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 		debugTable: true,
 	})
 
-	const headers = table.getHeaderGroups()
-	const rows = table.getRowModel()
-
-	return { ...table, headers, rows }
+	return table
 }
