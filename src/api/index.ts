@@ -1,13 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import {
-	AddressAirdrop,
-	AddressAsset,
-	AddressInfo,
-	CalculatorResponse,
-	ClientApiInterface,
-	HistoricalValue,
-	TopParticipant,
-} from './types'
+import { ClientApiInterface } from './types'
 import getTopWinnersAndLosersRequest from './requests/getTopWinnersAndLosersRequest'
 import getAirdropProjectsRequest from './requests/getAirdropProjectsRequest'
 import getProjectsHistoricalValueRequest from './requests/getProjectsHistoricalValueRequets'
@@ -21,7 +13,7 @@ import getStatsRequest from './requests/getStatsRequest'
 import getAddressAirdropsRequest from './requests/getAddressAirdropsRequest'
 import calculateAirdropRequest from './requests/calculateAirdropRequest'
 
-const API_BASE_URL = 'https://api.spell.club/'
+export const API_BASE_URL = 'https://api.spell.club/'
 
 class ClientApi implements ClientApiInterface {
 	readonly apiClient: AxiosInstance
