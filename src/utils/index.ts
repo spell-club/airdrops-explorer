@@ -48,3 +48,15 @@ export const getProminentColor = (img: string) => {
 		return data[0]
 	})
 }
+
+export const daysAgoFromDate = (airdropDate: string): string => {
+	const parts = airdropDate.split('.')
+
+	const jsDateStr = `${parts[1]}/${parts[0]}/${parts[2]}`
+
+	const dateObj = new Date(jsDateStr)
+
+	const daysDifference = Math.floor((Date.now() - dateObj.getTime()) / (1000 * 60 * 60 * 24))
+
+	return `${daysDifference} days ago`
+}

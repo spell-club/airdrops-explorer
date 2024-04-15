@@ -1,5 +1,4 @@
 import Script from 'next/script'
-import React from 'react'
 
 export default function Head() {
 	return (
@@ -19,6 +18,9 @@ export default function Head() {
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 			<meta name="theme-color" content="#000000" />
+
+			<meta property="og:title" content="SpellDrop" />
+			<meta property="og:description" content="Explore Cosmos Airdrops" />
 
 			<Script
 				async

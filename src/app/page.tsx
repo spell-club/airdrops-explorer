@@ -6,12 +6,13 @@ import DropsList from '../components/main/DropsList'
 import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 import MiniStatisticsGrid from '../components/main/MiniStatisticsGrid'
 import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
+import CalculatorBanner from '../components/main/CalculatorBanner'
 
 export default function Home({}) {
 	useEffect(() => {
 		const localStorageTheme = localStorage.getItem('chakra-ui-color-mode')
 
-		console.log('localStorageTheme', localStorageTheme)
+		console.log(localStorageTheme)
 
 		if (localStorageTheme === 'light') {
 			localStorage.setItem('chakra-ui-color-mode', 'dark')
@@ -32,7 +33,7 @@ export default function Home({}) {
 
 				<DropsList />
 
-				{/*<Banner />*/}
+				<CalculatorBanner />
 			</Flex>
 
 			<TopClaimersAndLosers />

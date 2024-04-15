@@ -62,12 +62,12 @@ const Page = ({ params }: { params: { address: string } }) => {
 				<Center my={50}>
 					<Card w="100%" alignItems="center">
 						<Flex flexDir="column" gap={5} align="center">
+							{' '}
 							<Box textAlign="center">
 								<Text fontSize={32} fontWeight={600}>
 									Invalid address
 								</Text>
 							</Box>
-
 							<Link href="/" style={{ textDecoration: 'underline' }}>
 								Back to home
 							</Link>
@@ -89,7 +89,6 @@ const Page = ({ params }: { params: { address: string } }) => {
 			/>
 			<SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} gap="20px" mb="20px">
 				<ClaimedUnclaimedChart address={address} />
-
 				<ProfitEstimationChart
 					totalAllocatedUsd={info?.total_claimed_usd + info?.total_unclaimed_usd}
 					totalClaimedUsd={info?.total_claimed_usd}
