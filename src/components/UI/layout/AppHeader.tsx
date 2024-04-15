@@ -7,9 +7,13 @@ import { captureDataLayer } from 'utils/analytics'
 
 const AppHeader = () => {
 	const onSearch = (value: string) => {
-		captureDataLayer('wallet_search', {
-			value,
-		})
+		// eslint-disable-next-line no-debugger
+		debugger
+		// @ts-ignore
+		window.dataLayer.push({ event: 'button1-click', conversionValue: 25, value })
+		// captureDataLayer('wallet_search', {
+		// 	value,
+		// })
 	}
 
 	return (
