@@ -9,4 +9,6 @@ export const captureDataLayer = (name: string, options = {}) => {
 		...options,
 		event: name,
 	})
+
+	window.dataLayer.push({ event: 'button1-click', conversionValue: 25 })
 }
