@@ -10,7 +10,6 @@ import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 export default function Home() {
 	return (
 		<Grid
-			mb="20px"
 			gridTemplateColumns={{ xl: '1fr 0.36fr', '2xl': '1fr 0.46fr' }}
 			gap={{ base: '20px', xl: '20px' }}
 			display={{ base: 'block', xl: 'grid' }}

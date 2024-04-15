@@ -108,6 +108,16 @@ interface CalculatorResponse {
 	roi: number
 }
 
+interface Post {
+	id: number
+	image: string
+	title: string
+	description: string
+	date: string
+	tags: string[]
+	readingTime: string
+}
+
 interface ClientApiInterface {
 	readonly apiClient: AxiosInstance
 
@@ -141,4 +151,5 @@ export type {
 	Stats,
 	CalculatorResponse,
 	AirdropDetails,
+	Post,
 }

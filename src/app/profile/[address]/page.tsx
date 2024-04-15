@@ -79,7 +79,7 @@ const Page = ({ params }: { params: { address: string } }) => {
 	}
 
 	return (
-		<Box mb="40px">
+		<Box>
 			<Banner
 				banner={banner.src}
 				avatar={NFT6}
