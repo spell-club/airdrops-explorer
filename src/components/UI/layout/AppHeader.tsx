@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box, Container, Flex } from '@chakra-ui/react'
 
 import { SearchBar } from 'components/UI/searchBar'
@@ -7,13 +6,9 @@ import { captureDataLayer } from 'utils/analytics'
 
 const AppHeader = () => {
 	const onSearch = (value: string) => {
-		// eslint-disable-next-line no-debugger
-		debugger
-		// @ts-ignore
-		window.dataLayer.push({ event: 'button1-click', conversionValue: 25, value })
-		// captureDataLayer('wallet_search', {
-		// 	value,
-		// })
+		captureDataLayer('wallet_search', {
+			value,
+		})
 	}
 
 	return (

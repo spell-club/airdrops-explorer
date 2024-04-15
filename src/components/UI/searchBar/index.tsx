@@ -44,9 +44,7 @@ export function SearchBar(props: {
 		if (event.key === 'Enter' && value) {
 			handleSearch()
 
-			if (value) {
-				onSearch(value)
-			}
+			onSearch(value)
 		}
 	}
 
