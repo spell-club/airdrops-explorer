@@ -10,10 +10,9 @@ import { Avatar, AvatarGroup, Flex, Link, Text } from '@chakra-ui/react'
 import { Roboto_Mono } from 'next/font/google'
 import numbro from 'numbro'
 
-import { generateIcon, roundToPrecision } from 'utils'
+import { generateIcon, getStaticImageLink, roundToPrecision } from 'utils'
 import IconWithBg from 'components/UI/icon/iconWithBg'
 import { RowObj } from '.'
-import { AIRDROPS_IMAGES } from 'constants/index'
 
 const robotoMono = Roboto_Mono({
 	subsets: ['latin'],
@@ -87,7 +86,7 @@ export const useDropClaimersTable = (data: RowObj[]) => {
 								key={key}
 								h={'32px'}
 								w={'32px'}
-								src={AIRDROPS_IMAGES[avt.project.toLowerCase()]}
+								src={getStaticImageLink(avt.project.toLowerCase())}
 							/>
 						))}
 					</AvatarGroup>

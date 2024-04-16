@@ -6,7 +6,7 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 import { CalculatorContextProvider } from 'contexts/CalculatorContext'
 
-import theme from '../styles/theme/theme'
+import theme from 'styles/theme/theme'
 
 import 'styles/App.css'
 import 'styles/Contact.css'

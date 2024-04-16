@@ -1,8 +1,8 @@
 import React from 'react'
 import { Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import AirdropProject from '../AirdropProject'
-import { AIRDROPS_IMAGES } from 'constants/index'
 import useAirdrops from 'hooks/useAirdrops'
+import { getStaticImageLink } from '../../utils'
 
 const DropsList = () => {
 	const { airdrops } = useAirdrops()
@@ -21,7 +21,7 @@ const DropsList = () => {
 						airdropAmount={airdrop.airdrop_amount}
 						tokenSymbol={airdrop.token_symbol}
 						avgAmount={airdrop.average_airdrop_amount}
-						image={AIRDROPS_IMAGES[airdrop.name.toLowerCase()]}
+						image={getStaticImageLink(airdrop.name.toLowerCase())}
 						{...airdrop}
 					/>
 				))}

@@ -1,14 +1,12 @@
 'use client'
-import { Box, Flex, Text } from '@chakra-ui/react'
-import CalculatorForm from 'components/calculator/CalculatorForm'
-import Card from 'components/card/Card'
+import { Box, Flex } from '@chakra-ui/react'
 import { useCalculatorContext } from 'contexts/CalculatorContext'
 import AprChart from 'components/calculator/AprChart'
 import RewardsChart from 'components/calculator/RewardsChart'
-import CalculatorSummary from '../../components/calculator/CalculatorSummary'
+import FormAndSummaryWrapper from 'components/calculator/FormAndSummaryWrapper'
 
 const Page = () => {
-	const { isLoading, isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
+	const { isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
 
 	return (
 		<Box as="section" mb="20px">
@@ -20,35 +18,15 @@ const Page = () => {
 				h="150px"
 				w="100%"
 			/>
-			<Flex w="100%" justify="center" mt={-20}>
-				<Card w="50%" alignItems="center" mb="20px" display="flex" flexDir="column" gap={8}>
-					<Flex flexDir="column">
-						<Text fontSize={32} fontWeight={600} mb="10px" textAlign="center">
-							Staking Reward Calculator
-						</Text>
-						<Text>
-							Unlock the potential of your staked coins with our Coin Staking Reward Calculator.
-							Easily input the number of coins you&apos;ve staked (Atoms) and discover the rewards
-							you could earn over time. Whether you&apos;re a seasoned investor or just getting
-							started, our calculator provides clear insights into the rewards awaiting you. Make
-							informed decisions and maximize your staking rewards with ease. Try it now!
-						</Text>
-					</Flex>
-
-					<CalculatorForm />
-				</Card>
+			<Flex w="100%" justify="center" mt={-20} mb="20px">
+				<FormAndSummaryWrapper />
 			</Flex>
 
-			{isDataLoaded && aprs.length && rewardsUSD.length ? (
-				<Flex flexDir="column" gap={5} align="center">
-					<Box w="50%">
-						<CalculatorSummary />
-					</Box>
-					<Flex gap={5} w="100%">
-						<AprChart dates={dates} values={aprs} />
+			{isDataLoaded ? (
+				<Flex gap={5} w="100%" flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
+					<AprChart dates={dates} values={aprs} />
 
-						<RewardsChart dates={dates} values={rewardsUSD} />
-					</Flex>
+					<RewardsChart dates={dates} values={rewardsUSD} />
 				</Flex>
 			) : null}
 		</Box>

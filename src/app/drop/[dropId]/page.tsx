@@ -8,9 +8,8 @@ import General from 'components/drop/General'
 import DropConversionChartCard from 'components/drop/DropConversionChartCard'
 import DropDynamicChart from 'components/drop/DropDynamicChart'
 import useClientApi from 'hooks/useClientApi'
-import { AIRDROPS_IMAGES } from 'constants/index'
 import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
-import { formatValue } from 'utils'
+import { formatValue, getStaticImageLink } from 'utils'
 
 const Page = ({ params }: { params: { dropId: string } }) => {
 	const { dropId } = params
@@ -33,7 +32,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 		<Box mb={5}>
 			<Banner
 				banner={banner.src}
-				avatar={AIRDROPS_IMAGES[airdropProject?.name.toLowerCase()]}
+				avatar={getStaticImageLink(airdropProject?.name.toLowerCase())}
 				name={airdropProject?.name}
 				airdropDate={new Date(airdropProject?.airdrop_timestamp).toLocaleDateString()}
 				snapshotDate={new Date(airdropProject?.snapshot_date).toLocaleDateString()}

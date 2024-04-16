@@ -13,7 +13,7 @@ import getStatsRequest from './requests/getStatsRequest'
 import getAddressAirdropsRequest from './requests/getAddressAirdropsRequest'
 import calculateAirdropRequest from './requests/calculateAirdropRequest'
 
-const API_BASE_URL = 'https://api.spell.club/'
+export const API_BASE_URL = 'https://api.spell.club/'
 
 class ClientApi implements ClientApiInterface {
 	readonly apiClient: AxiosInstance

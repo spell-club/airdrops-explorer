@@ -16,7 +16,7 @@ export default function CalculatorBanner() {
 		if (!inputRef.current?.value) return
 		setIsLoading(true)
 		setAmount(Number(inputRef.current?.value))
-		calculate()
+		calculate(Number(inputRef.current?.value))
 		push('/calculator')
 		setTimeout(() => setIsLoading(false), 1000)
 	}
