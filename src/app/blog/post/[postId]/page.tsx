@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import { BLOG_POSTS } from 'constants/index'
-import { Flex, Image, Text } from '@chakra-ui/react'
-
+import { Box, Center, Flex, Image, Spinner, Text } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 import { useQuery } from '@tanstack/react-query'
-import { getPostById } from 'api/blogApi'
+import { BLOG_API_URL, getPostById } from 'api/blogApi'
+import BlockRendererClient from 'components/blog/BlockRendererClient'
+import Link from 'next/link'
 
 const Page = ({ params }: { params: { postId: string } }) => {
 	const { postId } = params
@@ -17,30 +17,48 @@ const Page = ({ params }: { params: { postId: string } }) => {
 
 	console.log(blogPost)
 
-	const currentConstantPost = BLOG_POSTS.find((post) => post.id === Number(postId))
+	if (isBlogPostLoading) {
+		return (
+			<Center mt={100}>
+				<Spinner />
+			</Center>
+		)
+	}
 
-	const currentPost = currentConstantPost
-
-	if (!currentPost) {
+	if (!blogPost && !isBlogPostLoading) {
 		return <div>not found</div>
 	}
 
+	const { attributes } = blogPost.data
+
 	return (
 		<Flex flexDirection="column" gap="20px">
-			<Image src={currentPost.image} alt="banner" w="100%" h={250} borderRadius={20} />
+			<Flex>
+				<Link href="/blog"> {'<- Back to blog'} </Link>
+			</Flex>
+			<Flex flexDirection="column" gap="20px">
+				<Image
+					src={BLOG_API_URL + attributes.image.data.attributes.url}
+					alt="banner"
+					w="100%"
+					h={250}
+					borderRadius={20}
+				/>
 
-			<Card pe="20px" w="100%" pos="relative">
-				<Text pos="absolute" top="20px" right="20px" color="gray.400">
-					{currentPost.date}
-				</Text>
+				<Card pe="20px" w="100%" pos="relative">
+					<Text pos="absolute" top="20px" right="20px" color="gray.400">
+						{new Date(attributes.createdAt).toLocaleDateString()}
+					</Text>
 
-				<Text fontWeight="bold" fontSize="2xl" mb="10px">
-					{currentPost.title}
-				</Text>
-				<Text whiteSpace="pre-wrap" color="gray.400" fontSize="16" me="26px">
-					{currentPost.description}
-				</Text>
-			</Card>
+					<Text fontWeight="bold" fontSize="2xl" mb="20px" textAlign="center">
+						{attributes.title}
+					</Text>
+
+					<Box color="gray.400">
+						<BlockRendererClient content={attributes.content as any} />
+					</Box>
+				</Card>
+			</Flex>
 		</Flex>
 	)
 }

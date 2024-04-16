@@ -4,7 +4,7 @@ import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 import { BLOG_POSTS } from '../../constants'
 import BlogPost from '../../components/blog/BlogPost'
 import { useQuery } from '@tanstack/react-query'
-import { getBlogPosts } from 'api/blogApi'
+import { BLOG_API_URL, getBlogPosts } from 'api/blogApi'
 
 const Page = () => {
 	const { data: blogPosts, isLoading: isPostsLoading } = useQuery({
@@ -24,20 +24,20 @@ const Page = () => {
 				{blogPosts?.data.map(({ attributes, id }, idx) => (
 					<BlogPost
 						post={{
-							title: attributes.Title,
-							description: attributes.Content,
-							tags: [],
+							title: attributes.title,
+							description: attributes.preview_content,
+							tags: attributes.tags.split(' '),
 							readingTime: attributes.reading_time,
-							image: 'https://cms.spell.club' + attributes.Banner.data.attributes.url,
+							image: BLOG_API_URL + attributes.image.data.attributes.url,
 							date: new Date(attributes.createdAt).toLocaleDateString(),
 							id: id,
 						}}
-						key={attributes.Title + idx}
+						key={attributes.title + idx}
 					/>
 				))}
-				{BLOG_POSTS.map((post, idx) => (
-					<BlogPost post={post} key={post.title + idx} />
-				))}
+				{/*{BLOG_POSTS.map((post, idx) => (*/}
+				{/*	<BlogPost post={post} key={post.title + idx} />*/}
+				{/*))}*/}
 			</Flex>
 
 			<TopClaimersAndLosers />

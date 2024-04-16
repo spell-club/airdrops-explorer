@@ -23,8 +23,8 @@ const BlogPost = ({ post }: Props) => {
 								{title}
 							</Text>
 
-							<Box maxH="120px" overflow="hidden">
-								<Text fontSize={16} color="gray.400" maxW={400}>
+							<Box maxH="145px" overflow="hidden">
+								<Text fontSize={16} color="gray.400" maxW={500}>
 									{description}
 								</Text>
 							</Box>

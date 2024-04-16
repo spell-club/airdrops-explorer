@@ -22,6 +22,7 @@
 		"@emotion/cache": "^11.7.1",
 		"@emotion/react": "^11.4.1",
 		"@emotion/styled": "^11.3.0",
+		"@strapi/blocks-react-renderer": "^1.0.1",
 		"@tanstack/react-query": "^5.28.9",
 		"@tanstack/react-table": "^8.9.8",
 		"@testing-library/jest-dom": "^5.14.1",
