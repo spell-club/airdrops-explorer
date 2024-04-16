@@ -3,9 +3,9 @@ import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md'
 import { useQuery } from '@tanstack/react-query'
 
-import IconBox from '../UI/icon/iconBox'
-import { formatValue } from '../../utils'
-import useClientApi from '../../hooks/useClientApi'
+import IconBox from 'components/UI/icon/iconBox'
+import { formatValue } from 'utils'
+import useClientApi from 'hooks/useClientApi'
 import MiniStatistics from 'components/card/MiniStatistics'
 
 const MiniStatisticsGrid = () => {

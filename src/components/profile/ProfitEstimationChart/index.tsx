@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { Flex, Text } from '@chakra-ui/react'
 
-import { DonutChart } from '../../UI/charts'
-import { VSeparator } from '../../UI/separator'
-import Card from '../../card/Card'
-import { formatValue, roundToPrecision } from '../../../utils'
+import { DonutChart } from 'components/UI/charts'
+import { VSeparator } from 'components/UI/separator'
+import Card from 'components/card/Card'
+import { formatValue, roundToPrecision } from 'utils'
+
 import ProfitEstimationChartError from './ProfitEstimationChartError'
 
 interface Props {

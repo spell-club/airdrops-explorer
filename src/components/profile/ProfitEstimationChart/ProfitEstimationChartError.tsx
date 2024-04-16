@@ -1,8 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react'
 
-import { DonutChart } from '../../UI/charts'
-import { VSeparator } from '../../UI/separator'
-import Card from '../../card/Card'
+import { DonutChart } from 'components/UI/charts'
+import { VSeparator } from 'components/UI/separator'
+import Card from 'components/card/Card'
 
 const ProfitEstimationChartError = () => {
 	return (

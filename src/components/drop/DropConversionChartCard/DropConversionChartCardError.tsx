@@ -1,8 +1,8 @@
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 
-import Card from '../../card/Card'
-import { DonutChart } from '../../UI/charts'
-import { VSeparator } from '../../UI/separator'
+import Card from 'components/card/Card'
+import { DonutChart } from 'components/UI/charts'
+import { VSeparator } from 'components/UI/separator'
 
 const DropConversionChartCardError = () => {
 	const bg = useColorModeValue('whiteAlpha.800', 'navy.800')

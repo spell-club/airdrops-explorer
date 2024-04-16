@@ -1,9 +1,9 @@
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import numbro from 'numbro'
 
-import Card from '../../card/Card'
-import { DonutChart } from '../../UI/charts'
-import { VSeparator } from '../../UI/separator'
+import Card from 'components/card/Card'
+import { DonutChart } from 'components/UI/charts'
+import { VSeparator } from 'components/UI/separator'
 import { roundToPrecision } from 'utils'
 import { AirdropProject } from 'api/types'
 import DropConversionChartCardError from './DropConversionChartCardError'
