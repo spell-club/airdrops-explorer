@@ -20,8 +20,7 @@ export default function Head() {
 
 			<meta name="theme-color" content="#000000" />
 
-			<meta property="og:title" content="SpellDrop" />
-			<meta property="og:description" content="Explore Cosmos Airdrops" />
+			<meta property="description" content="Explore Cosmos Airdrops" />
 
 			<Script async src="https://www.googletagmanager.com/gtag/js?id=G-94FJ9Y76DL" />
 

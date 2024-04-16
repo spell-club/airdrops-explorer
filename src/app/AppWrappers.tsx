@@ -7,7 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { CacheProvider } from '@chakra-ui/next-js'
 import theme from 'styles/theme/theme'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { CalculatorContextProvider } from 'contexts/CalculatorContext'
+import { CalculatorContextProvider } from '../contexts/CalculatorContext'
 
 const queryClient = new QueryClient()
 
