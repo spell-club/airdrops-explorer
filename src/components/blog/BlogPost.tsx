@@ -18,13 +18,13 @@ const BlogPost = ({ post }: Props) => {
 					<Image src={image} w="270px" borderRadius={20} alt="post banner" />
 
 					<Flex flexDir="column" pt="30px" justify="space-between">
-						<Flex gap={5} flexDir="column">
+						<Flex gap={4} flexDir="column">
 							<Text fontSize={20} fontWeight={600}>
 								{title}
 							</Text>
 
 							<Box maxH="145px" overflow="hidden">
-								<Text fontSize={16} color="gray.400" maxW={500}>
+								<Text fontSize={16} color="gray.100" maxW={500}>
 									{description}
 								</Text>
 							</Box>

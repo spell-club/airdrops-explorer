@@ -25,7 +25,7 @@ export default function BlockRendererClient({ content }: { readonly content: Blo
 
 				link: ({ url, children }) => {
 					return (
-						<Link href={url} color="navy.500" isExternal>
+						<Link href={url} color="navy.400" isExternal>
 							{children}
 						</Link>
 					)
@@ -36,10 +36,10 @@ export default function BlockRendererClient({ content }: { readonly content: Blo
 				},
 				list: (props) => {
 					if (props.format === 'ordered') {
-						return <OrderedList>{props.children}</OrderedList>
+						return <OrderedList ml={10}>{props.children}</OrderedList>
 					}
 
-					return <UnorderedList>{props.children}</UnorderedList>
+					return <UnorderedList ml={10}>{props.children}</UnorderedList>
 				},
 				'list-item': (props) => <li>{props.children}</li>,
 			}}

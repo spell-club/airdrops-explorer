@@ -3,9 +3,10 @@ import React from 'react'
 import { Box, Center, Flex, Image, Spinner, Text } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 import { useQuery } from '@tanstack/react-query'
-import { BLOG_API_URL, getPostById } from 'api/blogApi'
+import { BLOG_API_URL, getPostById } from 'api/blogApi/blogApi'
 import BlockRendererClient from 'components/blog/BlockRendererClient'
 import Link from 'next/link'
+import { type BlocksContent } from '@strapi/blocks-react-renderer'
 
 const Page = ({ params }: { params: { postId: string } }) => {
 	const { postId } = params
@@ -14,8 +15,6 @@ const Page = ({ params }: { params: { postId: string } }) => {
 		queryKey: ['blogPost', postId],
 		queryFn: () => getPostById(Number(postId)),
 	})
-
-	console.log(blogPost)
 
 	if (isBlogPostLoading) {
 		return (
@@ -34,7 +33,7 @@ const Page = ({ params }: { params: { postId: string } }) => {
 	return (
 		<Flex flexDirection="column" gap="20px">
 			<Flex>
-				<Link href="/blog"> {'<- Back to blog'} </Link>
+				<Link href="/blog"> {'< Back to blog'} </Link>
 			</Flex>
 			<Flex flexDirection="column" gap="20px">
 				<Image
@@ -54,8 +53,8 @@ const Page = ({ params }: { params: { postId: string } }) => {
 						{attributes.title}
 					</Text>
 
-					<Box color="gray.400">
-						<BlockRendererClient content={attributes.content as any} />
+					<Box color="gray.100">
+						<BlockRendererClient content={attributes.content as unknown as BlocksContent} />
 					</Box>
 				</Card>
 			</Flex>
