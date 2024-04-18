@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { Box, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
 import Banner from 'components/profile/Banner'
 import banner from 'assets/img/profile/banner.png'

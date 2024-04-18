@@ -11,16 +11,16 @@ import {
 import { HeaderGroup, RowModel, flexRender } from '@tanstack/react-table'
 
 interface Props<T> {
-	headers: HeaderGroup<T>[]
-	rows: RowModel<T>
+	getHeaderGroups: () => HeaderGroup<T>[]
+	getRowModel: () => RowModel<T>
 }
 
-export const Table = <T,>({ headers, rows }: Props<T>) => {
+export const Table = <T,>({ getHeaderGroups, getRowModel }: Props<T>) => {
 	return (
 		<TableContainer>
 			<ChakraTable variant="simple">
 				<Thead>
-					{headers.map((headerGroup) => (
+					{getHeaderGroups().map((headerGroup) => (
 						<Tr key={headerGroup.id}>
 							{headerGroup.headers.map((header) => {
 								return (
@@ -53,24 +53,26 @@ export const Table = <T,>({ headers, rows }: Props<T>) => {
 				</Thead>
 
 				<Tbody>
-					{rows.rows.slice().map((row) => {
-						return (
-							<Tr key={row.id}>
-								{row.getVisibleCells().map((cell) => {
-									return (
-										<Td
-											key={cell.id}
-											fontSize={{ sm: '14px' }}
-											minW={{ sm: '150px', md: '200px', lg: 'auto' }}
-											borderColor="transparent"
-										>
-											{flexRender(cell.column.columnDef.cell, cell.getContext())}
-										</Td>
-									)
-								})}
-							</Tr>
-						)
-					})}
+					{getRowModel()
+						.rows.slice()
+						.map((row) => {
+							return (
+								<Tr key={row.id}>
+									{row.getVisibleCells().map((cell) => {
+										return (
+											<Td
+												key={cell.id}
+												fontSize={{ sm: '14px' }}
+												minW={{ sm: '150px', md: '200px', lg: 'auto' }}
+												borderColor="transparent"
+											>
+												{flexRender(cell.column.columnDef.cell, cell.getContext())}
+											</Td>
+										)
+									})}
+								</Tr>
+							)
+						})}
 				</Tbody>
 			</ChakraTable>
 		</TableContainer>

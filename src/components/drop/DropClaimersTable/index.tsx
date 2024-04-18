@@ -18,7 +18,7 @@ interface Props {
 }
 
 const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) => {
-	const { rows, headers } = useDropClaimersTable(tableData, tokenSymbol)
+	const { getHeaderGroups, getRowModel } = useDropClaimersTable(tableData, tokenSymbol)
 
 	return (
 		<Flex direction="column" w="100%" overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -34,7 +34,7 @@ const DropClaimersTable = ({ tableData, title, isLoading, tokenSymbol }: Props) 
 				</Text>
 			</Flex>
 
-			<Table rows={rows} headers={headers} />
+			<Table getHeaderGroups={getHeaderGroups} getRowModel={getRowModel} />
 		</Flex>
 	)
 }

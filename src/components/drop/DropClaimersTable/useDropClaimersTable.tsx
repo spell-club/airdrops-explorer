@@ -129,8 +129,5 @@ export const useDropClaimersTable = (data: RowObj[], tokenSymbol: string) => {
 		debugTable: true,
 	})
 
-	const headers = table.getHeaderGroups()
-	const rows = table.getRowModel()
-
-	return { ...table, headers, rows }
+	return table
 }

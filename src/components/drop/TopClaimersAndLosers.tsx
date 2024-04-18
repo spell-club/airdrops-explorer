@@ -12,6 +12,7 @@ interface Props {
 
 const TopClaimersAndLosers = ({ dropId, tokenSymbol }: Props) => {
 	const { clientApi } = useClientApi()
+
 	const { data: claimersData, isLoading } = useQuery({
 		queryKey: ['getTopDropClaimers'],
 		queryFn: () => clientApi.getAirdropTowWinnersAndLosers(dropId),

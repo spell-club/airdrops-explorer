@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
-import IconBox from '../UI/icon/iconBox'
 import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md'
-import { formatValue } from '../../utils'
 import { useQuery } from '@tanstack/react-query'
-import useClientApi from '../../hooks/useClientApi'
+
+import IconBox from 'components/UI/icon/iconBox'
+import { formatValue } from 'utils'
+import useClientApi from 'hooks/useClientApi'
 import MiniStatistics from 'components/card/MiniStatistics'
 
 const MiniStatisticsGrid = () => {

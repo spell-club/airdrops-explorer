@@ -1,12 +1,12 @@
 'use client'
-import React from 'react'
 import { Box, Center, Flex, Spinner } from '@chakra-ui/react'
+import { useQuery } from '@tanstack/react-query'
+
 import Banner from 'components/drop/Banner'
 import banner from 'assets/img/auth/banner.png'
 import General from 'components/drop/General'
 import DropConversionChartCard from 'components/drop/DropConversionChartCard'
 import DropDynamicChart from 'components/drop/DropDynamicChart'
-import { useQuery } from '@tanstack/react-query'
 import useClientApi from 'hooks/useClientApi'
 import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
 import { formatValue, getStaticImageLink } from 'utils'
@@ -14,6 +14,7 @@ import { formatValue, getStaticImageLink } from 'utils'
 const Page = ({ params }: { params: { dropId: string } }) => {
 	const { dropId } = params
 	const { clientApi } = useClientApi()
+
 	const { data: airdropProject, isLoading: isAirdropProjectLoading } = useQuery({
 		queryKey: ['drop', dropId],
 		queryFn: () => clientApi.getAirdropProject(dropId),
@@ -40,6 +41,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 
 			<Flex gap="20px" mb="20px" flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
 				<DropDynamicChart dropId={dropId} tokenSymbol={airdropProject?.token_symbol} />
+
 				<DropConversionChartCard project={airdropProject} />
 			</Flex>
 

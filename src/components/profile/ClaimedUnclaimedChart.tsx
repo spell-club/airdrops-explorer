@@ -15,8 +15,10 @@ interface Props {
 }
 
 const ClaimedUnclaimedChart = ({ address }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
 	const { clientApi } = useClientApi()
+
+	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['claimHistory'],
 		queryFn: () => clientApi.getClaimHistoricalValue(address),
@@ -51,12 +53,14 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 				<Text fontSize="xl" fontWeight="600" alignSelf="start" pb={2}>
 					Allocated vs Claimed
 				</Text>
+
 				<SelectTimelineMenu
 					selected={selectedTime}
 					items={timeCategories}
 					onItemSelected={setSelectedTime}
 				/>
 			</Flex>
+
 			<Flex w="100%" flexDirection={{ base: 'column', lg: 'column' }}>
 				<Box minH="360px" minW="75%" mt="auto">
 					<LineChart
