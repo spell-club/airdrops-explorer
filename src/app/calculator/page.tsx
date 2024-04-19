@@ -4,9 +4,12 @@ import { useCalculatorContext } from 'contexts/CalculatorContext'
 import AprChart from 'components/calculator/AprChart'
 import RewardsChart from 'components/calculator/RewardsChart'
 import FormAndSummaryWrapper from 'components/calculator/FormAndSummaryWrapper'
+import useAirdrops from 'hooks/useAirdrops'
 
 const Page = () => {
 	const { isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
+	// initial projects loading
+	const { airdrops } = useAirdrops()
 
 	return (
 		<Box as="section" mb="20px">

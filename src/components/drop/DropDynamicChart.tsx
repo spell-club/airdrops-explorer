@@ -20,7 +20,7 @@ const defaultTooltipFormat = {
 }
 
 const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
 	const { clientApi } = useClientApi()
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['dropHistory'],
@@ -85,7 +85,7 @@ const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
 								categories: datesArray,
 								overwriteCategories: ovewriteCategories(
 									datesArray,
-									selectedTime.label === '1W' ? 4 : 7,
+									selectedTime.label === '1W' ? 4 : xAxisCount,
 								),
 							},
 							tooltip: {
@@ -101,8 +101,6 @@ const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
 										const tokenAmount = seriesIndex
 											? chartData[dataPointIndex].claimed_amount
 											: chartData[dataPointIndex].allocated_amount
-
-										console.log(tokenAmount, 'tokenAmount', chartData[dataPointIndex])
 
 										const trancatedTokenAmount = roundToPrecision({
 											value: tokenAmount,

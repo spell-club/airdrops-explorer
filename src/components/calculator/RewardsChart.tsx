@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import LineChart from 'components/UI/charts/LineChart'
 import React, { useMemo, useState } from 'react'
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const RewardsChart = ({ values, dates }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
 	const { airdropsLabelsForChart } = useAirdropsDates()
 
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
@@ -32,9 +32,9 @@ const RewardsChart = ({ values, dates }: Props) => {
 	return (
 		<Card w="100%" alignItems="center">
 			<Box justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
-				<Flex w="100%" justify="space-between" align="center">
+				<Flex w="100%" justify="space-between" align="center" gap={1}>
 					<Text fontSize="xl" fontWeight="600" alignSelf="start" pb={2}>
-						Rewards USD
+						Total gains: Staking & Airdrops (USD)
 					</Text>
 					<SelectTimelineMenu
 						selected={selectedTime}
@@ -59,11 +59,13 @@ const RewardsChart = ({ values, dates }: Props) => {
 							}}
 						/>
 						<Flex justify="space-between" pl={5} pr={2}>
-							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : 7).map((date) => (
-								<Text key={date} fontSize={12} color="secondaryGray.600">
-									{date}
-								</Text>
-							))}
+							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : xAxisCount).map(
+								(date) => (
+									<Text key={date} fontSize={12} color="secondaryGray.600">
+										{date}
+									</Text>
+								),
+							)}
 						</Flex>
 					</Box>
 				</Flex>

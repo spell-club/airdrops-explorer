@@ -6,7 +6,7 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table'
-import { Flex, Link, Text, useColorModeValue } from '@chakra-ui/react'
+import { Flex, Link, Text, useColorModeValue, useMediaQuery } from '@chakra-ui/react'
 
 import { AddressAirdrop } from 'api/types'
 import { formatValue } from 'utils'
@@ -17,6 +17,7 @@ export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 	const textColor = useColorModeValue('secondaryGray.900', 'white')
 
 	const [sorting, setSorting] = useState<SortingState>([])
+	const [isLargerThan600] = useMediaQuery('(min-width: 600px)')
 
 	const columns = [
 		columnHelper.accessor('name', {
@@ -53,6 +54,7 @@ export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 			cell: (info) => {
 				const value = info.getValue()
 				const explorerLink = `https://www.mintscan.io/cosmos/address/${value}`
+				const truncatedAddress = `${value.slice(0, 4)}...${value.slice(-4)}`
 
 				return (
 					<Link isExternal href={explorerLink} target="_blank" rel="noreferer noopener">
@@ -62,7 +64,7 @@ export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 							fontWeight="700"
 							_hover={{ textDecor: 'underline' }}
 						>
-							{value}
+							{isLargerThan600 ? value : truncatedAddress}
 						</Text>
 					</Link>
 				)

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
 import LineChart from 'components/UI/charts/LineChart'
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const AprChart = ({ dates, values }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const dataByTime = useMemo(() => {
@@ -37,7 +37,7 @@ const AprChart = ({ dates, values }: Props) => {
 			<Box justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
 				<Flex w="100%" justify="space-between" align="center">
 					<Text fontSize="xl" fontWeight="600" alignSelf="start" pb={2}>
-						APR Rate
+						Staking APR (ATOM)
 					</Text>
 					<SelectTimelineMenu
 						selected={selectedTime}
@@ -87,11 +87,13 @@ const AprChart = ({ dates, values }: Props) => {
 							}}
 						/>
 						<Flex justify="space-between" pl={5} pr={2}>
-							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : 7).map((date) => (
-								<Text key={date} fontSize={12} color="secondaryGray.600">
-									{date}
-								</Text>
-							))}
+							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : xAxisCount).map(
+								(date) => (
+									<Text key={date} fontSize={12} color="secondaryGray.600">
+										{date}
+									</Text>
+								),
+							)}
 						</Flex>
 					</Box>
 				</Flex>

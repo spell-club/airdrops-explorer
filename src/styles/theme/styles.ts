@@ -105,6 +105,9 @@ export const globalStyles = {
 				borderBottom: '1px solid',
 				borderColor: 'navy.700',
 			},
+			'.chakra-modal__content-container': {
+				height: '0px !important',
+			},
 		}),
 	},
 }
