@@ -1,74 +1,9 @@
-import { RefObject, ChangeEvent, useState } from 'react'
-import {
-	Text,
-	Button,
-	Flex,
-	Input,
-	FormLabel,
-	FormControl,
-	InputGroup,
-	InputRightAddon,
-} from '@chakra-ui/react'
+import { ChangeEvent, useState } from 'react'
+import { Text, Button, Flex, FormLabel } from '@chakra-ui/react'
 import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 import { CalendarIcon } from '@chakra-ui/icons'
 import { formatValue } from 'utils'
-
-interface CalculatorFormInputProps {
-	inputRef?: RefObject<HTMLInputElement>
-	placeholder: string
-	id: string
-	label: string
-	adon?: string
-	[x: string]: unknown
-}
-
-const CalculatorFormInput = ({
-	inputRef,
-	placeholder,
-	id,
-	label,
-	adon,
-	...rest
-}: CalculatorFormInputProps) => (
-	<FormControl>
-		<FormLabel ml={2} htmlFor={id} fontSize="sm" fontWeight="bold" _hover={{ cursor: 'pointer' }}>
-			{label}
-		</FormLabel>
-
-		<InputGroup>
-			<Input
-				id={id}
-				type="number"
-				w="100%"
-				h="50px"
-				border="1px solid"
-				borderColor="navy.700"
-				ref={inputRef}
-				variant="search"
-				fontSize="lg"
-				bg={'navy.900'}
-				color={'gray.100'}
-				fontWeight="500"
-				_placeholder={{ color: 'gray.400', fontSize: '14px' }}
-				borderRadius={'30px'}
-				placeholder={placeholder}
-				borderRight={adon ? 'none' : '1px solid'}
-				{...rest}
-			/>
-
-			<InputRightAddon
-				border="1px solid"
-				borderColor="navy.700"
-				h="50px"
-				bg="navy.900"
-				borderRightRadius="20px"
-				color={'gray.400'}
-			>
-				{adon}
-			</InputRightAddon>
-		</InputGroup>
-	</FormControl>
-)
+import CalculatorFormInput from 'components/UI/input/CalculatorFormInput'
 
 interface Props {
 	validatorFee: number
@@ -83,15 +18,16 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 	const isButtonDisabled = !inputAmount
 
 	return (
-		<Flex align="center" flexDir="column" gap={4} w={{ base: '300px', md: '400px' }}>
+		<Flex align="center" flexDir="column" gap={4} w={{ base: '280px', md: '400px' }}>
 			<CalculatorFormInput
-				value={inputAmount}
+				value={inputAmount || ''}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}
 				id="amount"
-				placeholder="Atom"
+				placeholder=""
 				min={0}
 				label="Initial staking amount"
 				adon="ATOM"
+				autoComplete="off"
 			/>
 
 			{initialAmountUsd ? (

@@ -32,6 +32,7 @@ export function SearchBar(props: {
 
 	const handleSearch = () => {
 		if (value) {
+			onSearch(value)
 			push(`/profile/${value}`)
 		}
 
@@ -43,8 +44,6 @@ export function SearchBar(props: {
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter' && value) {
 			handleSearch()
-
-			onSearch(value)
 		}
 	}
 
@@ -81,7 +80,7 @@ export function SearchBar(props: {
 				fontWeight="500"
 				_placeholder={{ color: 'gray.400', fontSize: '14px' }}
 				borderRadius={borderRadius ? borderRadius : '30px'}
-				placeholder={placeholder ? placeholder : 'Search...'}
+				placeholder={placeholder ? placeholder : 'Search by address'}
 				onKeyDown={handleKeyDown}
 			/>
 		</InputGroup>

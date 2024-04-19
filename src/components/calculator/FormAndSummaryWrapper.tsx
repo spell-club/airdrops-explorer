@@ -4,10 +4,12 @@ import CalculatorForm from './CalculatorForm'
 import CalculatorSummary from './CalculatorSummary'
 import { useMemo, useState } from 'react'
 import { useCalculatorContext } from 'contexts/CalculatorContext'
+import useAirdropsDates from 'hooks/useAirdropsDates'
 
 const FormAndSummaryWrapper = () => {
 	const [validatorFee, setValidatorFee] = useState(5)
 	const { totalStakingRewardsUSD, totalAirdropUSD, isDataLoaded } = useCalculatorContext()
+	const { airdropsDates } = useAirdropsDates()
 
 	const { totalUsd, totalStakingRewardsWithFee } = useMemo(() => {
 		const totalStakingRewardsWithFee =
@@ -25,14 +27,15 @@ const FormAndSummaryWrapper = () => {
 			<Card alignItems="center" mb="20px" display="flex" flexDir="column" gap={8}>
 				<Flex flexDir="column">
 					<Text fontSize={32} fontWeight={600} mb="10px" textAlign="center">
-						Staking Reward Calculator
+						ROI Calculator
 					</Text>
 					<Text>
-						Unlock the potential of your staked coins with our Coin Staking Reward Calculator.
-						Easily input the number of coins you&apos;ve staked (Atoms) and discover the rewards you
-						could earn over time. Whether you&apos;re a seasoned investor or just getting started,
-						our calculator provides clear insights into the rewards awaiting you. Make informed
-						decisions and maximize your staking rewards with ease. Try it now!
+						Unlock the potential of your staked tokens with our Return on Investment (ROI)
+						Calculator. Simply input the number of tokens you&apos;ve staked (ATOM) and discover the
+						earnings you could have accumulated over time, including staking rewards and Airdrops.
+						Whether you&apos;re a seasoned investor or just getting started, our calculator provides
+						clear insights into the potential income you could earn by staking ATOM. Make informed
+						decisions and maximize your crypto assets with ease. Try it now!
 					</Text>
 				</Flex>
 
@@ -42,6 +45,7 @@ const FormAndSummaryWrapper = () => {
 			{isDataLoaded ? (
 				<Box w="100%">
 					<CalculatorSummary
+						airdropsDates={airdropsDates}
 						totalStakingRewardsUSD={totalStakingRewardsWithFee}
 						totalUsd={totalUsd}
 					/>

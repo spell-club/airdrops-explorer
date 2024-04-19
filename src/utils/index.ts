@@ -51,7 +51,9 @@ export const getProminentColor = (img: string) => {
 }
 
 export const daysAgoFromDate = (airdropDate: string): string => {
-	const parts = airdropDate.split('.')
+	const isDateContainsSlash = airdropDate.includes('/')
+
+	const parts = isDateContainsSlash ? airdropDate.split('/') : airdropDate.split('.')
 
 	const jsDateStr = `${parts[1]}/${parts[0]}/${parts[2]}`
 

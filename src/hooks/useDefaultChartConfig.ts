@@ -1,6 +1,7 @@
 import { roundToPrecision } from '../utils'
 import numbro from 'numbro'
 import { ApexOptions } from 'apexcharts'
+import { useBreakpointValue } from '@chakra-ui/react'
 
 const defaultTooltipFormat = {
 	trimMantissa: true,
@@ -165,17 +166,28 @@ const useDefaultChartConfig = () => {
 	const ovewriteCategories = (categories: string[], count = 10) => {
 		return categories?.filter((value, index, array) => {
 			const length = array.length
-			const desiredCount = count
-			const step = Math.floor(length / desiredCount)
+			const step = Math.floor(length / count)
 
 			return index === 0 || index % step === 0 || index === length - 1
 		})
 	}
 
+	const xAxisCount = useBreakpointValue(
+		{
+			base: 3,
+			md: 6,
+			'2xl': 10,
+		},
+		{
+			fallback: '10',
+		},
+	)
+
 	return {
 		chartConfig: DEFAULT_CHART_CONFIG,
 		ovewriteCategories,
 		timeCategories,
+		xAxisCount,
 	}
 }
 

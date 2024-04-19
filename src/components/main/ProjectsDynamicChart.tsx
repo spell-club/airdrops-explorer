@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Box, Flex, useColorModeValue, Text } from '@chakra-ui/react'
+import { Box, Flex, useColorModeValue, Text, useBreakpointValue } from '@chakra-ui/react'
 
 import useClientApi from '../../hooks/useClientApi'
 import { roundToPrecision } from '../../utils'
@@ -12,7 +12,7 @@ import useAirdropsDates from '../../hooks/useAirdropsDates'
 
 const ProjectsDynamicChart = () => {
 	const { clientApi } = useClientApi()
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
+	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
 	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
 		queryKey: ['dropsHistory'],
 		queryFn: () => clientApi.getProjectsHistoricalValue(),
@@ -67,23 +67,20 @@ const ProjectsDynamicChart = () => {
 							xaxis: {
 								...chartConfig.xaxis,
 								categories: datesArray,
-
-								// overwriteCategories: ovewriteCategories(
-								//   datesArray,
-								//   selectedTime.label === '1W' ? 4 : 10,
-								// ),
 							},
 							annotations: {
 								xaxis: airdropsLabelsForChart,
 							},
 						}}
 					/>
-					<Flex justify="space-between" pl={5} pr={2}>
-						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : 10).map((date) => (
-							<Text key={date} fontSize={12} color="secondaryGray.600">
-								{date}
-							</Text>
-						))}
+					<Flex justify="space-between" pl={5} pr={2} gap={1}>
+						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
+							(date) => (
+								<Text key={date} fontSize={12} color="secondaryGray.600">
+									{date}
+								</Text>
+							),
+						)}
 					</Flex>
 				</Box>
 			</Flex>

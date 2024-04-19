@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 
 import Card from '../card/Card'
@@ -23,6 +23,17 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 		queryKey: ['claimHistory'],
 		queryFn: () => clientApi.getClaimHistoricalValue(address),
 	})
+
+	const xAxisCount = useBreakpointValue(
+		{
+			base: 3,
+			md: 6,
+			lg: 8,
+		},
+		{
+			fallback: '8',
+		},
+	)
 
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 	const { airdropsLabelsForChart } = useAirdropsDates()
@@ -85,11 +96,13 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 						}}
 					/>
 					<Flex justify="space-between" pl={5} pr={2}>
-						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : 7).map((date) => (
-							<Text key={date} fontSize={12} color="secondaryGray.600">
-								{date}
-							</Text>
-						))}
+						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
+							(date) => (
+								<Text key={date} fontSize={12} color="secondaryGray.600">
+									{date}
+								</Text>
+							),
+						)}
 					</Flex>
 				</Box>
 			</Flex>

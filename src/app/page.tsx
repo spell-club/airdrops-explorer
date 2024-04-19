@@ -2,10 +2,10 @@
 import { Flex, Grid } from '@chakra-ui/react'
 
 import DropsList from 'components/main/DropsList'
-import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 import MiniStatisticsGrid from 'components/main/MiniStatisticsGrid'
 import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 import CalculatorBanner from 'components/main/CalculatorBanner'
+import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 
 export default function Home() {
 	return (

@@ -8,9 +8,52 @@ import { roundToPrecision } from 'utils'
 import { AirdropProject } from 'api/types'
 import DropConversionChartCardError from './DropConversionChartCardError'
 
+const formatValue = (value: number) => {
+	const truncatedAmount = roundToPrecision({
+		value,
+		precision: 0,
+		method: 'floor',
+	})
+
+	const roundFormat = {
+		trimMantissa: true,
+		thousandSeparated: true,
+	}
+
+	return String(numbro(truncatedAmount).format(roundFormat))
+}
+
 interface Props {
 	project: AirdropProject
 }
+
+interface StatsWrapperProps {
+	firstTitle: string
+	firstValue: number
+	secondTitle: string
+	secondValue: number
+}
+const StatsWrapper = ({ firstTitle, secondTitle, secondValue, firstValue }: StatsWrapperProps) => (
+	<Flex flexDir="column" gap={5}>
+		<Flex flexDir="column" align="center">
+			<Text fontSize={14} color="gray.400">
+				{firstTitle}
+			</Text>
+			<Text fontSize={{ base: 16, md: 20 }} fontWeight={600}>
+				${formatValue(firstValue)}
+			</Text>
+		</Flex>
+
+		<Flex flexDir="column" align="center">
+			<Text fontSize={14} color="gray.400">
+				{secondTitle}
+			</Text>
+			<Text fontSize={{ base: 16, md: 20 }} fontWeight={600}>
+				{formatValue(secondValue)}
+			</Text>
+		</Flex>
+	</Flex>
+)
 
 const DropConversionChartCard = ({ project }: Props) => {
 	const bg = useColorModeValue('whiteAlpha.800', 'navy.800')
@@ -37,21 +80,6 @@ const DropConversionChartCard = ({ project }: Props) => {
 		method: 'floor',
 	})
 
-	const formatValue = (value: number) => {
-		const truncatedAmount = roundToPrecision({
-			value,
-			precision: 0,
-			method: 'floor',
-		})
-
-		const roundFormat = {
-			trimMantissa: true,
-			thousandSeparated: true,
-		}
-
-		return String(numbro(truncatedAmount).format(roundFormat))
-	}
-
 	const isRelocatedStatExist = total_reallocated && total_reallocated_usd
 
 	const claimersRate = roundToPrecision({
@@ -66,7 +94,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 				<Text fontSize={20} fontWeight={600}>
 					Allocation Info
 				</Text>
-				<Flex gap={5}>
+				<Flex gap={5} flexDir={{ base: 'column', md: 'row' }}>
 					<Flex flexDir="column" align="center" gap={4}>
 						<DonutChart value={conversion}>
 							<Flex flexDir="column" align="center">
@@ -94,101 +122,81 @@ const DropConversionChartCard = ({ project }: Props) => {
 					)}
 				</Flex>
 
-				<Flex
-					gap={5}
-					px={10}
-					py={4}
-					boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
-					borderRadius={20}
-				>
-					<Flex flexDir="column" gap={5}>
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Allocated $
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								${formatValue(totalAllocatedUsd)}
-							</Text>
+				{isRelocatedStatExist ? (
+					<Flex
+						gap={{ base: 2, md: 5 }}
+						px={{ base: 2, md: 10 }}
+						py={4}
+						boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
+						borderRadius={20}
+					>
+						<Flex flexDir="column" gap={5}>
+							<StatsWrapper
+								firstTitle="Allocated $"
+								firstValue={totalAllocatedUsd}
+								secondTitle={`Allocated ${tokenSymbol}`}
+								secondValue={totalAllocated}
+							/>
+							<StatsWrapper
+								firstTitle="Reallocated $"
+								firstValue={total_reallocated_usd}
+								secondTitle={`Reallocated ${tokenSymbol}`}
+								secondValue={total_reallocated}
+							/>
 						</Flex>
 
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Allocated {tokenSymbol}
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								{formatValue(totalAllocated)}
-							</Text>
-						</Flex>
-					</Flex>
+						<VSeparator />
 
-					<VSeparator />
+						<Flex flexDir="column" gap={5}>
+							<StatsWrapper
+								firstTitle="Claimed $"
+								firstValue={totalClaimedUsd}
+								secondTitle={`Claimed ${tokenSymbol}`}
+								secondValue={totalClaimed}
+							/>
 
-					<Flex flexDir="column" gap={5}>
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Claimed $
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								${formatValue(totalClaimedUsd)}
-							</Text>
-						</Flex>
-
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Claimed {tokenSymbol}
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								{formatValue(totalClaimed)}
-							</Text>
+							<StatsWrapper
+								firstTitle="Missed $"
+								firstValue={totalAllocatedUsd - totalClaimedUsd}
+								secondTitle={`Missed ${tokenSymbol}`}
+								secondValue={totalAllocated - totalClaimed}
+							/>
 						</Flex>
 					</Flex>
+				) : (
+					<Flex
+						gap={{ base: 2, md: 5 }}
+						px={{ base: 2, md: 10 }}
+						py={4}
+						boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
+						borderRadius={20}
+					>
+						<StatsWrapper
+							firstTitle="Allocated $"
+							firstValue={totalAllocatedUsd}
+							secondTitle={`Allocated ${tokenSymbol}`}
+							secondValue={totalAllocated}
+						/>
 
-					<VSeparator />
+						<VSeparator />
 
-					<Flex flexDir="column" gap={5}>
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Missed $
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								${formatValue(totalAllocatedUsd - totalClaimedUsd)}
-							</Text>
-						</Flex>
-						<Flex flexDir="column" align="center">
-							<Text fontSize={14} color="gray.400">
-								Missed {tokenSymbol}
-							</Text>
-							<Text fontSize={20} fontWeight={600}>
-								{formatValue(totalAllocated - totalClaimed)}
-							</Text>
-						</Flex>
+						<StatsWrapper
+							firstTitle="Claimed $"
+							firstValue={totalClaimedUsd}
+							secondTitle={`Claimed ${tokenSymbol}`}
+							secondValue={totalClaimed}
+						/>
+
+						<VSeparator />
+
+						<StatsWrapper
+							firstTitle="Missed $"
+							firstValue={totalAllocatedUsd - totalClaimedUsd}
+							secondTitle={`Missed ${tokenSymbol}`}
+							secondValue={totalAllocated - totalClaimed}
+						/>
 					</Flex>
-
-					{isRelocatedStatExist ? (
-						<>
-							{' '}
-							<VSeparator />
-							<Flex flexDir="column" gap={5}>
-								<Flex flexDir="column" align="center">
-									<Text fontSize={14} color="gray.400">
-										Reallocated $
-									</Text>
-									<Text fontSize={20} fontWeight={600}>
-										${formatValue(total_reallocated_usd)}
-									</Text>
-								</Flex>
-								<Flex flexDir="column" align="center">
-									<Text fontSize={14} color="gray.400">
-										Reallocated {tokenSymbol}
-									</Text>
-									<Text fontSize={20} fontWeight={600}>
-										{formatValue(total_reallocated)}
-									</Text>
-								</Flex>
-							</Flex>{' '}
-						</>
-					) : null}
-				</Flex>
+				)}
 			</Flex>
 		</Card>
 	)

@@ -9,3 +9,9 @@ export const captureDataLayer = (name: string, options = {}) => {
 		window.dataLayer.push({ ...options, event: name })
 	}
 }
+
+export const onSearch = (value: string) => {
+	captureDataLayer('wallet_search', {
+		value,
+	})
+}
