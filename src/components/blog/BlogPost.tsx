@@ -14,11 +14,16 @@ const BlogPost = ({ post }: Props) => {
 	return (
 		<Link href={`/blog/post/${id}`}>
 			<Card p="20px" cursor="pointer" position="relative">
-				<Flex gap="34px">
+				<Flex
+					gap={{ base: '0px', md: '25px' }}
+					flexDir={{ base: 'column', md: 'row' }}
+					align="center"
+					my={{ base: '25px', md: '0px' }}
+				>
 					<Image src={image} w="270px" borderRadius={20} alt="post banner" />
 
 					<Flex flexDir="column" pt="30px" justify="space-between">
-						<Flex gap={4} flexDir="column">
+						<Flex gap={4} flexDir="column" align={{ base: 'center', md: 'start' }}>
 							<Text fontSize={20} fontWeight={600}>
 								{title}
 							</Text>
@@ -30,7 +35,7 @@ const BlogPost = ({ post }: Props) => {
 							</Box>
 						</Flex>
 
-						<Flex gap={4} align="center">
+						<Flex gap={3} align="center" mt={3} flexWrap="wrap">
 							{tags.map((tag) => (
 								<Badge key={tag}>{tag}</Badge>
 							))}
@@ -38,11 +43,18 @@ const BlogPost = ({ post }: Props) => {
 					</Flex>
 				</Flex>
 
-				<Text pos="absolute" top="20px" right="20px" color="gray.400">
+				<Text pos="absolute" top={{ base: '10px', md: '20px' }} right="20px" color="gray.400">
 					{date}
 				</Text>
 
-				<Flex gap={2} color="gray.400" pos="absolute" bottom="20px" right="20px" align="center">
+				<Flex
+					gap={2}
+					color="gray.400"
+					pos="absolute"
+					bottom={{ base: '10px', md: '20px' }}
+					right="20px"
+					align="center"
+				>
 					<TimeIcon boxSize="12px" />
 					<Text>{readingTime}</Text>
 				</Flex>

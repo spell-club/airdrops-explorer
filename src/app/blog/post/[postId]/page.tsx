@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 import { useQuery } from '@tanstack/react-query'
 import { BLOG_API_URL, getPostById } from 'api/blogApi/blogApi'
@@ -49,8 +49,8 @@ const Page = ({ params }: Props) => {
 					borderRadius={20}
 				/>
 
-				<Card pe="20px" w="100%" pos="relative">
-					<Text pos="absolute" top="20px" right="20px" color="gray.400">
+				<Card pe="20px" w="100%" pos="relative" py={{ base: '30px', md: '20px' }}>
+					<Text pos="absolute" top={{ base: '10px', md: '20px' }} right="20px" color="gray.400">
 						{new Date(attributes.createdAt).toLocaleDateString()}
 					</Text>
 
@@ -61,6 +61,12 @@ const Page = ({ params }: Props) => {
 					<Box color="gray.100">
 						<BlockRendererClient content={attributes.content as unknown as BlocksContent} />
 					</Box>
+
+					<Flex gap={3} align="center" mt={3} flexWrap="wrap" justify="center">
+						{attributes.tags.split(' ').map((tag) => (
+							<Badge key={tag}>{tag}</Badge>
+						))}
+					</Flex>
 				</Card>
 			</Flex>
 		</Flex>
