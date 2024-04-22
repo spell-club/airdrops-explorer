@@ -33,7 +33,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 			<ScrollToTop />
 			<Banner
 				banner={banner.src}
-				avatar={getStaticImageLink(airdropProject?.name.toLowerCase())}
+				avatar={getStaticImageLink(airdropProject?.name.toLowerCase(), true)}
 				name={airdropProject?.name}
 				airdropDate={new Date(airdropProject?.airdrop_timestamp).toLocaleDateString()}
 				snapshotDate={new Date(airdropProject?.snapshot_date).toLocaleDateString()}

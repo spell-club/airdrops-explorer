@@ -64,8 +64,8 @@ export const daysAgoFromDate = (airdropDate: string): string => {
 	return `${daysDifference} days ago`
 }
 
-export const getStaticImageLink = (image: string) => {
-	return `${API_BASE_URL}/static/${image}.webp`
+export const getStaticImageLink = (image: string, isSmall?: boolean) => {
+	return `${API_BASE_URL}/static/${image}${isSmall ? '_small' : ''}.webp`
 }
 
 export const scrollToHash = function (element_id: string) {
