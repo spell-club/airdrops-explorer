@@ -58,6 +58,7 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 				const response = await clientApi.calculateAirdrop(calculateAmount)
 				setCalculatedData(response)
 			} catch (e) {
+				setCalculatedData(null)
 				console.error(e)
 			} finally {
 				setIsLoading(false)

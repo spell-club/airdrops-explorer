@@ -15,7 +15,7 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 	const { isLoading, currentAmount, initialAmountUsd, startDate } = useCalculatorContext()
 	const [inputAmount, setAmount] = useState<number>(currentAmount)
 
-	const isButtonDisabled = !inputAmount
+	const isButtonDisabled = !inputAmount || inputAmount < 0
 
 	return (
 		<Flex align="center" flexDir="column" gap={4} w={{ base: '280px', md: '400px' }}>
