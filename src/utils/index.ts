@@ -2,7 +2,6 @@ import numbro from 'numbro'
 import { toSvg } from 'jdenticon'
 import { prominent } from 'color.js'
 import { API_BASE_URL } from '../api'
-
 type RoundingMethod = 'round' | 'ceil' | 'floor' | 'trunc'
 
 export function roundToPrecision({

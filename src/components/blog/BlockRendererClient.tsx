@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer'
-import { Flex, Heading, Link, List, OrderedList, UnorderedList } from '@chakra-ui/react'
+import { Flex, Heading, Link, OrderedList, UnorderedList } from '@chakra-ui/react'
 import React from 'react'
 
 export default function BlockRendererClient({ content }: { readonly content: BlocksContent }) {
