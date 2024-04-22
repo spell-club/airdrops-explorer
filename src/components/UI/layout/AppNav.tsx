@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const LINKS = [
-	// { name: 'Blog', path: '/blog' },
+	{ name: 'Blog', path: '/blog' },
 	{ name: 'Calculator', path: '/calculator' },
 ]
 

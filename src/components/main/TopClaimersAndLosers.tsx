@@ -13,8 +13,8 @@ const TopClaimersAndLosers = () => {
 	})
 
 	return (
-		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }}>
-			<Card px="0px" mb="20px">
+		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }} gap={5}>
+			<Card px="0px">
 				<ClaimersTable
 					title="Top Claimers"
 					tableData={topWinnersAndLosers?.winners}
@@ -22,7 +22,7 @@ const TopClaimersAndLosers = () => {
 				/>
 			</Card>
 
-			<Card px="0px" mb="20px">
+			<Card px="0px">
 				<ClaimersTable
 					title="Top Losers"
 					tableData={topWinnersAndLosers?.losers}
