@@ -176,10 +176,10 @@ const useDefaultChartConfig = () => {
 		{
 			base: 3,
 			md: 6,
-			'2xl': 10,
+			'2xl': 7,
 		},
 		{
-			fallback: '10',
+			fallback: '7',
 		},
 	)
 

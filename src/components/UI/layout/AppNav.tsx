@@ -20,7 +20,7 @@ const AppNav = chakra(({ className, isMobile = false, onItemClick }) => {
 					fontWeight={500}
 					key={link.path}
 					href={link.path}
-					color={isActive(link.path) ? 'navy.400' : 'grey.100'}
+					color="grey.100"
 					transition=".3s all"
 					opacity={0.85}
 					_hover={{
