@@ -23,7 +23,6 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 				value={inputAmount || ''}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(Number(e.target.value))}
 				id="amount"
-				placeholder=""
 				min={0}
 				label="Initial staking amount"
 				adon="ATOM"
@@ -37,10 +36,9 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 			) : null}
 
 			<CalculatorFormInput
-				value={validatorFee}
+				value={validatorFee || ''}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setValidatorFee(Number(e.target.value))}
 				id="fee"
-				placeholder="%"
 				min={0}
 				label="Validator fee"
 				adon="%"

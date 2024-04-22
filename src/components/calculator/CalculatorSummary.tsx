@@ -1,8 +1,8 @@
 import Card from '../card/Card'
 import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useCalculatorContext } from 'contexts/CalculatorContext'
-import { daysAgoFromDate, formatValue } from 'utils'
-import { useMemo } from 'react'
+import { daysAgoFromDate, formatValue, scrollToHash } from 'utils'
+import { useEffect, useMemo } from 'react'
 
 interface AirdropDate {
 	name: string
@@ -27,6 +27,10 @@ const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd, airdropsDates }: 
 			fallback: '24',
 		},
 	)
+
+	useEffect(() => {
+		scrollToHash('calculatorSummary')
+	}, [])
 
 	const airdropsSummary = useMemo(() => {
 		return airdropsDetails.map((airdrop) => {
@@ -57,7 +61,7 @@ const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd, airdropsDates }: 
 	}, [airdropsDetails, airdropsDates])
 
 	return (
-		<Card w="100%" alignItems="center" p={{ base: 2, md: 5 }}>
+		<Card w="100%" alignItems="center" p={{ base: 2, md: 5 }} id="calculatorSummary">
 			<Box w={{ base: '320px', md: '400px' }}>
 				<Flex flexDir="column" w="100%" gap={5}>
 					<Flex p={5} borderRadius={16} bg="navy.900" justify="space-between">

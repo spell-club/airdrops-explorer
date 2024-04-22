@@ -75,7 +75,7 @@ export default function CalculatorBanner() {
 						adon="ATOM"
 						placeholder=""
 						onKeyDown={handleKeyDown}
-						autocomplete="off"
+						autoComplete="off"
 					/>
 					<Button
 						mt={2}

@@ -123,37 +123,81 @@ const DropConversionChartCard = ({ project }: Props) => {
 				</Flex>
 
 				{isRelocatedStatExist ? (
-					<Flex
-						gap={{ base: 2, md: 5 }}
-						px={{ base: 2, md: 10 }}
-						py={4}
-						boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
-						borderRadius={20}
-					>
-						<Flex flexDir="column" gap={5}>
+					<>
+						<Flex
+							gap={{ base: 2, md: 5 }}
+							px={{ base: 2, md: 10 }}
+							py={4}
+							boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
+							borderRadius={20}
+							display={{ base: 'flex', md: 'none' }}
+						>
+							<Flex flexDir="column" gap={5}>
+								<StatsWrapper
+									firstTitle="Allocated $"
+									firstValue={totalAllocatedUsd}
+									secondTitle={`Allocated ${tokenSymbol}`}
+									secondValue={totalAllocated}
+								/>
+								<StatsWrapper
+									firstTitle="Reallocated $"
+									firstValue={total_reallocated_usd}
+									secondTitle={`Reallocated ${tokenSymbol}`}
+									secondValue={total_reallocated}
+								/>
+							</Flex>
+
+							<VSeparator />
+
+							<Flex flexDir="column" gap={5}>
+								<StatsWrapper
+									firstTitle="Claimed $"
+									firstValue={totalClaimedUsd}
+									secondTitle={`Claimed ${tokenSymbol}`}
+									secondValue={totalClaimed}
+								/>
+
+								<StatsWrapper
+									firstTitle="Missed $"
+									firstValue={totalAllocatedUsd - totalClaimedUsd}
+									secondTitle={`Missed ${tokenSymbol}`}
+									secondValue={totalAllocated - totalClaimed}
+								/>
+							</Flex>
+						</Flex>
+
+						<Flex
+							gap={{ base: 2, md: 5 }}
+							px={{ base: 2, md: 10 }}
+							py={4}
+							boxShadow="rgba(112, 144, 176, 0.08) 4px 1px 10px 4px"
+							borderRadius={20}
+							display={{ base: 'none', md: 'flex' }}
+						>
 							<StatsWrapper
 								firstTitle="Allocated $"
 								firstValue={totalAllocatedUsd}
 								secondTitle={`Allocated ${tokenSymbol}`}
 								secondValue={totalAllocated}
 							/>
+							<VSeparator />
+
 							<StatsWrapper
 								firstTitle="Reallocated $"
 								firstValue={total_reallocated_usd}
 								secondTitle={`Reallocated ${tokenSymbol}`}
 								secondValue={total_reallocated}
 							/>
-						</Flex>
 
-						<VSeparator />
+							<VSeparator />
 
-						<Flex flexDir="column" gap={5}>
 							<StatsWrapper
 								firstTitle="Claimed $"
 								firstValue={totalClaimedUsd}
 								secondTitle={`Claimed ${tokenSymbol}`}
 								secondValue={totalClaimed}
 							/>
+							<VSeparator />
 
 							<StatsWrapper
 								firstTitle="Missed $"
@@ -162,7 +206,7 @@ const DropConversionChartCard = ({ project }: Props) => {
 								secondValue={totalAllocated - totalClaimed}
 							/>
 						</Flex>
-					</Flex>
+					</>
 				) : (
 					<Flex
 						gap={{ base: 2, md: 5 }}
