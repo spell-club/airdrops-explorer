@@ -86,7 +86,7 @@ export const useDropClaimersTable = (data: RowObj[]) => {
 								key={key}
 								h={'32px'}
 								w={'32px'}
-								src={getStaticImageLink(avt.project.toLowerCase())}
+								src={getStaticImageLink(avt.project.toLowerCase(), true)}
 							/>
 						))}
 					</AvatarGroup>
