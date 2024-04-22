@@ -63,7 +63,7 @@ export const Table = <T,>({ getHeaderGroups, getRowModel }: Props<T>) => {
 											<Td
 												key={cell.id}
 												fontSize={{ sm: '14px' }}
-												minW={{ sm: '150px', md: '200px', lg: 'auto' }}
+												minW={{ sm: '135px', md: '200px', lg: 'auto' }}
 												borderColor="transparent"
 											>
 												{flexRender(cell.column.columnDef.cell, cell.getContext())}

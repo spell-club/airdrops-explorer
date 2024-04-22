@@ -3,7 +3,7 @@ import { FormControl, FormLabel, Input, InputGroup, InputRightAddon } from '@cha
 
 interface CalculatorFormInputProps {
 	inputRef?: RefObject<HTMLInputElement>
-	placeholder: string
+	placeholder?: string
 	id: string
 	label: string
 	adon?: string

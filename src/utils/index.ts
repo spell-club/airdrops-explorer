@@ -67,3 +67,8 @@ export const daysAgoFromDate = (airdropDate: string): string => {
 export const getStaticImageLink = (image: string) => {
 	return `${API_BASE_URL}/static/${image}.webp`
 }
+
+export const scrollToHash = function (element_id: string) {
+	const element = document.getElementById(element_id)
+	element?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+}

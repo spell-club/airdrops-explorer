@@ -1,5 +1,4 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
-
 import { SearchBar } from 'components/UI/searchBar'
 import Logo from 'assets/icons/Logo'
 import { onSearch } from 'utils/analytics'
@@ -11,9 +10,11 @@ const AppHeader = () => {
 		<Box as="header" h="75px">
 			<Container maxW="container.xl" h="100%">
 				<Flex w="100%" h="100%" align="center" justify="space-between">
-					<Logo />
+					<Flex align="center" gap={10}>
+						<Logo />
 
-					<AppNav display={{ base: 'none', lg: 'flex' }} />
+						<AppNav display={{ base: 'none', lg: 'flex' }} />
+					</Flex>
 
 					<SearchBar
 						me="10px"

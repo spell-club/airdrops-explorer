@@ -85,7 +85,7 @@ const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
 								categories: datesArray,
 								overwriteCategories: ovewriteCategories(
 									datesArray,
-									selectedTime.label === '1W' ? 4 : xAxisCount,
+									selectedTime.label === '1W' ? 4 : xAxisCount - 1,
 								),
 							},
 							tooltip: {

@@ -1,7 +1,6 @@
 'use client'
 import { Box, Center, Flex, Spinner } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-
 import Banner from 'components/drop/Banner'
 import banner from 'assets/img/auth/banner.png'
 import General from 'components/drop/General'
@@ -10,6 +9,7 @@ import DropDynamicChart from 'components/drop/DropDynamicChart'
 import useClientApi from 'hooks/useClientApi'
 import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
 import { formatValue, getStaticImageLink } from 'utils'
+import ScrollToTop from 'components/ScrollToTop'
 
 const Page = ({ params }: { params: { dropId: string } }) => {
 	const { dropId } = params
@@ -30,6 +30,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 
 	return (
 		<Box mb={5}>
+			<ScrollToTop />
 			<Banner
 				banner={banner.src}
 				avatar={getStaticImageLink(airdropProject?.name.toLowerCase())}
