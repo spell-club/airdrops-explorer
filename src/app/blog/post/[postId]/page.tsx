@@ -1,14 +1,23 @@
 'use client'
 import React from 'react'
-import { Box, Center, Flex, Image, Spinner, Text } from '@chakra-ui/react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 import { useQuery } from '@tanstack/react-query'
 import { BLOG_API_URL, getPostById } from 'api/blogApi/blogApi'
 import BlockRendererClient from 'components/blog/BlockRendererClient'
 import Link from 'next/link'
 import { type BlocksContent } from '@strapi/blocks-react-renderer'
+import Loader from 'components/UI/loader'
 
-const Page = ({ params }: { params: { postId: string } }) => {
+interface PageParams {
+	postId: string
+}
+
+interface Props {
+	params: PageParams
+}
+
+const Page = ({ params }: Props) => {
 	const { postId } = params
 
 	const { data: blogPost, isLoading: isBlogPostLoading } = useQuery({
@@ -17,11 +26,7 @@ const Page = ({ params }: { params: { postId: string } }) => {
 	})
 
 	if (isBlogPostLoading) {
-		return (
-			<Center mt={100}>
-				<Spinner />
-			</Center>
-		)
+		return <Loader mt={100} />
 	}
 
 	if (!blogPost && !isBlogPostLoading) {

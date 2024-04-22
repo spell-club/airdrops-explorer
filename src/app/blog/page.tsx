@@ -4,6 +4,7 @@ import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 import BlogPost from 'components/blog/BlogPost'
 import { useQuery } from '@tanstack/react-query'
 import { BLOG_API_URL, getBlogPosts } from 'api/blogApi/blogApi'
+import Loader from 'components/UI/loader'
 
 const Page = () => {
 	const { data: blogPosts, isLoading: isPostsLoading } = useQuery({
@@ -19,9 +20,7 @@ const Page = () => {
 		>
 			<Flex flexDirection="column" gap="20px">
 				{isPostsLoading ? (
-					<Center mt={10}>
-						<Spinner />
-					</Center>
+					<Loader mt={10} />
 				) : (
 					blogPosts?.data.map(({ attributes, id }, idx) => (
 						<BlogPost

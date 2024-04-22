@@ -11,32 +11,41 @@ interface ImageFormatData {
 	url: string
 }
 
+interface ImageFormats {
+	thumbnail: ImageFormatData
+	large: ImageFormatData
+	small: ImageFormatData
+	medium: ImageFormatData
+}
+
+interface BlogPostImageAttributes {
+	name: string
+	alternativeText: null
+	caption: null
+	width: number
+	height: number
+	formats: ImageFormats
+	hash: string
+	ext: string
+	mime: string
+	size: number
+	url: string
+	previewUrl: null
+	provider: string
+	provider_metadata: null
+	createdAt: string
+	updatedAt: string
+}
+
 interface BlogPostImage {
 	id: number
-	attributes: {
-		name: string
-		alternativeText: null
-		caption: null
-		width: number
-		height: number
-		formats: {
-			thumbnail: ImageFormatData
-			large: ImageFormatData
-			small: ImageFormatData
-			medium: ImageFormatData
-		}
-		hash: string
-		ext: string
-		mime: string
-		size: number
-		url: string
-		previewUrl: null
-		provider: string
-		provider_metadata: null
-		createdAt: string
-		updatedAt: string
-	}
+	attributes: BlogPostImageAttributes
 }
+
+interface BlogPostAttributesImage {
+	data: BlogPostImage
+}
+
 interface BlogPostAttributes {
 	title: string
 	content: Record<string, unknown>[]
@@ -46,18 +55,18 @@ interface BlogPostAttributes {
 	publishedAt: string
 	reading_time: string
 	tags: string
-	image: {
-		data: BlogPostImage
-	}
+	image: BlogPostAttributesImage
+}
+
+interface Pagination {
+	page: number
+	pageSize: number
+	pageCount: number
+	total: number
 }
 
 interface ResponseMeta {
-	pagination: {
-		page: number
-		pageSize: number
-		pageCount: number
-		total: number
-	}
+	pagination: Pagination
 }
 
 interface BlogPostData {

@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Button, Flex, Text, chakra } from '@chakra-ui/react'
 import React, { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCalculatorDispatchContext } from 'contexts/CalculatorContext'
@@ -17,12 +17,6 @@ export default function CalculatorBanner() {
 		calculate(inputAmount)
 		push('/calculator')
 		setTimeout(() => setIsLoading(false), 1000)
-	}
-
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === 'Enter' && inputAmount) {
-			onCalculate()
-		}
 	}
 
 	return (
@@ -58,42 +52,50 @@ export default function CalculatorBanner() {
 				>
 					Drop your cosmos stake size and see how much you can earn
 				</Text>
-				<Flex
-					align="center"
-					borderRadius={30}
-					flexDir={{ base: 'column', md: 'row' }}
-					justify="center"
-					w="100%"
-					gap={4}
+				<chakra.form
+					onSubmit={(e) => {
+						e.preventDefault()
+						onCalculate()
+					}}
 				>
-					<CalculatorFormInput
-						value={inputAmount || ''}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => setInputAmount(Number(e.target.value))}
-						id="amount"
-						min={0}
-						label=""
-						adon="ATOM"
-						placeholder=""
-						onKeyDown={handleKeyDown}
-						autoComplete="off"
-					/>
-					<Button
-						mt={2}
-						boxShadow=""
-						variant="darkBrand"
-						color="white"
-						fontSize="sm"
-						fontWeight="500"
-						borderRadius="70px"
-						px="24px"
-						py="5px"
-						onClick={onCalculate}
-						isLoading={isLoading}
-						isDisabled={!inputAmount}
+					<Flex
+						align="center"
+						borderRadius={30}
+						flexDir={{ base: 'column', md: 'row' }}
+						justify="center"
+						w="100%"
+						gap={4}
 					>
-						Calculate
-					</Button>
-				</Flex>
+						<CalculatorFormInput
+							value={inputAmount || ''}
+							onChange={(e: ChangeEvent<HTMLInputElement>) =>
+								setInputAmount(Number(e.target.value))
+							}
+							id="amount"
+							min={0}
+							label=""
+							adon="ATOM"
+							placeholder=""
+							autoComplete="off"
+						/>
+						<Button
+							mt={2}
+							boxShadow=""
+							variant="darkBrand"
+							color="white"
+							fontSize="sm"
+							fontWeight="500"
+							borderRadius="70px"
+							px="24px"
+							py="5px"
+							isLoading={isLoading}
+							isDisabled={!inputAmount}
+							type="submit"
+						>
+							Calculate
+						</Button>
+					</Flex>
+				</chakra.form>
 			</Flex>
 		</Flex>
 	)
