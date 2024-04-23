@@ -8,11 +8,13 @@ const useAirdropsDates = () => {
 	})
 
 	const airdropsDates = airdrops
+		?.sort(
+			(a, b) => new Date(a.airdrop_timestamp).getTime() - new Date(b.airdrop_timestamp).getTime(),
+		)
 		?.map((airdrop) => ({
 			date: new Date(airdrop.airdrop_timestamp).toLocaleDateString(),
 			name: airdrop.name,
 		}))
-		.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
 	const airdropsLabelsForChart = airdropsDates?.map(({ date, name }, index) => ({
 		x: date,
@@ -23,7 +25,7 @@ const useAirdropsDates = () => {
 			borderColor: '#0af802',
 			orientation: 'horizontal',
 			offsetX: 0,
-			offsetY: index % 2 === 0 ? 0 : 100,
+			offsetY: (index + 1) % 2 === 0 ? 0 : 100,
 			style: {
 				color: '#e3e3e3',
 				fontSize: '14px',
