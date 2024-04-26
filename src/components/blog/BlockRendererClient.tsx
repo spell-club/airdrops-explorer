@@ -2,7 +2,28 @@
 import Image from 'next/image'
 import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer'
 import { Flex, Heading, Link, OrderedList, Text, UnorderedList } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
+
+type HeadingProps = {
+	level: 1 | 2 | 3 | 4 | 5 | 6
+	children: ReactNode
+}
+const CustomHeading = ({ level, children }: HeadingProps) => {
+	const fontSize = {
+		1: 32,
+		2: 24,
+		3: 22,
+		4: 20,
+		5: 18,
+		6: 16,
+	}[level]
+
+	return (
+		<Heading as={`h${level}`} my="20px" fontSize={fontSize}>
+			{children}
+		</Heading>
+	)
+}
 
 export default function BlockRendererClient({ content }: { readonly content: BlocksContent }) {
 	if (!content) return null
@@ -38,11 +59,7 @@ export default function BlockRendererClient({ content }: { readonly content: Blo
 				},
 
 				heading: ({ level, children }) => {
-					return (
-						<Heading as={`h${level}`} my="20px">
-							{children}
-						</Heading>
-					)
+					return <CustomHeading level={level}>{children}</CustomHeading>
 				},
 				list: (props) => {
 					if (props.format === 'ordered') {
