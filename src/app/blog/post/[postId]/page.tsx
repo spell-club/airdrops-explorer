@@ -59,14 +59,13 @@ const Page = ({ params }: Props) => {
 					</Flex>
 				</Flex>
 
-				<Card pe="20px" w="100%" pos="relative" py={{ base: '30px', md: '20px' }}>
-					<Text pos="absolute" top={{ base: '10px', md: '20px' }} right="20px" color="gray.400">
-						{new Date(attributes.createdAt).toLocaleDateString()}
-					</Text>
-
-					<Heading as="h1" fontWeight="bold" mb="40px" textAlign="center">
-						{attributes.title}
-					</Heading>
+				<Card pe="20px" w="100%" pos="relative" py={{ base: '30px', md: '20px' }} bg="navy.650">
+					<Flex flexDir="column" align="center" mb="35px" mt="50px" gap="10px">
+						<Heading as="h1" fontWeight="bold" textAlign="center">
+							{attributes.title}
+						</Heading>
+						<Text color="gray.400">{new Date(attributes.createdAt).toLocaleDateString()}</Text>
+					</Flex>
 
 					<Flex w="100%" justify="center">
 						<Box color="gray.100" maxW={{ base: '90%', md: '75%' }}>
