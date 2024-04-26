@@ -1,5 +1,5 @@
 'use client'
-import { Center, Flex, Grid, Spinner } from '@chakra-ui/react'
+import { Flex, Grid } from '@chakra-ui/react'
 import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 import BlogPost from 'components/blog/BlogPost'
 import { useQuery } from '@tanstack/react-query'
@@ -29,7 +29,7 @@ const Page = () => {
 								description: attributes.preview_content,
 								tags: attributes.tags.split(' '),
 								readingTime: attributes.reading_time,
-								image: BLOG_API_URL + attributes.image.data.attributes.url,
+								image: BLOG_API_URL + attributes.image.data?.attributes?.url,
 								date: new Date(attributes.createdAt).toLocaleDateString(),
 								id: id,
 							}}

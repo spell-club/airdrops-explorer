@@ -56,6 +56,7 @@ interface BlogPostAttributes {
 	reading_time: string
 	tags: string
 	image: BlogPostAttributesImage
+	preview_image: BlogPostAttributesImage
 }
 
 interface Pagination {

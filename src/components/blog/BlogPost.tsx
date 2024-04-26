@@ -1,7 +1,7 @@
 import React from 'react'
 import { Post } from 'api/types'
 import Card from '../card/Card'
-import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Badge, Box, Flex, Text } from '@chakra-ui/react'
 import { TimeIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
 
@@ -17,10 +17,18 @@ const BlogPost = ({ post }: Props) => {
 				<Flex
 					gap={{ base: '0px', md: '25px' }}
 					flexDir={{ base: 'column', md: 'row' }}
-					align="center"
 					my={{ base: '25px', md: '0px' }}
 				>
-					<Image src={image} w="270px" borderRadius={20} alt="post banner" />
+					<Box
+						bgImage={image}
+						bgSize="cover"
+						bgPosition="center"
+						bgRepeat="no-repeat"
+						w="270px"
+						h="250px"
+						pos="relative"
+						borderRadius={20}
+					/>
 
 					<Flex flexDir="column" pt="30px" justify="space-between">
 						<Flex gap={4} flexDir="column" align={{ base: 'center', md: 'start' }}>

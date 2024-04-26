@@ -3,6 +3,7 @@ export const globalStyles = {
 	colors: {
 		purple: {
 			100: '#6D49FB',
+			200: '#9E74DA',
 		},
 		grey: {
 			100: '#e6e6e9',
