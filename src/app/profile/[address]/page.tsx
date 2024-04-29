@@ -13,6 +13,7 @@ import { AddressInfo } from 'api/types'
 import Card from 'components/card/Card'
 import Link from 'next/link'
 import Loader from 'components/UI/loader'
+import useAirdrops from 'hooks/useAirdrops'
 
 const emptyState: AddressInfo = {
 	claimed_airdrops: 0,
@@ -24,6 +25,8 @@ const emptyState: AddressInfo = {
 const Page = ({ params }: { params: { address: string } }) => {
 	const { address } = params
 	const { clientApi } = useClientApi()
+	// initial projects loading
+	const { airdrops } = useAirdrops()
 
 	const {
 		data: addressInfo,

@@ -53,7 +53,7 @@ export const useAirdropsTable = (airdrops?: AddressAirdrop[]) => {
 			),
 			cell: (info) => {
 				const value = info.getValue()
-				const explorerLink = `https://www.mintscan.io/cosmos/address/${value}`
+				const explorerLink = `https://www.mintscan.io/${info.row.original.name.toLowerCase()}/address/${value}`
 				const truncatedAddress = `${value.slice(0, 4)}...${value.slice(-4)}`
 
 				return (
