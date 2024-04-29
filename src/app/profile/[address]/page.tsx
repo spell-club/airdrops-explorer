@@ -1,6 +1,6 @@
 'use client'
 import { useMemo } from 'react'
-import { Box, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
+import { Box, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import Banner from 'components/profile/Banner'
 import banner from 'assets/img/profile/banner.png'
 import NFT6 from 'assets/img/nfts/Nft6.png'
@@ -12,6 +12,8 @@ import AirdropsTable from 'components/profile/AssetsTable'
 import { AddressInfo } from 'api/types'
 import Card from 'components/card/Card'
 import Link from 'next/link'
+import Loader from 'components/UI/loader'
+import useAirdrops from 'hooks/useAirdrops'
 
 const emptyState: AddressInfo = {
 	claimed_airdrops: 0,
@@ -23,6 +25,8 @@ const emptyState: AddressInfo = {
 const Page = ({ params }: { params: { address: string } }) => {
 	const { address } = params
 	const { clientApi } = useClientApi()
+	// initial projects loading
+	const { airdrops } = useAirdrops()
 
 	const {
 		data: addressInfo,
@@ -47,11 +51,7 @@ const Page = ({ params }: { params: { address: string } }) => {
 	)
 
 	if (isAddressInfoLoading) {
-		return (
-			<Center my={50}>
-				<Spinner />
-			</Center>
-		)
+		return <Loader my={50} />
 	}
 
 	const info = isNotFound ? emptyState : addressInfo
@@ -79,7 +79,7 @@ const Page = ({ params }: { params: { address: string } }) => {
 	}
 
 	return (
-		<Box mb="40px">
+		<Box>
 			<Banner
 				banner={banner.src}
 				avatar={NFT6}

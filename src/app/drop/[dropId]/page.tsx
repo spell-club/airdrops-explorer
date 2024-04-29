@@ -10,8 +10,17 @@ import useClientApi from 'hooks/useClientApi'
 import TopClaimersAndLosers from 'components/drop/TopClaimersAndLosers'
 import { formatValue, getStaticImageLink } from 'utils'
 import ScrollToTop from 'components/ScrollToTop'
+import Loader from 'components/UI/loader'
 
-const Page = ({ params }: { params: { dropId: string } }) => {
+interface PageParams {
+	dropId: string
+}
+
+interface Props {
+	params: PageParams
+}
+
+const Page = ({ params }: Props) => {
 	const { dropId } = params
 	const { clientApi } = useClientApi()
 
@@ -21,11 +30,7 @@ const Page = ({ params }: { params: { dropId: string } }) => {
 	})
 
 	if (isAirdropProjectLoading) {
-		return (
-			<Center my={50}>
-				<Spinner />
-			</Center>
-		)
+		return <Loader my={50} />
 	}
 
 	return (

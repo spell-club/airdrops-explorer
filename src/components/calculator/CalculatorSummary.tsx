@@ -67,7 +67,7 @@ const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd, airdropsDates }: 
 					<Flex p={5} borderRadius={16} bg="navy.900" justify="space-between">
 						<Flex flexDir="column" align="center">
 							<Text fontSize={18} color="gray.400">
-								Total Rewards
+								Total Gain
 							</Text>
 
 							<Text fontSize={summaryFontSize} fontWeight={600}>
