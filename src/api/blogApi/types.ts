@@ -46,8 +46,15 @@ interface BlogPostAttributesImage {
 	data: BlogPostImage
 }
 
+interface SEOAttributes {
+	id: number
+	metaTitle: string
+	metaDescription: string
+}
+
 interface BlogPostAttributes {
 	title: string
+	SEO: SEOAttributes[]
 	content: Record<string, unknown>[]
 	preview_content: string
 	createdAt: string

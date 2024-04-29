@@ -9,7 +9,7 @@ import Head from './head'
 import AppWrappers from './AppWrappers'
 
 export const metadata: Metadata = {
-	title: 'SpellDrop',
+	title: 'SpellDrop | Explore Cosmos Airdrops',
 	description: 'Explore Cosmos Airdrops',
 }
 
