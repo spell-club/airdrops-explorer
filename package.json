@@ -10,7 +10,10 @@
 		"predeploy": "yarn run build",
 		"deploy": "gh-pages -d build",
 		"prettier": "prettier --write .",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"analyze": "cross-env ANALYZE=true next build",
+		"analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+		"analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
 	},
 	"dependencies": {
 		"@chakra-ui/icons": "^2.0.19",
@@ -52,11 +55,13 @@
 		"web-vitals": "^1.1.2"
 	},
 	"devDependencies": {
+		"@next/bundle-analyzer": "^14.2.3",
 		"@strapi/blocks-react-renderer": "^1.0.1",
 		"@types/node": "^18.7.6",
 		"@types/react": "18.2.0",
 		"@types/react-calendar": "^3.5.2",
 		"@types/react-table": "^7.7.12",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.23.0",
 		"eslint-config-next": "^12.2.5",
 		"eslint-config-prettier": "^9.1.0",
