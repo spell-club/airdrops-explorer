@@ -28,6 +28,7 @@ const AppNav = chakra(({ className, isMobile = false, onItemClick }) => {
 						color: 'white',
 					}}
 					onClick={onItemClick}
+					prefetch={false}
 				>
 					{link.name}
 				</ChakraLink>

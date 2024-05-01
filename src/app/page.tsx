@@ -19,12 +19,12 @@ export default function Home() {
 
 				<ProjectsDynamicChart />
 
-				<DropsList />
+				{/*<DropsList />*/}
 
 				<CalculatorBanner />
 			</Flex>
 
-			<TopClaimersAndLosers />
+			{/*<TopClaimersAndLosers />*/}
 		</Grid>
 	)
 }

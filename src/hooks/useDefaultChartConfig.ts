@@ -16,6 +16,9 @@ const defaultYAxisLabelFormat = {
 
 const DEFAULT_CHART_CONFIG: ApexOptions = {
 	chart: {
+		animations: {
+			enabled: false,
+		},
 		offsetX: 0,
 		toolbar: {
 			show: false,
