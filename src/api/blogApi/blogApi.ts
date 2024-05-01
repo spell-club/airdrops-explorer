@@ -21,11 +21,11 @@ const getBlogPosts = async (): Promise<BlogPostsResponse> => {
 	})
 }
 
-const getPostById = async (id: number): Promise<BlogPostResponse> => {
+const getPostById = async (slug: string): Promise<BlogPostsResponse> => {
 	return new Promise((resolve, reject) => {
 		blogApiClient
-			.get(`/api/blogs/${id}?populate=*`)
-			.then((response: AxiosResponse<BlogPostResponse>) => {
+			.get(`/api/blogs/?slug=${slug}&populate=*`)
+			.then((response: AxiosResponse<BlogPostsResponse>) => {
 				resolve(response.data)
 			})
 			.catch((error) => {
