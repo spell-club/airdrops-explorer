@@ -10,9 +10,9 @@ interface Props {
 }
 
 const BlogPost = ({ post }: Props) => {
-	const { image, title, date, description, tags, readingTime, id } = post
+	const { image, title, date, description, tags, readingTime, slug } = post
 	return (
-		<Link href={`/blog/post/${id}`}>
+		<Link href={`/blog/${slug}`}>
 			<Card p="20px" cursor="pointer" position="relative">
 				<Flex
 					gap={{ base: '0px', md: '25px' }}

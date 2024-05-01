@@ -22,7 +22,7 @@ const Page = ({ params }: Props) => {
 
 	const { data: blogPost, isLoading: isBlogPostLoading } = useQuery({
 		queryKey: ['blogPost', postId],
-		queryFn: () => getPostById(Number(postId)),
+		queryFn: () => getPostById(postId),
 	})
 
 	if (isBlogPostLoading) {
@@ -33,7 +33,7 @@ const Page = ({ params }: Props) => {
 		return <div>not found</div>
 	}
 
-	const { attributes } = blogPost.data
+	const { attributes } = blogPost.data[0]
 
 	return (
 		<Flex flexDirection="column" gap="20px">
