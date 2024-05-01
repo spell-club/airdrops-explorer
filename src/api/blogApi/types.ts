@@ -64,6 +64,7 @@ interface BlogPostAttributes {
 	tags: string
 	image: BlogPostAttributesImage
 	preview_image: BlogPostAttributesImage
+	slug: string
 }
 
 interface Pagination {

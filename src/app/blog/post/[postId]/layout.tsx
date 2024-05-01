@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const id = params.postId
 
 	// fetch data
-	const product = await getPostById(Number(id))
+	const product = await getPostById(id)
 
-	const seoAttributes = product.data.attributes.SEO[0]
+	const seoAttributes = product.data[0].attributes.SEO[0]
 
 	return {
 		title: seoAttributes.metaTitle,

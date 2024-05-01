@@ -116,6 +116,7 @@ interface Post {
 	date: string
 	tags: string[]
 	readingTime: string
+	slug: string
 }
 
 interface ClientApiInterface {

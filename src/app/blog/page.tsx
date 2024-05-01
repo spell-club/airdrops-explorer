@@ -32,6 +32,7 @@ const Page = () => {
 								image: BLOG_API_URL + attributes.image.data?.attributes?.url,
 								date: new Date(attributes.createdAt).toLocaleDateString(),
 								id: id,
+								slug: attributes.slug,
 							}}
 							key={attributes.title + idx}
 						/>
