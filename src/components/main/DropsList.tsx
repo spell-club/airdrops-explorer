@@ -4,8 +4,11 @@ import AirdropProject from '../AirdropProject'
 import useAirdrops from 'hooks/useAirdrops'
 import { getStaticImageLink } from '../../utils'
 
-const DropsList = () => {
-	const { airdrops } = useAirdrops()
+interface Props {
+	airdrops: any[]
+}
+const DropsList = ({ airdrops }: Props) => {
+	const { airdrops: airdropsProjects } = useAirdrops()
 
 	return (
 		<Flex direction="column">

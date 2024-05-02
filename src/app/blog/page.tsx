@@ -40,7 +40,7 @@ const Page = () => {
 				)}
 			</Flex>
 
-			<TopClaimersAndLosers />
+			<TopClaimersAndLosers topWinnersAndLosers={{} as any} />
 		</Grid>
 	)
 }

@@ -168,7 +168,7 @@ const timeCategories = [
 const useDefaultChartConfig = () => {
 	const ovewriteCategories = (categories: string[], count = 10) => {
 		return categories?.filter((value, index, array) => {
-			const length = array.length
+			const length = array?.length
 			const step = Math.floor(length / count)
 
 			return index === 0 || index % step === 0 || index === length - 1

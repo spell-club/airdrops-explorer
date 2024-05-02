@@ -7,17 +7,22 @@ import IconBox from 'components/UI/icon/iconBox'
 import { formatValue } from 'utils'
 import useClientApi from 'hooks/useClientApi'
 import MiniStatistics from 'components/card/MiniStatistics'
+import { Stats } from 'api/types'
 
-const MiniStatisticsGrid = () => {
+interface Props {
+	stats: Stats
+}
+
+const MiniStatisticsGrid = ({ stats }: Props) => {
 	const { clientApi } = useClientApi()
 	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
-	const { data: stats, isLoading: isStatsLoading } = useQuery({
-		queryKey: ['stats'],
-		queryFn: () => clientApi.getStats(),
-	})
+	// const { data: stats, isLoading: isStatsLoading } = useQuery({
+	// 	queryKey: ['stats'],
+	// 	queryFn: () => clientApi.getStats(),
+	// })
 
 	const { totalClaimed, totalAllocated, users } = useMemo(() => {
-		if (isStatsLoading || !stats) {
+		if (!stats) {
 			return {
 				totalAllocated: '$0',
 				totalClaimed: '$0',
@@ -32,7 +37,7 @@ const MiniStatisticsGrid = () => {
 
 			users: formatValue(stats.eligible_users_num, 0),
 		}
-	}, [stats, isStatsLoading])
+	}, [stats])
 
 	return (
 		<SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 3 }} gap="20px">

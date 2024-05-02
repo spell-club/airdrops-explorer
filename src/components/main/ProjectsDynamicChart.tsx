@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Box, Flex, useColorModeValue, Text, useBreakpointValue } from '@chakra-ui/react'
 
@@ -9,16 +9,30 @@ import { LineChart } from 'components/UI/charts'
 import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import useAirdropsDates from '../../hooks/useAirdropsDates'
+import { HistoricalValue } from '../../api/types'
 
-const ProjectsDynamicChart = () => {
+interface Props {
+	chartData: HistoricalValue[]
+}
+
+const ProjectsDynamicChart = ({ chartData }: Props) => {
 	const { clientApi } = useClientApi()
 	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
-	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
-		queryKey: ['dropsHistory'],
-		queryFn: () => clientApi.getProjectsHistoricalValue(),
-	})
+	// const { data: chartData } = useQuery({
+	// 	queryKey: ['dropsHistory'],
+	// 	queryFn: () => clientApi.getProjectsHistoricalValue(),
+	// })
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 	const { airdropsLabelsForChart } = useAirdropsDates()
+	const [showChart, setShowChart] = useState(false)
+
+	useEffect(() => {
+		if (chartData) {
+			setTimeout(() => {
+				setShowChart(true)
+			}, 3000)
+		}
+	}, [chartData])
 
 	const dataByTime = useMemo(() => {
 		if (!chartData) return []
@@ -56,32 +70,36 @@ const ProjectsDynamicChart = () => {
 
 			<Flex w="100%" flexDirection={{ base: 'column', lg: 'row' }}>
 				<Box minH="360px" minW="100%" mt="auto">
-					<LineChart
-						chartData={[
-							{ name: 'Allocated', data: allocatedArray },
-							{ name: 'Claimed', data: claimedArray },
-						]}
-						chartOptions={{
-							...chartConfig,
-							colors: ['#4690fd', '#f035fd'],
-							xaxis: {
-								...chartConfig.xaxis,
-								categories: datesArray,
-							},
-							annotations: {
-								xaxis: airdropsLabelsForChart,
-							},
-						}}
-					/>
-					<Flex justify="space-between" pl={5} pr={2} gap={1}>
-						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
-							(date) => (
-								<Text key={date} fontSize={12} color="secondaryGray.600">
-									{date}
-								</Text>
-							),
-						)}
-					</Flex>
+					{showChart && (
+						<LineChart
+							chartData={[
+								{ name: 'Allocated', data: allocatedArray },
+								{ name: 'Claimed', data: claimedArray },
+							]}
+							chartOptions={{
+								...chartConfig,
+								colors: ['#4690fd', '#f035fd'],
+								xaxis: {
+									...chartConfig.xaxis,
+									categories: datesArray,
+								},
+								annotations: {
+									xaxis: airdropsLabelsForChart,
+								},
+							}}
+						/>
+					)}
+					{showChart && (
+						<Flex justify="space-between" pl={5} pr={2} gap={1}>
+							{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
+								(date) => (
+									<Text key={date} fontSize={12} color="secondaryGray.600">
+										{date}
+									</Text>
+								),
+							)}
+						</Flex>
+					)}
 				</Box>
 			</Flex>
 		</Card>
