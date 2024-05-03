@@ -1,9 +1,10 @@
 'use client'
 import { Box, Flex } from '@chakra-ui/react'
-import { useCalculatorContext } from 'contexts/CalculatorContext'
+import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 import FormAndSummaryWrapper from 'components/calculator/FormAndSummaryWrapper'
 import useAirdrops from 'hooks/useAirdrops'
 import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
 
 const AprChart = dynamic(() => import('components/calculator/AprChart'), {
 	ssr: false,
@@ -14,8 +15,15 @@ const RewardsChart = dynamic(() => import('components/calculator/RewardsChart'),
 
 const Page = () => {
 	const { isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
+	const { clearData } = useCalculatorDispatchContext()
 	// initial projects loading
 	const { airdrops } = useAirdrops()
+
+	useEffect(() => {
+		return () => {
+			clearData()
+		}
+	}, [])
 
 	return (
 		<Box as="section" mb="20px">

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import LineChart from 'components/UI/charts/LineChart'
 import React, { useMemo, useState } from 'react'
