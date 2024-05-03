@@ -12,11 +12,16 @@ const useAirdropsDates = () => {
 			(a, b) => new Date(a.airdrop_timestamp).getTime() - new Date(b.airdrop_timestamp).getTime(),
 		)
 		?.map((airdrop) => ({
-			date: new Date(airdrop.airdrop_timestamp).toLocaleDateString(),
+			date: new Date(airdrop.airdrop_timestamp),
 			name: airdrop.name,
 		}))
 
-	const airdropsLabelsForChart = airdropsDates?.map(({ date, name }, index) => ({
+	const airdropsDatesToLocale = airdropsDates?.map(({ date, name }) => ({
+		date: new Date(date).toLocaleDateString(),
+		name,
+	}))
+
+	const airdropsLabelsForChart = airdropsDatesToLocale?.map(({ date, name }, index) => ({
 		x: date,
 		strokeDashArray: 0,
 		borderColor: 'rgba(57,220,50,0.3)',
@@ -35,7 +40,7 @@ const useAirdropsDates = () => {
 		},
 	}))
 
-	return { airdropsLabelsForChart, airdropsDates }
+	return { airdropsLabelsForChart, airdropsDates, airdropsDatesToLocale }
 }
 
 export default useAirdropsDates

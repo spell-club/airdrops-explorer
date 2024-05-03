@@ -34,6 +34,7 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 						label="Initial staking amount"
 						adon="ATOM"
 						autoComplete="off"
+						onWheel={(e: ChangeEvent<HTMLInputElement>) => e.currentTarget.blur()}
 					/>
 
 					{initialAmountUsd ? (
@@ -49,6 +50,7 @@ const CalculatorForm = ({ validatorFee, setValidatorFee }: Props) => {
 						min={0}
 						label="Validator fee"
 						adon="%"
+						onWheel={(e: ChangeEvent<HTMLInputElement>) => e.currentTarget.blur()}
 					/>
 
 					<Flex flexDir="column" gap={1} w="100%">
