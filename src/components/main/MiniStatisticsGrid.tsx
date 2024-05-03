@@ -1,11 +1,9 @@
 import { useMemo } from 'react'
 import { Icon, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 import { MdAttachMoney, MdSupervisedUserCircle } from 'react-icons/md'
-import { useQuery } from '@tanstack/react-query'
 
 import IconBox from 'components/UI/icon/iconBox'
 import { formatValue } from 'utils'
-import useClientApi from 'hooks/useClientApi'
 import MiniStatistics from 'components/card/MiniStatistics'
 import { Stats } from 'api/types'
 
@@ -14,12 +12,7 @@ interface Props {
 }
 
 const MiniStatisticsGrid = ({ stats }: Props) => {
-	const { clientApi } = useClientApi()
 	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
-	// const { data: stats, isLoading: isStatsLoading } = useQuery({
-	// 	queryKey: ['stats'],
-	// 	queryFn: () => clientApi.getStats(),
-	// })
 
 	const { totalClaimed, totalAllocated, users } = useMemo(() => {
 		if (!stats) {

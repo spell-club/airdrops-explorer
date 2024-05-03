@@ -1,8 +1,6 @@
 'use client'
 import { Flex, Grid } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-
-// import DropsList from 'components/main/DropsList'
 import MiniStatisticsGrid from 'components/main/MiniStatisticsGrid'
 import {
 	AirdropProject,
@@ -11,22 +9,15 @@ import {
 	Stats,
 	TopParticipant,
 } from '../api/types'
-// import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
-// import CalculatorBanner from 'components/main/CalculatorBanner'
-// import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
 
 const DropsList = dynamic(() => import('components/main/DropsList'), {
 	ssr: true,
 })
-//
-// const MiniStatisticsGrid = dynamic(() => import('components/main/MiniStatisticsGrid'), {
-// 	ssr: false,
-// })
-//
+
 const ProjectsDynamicChart = dynamic(() => import('components/main/ProjectsDynamicChart'), {
 	ssr: true,
 })
-//
+
 const TopClaimersAndLosers = dynamic(() => import('components/main/TopClaimersAndLosers'), {
 	ssr: true,
 })

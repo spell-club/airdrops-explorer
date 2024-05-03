@@ -1,47 +1,30 @@
-'use client'
-import { Flex, Grid } from '@chakra-ui/react'
-import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
-import BlogPost from 'components/blog/BlogPost'
-import { useQuery } from '@tanstack/react-query'
-import { BLOG_API_URL, getBlogPosts } from 'api/blogApi/blogApi'
-import Loader from 'components/UI/loader'
+'use server'
 
-const Page = () => {
-	const { data: blogPosts, isLoading: isPostsLoading } = useQuery({
-		queryKey: ['blogPosts'],
-		queryFn: () => getBlogPosts(),
-	})
+import React from 'react'
+import ClientPage from './clientPage'
+import ClientApi from 'api'
+import { getBlogPosts } from 'api/blogApi/blogApi'
+
+const getServerDataForClient = async () => {
+	const clientApi = new ClientApi()
+	const blogPosts = await getBlogPosts()
+
+	const topWinnersAndLosers = await clientApi.getTopWinnersAndLosers()
+
+	return {
+		topWinnersAndLosers,
+		blogPosts,
+	}
+}
+
+const Page = async () => {
+	const serverData = await getServerDataForClient()
 
 	return (
-		<Grid
-			gridTemplateColumns={{ xl: '1fr 0.36fr', '2xl': '1fr 0.46fr' }}
-			gap={{ base: '20px', xl: '20px' }}
-			display={{ base: 'block', xl: 'grid' }}
-		>
-			<Flex flexDirection="column" gap="20px">
-				{isPostsLoading ? (
-					<Loader mt={10} />
-				) : (
-					blogPosts?.data.map(({ attributes, id }, idx) => (
-						<BlogPost
-							post={{
-								title: attributes.title,
-								description: attributes.preview_content,
-								tags: attributes.tags.split(' '),
-								readingTime: attributes.reading_time,
-								image: BLOG_API_URL + attributes.image.data?.attributes?.url,
-								date: new Date(attributes.createdAt).toLocaleDateString(),
-								id: id,
-								slug: attributes.slug,
-							}}
-							key={attributes.title + idx}
-						/>
-					))
-				)}
-			</Flex>
-
-			<TopClaimersAndLosers topWinnersAndLosers={{} as any} />
-		</Grid>
+		<ClientPage
+			topWinnersAndLosers={serverData.topWinnersAndLosers}
+			blogPosts={serverData.blogPosts}
+		/>
 	)
 }
 

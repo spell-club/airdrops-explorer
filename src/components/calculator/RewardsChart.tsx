@@ -59,13 +59,14 @@ const RewardsChart = ({ values, dates }: Props) => {
 							}}
 						/>
 						<Flex justify="space-between" pl={5} pr={2}>
-							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : xAxisCount).map(
-								(date) => (
-									<Text key={date} fontSize={12} color="secondaryGray.600">
-										{date}
-									</Text>
-								),
-							)}
+							{ovewriteCategories(
+								datesByTime,
+								selectedTime.label === '1W' ? 4 : xAxisCount - 1,
+							).map((date) => (
+								<Text key={date} fontSize={12} color="secondaryGray.600">
+									{date}
+								</Text>
+							))}
 						</Flex>
 					</Box>
 				</Flex>

@@ -2,16 +2,16 @@ import React, { useMemo, useState } from 'react'
 import Card from '../card/Card'
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import { LineChart } from '../UI/charts'
-import { useQuery } from '@tanstack/react-query'
-import useClientApi from '../../hooks/useClientApi'
-import { roundToPrecision } from '../../utils'
+
+import { roundToPrecision } from 'utils'
 import SelectTimelineMenu from '../UI/menu/SelectTimelineMenu'
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import numbro from 'numbro'
+import { HistoricalValue } from 'api/types'
 
 interface Props {
-	dropId: string
 	tokenSymbol: string
+	chartData: HistoricalValue[]
 }
 
 const defaultTooltipFormat = {
@@ -19,13 +19,9 @@ const defaultTooltipFormat = {
 	thousandSeparated: true,
 }
 
-const DropDynamicChart = ({ dropId, tokenSymbol }: Props) => {
+const DropDynamicChart = ({ tokenSymbol, chartData }: Props) => {
 	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
-	const { clientApi } = useClientApi()
-	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
-		queryKey: ['dropHistory'],
-		queryFn: () => clientApi.getProjectHistoricalValue(dropId),
-	})
+
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const dataByTime = useMemo(() => {
