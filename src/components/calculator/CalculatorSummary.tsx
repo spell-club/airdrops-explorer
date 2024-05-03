@@ -6,7 +6,7 @@ import { useEffect, useMemo } from 'react'
 
 interface AirdropDate {
 	name: string
-	date: string
+	date: Date
 }
 
 interface Props {
