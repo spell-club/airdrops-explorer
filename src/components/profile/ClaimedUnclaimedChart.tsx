@@ -1,14 +1,27 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-
 import Card from '../card/Card'
-import LineChart from '../UI/charts/LineChart'
-import useClientApi from '../../hooks/useClientApi'
-import { roundToPrecision } from '../../utils'
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
+import useClientApi from 'hooks/useClientApi'
+import { roundToPrecision } from 'utils'
+import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import SelectTimelineMenu from '../UI/menu/SelectTimelineMenu'
-import useAirdropsDates from '../../hooks/useAirdropsDates'
+import useAirdropsDates from 'hooks/useAirdropsDates'
+import {
+	CartesianGrid,
+	Label,
+	Legend,
+	Line,
+	ReferenceLine,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
+	LineChart,
+} from 'recharts'
+import numbro from 'numbro'
+import CustomTooltip from '../CustomTooltip'
+import { globalStyles } from 'styles/theme/styles'
 
 interface Props {
 	address: string
@@ -16,24 +29,13 @@ interface Props {
 
 const ClaimedUnclaimedChart = ({ address }: Props) => {
 	const { clientApi } = useClientApi()
-
-	const { chartConfig, ovewriteCategories, timeCategories } = useDefaultChartConfig()
-
-	const { data: chartData, isLoading: isChartDataLoading } = useQuery({
+	const { timeCategories, defaultYAxisLabelFormat, defaultTooltipFormat } = useDefaultChartConfig()
+	const { data: chartData } = useQuery({
 		queryKey: ['claimHistory'],
 		queryFn: () => clientApi.getClaimHistoricalValue(address),
 	})
 
-	const xAxisCount = useBreakpointValue(
-		{
-			base: 3,
-			md: 6,
-			lg: 8,
-		},
-		{
-			fallback: '8',
-		},
-	)
+	const secondaryGray = globalStyles.colors.secondaryGray[600]
 
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 	const { airdropsLabelsForChart } = useAirdropsDates()
@@ -44,19 +46,18 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 		return chartData.slice(-selectedTime.value)
 	}, [chartData, selectedTime])
 
-	const { claimedArray, unclaimedArray } = useMemo(() => {
-		const claimedArray: number[] = []
-		const unclaimedArray: number[] = []
+	const datesArray = useMemo(
+		() => dataByTime?.map((data) => new Date(data.date).toLocaleDateString()),
+		[dataByTime],
+	)
 
-		dataByTime.forEach((data) => {
-			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }))
-			unclaimedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }))
-		})
-
-		return { claimedArray, unclaimedArray }
-	}, [dataByTime])
-
-	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString())
+	const aggregatedChartData = useMemo(() => {
+		return dataByTime.map((data, idx) => ({
+			Allocated: roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }),
+			Claimed: roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
+			date: datesArray[idx],
+		}))
+	}, [dataByTime, datesArray])
 
 	return (
 		<Card justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
@@ -73,38 +74,72 @@ const ClaimedUnclaimedChart = ({ address }: Props) => {
 			</Flex>
 
 			<Flex w="100%" flexDirection={{ base: 'column', lg: 'column' }}>
-				<Box minH="360px" minW="75%" mt="auto">
+				<ResponsiveContainer minWidth="100%" minHeight={400}>
 					<LineChart
-						chartData={[
-							{ name: 'Allocated', data: unclaimedArray },
-							{ name: 'Claimed', data: claimedArray },
-						]}
-						chartOptions={{
-							...chartConfig,
-							colors: ['#a79dcb', '#0857ef'],
-							xaxis: {
-								...chartConfig.xaxis,
-								categories: datesArray,
-								// overwriteCategories: ovewriteCategories(
-								//   datesArray,
-								//   selectedTime.label === '1W' ? 4 : 7,
-								// ),
-							},
-							annotations: {
-								xaxis: airdropsLabelsForChart,
-							},
+						data={aggregatedChartData}
+						margin={{
+							top: 10,
+							right: 0,
+							left: -20,
+							bottom: -10,
 						}}
-					/>
-					<Flex justify="space-between" pl={5} pr={2}>
-						{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
-							(date) => (
-								<Text key={date} fontSize={12} color="secondaryGray.600">
-									{date}
-								</Text>
-							),
-						)}
-					</Flex>
-				</Box>
+					>
+						<CartesianGrid vertical={false} opacity={0.4} />
+						<XAxis
+							dataKey="date"
+							tick={{ fill: secondaryGray }}
+							style={{ fontSize: 12 }}
+							tickLine={false}
+							minTickGap={7}
+						/>
+						<YAxis
+							tickCount={10}
+							tick={{ fill: secondaryGray }}
+							tickFormatter={(value) => numbro(value).format(defaultYAxisLabelFormat).toUpperCase()}
+							style={{ fontSize: 12 }}
+						/>
+						<Tooltip
+							content={
+								<CustomTooltip
+									customValueFormatter={(val: number | string) => {
+										const truncatedValue = roundToPrecision({
+											value: Number(val),
+											precision: 0,
+											method: 'floor',
+										})
+										return `$${numbro(truncatedValue).format(defaultTooltipFormat)}`
+									}}
+								/>
+							}
+						/>
+						<Legend iconSize={10} />
+						<Line type="monotone" dataKey="Claimed" stroke="#4690fd" strokeWidth={3} dot={false} />
+						<Line
+							type="monotone"
+							dataKey="Allocated"
+							stroke="#f035fd"
+							strokeWidth={2}
+							dot={false}
+						/>
+
+						{airdropsLabelsForChart?.map((label) => (
+							<ReferenceLine
+								key={label.x}
+								x={label.x}
+								stroke={label.borderColor}
+								strokeWidth={label.borderWidth}
+								strokeDasharray={label.strokeDashArray}
+							>
+								<Label
+									position={label.label.offsetY ? 'insideTop' : 'center'}
+									style={{ fill: '#fff', fontSize: 14, fontWeight: 600 }}
+								>
+									{label.label.text}
+								</Label>
+							</ReferenceLine>
+						))}
+					</LineChart>
+				</ResponsiveContainer>
 			</Flex>
 		</Card>
 	)

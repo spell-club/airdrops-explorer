@@ -75,11 +75,6 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 		const rewardsUSD: number[] = calculatedData?.details.map((data) => data.total_usd) || []
 		const airdrops: number[] = calculatedData?.details.map((data) => data.total_airdrops_usd) || []
 
-		// const dates: string[] = []
-		// const aprs: number[] = []
-		// const rewardsUSD: number[] = []
-		// const airdrops: number[] = []
-
 		return {
 			dates,
 			aprs,

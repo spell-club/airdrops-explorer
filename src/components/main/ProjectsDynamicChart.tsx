@@ -1,36 +1,43 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Box, Flex, useColorModeValue, Text, Skeleton } from '@chakra-ui/react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Flex, useColorModeValue, Text, Skeleton } from '@chakra-ui/react'
 import { roundToPrecision } from 'utils'
 import Card from '../card/Card'
 import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
 import useAirdropsDates from 'hooks/useAirdropsDates'
 import { HistoricalValue } from 'api/types'
-import dynamic from 'next/dynamic'
-
-const LineChart = dynamic(() => import('components/UI/charts/LineChart'), {
-	ssr: false,
-})
+import {
+	CartesianGrid,
+	Label,
+	Line,
+	ReferenceLine,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
+	LineChart,
+	Legend,
+} from 'recharts'
+import numbro from 'numbro'
+import CustomTooltip from 'components/CustomTooltip'
+import { globalStyles } from 'styles/theme/styles'
 
 interface Props {
 	chartData: HistoricalValue[]
 }
 
 const ProjectsDynamicChart = ({ chartData }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
+	const { timeCategories, defaultYAxisLabelFormat, defaultTooltipFormat } = useDefaultChartConfig()
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 	const { airdropsLabelsForChart } = useAirdropsDates()
-	const [showChart, setShowChart] = useState(false)
 	const [showSkeleton, setShowSkeleton] = useState(true)
+	const secondaryGray = globalStyles.colors.secondaryGray[600]
 
 	useEffect(() => {
 		if (chartData) {
 			setTimeout(() => {
-				setShowChart(true)
-			}, 2000)
-			setTimeout(() => {
 				setShowSkeleton(false)
-			}, 2600)
+			}, 1600)
 		}
 	}, [chartData])
 
@@ -40,19 +47,19 @@ const ProjectsDynamicChart = ({ chartData }: Props) => {
 		return chartData.slice(-selectedTime.value)
 	}, [chartData, selectedTime])
 
-	const { claimedArray, allocatedArray } = useMemo(() => {
-		const claimedArray: number[] = []
-		const allocatedArray: number[] = []
+	const datesArray = useMemo(
+		() => dataByTime?.map((data) => new Date(data.date).toLocaleDateString()),
+		[dataByTime],
+	)
 
-		dataByTime.forEach((data) => {
-			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }))
-			allocatedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }))
-		})
+	const aggregatedData = useMemo(() => {
+		return dataByTime.map((data, idx) => ({
+			date: datesArray[idx],
+			Claimed: roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
+			Allocated: roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }),
+		}))
+	}, [dataByTime, datesArray])
 
-		return { claimedArray, allocatedArray }
-	}, [dataByTime])
-
-	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString())
 	const textColor = useColorModeValue('secondaryGray.900', 'white')
 
 	return (
@@ -91,38 +98,72 @@ const ProjectsDynamicChart = ({ chartData }: Props) => {
 			</Flex>
 
 			<Flex w="100%" flexDirection={{ base: 'column', lg: 'row' }}>
-				<Box minH="360px" minW="100%" mt="auto">
-					{showChart && (
-						<LineChart
-							chartData={[
-								{ name: 'Allocated', data: allocatedArray },
-								{ name: 'Claimed', data: claimedArray },
-							]}
-							chartOptions={{
-								...chartConfig,
-								colors: ['#4690fd', '#f035fd'],
-								xaxis: {
-									...chartConfig.xaxis,
-									categories: datesArray,
-								},
-								annotations: {
-									xaxis: airdropsLabelsForChart,
-								},
-							}}
+				<ResponsiveContainer minWidth="100%" minHeight={400}>
+					<LineChart
+						data={aggregatedData}
+						margin={{
+							top: 10,
+							right: 0,
+							left: -20,
+							bottom: -10,
+						}}
+					>
+						<CartesianGrid vertical={false} opacity={0.4} />
+						<XAxis
+							dataKey="date"
+							tick={{ fill: secondaryGray }}
+							style={{ fontSize: 12 }}
+							tickLine={false}
+							minTickGap={7}
 						/>
-					)}
-					{showChart && (
-						<Flex justify="space-between" pl={5} pr={2} gap={1}>
-							{ovewriteCategories(datesArray, selectedTime.label === '1W' ? 4 : xAxisCount).map(
-								(date) => (
-									<Text key={date} fontSize={12} color="secondaryGray.600">
-										{date}
-									</Text>
-								),
-							)}
-						</Flex>
-					)}
-				</Box>
+						<YAxis
+							tickCount={10}
+							tick={{ fill: secondaryGray }}
+							tickFormatter={(value) => numbro(value).format(defaultYAxisLabelFormat).toUpperCase()}
+							style={{ fontSize: 12 }}
+						/>
+						<Tooltip
+							content={
+								<CustomTooltip
+									customValueFormatter={(val: number | string) => {
+										const truncatedValue = roundToPrecision({
+											value: Number(val),
+											precision: 0,
+											method: 'floor',
+										})
+										return `$${numbro(truncatedValue).format(defaultTooltipFormat)}`
+									}}
+								/>
+							}
+						/>
+						<Legend iconSize={10} />
+						<Line type="monotone" dataKey="Claimed" stroke="#4690fd" strokeWidth={3} dot={false} />
+						<Line
+							type="monotone"
+							dataKey="Allocated"
+							stroke="#f035fd"
+							strokeWidth={3}
+							dot={false}
+						/>
+
+						{airdropsLabelsForChart?.map((label) => (
+							<ReferenceLine
+								key={label.x}
+								x={label.x}
+								stroke={label.borderColor}
+								strokeWidth={label.borderWidth}
+								strokeDasharray={label.strokeDashArray}
+							>
+								<Label
+									position={label.label.offsetY ? 'insideTop' : 'center'}
+									style={{ fill: '#fff', fontSize: 14, fontWeight: 600 }}
+								>
+									{label.label.text}
+								</Label>
+							</ReferenceLine>
+						))}
+					</LineChart>
+				</ResponsiveContainer>
 			</Flex>
 		</Card>
 	)

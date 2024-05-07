@@ -1,28 +1,33 @@
 import React, { useMemo, useState } from 'react'
 import Card from '../card/Card'
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import { LineChart } from '../UI/charts'
-
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import { roundToPrecision } from 'utils'
 import SelectTimelineMenu from '../UI/menu/SelectTimelineMenu'
 import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import numbro from 'numbro'
 import { HistoricalValue } from 'api/types'
+import {
+	CartesianGrid,
+	Legend,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
+} from 'recharts'
+import CustomTooltip from '../CustomTooltip'
+import { globalStyles } from 'styles/theme/styles'
 
 interface Props {
 	tokenSymbol: string
 	chartData: HistoricalValue[]
 }
 
-const defaultTooltipFormat = {
-	trimMantissa: true,
-	thousandSeparated: true,
-}
-
 const DropDynamicChart = ({ tokenSymbol, chartData }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
-
+	const { defaultTooltipFormat, timeCategories, defaultYAxisLabelFormat } = useDefaultChartConfig()
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
+	const secondaryGray = globalStyles.colors.secondaryGray[600]
 
 	const dataByTime = useMemo(() => {
 		if (!chartData) return []
@@ -30,19 +35,20 @@ const DropDynamicChart = ({ tokenSymbol, chartData }: Props) => {
 		return chartData.slice(-selectedTime.value)
 	}, [chartData, selectedTime])
 
-	const { claimedArray, allocatedArray } = useMemo(() => {
-		const claimedArray: number[] = []
-		const allocatedArray: number[] = []
+	const datesArray = useMemo(
+		() => dataByTime?.map((data) => new Date(data.date).toLocaleDateString()),
+		[dataByTime],
+	)
 
-		dataByTime.forEach((data) => {
-			claimedArray.push(roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }))
-			allocatedArray.push(roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }))
-		})
-
-		return { claimedArray, allocatedArray }
-	}, [dataByTime])
-
-	const datesArray = dataByTime?.map((data) => new Date(data.date).toLocaleDateString())
+	const aggregatedData = useMemo(() => {
+		return dataByTime.map((data, idx) => ({
+			date: datesArray[idx],
+			Allocated: roundToPrecision({ value: data.allocated_amount_usd, precision: 2 }),
+			Claimed: roundToPrecision({ value: data.claimed_amount_usd, precision: 2 }),
+			allocatedTokens: roundToPrecision({ value: data.allocated_amount, precision: 0 }),
+			claimedTokens: roundToPrecision({ value: data.claimed_amount, precision: 0 }),
+		}))
+	}, [dataByTime, datesArray])
 
 	const textColor = useColorModeValue('secondaryGray.900', 'white')
 
@@ -60,56 +66,67 @@ const DropDynamicChart = ({ tokenSymbol, chartData }: Props) => {
 			</Flex>
 
 			<Flex w="100%" flexDirection={{ base: 'column', lg: 'row' }}>
-				<Box minH="360px" minW="100%" mt="auto">
+				<ResponsiveContainer minWidth="100%" minHeight={400}>
 					<LineChart
-						chartData={[
-							{ name: 'Allocated', data: allocatedArray },
-							{ name: 'Claimed', data: claimedArray },
-						]}
-						chartOptions={{
-							...chartConfig,
-							colors: ['#4318FF', '#39B8FF'],
-							xaxis: {
-								...chartConfig.xaxis,
-								labels: {
-									...chartConfig.xaxis.labels,
-									style: {
-										...chartConfig.xaxis.labels.style,
-										fontSize: '12px',
-									},
-								},
-								categories: datesArray,
-								overwriteCategories: ovewriteCategories(
-									datesArray,
-									selectedTime.label === '1W' ? 4 : xAxisCount - 1,
-								),
-							},
-							tooltip: {
-								...chartConfig.tooltip,
-								y: {
-									...chartConfig.tooltip.y,
-									formatter(val: number, { seriesIndex, dataPointIndex }: any): string {
-										const truncatedValue = roundToPrecision({
-											value: val,
+						data={aggregatedData}
+						margin={{
+							top: 10,
+							right: 0,
+							left: -20,
+							bottom: -10,
+						}}
+					>
+						<CartesianGrid vertical={false} opacity={0.4} />
+						<XAxis
+							dataKey="date"
+							tick={{ fill: secondaryGray }}
+							style={{ fontSize: 12 }}
+							tickLine={false}
+							minTickGap={7}
+						/>
+						<YAxis
+							tickCount={10}
+							tick={{ fill: secondaryGray }}
+							tickFormatter={(value) => numbro(value).format(defaultYAxisLabelFormat).toUpperCase()}
+							style={{ fontSize: 12 }}
+						/>
+						<Tooltip
+							content={
+								<CustomTooltip
+									customValueFormatter={(val: number | string, dataKey: string, payload: any) => {
+										let tokensValue = 0
+										if (dataKey === 'Allocated') {
+											tokensValue = payload?.allocatedTokens
+										} else {
+											tokensValue = payload?.claimedTokens
+										}
+										const trancatedTokenAmount = roundToPrecision({
+											value: tokensValue,
 											precision: 0,
 											method: 'floor',
 										})
-										const tokenAmount = seriesIndex
-											? chartData[dataPointIndex].claimed_amount
-											: chartData[dataPointIndex].allocated_amount
 
-										const trancatedTokenAmount = roundToPrecision({
-											value: tokenAmount,
+										const truncatedValue = roundToPrecision({
+											value: Number(val),
 											precision: 0,
 											method: 'floor',
 										})
 										return `$${numbro(truncatedValue).format(defaultTooltipFormat)} | ${numbro(trancatedTokenAmount).format(defaultTooltipFormat)} ${tokenSymbol}`
-									},
-								},
-							},
-						}}
-					/>
-				</Box>
+									}}
+								/>
+							}
+						/>
+						<Legend iconSize={10} />
+						<Line type="monotone" dataKey="Claimed" stroke="#4690fd" strokeWidth={3} dot={false} />
+						<Line
+							type="monotone"
+							dataKey="Allocated"
+							stroke="#f035fd"
+							strokeWidth={3}
+							dot={false}
+						/>
+					</LineChart>
+				</ResponsiveContainer>
 			</Flex>
 		</Card>
 	)
