@@ -20,6 +20,8 @@ const RewardsChart = ({ values, dates }: Props) => {
 	const rewardsByTime = useMemo(() => {
 		if (!values) return []
 
+		if (selectedTime.label === 'All time') return values
+
 		return values.slice(-selectedTime.value)
 	}, [values, selectedTime])
 

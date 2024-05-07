@@ -17,6 +17,8 @@ const AprChart = ({ dates, values }: Props) => {
 	const dataByTime = useMemo(() => {
 		if (!values) return []
 
+		if (selectedTime.label === 'All time') return values
+
 		return values.slice(-selectedTime.value)
 	}, [values, selectedTime])
 

@@ -40,21 +40,6 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
 		},
 	},
 	colors: ['#39B8FF'],
-	markers: {
-		size: 0,
-		colors: 'white',
-		strokeColors: '#7551FF',
-		strokeWidth: 3,
-		strokeOpacity: 0.9,
-		strokeDashArray: 0,
-		fillOpacity: 1,
-		discrete: [],
-		shape: 'circle',
-		radius: 2,
-		offsetX: 0,
-		offsetY: 0,
-		showNullDataPoints: true,
-	},
 	tooltip: {
 		theme: 'dark',
 		y: {
@@ -72,7 +57,7 @@ const DEFAULT_CHART_CONFIG: ApexOptions = {
 		enabled: false,
 	},
 	stroke: {
-		curve: 'smooth',
+		curve: 'straight',
 		width: 3,
 	},
 	xaxis: {
