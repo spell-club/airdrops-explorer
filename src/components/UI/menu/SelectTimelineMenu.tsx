@@ -44,6 +44,7 @@ const SelectTimelineMenu = ({ items, onItemSelected, selected }: Props) => {
 				fontWeight="500"
 				color={textColorSecondary}
 				borderRadius="7px"
+				boxShadow={{}}
 			>
 				<Flex align="center">
 					<Icon as={MdOutlineCalendarToday} color={textColorSecondary} me="4px" />

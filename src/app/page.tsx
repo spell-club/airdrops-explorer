@@ -1,30 +1,36 @@
-'use client'
-import { Flex, Grid } from '@chakra-ui/react'
+'use server'
 
-import DropsList from 'components/main/DropsList'
-import MiniStatisticsGrid from 'components/main/MiniStatisticsGrid'
-import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
-import CalculatorBanner from 'components/main/CalculatorBanner'
-import ProjectsDynamicChart from 'components/main/ProjectsDynamicChart'
+import React from 'react'
+import ClientPage from './clientPage'
+import ClientApi from '../api'
 
-export default function Home() {
+const getServerDataForClient = async () => {
+	const clientApi = new ClientApi()
+
+	const stats = await clientApi.getStats()
+	const history = await clientApi.getProjectsHistoricalValue()
+	const drops = await clientApi.getAirdropProjects()
+	const topWinnersAndLosers = await clientApi.getTopWinnersAndLosers()
+
+	return {
+		stats,
+		history,
+		drops,
+		topWinnersAndLosers,
+	}
+}
+
+const Page = async () => {
+	const serverData = await getServerDataForClient()
+
 	return (
-		<Grid
-			gridTemplateColumns={{ xl: '1fr 0.36fr', '2xl': '1fr 0.46fr' }}
-			gap={{ base: '20px', xl: '20px' }}
-			display={{ base: 'block', xl: 'grid' }}
-		>
-			<Flex flexDirection="column" gap="30px">
-				<MiniStatisticsGrid />
-
-				<ProjectsDynamicChart />
-
-				<DropsList />
-
-				<CalculatorBanner />
-			</Flex>
-
-			<TopClaimersAndLosers />
-		</Grid>
+		<ClientPage
+			stats={serverData.stats}
+			history={serverData.history}
+			drops={serverData.drops}
+			topWinnersAndLosers={serverData.topWinnersAndLosers}
+		/>
 	)
 }
+
+export default Page

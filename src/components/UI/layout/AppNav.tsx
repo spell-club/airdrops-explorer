@@ -1,6 +1,5 @@
 import { chakra, Flex, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 const LINKS = [
 	{ name: 'Blog', path: '/blog' },
@@ -8,9 +7,6 @@ const LINKS = [
 ]
 
 const AppNav = chakra(({ className, isMobile = false, onItemClick }) => {
-	const currentPath = usePathname()
-	const isActive = (path: string) => currentPath === path
-
 	return (
 		<Flex as="nav" gap={5} className={className} flexDir={isMobile ? 'column' : 'row'}>
 			{LINKS.map((link) => (

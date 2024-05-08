@@ -1,17 +1,42 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import SelectTimelineMenu from 'components/UI/menu/SelectTimelineMenu'
-import useDefaultChartConfig from '../../hooks/useDefaultChartConfig'
-import LineChart from 'components/UI/charts/LineChart'
+import useDefaultChartConfig from 'hooks/useDefaultChartConfig'
 import Card from 'components/card/Card'
+import {
+	LineChart,
+	Line,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	ResponsiveContainer,
+	ReferenceLine,
+	Label,
+	LabelProps,
+} from 'recharts'
+import CustomTooltip from '../CustomTooltip'
 
 interface Props {
 	dates: string[]
 	values: number[]
 }
 
+const CustomLabel = (props: LabelProps, content: string) => {
+	const x = 'width' in props.viewBox ? props.viewBox.width / 2 : 0
+	const y = 'y' in props.viewBox ? props.viewBox.y - 30 : 0
+	return (
+		<g>
+			<rect x={x} y={y} />
+			<text x={x} y={y} fill="#fff" dy={20} dx={5} fontSize={14}>
+				{content}
+			</text>
+		</g>
+	)
+}
+
 const AprChart = ({ dates, values }: Props) => {
-	const { chartConfig, ovewriteCategories, timeCategories, xAxisCount } = useDefaultChartConfig()
+	const { timeCategories } = useDefaultChartConfig()
 	const [selectedTime, setSelectedTime] = useState(timeCategories[0])
 
 	const dataByTime = useMemo(() => {
@@ -32,6 +57,13 @@ const AprChart = ({ dates, values }: Props) => {
 		return values.reduce((acc, value) => acc + value, 0) / values.length
 	}, [values])
 
+	const newData = dataByTime.map((data, idx) => {
+		return {
+			date: datesByTime[idx],
+			APR: data,
+		}
+	})
+
 	return (
 		<Card w="100%" alignItems="center" key="apr">
 			<Box justifyContent="center" alignItems="center" flexDirection="column" w="100%" mb="0px">
@@ -46,56 +78,49 @@ const AprChart = ({ dates, values }: Props) => {
 					/>
 				</Flex>
 				<Flex w="100%" flexDirection={{ base: 'column', lg: 'column' }}>
-					<Box minH="360px" minW="75%" mt="auto">
+					<ResponsiveContainer minWidth="100%" minHeight={400}>
 						<LineChart
-							chartData={[{ name: 'APR', data: dataByTime }]}
-							chartOptions={{
-								...chartConfig,
-								colors: ['#0857ef'],
-								xaxis: {
-									...chartConfig.xaxis,
-									categories: dates,
-								},
-								annotations: {
-									yaxis: [
-										{
-											y: averageApr,
-											strokeDashArray: 2,
-											borderColor: 'rgba(57,220,50,0.3)',
-											borderWidth: 2,
-											label: {
-												position: 'left',
-												borderColor: '#0af802',
-												orientation: 'horizontal',
-												offsetX: 130,
-												style: {
-													color: '#e3e3e3',
-													fontSize: '14px',
-													background: '#150c0c',
-												},
-												text: `Average APR: ${Number(averageApr.toFixed(1))}%`,
-											},
-										},
-									],
-								},
-								tooltip: {
-									...chartConfig.tooltip,
-									y: {
-										formatter: (value: number) => `${value.toFixed(2)}%`,
-									},
-								},
+							data={newData}
+							margin={{
+								top: 10,
+								right: 0,
+								left: -30,
 							}}
-						/>
-						<Flex justify="space-between" pl={5} pr={2}>
-							{ovewriteCategories(datesByTime, selectedTime.label === '1W' ? 4 : xAxisCount).map(
-								(date) => (
-									<Text key={date} fontSize={12} color="secondaryGray.600">
-										{date}
-									</Text>
-								),
-							)}
-						</Flex>
-					</Box>
+						>
+							<CartesianGrid vertical={false} opacity={0.4} />
+							<XAxis
+								dataKey="date"
+								tick={{ fill: '#A3AED0' }}
+								style={{ fontSize: 12 }}
+								tickLine={false}
+								minTickGap={7}
+							/>
+							<YAxis
+								tickCount={8}
+								tick={{ fill: '#A3AED0' }}
+								tickFormatter={(value) => `${value}%`}
+								style={{ fontSize: 12 }}
+							/>
+							<Tooltip
+								content={
+									<CustomTooltip
+										customValueFormatter={(value: string | number) =>
+											`${Number(value).toFixed(2)}%`
+										}
+									/>
+								}
+							/>
+							<ReferenceLine y={averageApr} stroke="green" strokeWidth={2} strokeDasharray="3 3">
+								<Label
+									position="center"
+									content={(props) =>
+										CustomLabel(props, `Average APR: ${Number(averageApr.toFixed(1))}%`)
+									}
+								></Label>
+							</ReferenceLine>
+							<Line type="monotone" dataKey="APR" stroke="#0857ef" strokeWidth={3} dot={false} />
+						</LineChart>
+					</ResponsiveContainer>
 				</Flex>
 			</Box>
 		</Card>

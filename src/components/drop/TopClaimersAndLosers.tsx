@@ -1,22 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Flex } from '@chakra-ui/react'
 import Card from '../card/Card'
 import DropClaimersTable from './DropClaimersTable'
-import useClientApi from '../../hooks/useClientApi'
-import { useQuery } from '@tanstack/react-query'
+import { GetTopWinnersAndLosersResponse, TopParticipantByProject } from 'api/types'
 
 interface Props {
-	dropId: string
 	tokenSymbol: string
+	claimersData: GetTopWinnersAndLosersResponse<TopParticipantByProject>
 }
 
-const TopClaimersAndLosers = ({ dropId, tokenSymbol }: Props) => {
-	const { clientApi } = useClientApi()
+const TopClaimersAndLosers = ({ tokenSymbol, claimersData }: Props) => {
+	const [isLoading, setIsLoading] = useState(true)
 
-	const { data: claimersData, isLoading } = useQuery({
-		queryKey: ['getTopDropClaimers'],
-		queryFn: () => clientApi.getAirdropTowWinnersAndLosers(dropId),
-	})
+	useEffect(() => {
+		if (claimersData) {
+			setIsLoading(false)
+		}
+	}, [claimersData])
 
 	const isWinnersEmpty = !claimersData?.winners?.length && !isLoading
 	const isLosersEmpty = !claimersData?.losers?.length && !isLoading
