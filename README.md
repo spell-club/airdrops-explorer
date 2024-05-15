@@ -4,8 +4,6 @@
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 [![GitHub issues open](https://img.shields.io/github/issues/horizon-ui/horizon-ui-chakra-nextjs.svg?maxAge=2592000)](https://github.com/horizon-ui/horizon-ui-chakra-nextjs/issues?q=is%3Aopen+is%3Aissue)
 
-<p>&nbsp;</p>
-
 [<img alt="Horizon UI NextJS" src="https://i.ibb.co/mtLkcYL/horizon-ui-nextjs-free.png" /> ](https://github.com/horizon-ui/horizon-ui-chakra-nextjs)
 
 <p>&nbsp;</p>
