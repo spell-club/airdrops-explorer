@@ -24,7 +24,7 @@ const getBlogPosts = async (): Promise<BlogPostsResponse> => {
 const getPostById = async (slug: string): Promise<BlogPostsResponse> => {
 	return new Promise((resolve, reject) => {
 		blogApiClient
-			.get(`/api/blogs/?slug=${slug}&populate=*`)
+			.get(`/api/blogs/?filters[slug]=${slug}&populate=*`)
 			.then((response: AxiosResponse<BlogPostsResponse>) => {
 				resolve(response.data)
 			})
