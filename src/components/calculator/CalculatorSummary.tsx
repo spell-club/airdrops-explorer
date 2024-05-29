@@ -52,7 +52,7 @@ const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd, airdropsDates }: 
 
 					<Box minW="80px">
 						<Text fontSize={20} fontWeight={600}>
-							+${formatValue(airdrop.amount_usd, 0)}
+							+${formatValue(airdrop.amount_usd, 2)}
 						</Text>
 					</Box>
 				</Flex>
@@ -101,7 +101,7 @@ const CalculatorSummary = ({ totalStakingRewardsUSD, totalUsd, airdropsDates }: 
 
 									<Box minW="80px">
 										<Text fontSize={20} fontWeight={600}>
-											+${formatValue(totalStakingRewardsUSD, 0)}
+											+${formatValue(totalStakingRewardsUSD, 2)}
 										</Text>
 									</Box>
 								</Flex>

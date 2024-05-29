@@ -1,7 +1,8 @@
 'use client'
-import { Flex, Grid } from '@chakra-ui/react'
+import { Flex, Grid, useBreakpointValue } from '@chakra-ui/react'
 import TopClaimersAndLosers from 'components/main/TopClaimersAndLosers'
 import BlogPost from 'components/blog/BlogPost'
+import BlogText from 'components/blog/BlogText'
 import { BLOG_API_URL } from 'api/blogApi/blogApi'
 import Loader from 'components/UI/loader'
 import { GetTopWinnersAndLosersResponse, TopParticipant } from 'api/types'
@@ -15,6 +16,8 @@ interface Props {
 
 const Page = ({ topWinnersAndLosers, blogPosts }: Props) => {
 	const [isPostsLoading, setIsPostsLoading] = useState(true)
+
+	const isMobile = useBreakpointValue({ base: true, xl: false })
 
 	useEffect(() => {
 		if (blogPosts) {
@@ -48,9 +51,13 @@ const Page = ({ topWinnersAndLosers, blogPosts }: Props) => {
 						/>
 					))
 				)}
+
+				{!isMobile && <BlogText />}
 			</Flex>
 
 			<TopClaimersAndLosers topWinnersAndLosers={topWinnersAndLosers} />
+
+			{isMobile && <BlogText />}
 		</Grid>
 	)
 }

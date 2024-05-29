@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Grid } from '@chakra-ui/react'
+import { Flex, Grid, useBreakpointValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import MiniStatisticsGrid from 'components/main/MiniStatisticsGrid'
 import {
@@ -26,6 +26,10 @@ const CalculatorBanner = dynamic(() => import('components/main/CalculatorBanner'
 	ssr: false,
 })
 
+const HomeText = dynamic(() => import('components/main/HomeText'), {
+	ssr: true,
+})
+
 interface Props {
 	stats: Stats
 	history: HistoricalValue[]
@@ -34,6 +38,8 @@ interface Props {
 }
 
 export default function ClientPage({ stats, history, drops, topWinnersAndLosers }: Props) {
+	const isMobile = useBreakpointValue({ base: true, xl: false })
+
 	return (
 		<Grid
 			gridTemplateColumns={{ xl: '1fr 0.36fr', '2xl': '1fr 0.46fr' }}
@@ -48,9 +54,12 @@ export default function ClientPage({ stats, history, drops, topWinnersAndLosers 
 				<DropsList airdrops={drops} />
 
 				<CalculatorBanner />
+
+				{!isMobile && <HomeText />}
 			</Flex>
 
 			<TopClaimersAndLosers topWinnersAndLosers={topWinnersAndLosers} />
+			{isMobile && <HomeText />}
 		</Grid>
 	)
 }

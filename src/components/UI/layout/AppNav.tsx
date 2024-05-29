@@ -4,6 +4,8 @@ import Link from 'next/link'
 const LINKS = [
 	{ name: 'Blog', path: '/blog' },
 	{ name: 'Calculator', path: '/calculator' },
+	{ name: 'Upcoming', path: '/upcoming' },
+	{ name: 'About', path: '/about' },
 ]
 
 const AppNav = chakra(({ className, isMobile = false, onItemClick }) => {

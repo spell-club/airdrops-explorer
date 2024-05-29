@@ -2,6 +2,7 @@
 import { Box, Flex } from '@chakra-ui/react'
 import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 import FormAndSummaryWrapper from 'components/calculator/FormAndSummaryWrapper'
+import CalculatorText from 'components/calculator/CalculatorText'
 import useAirdrops from 'hooks/useAirdrops'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
@@ -17,7 +18,7 @@ const Page = () => {
 	const { isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
 	const { clearData } = useCalculatorDispatchContext()
 	// initial projects loading
-	const { airdrops } = useAirdrops()
+	const {} = useAirdrops()
 
 	useEffect(() => {
 		return () => {
@@ -49,6 +50,8 @@ const Page = () => {
 
 				<RewardsChart dates={dates} values={rewardsUSD} />
 			</Flex>
+
+			<CalculatorText />
 		</Box>
 	)
 }

@@ -1,14 +1,15 @@
 import React from 'react'
 import { Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import AirdropProject from '../AirdropProject'
-import useAirdrops from 'hooks/useAirdrops'
 import { getStaticImageLink } from '../../utils'
+import Pagination from 'components/UI/pagination'
+import usePagination from 'hooks/usePagination'
 
 interface Props {
 	airdrops: any[]
 }
 const DropsList = ({ airdrops }: Props) => {
-	const { airdrops: airdropsProjects } = useAirdrops()
+	const { currentData, currentPage, totalPages, handlePageChange } = usePagination(airdrops)
 
 	return (
 		<Flex direction="column">
@@ -17,7 +18,7 @@ const DropsList = ({ airdrops }: Props) => {
 			</Text>
 
 			<SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-				{airdrops?.map((airdrop) => (
+				{currentData?.map((airdrop) => (
 					<AirdropProject
 						key={airdrop.id + airdrop.name}
 						name={airdrop.name}
@@ -29,6 +30,12 @@ const DropsList = ({ airdrops }: Props) => {
 					/>
 				))}
 			</SimpleGrid>
+
+			<Pagination
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={handlePageChange}
+			/>
 		</Flex>
 	)
 }

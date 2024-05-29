@@ -9,8 +9,8 @@ import Head from './head'
 import AppWrappers from './AppWrappers'
 
 export const metadata: Metadata = {
-	title: 'SpellDrop | Explore Cosmos Airdrops',
-	description: 'Explore Cosmos Airdrops',
+	title: 'Cosmos Airdrop Checker | Track and Claim Airdrops with SpellDrop',
+	description: `Discover and track Cosmos airdrops in an easy way with SpellDrop's Airdrop Checker. Explore and claim your airdrops using our advanced tracking tools.`,
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
