@@ -120,7 +120,7 @@ const CalculatorContextProvider = ({ children }: PropsWithChildren) => {
 			totalAirdropUSD,
 			totalStakingRewardsUSD: totalRewardsUSD,
 			airdropsDetails,
-			roi: Number(calculatedData?.roi?.toFixed(2)) || 0,
+			roi: Number(calculatedData?.roi?.toFixed(0)) || 0,
 			initialAmountUsd: calculatedData?.initial_investment_usd,
 			startDate,
 		}),
