@@ -17,8 +17,6 @@ export default function Head() {
 
 			<meta name="theme-color" content="#000000" />
 
-			<meta property="description" content="Explore Cosmos Airdrops" />
-
 			<Script
 				async
 				strategy="lazyOnload"

@@ -110,8 +110,9 @@ const RewardsChart = ({ values, dates }: Props) => {
 								strokeWidth={3}
 								dot={false}
 							/>
-							{airdropsLabelsForChart.map((label) => (
+							{airdropsLabelsForChart?.map((label, index) => (
 								<ReferenceLine
+									key={index}
 									x={label.x}
 									stroke={label.borderColor}
 									strokeWidth={label.borderWidth}

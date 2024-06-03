@@ -18,9 +18,11 @@ export function roundToPrecision({
 }
 
 export const formatValue = (value: number, precision?: number, average = false) => {
+	const actualPrecision = value > 100 ? 0 : precision ?? 2
+
 	const truncatedAmount = roundToPrecision({
 		value,
-		precision: precision ?? 2,
+		precision: actualPrecision,
 		method: 'floor',
 	})
 

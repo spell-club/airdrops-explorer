@@ -9,7 +9,7 @@ interface Props {
 }
 const TopClaimersAndLosers = ({ topWinnersAndLosers }: Props) => {
 	return (
-		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }} gap={5}>
+		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }} mb="20px" gap={5}>
 			<Card px="0px">
 				<ClaimersTable
 					title="Top Claimers"
