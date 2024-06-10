@@ -18,9 +18,11 @@ export function roundToPrecision({
 }
 
 export const formatValue = (value: number, precision?: number, average = false) => {
+	const actualPrecision = value > 100 ? 0 : precision ?? 2
+
 	const truncatedAmount = roundToPrecision({
 		value,
-		precision: precision ?? 2,
+		precision: actualPrecision,
 		method: 'floor',
 	})
 
@@ -49,16 +51,8 @@ export const getProminentColor = (img: string) => {
 	})
 }
 
-export const daysAgoFromDate = (airdropDate: string): string => {
-	const isDateContainsSlash = airdropDate.includes('/')
-
-	const parts = isDateContainsSlash ? airdropDate.split('/') : airdropDate.split('.')
-
-	const jsDateStr = `${parts[1]}/${parts[0]}/${parts[2]}`
-
-	const dateObj = new Date(jsDateStr)
-
-	const daysDifference = Math.floor((Date.now() - dateObj.getTime()) / (1000 * 60 * 60 * 24))
+export const daysAgoFromDate = (airdropDate: Date): string => {
+	const daysDifference = Math.floor((Date.now() - airdropDate.getTime()) / (1000 * 60 * 60 * 24))
 
 	return `${daysDifference} days ago`
 }

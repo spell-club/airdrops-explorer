@@ -1,16 +1,19 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
+import AppFooterNav from './AppFooterNav'
 
 import Logo from 'assets/icons/Logo'
 
 const AppFooter = () => {
 	// let linkColor = 'white'
 	return (
-		<Box as="footer" h="75px" bg="navy.800" borderTop="1px solid" borderColor="navy.700">
+		<Box as="footer" minH="75px" bg="navy.800" borderTop="1px solid" borderColor="navy.700">
 			<Container maxW="container.xl" h="100%">
-				<Flex w="100%" h="100%" align="center" justify="space-between">
+				<Flex w="100%" h="100%" align="center" justify="space-between" flexWrap="wrap">
 					<Logo />
 
-					{/*<List display='flex'>*/}
+					<AppFooterNav />
+
+					{/* <List display='flex'>*/}
 					{/*  <ListItem*/}
 					{/*    me={{*/}
 					{/*      base: '20px',*/}
@@ -30,8 +33,8 @@ const AppFooter = () => {
 					{/*      base: '20px',*/}
 					{/*      md: '44px',*/}
 					{/*    }}*/}
-					{/*  >*/}
-					{/*    <Link*/}
+					{/*  > */}
+					{/*    <Link */}
 					{/*      fontWeight='500'*/}
 					{/*      color={linkColor}*/}
 					{/*      href='https://www.simmmple.com/licenses'*/}

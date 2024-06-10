@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { AspectRatio, Box, Button, Flex, Image, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
 import numbro from 'numbro'
 import Link from 'next/link'
 
@@ -16,8 +15,6 @@ interface Props {
 }
 
 const AirdropProject = ({ image, name, avgAmount, airdropAmount, tokenSymbol, id }: Props) => {
-	const { push } = useRouter()
-
 	const averageAmount = useMemo(() => {
 		const roundFormat = {
 			trimMantissa: true,
@@ -44,7 +41,7 @@ const AirdropProject = ({ image, name, avgAmount, airdropAmount, tokenSymbol, id
 				<Flex direction={{ base: 'column' }} justify="center">
 					<Box mb={{ base: '20px', '2xl': '20px' }} position="relative">
 						<AspectRatio ratio={7 / 5}>
-							<Image src={image} w={'100%'} borderRadius="20px" alt="" />
+							<Image src={image} w={'100%'} borderRadius="20px" alt={name} />
 						</AspectRatio>
 					</Box>
 					<Flex flexDirection="column" justify="space-between" h="100%">

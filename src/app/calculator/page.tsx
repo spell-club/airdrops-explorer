@@ -1,15 +1,30 @@
 'use client'
 import { Box, Flex } from '@chakra-ui/react'
-import { useCalculatorContext } from 'contexts/CalculatorContext'
-import AprChart from 'components/calculator/AprChart'
-import RewardsChart from 'components/calculator/RewardsChart'
+import { useCalculatorContext, useCalculatorDispatchContext } from 'contexts/CalculatorContext'
 import FormAndSummaryWrapper from 'components/calculator/FormAndSummaryWrapper'
+import CalculatorText from 'components/calculator/CalculatorText'
 import useAirdrops from 'hooks/useAirdrops'
+import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
+
+const AprChart = dynamic(() => import('components/calculator/AprChart'), {
+	ssr: false,
+})
+const RewardsChart = dynamic(() => import('components/calculator/RewardsChart'), {
+	ssr: false,
+})
 
 const Page = () => {
 	const { isDataLoaded, aprs, rewardsUSD, dates } = useCalculatorContext()
+	const { clearData } = useCalculatorDispatchContext()
 	// initial projects loading
-	const { airdrops } = useAirdrops()
+	const {} = useAirdrops()
+
+	useEffect(() => {
+		return () => {
+			clearData()
+		}
+	}, [])
 
 	return (
 		<Box as="section" mb="20px">
@@ -25,13 +40,18 @@ const Page = () => {
 				<FormAndSummaryWrapper />
 			</Flex>
 
-			{isDataLoaded ? (
-				<Flex gap={5} w="100%" flexWrap={{ base: 'wrap', xl: 'nowrap' }}>
-					<AprChart dates={dates} values={aprs} />
+			<Flex
+				gap={5}
+				w="100%"
+				flexWrap={{ base: 'wrap', xl: 'nowrap' }}
+				display={isDataLoaded ? 'flex' : 'none'}
+			>
+				<AprChart dates={dates} values={aprs} />
 
-					<RewardsChart dates={dates} values={rewardsUSD} />
-				</Flex>
-			) : null}
+				<RewardsChart dates={dates} values={rewardsUSD} />
+			</Flex>
+
+			<CalculatorText />
 		</Box>
 	)
 }

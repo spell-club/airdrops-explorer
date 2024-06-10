@@ -2,23 +2,19 @@ import React from 'react'
 import { Flex } from '@chakra-ui/react'
 import Card from '../card/Card'
 import ClaimersTable from './ClaimersTable'
-import { useQuery } from '@tanstack/react-query'
-import useClientApi from '../../hooks/useClientApi'
+import { GetTopWinnersAndLosersResponse, TopParticipant } from 'api/types'
 
-const TopClaimersAndLosers = () => {
-	const { clientApi } = useClientApi()
-	const { data: topWinnersAndLosers, isLoading: isWinnersAndLosersLoading } = useQuery({
-		queryKey: ['getTopClaimers'],
-		queryFn: () => clientApi.getTopWinnersAndLosers(),
-	})
-
+interface Props {
+	topWinnersAndLosers: GetTopWinnersAndLosersResponse<TopParticipant>
+}
+const TopClaimersAndLosers = ({ topWinnersAndLosers }: Props) => {
 	return (
-		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }} gap={5}>
+		<Flex flexDirection="column" mt={{ base: '30px', xl: '0' }} mb="20px" gap={5}>
 			<Card px="0px">
 				<ClaimersTable
 					title="Top Claimers"
 					tableData={topWinnersAndLosers?.winners}
-					isLoading={isWinnersAndLosersLoading}
+					isLoading={false}
 				/>
 			</Card>
 
@@ -26,7 +22,7 @@ const TopClaimersAndLosers = () => {
 				<ClaimersTable
 					title="Top Losers"
 					tableData={topWinnersAndLosers?.losers}
-					isLoading={isWinnersAndLosersLoading}
+					isLoading={false}
 				/>
 			</Card>
 		</Flex>
