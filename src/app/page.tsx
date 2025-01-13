@@ -1,5 +1,3 @@
-'use server'
-
 import React from 'react'
 import ClientPage from './clientPage'
 import ClientApi from '../api'

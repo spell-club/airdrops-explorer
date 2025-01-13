@@ -94,7 +94,7 @@ some advices for our users that want to report an issue:
 
 ---
 
-### Community 
+### Community
 
 Connect with the community! Feel free to ask questions, report issues, and meet
 new people that already use Horizon UI!
