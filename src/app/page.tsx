@@ -4,6 +4,10 @@ import React from 'react'
 import ClientPage from './clientPage'
 import ClientApi from '../api'
 
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 6 hours.
+export const revalidate = 21600
+
 const getServerDataForClient = async () => {
 	const clientApi = new ClientApi()
 
